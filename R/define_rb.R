@@ -29,7 +29,7 @@ define_rb <- function(data,
   # Calculate kmedoids
   clustered_data <-
     data %>%
-    filter(.data$Abundance > 0, !is.na(Abundance)) %>%
+    filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
     group_by(.data$Sample) %>%
     tidyr::nest() %>%
     mutate(Level = purrr::map(.x = data,
@@ -37,7 +37,7 @@ define_rb <- function(data,
                                  k = k,
                                  cluster.only = TRUE,
                                  diss = FALSE))) %>%
-    tidyr::unnest(cols = c(data,Level))
+    tidyr::unnest(cols = c(data,.data$Level))
 
   return(clustered_data)
 }
