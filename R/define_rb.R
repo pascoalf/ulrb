@@ -11,12 +11,32 @@
 #' @examples 1
 #'
 #' @import dplyr
-#' @import tidyr
-#' @import cluster
-#' @import purrr
 define_rb <- function(data,
                       classification_vector = c("Rare","Undetermined","Abundant"),
                       samples_id = "Sample",
                       abundance_id = "Abundance") {
 
+  # Define number of cluster based on possible classifications
+  k <- length(classification_vector)
+
+  # Match samples_id and abundance_id with Samples and Abundance, respectively
+  data <-
+    data %>%
+    rename(Sample = all_of(samples_id),
+           Abundance = all_of(abundance_id))
+
+  # Calculate kmedoids
+  clustered_data <-
+    data %>%
+    filter(Abundance > 0, !is.na(Abundance)) %>%
+    group_by(Sample) %>%
+    tidyr::nest() %>%
+    mutate(Level = purrr::map(.x = data,
+                       .f = ~cluster::pam(.x$Abundance,
+                                 k = k,
+                                 cluster.only = TRUE,
+                                 diss = FALSE))) %>%
+    tidyr::unnest(cols = c(data,Level))
+
+  return(clustered_data)
 }
