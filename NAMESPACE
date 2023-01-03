@@ -2,3 +2,4 @@
 
 export(define_rb)
 import(dplyr)
+importFrom(rlang,.data)

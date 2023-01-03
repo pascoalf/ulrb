@@ -11,6 +11,7 @@
 #' @examples 1
 #'
 #' @import dplyr
+#' @importFrom rlang .data
 define_rb <- function(data,
                       classification_vector = c("Rare","Undetermined","Abundant"),
                       samples_id = "Sample",
@@ -28,8 +29,8 @@ define_rb <- function(data,
   # Calculate kmedoids
   clustered_data <-
     data %>%
-    filter(Abundance > 0, !is.na(Abundance)) %>%
-    group_by(Sample) %>%
+    filter(.data$Abundance > 0, !is.na(Abundance)) %>%
+    group_by(.data$Sample) %>%
     tidyr::nest() %>%
     mutate(Level = purrr::map(.x = data,
                        .f = ~cluster::pam(.x$Abundance,
