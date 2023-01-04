@@ -39,5 +39,18 @@ define_rb <- function(data,
                                  diss = FALSE))) %>%
     tidyr::unnest(cols = c(data,.data$Level))
 
-  return(clustered_data)
+  # Make classification table
+  classification_table <- clustered_data %>%
+    group_by(.data$Sample,Level = as.factor(.data$Level)) %>%
+    summarize(Cluster_median_abundance = stats::median(.data$Abundance)) %>%
+    arrange(.data$Sample, .data$Cluster_median_abundance) %>%
+    mutate(Classification = factor(all_of(classification_vector),
+                                   levels = all_of(classification_vector)))
+
+  # Apply classification_table to classify clusters
+  classified_clusters <- clustered_data %>%
+    mutate(Level = as.factor(.data$Level)) %>%
+    left_join(classification_table)
+
+  return(classified_clusters)
 }
