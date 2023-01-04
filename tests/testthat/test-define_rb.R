@@ -191,3 +191,10 @@ test_that("Output does not have Species with NA abundance",{
 
   expect_length(NA_abundance, 0)
 })
+
+## note: be more specific after adding more functions
+test_that("Input must be tidy",{
+  untidy_data <- nice_tidy %>% tidyr::pivot_wider(names_from = Sample, values_from = Abundance)
+
+  expect_error(define_rb(untidy_data))
+})
