@@ -20,4 +20,5 @@ Imports:
     dplyr,
     purrr,
     rlang,
+    stats,
     tidyr
