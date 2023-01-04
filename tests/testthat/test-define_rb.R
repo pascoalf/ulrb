@@ -11,22 +11,20 @@ test_that("Levels output is integer", {
 test_that("Number of levels corresponds to
           size of classification vector", {
             test_vector <- c("Rare", "Undetermined","Abundant")
-            expect_equal(
-              length(
+            expect_length(
                 unique(
                   define_rb(nice_tidy,
-                            classification_vector = test_vector)$Level)),
+                            classification_vector = test_vector)$Level),
               length(
                 unique(test_vector)))
             })
 test_that("Number of levels corresponds to
           size of alternative classification vector", {
             test_vector <- c("Rare","Abundant")
-            expect_equal(
-              length(
+            expect_length(
                 unique(
                   define_rb(nice_tidy,
-                            classification_vector = test_vector)$Level)),
+                            classification_vector = test_vector)$Level),
               length(
                 unique(test_vector)))
           })
@@ -49,10 +47,9 @@ test_that("The classification column is type integer",{
 })
 test_that("The number of classifications corresponds to classification vector",{
   classification_vector <- c("Rare", "Undertermined", "Abundant")
-  expect_equal(
-    length(
+  expect_length(
       unique(
-        define_rb(nice_tidy, classification_vector = classification_vector)$Classification)),
+        define_rb(nice_tidy, classification_vector = classification_vector)$Classification),
     length(
       unique(classification_vector)))
 })
@@ -140,7 +137,7 @@ test_that("For one sample the maximum number of
           the number of observations", {
 
   # Modify colnames
-  one_sample <- filter(nice_tidy,
+  one_sample <- dplyr::filter(nice_tidy,
                        Sample == "NB_5",
                        Abundance > 0,
                        !is.na(Sample))
@@ -157,4 +154,40 @@ test_that("For one sample the maximum number of
   bad_classification_vector <- c(1:(maximum_possible_clusters+1))
 
   expect_error(define_rb(one_sample, classification_vector = bad_classification_vector))
+})
+test_that("Works without any column with species information",{
+
+  # Remove species column
+  no_species <- nice_tidy %>% select(-OTU)
+  expect_no_error(define_rb(no_species))
+})
+test_that("Abundance must be numeric",{
+  wrong_abundance <- mutate(nice_tidy, Abundance = as.character(Abundance))
+
+  expect_error(define_rb(wrong_abundance))
+})
+test_that("Output does not have Species with zero abundance",{
+
+  # Standard output
+  output <- define_rb(nice_tidy)
+
+  # Pull observations with Abundance == 0
+  zero_abundance <-
+    output %>%
+    filter(Abundance == 0) %>%
+    pull(Abundance)
+
+  expect_length(zero_abundance, 0)
+})
+test_that("Output does not have Species with NA abundance",{
+  # Standard output
+  output <- define_rb(nice_tidy)
+
+  # Pull observations with Abundance == 0
+  NA_abundance <-
+    output %>%
+    filter(is.na(Abundance)) %>%
+    pull(Abundance)
+
+  expect_length(NA_abundance, 0)
 })
