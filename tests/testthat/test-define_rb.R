@@ -112,3 +112,49 @@ test_that("The definition does not work for classification vectors with more tha
 
             expect_error(define_rb(nice_tidy, classification_vector = bad_classification_vector))
           })
+test_that("User can give any col names to the data", {
+
+  # Modify colnames
+  data_modified <- nice_tidy
+  colnames(data_modified) <- c("a", "b", "c")
+
+  expect_no_error(define_rb(data_modified, samples_id = "b", abundance_id = "c"))
+})
+test_that("User must specify colnames if they are not default", {
+
+  # Modify colnames
+  data_modified <- nice_tidy
+  colnames(data_modified) <- c("a", "b", "c")
+
+  expect_error(define_rb(data_modified))
+})
+test_that("define_rb works for a single sample", {
+
+  # Modify colnames
+  one_sample <- filter(nice_tidy, Sample == "NB_5")
+
+  expect_no_error(define_rb(one_sample))
+})
+test_that("For one sample the maximum number of
+          elements in the classification vector is
+          the number of observations", {
+
+  # Modify colnames
+  one_sample <- filter(nice_tidy,
+                       Sample == "NB_5",
+                       Abundance > 0,
+                       !is.na(Sample))
+
+  # Calculate maximum number of valid observations per sample
+  total_clusters <-
+    dplyr::summarise(group_by(one_sample,Sample),
+                     Observation = length(Abundance))
+
+  # Get maximum number of clusters
+  maximum_possible_clusters <- min(total_clusters$Observation)-1
+
+  # Make classification vector that will not work
+  bad_classification_vector <- c(1:(maximum_possible_clusters+1))
+
+  expect_error(define_rb(one_sample, classification_vector = bad_classification_vector))
+})
