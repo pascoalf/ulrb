@@ -1,19 +1,24 @@
 #' Sanity check rare biosphere definition for one sample
 #'
-#' @param data
-#' @param species_id
-#' @param samples_id
-#' @param ...
+#' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
+#' @param sample string with name of selected sample.
+#' @param taxa_id string with name of column with taxonomic units. Usually OTU or ASV.
+#' @param classification_id string with name of column with classification for each row. Default value is "Classification".
+#' @param abundance_id string with name of column with abundance values. Default is "Abundance".
+#' @param ... other arguments
 #'
-#' @return
+#' @return a ggplot object
 #' @export
 #'
-#' @examples
+#' @examples 1
 #'
 #' @import dplyr
-#' @import ggplot2
 #' @importFrom rlang .data
-sanity_check_rb_sample <- function(data, sample, taxa_id,...){
+sanity_check_rb_sample <- function(data,
+                                   sample,
+                                   taxa_id, ## go back to other functions, make this mandatory
+                                   classification_id = "Classification", # in case the user changes something
+                                   abundance_id = "Abundance", ...){ # in case the user changes something
 
   # Make sure the taxa_id corresponds to the correct column
   data <- data %>%
@@ -21,15 +26,15 @@ sanity_check_rb_sample <- function(data, sample, taxa_id,...){
 
   #
   data %>%
-    filter(Sample == all_of(sample)) %>%
-    ggplot(aes(x = .data$ID, "Abundance", col = "Classification")) +
-    geom_point()+
-    theme(axis.text.x = element_blank(),
-          axis.ticks.x = element_blank(),
-          panel.grid = element_blank(),
-          axis.line.x.bottom = element_line(),
-          axis.line.y.left = element_line(),
-          panel.background = element_blank())+
-    scale_color_manual(values = c("#0072B2", "#D55E00", "#CC79A7"))+
-    labs(title = paste("Sample", sample))
+    filter(.data$Sample == all_of(sample)) %>%
+    ggplot2::ggplot(ggplot2::aes(x = .data$ID, .data$Abundance, col = .data$Classification)) +
+    ggplot2::geom_point()+
+    ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank(),
+          panel.grid = ggplot2::element_blank(),
+          axis.line.x.bottom = ggplot2::element_line(),
+          axis.line.y.left = ggplot2::element_line(),
+          panel.background = ggplot2::element_blank())+
+    ggplot2::scale_color_manual(values = c("#0072B2", "#D55E00", "#CC79A7"))+
+    ggplot2::labs(title = paste("Sample", sample))
 }
