@@ -24,7 +24,7 @@ sanity_check_rb_sample(
 
 \item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
 
-\item{...}{}
+\item{...}{other arguments}
 }
 \value{
 a ggplot object
