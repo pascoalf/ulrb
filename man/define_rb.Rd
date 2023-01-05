@@ -2,7 +2,7 @@
 % Please edit documentation in R/define_rb.R
 \name{define_rb}
 \alias{define_rb}
-\title{Title}
+\title{Define Rare Biosphere}
 \usage{
 define_rb(
   data,
@@ -21,10 +21,10 @@ define_rb(
 \item{abundance_id}{String with name of column with abundance values}
 }
 \value{
-The input tibble with additional columns for the cluster and classification.
+A tibble with the initial columns and new columns for the cluster and classification of each species.
 }
 \description{
-Title
+Define Rare Biosphere
 }
 \examples{
 1
