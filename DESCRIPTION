@@ -18,6 +18,7 @@ RoxygenNote: 7.2.3
 Imports: 
     cluster,
     dplyr,
+    ggplot2,
     purrr,
     rlang,
     stats,
