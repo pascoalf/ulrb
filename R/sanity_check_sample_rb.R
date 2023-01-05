@@ -22,14 +22,24 @@ sanity_check_rb_sample <- function(data,
                                    abundance_id = "Abundance",
                                    colors = c("#0072B2", "#D55E00", "#CC79A7"), ...){ # in case the user changes something
 
-  # Make sure the taxa_id corresponds to the correct column
-  data <- data %>%
-    rename(ID = taxa_id)
-
   #
   if(length(colors) != length(unique(data$Classification))){
-    message("Number of colors must correspond to number of classifications used.")
-    }
+    stop("Number of colors must correspond to number of classifications used.")
+  }
+  if(missing(sample)){
+    stop("You must specify one sample from the column with samples ID's.")
+  }
+  if(missing(taxa_id)){
+    stop("You must specify which column includes the taxonomic units.")
+  }
+  if(is.matrix(data))
+    stop("Please use data.frame in tidy format.")
+
+  # Make sure the taxa_id corresponds to the correct column
+  data <- data %>%
+    rename(ID = taxa_id,
+           Classification = classification_id,
+           Abundance = abundance_id)
 
   data %>%
     filter(.data$Sample == all_of(sample)) %>%
