@@ -10,6 +10,7 @@ sanity_check_rb_sample(
   taxa_id,
   classification_id = "Classification",
   abundance_id = "Abundance",
+  colors = c("#0072B2", "#D55E00", "#CC79A7"),
   ...
 )
 }
@@ -23,6 +24,8 @@ sanity_check_rb_sample(
 \item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
 
 \item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
+
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
 \item{...}{other arguments}
 }

@@ -16,7 +16,7 @@
 #' @import dplyr
 #' @importFrom rlang .data
 sanity_check_rb_sample <- function(data,
-                                   sample,
+                                   sample_id,
                                    taxa_id, ## go back to other functions, make this mandatory
                                    classification_id = "Classification", # in case the user changes something
                                    abundance_id = "Abundance",
@@ -26,7 +26,7 @@ sanity_check_rb_sample <- function(data,
   if(length(colors) != length(unique(data$Classification))){
     stop("Number of colors must correspond to number of classifications used.")
   }
-  if(missing(sample)){
+  if(missing(sample_id)){
     stop("You must specify one sample from the column with samples ID's.")
   }
   if(missing(taxa_id)){
@@ -42,7 +42,7 @@ sanity_check_rb_sample <- function(data,
            Abundance = abundance_id)
 
   data %>%
-    filter(.data$Sample == all_of(sample)) %>%
+    filter(.data$Sample == all_of(sample_id)) %>%
     ggplot2::ggplot(ggplot2::aes(x = .data$ID, .data$Abundance, col = .data$Classification)) +
     ggplot2::geom_point()+
     ggplot2::theme(axis.text.x = ggplot2::element_blank(),
@@ -52,5 +52,5 @@ sanity_check_rb_sample <- function(data,
                    axis.line.y.left = ggplot2::element_line(),
                    panel.background = ggplot2::element_blank())+
     ggplot2::scale_color_manual(values = colors)+
-    ggplot2::labs(title = paste("Sample", sample))
+    ggplot2::labs(title = paste("Sample", sample_id))
 }
