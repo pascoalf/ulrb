@@ -17,6 +17,8 @@ sanity_check_rb_sample(
 \arguments{
 \item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
 
+\item{sample_id}{string with name of selected sample.}
+
 \item{taxa_id}{string with name of column with taxonomic units. Usually OTU or ASV.}
 
 \item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
@@ -26,8 +28,6 @@ sanity_check_rb_sample(
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
 \item{...}{other arguments}
-
-\item{sample}{string with name of selected sample.}
 }
 \value{
 a ggplot object

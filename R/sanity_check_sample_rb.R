@@ -17,10 +17,10 @@
 #' @importFrom rlang .data
 sanity_check_rb_sample <- function(data,
                                    sample_id,
-                                   taxa_id, ## go back to other functions, make this mandatory
-                                   classification_id = "Classification", # in case the user changes something
+                                   taxa_id,
+				   classification_id = "Classification",
                                    abundance_id = "Abundance",
-                                   colors = c("#0072B2", "#D55E00", "#CC79A7"), ...){ # in case the user changes something
+                                   colors = c("#0072B2", "#D55E00", "#CC79A7"), ...){ 
 
   #
   if(length(colors) != length(unique(data$Classification))){
