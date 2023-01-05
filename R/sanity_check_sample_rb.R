@@ -1,7 +1,7 @@
 #' Sanity check rare biosphere definition for one sample
 #'
 #' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
-#' @param sample string with name of selected sample.
+#' @param sample_id string with name of selected sample.
 #' @param taxa_id string with name of column with taxonomic units. Usually OTU or ASV.
 #' @param classification_id string with name of column with classification for each row. Default value is "Classification".
 #' @param abundance_id string with name of column with abundance values. Default is "Abundance".
