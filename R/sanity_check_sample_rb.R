@@ -15,7 +15,7 @@
 #'
 #' @import dplyr
 #' @importFrom rlang .data
-sanity_check_rb_sample <- function(data,
+sanity_check_sample_rb <- function(data,
                                    sample_id,
                                    taxa_id,
                                    classification_id = "Classification",
