@@ -6,3 +6,5 @@ sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
 nice_tidy <- prepare_tidy_data(nice, sample_names = selected_samples, samples_in = "cols")
 #
 usethis::use_data(nice_tidy, overwrite = TRUE)
+
+

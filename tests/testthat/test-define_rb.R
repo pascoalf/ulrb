@@ -113,9 +113,11 @@ test_that("User can give any col names to the data", {
 
   # Modify colnames
   data_modified <- nice_tidy
-  colnames(data_modified) <- c("a", "b", "c")
+  # Change column names to letters from a to j
+  colnames(data_modified) <- letters[seq_along(colnames(nice_tidy))]
 
-  expect_no_error(define_rb(data_modified, samples_id = "b", abundance_id = "c"))
+  # Sample is now "i" and Abundance is "j"
+  expect_no_error(define_rb(data_modified, samples_id = "i", abundance_id = "j"))
 })
 test_that("User must specify colnames if they are not default", {
 
@@ -128,7 +130,7 @@ test_that("User must specify colnames if they are not default", {
 test_that("define_rb works for a single sample", {
 
   # Modify colnames
-  one_sample <- filter(nice_tidy, Sample == "NB_5")
+  one_sample <- filter(nice_tidy, Sample == "ERR2044662")
 
   expect_no_error(define_rb(one_sample))
 })
@@ -138,7 +140,7 @@ test_that("For one sample the maximum number of
 
   # Modify colnames
   one_sample <- dplyr::filter(nice_tidy,
-                       Sample == "NB_5",
+                       Sample == "ERR2044662",
                        Abundance > 0,
                        !is.na(Sample))
 

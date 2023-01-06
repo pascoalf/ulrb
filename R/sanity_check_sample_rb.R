@@ -18,14 +18,10 @@
 sanity_check_rb_sample <- function(data,
                                    sample_id,
                                    taxa_id,
-				   classification_id = "Classification",
+                                   classification_id = "Classification",
                                    abundance_id = "Abundance",
-                                   colors = c("#0072B2", "#D55E00", "#CC79A7"), ...){ 
-
+                                   colors = c("#0072B2", "#D55E00", "#CC79A7"), ...){
   #
-  if(length(colors) != length(unique(data$Classification))){
-    stop("Number of colors must correspond to number of classifications used.")
-  }
   if(missing(sample_id)){
     stop("You must specify one sample from the column with samples ID's.")
   }
@@ -34,6 +30,9 @@ sanity_check_rb_sample <- function(data,
   }
   if(is.matrix(data))
     stop("Please use data.frame in tidy format.")
+  if(length(colors) != length(unique(data$Classification))){
+    stop("Number of colors must correspond to number of classifications used.")
+  }
 
   # Make sure the taxa_id corresponds to the correct column
   data <- data %>%
