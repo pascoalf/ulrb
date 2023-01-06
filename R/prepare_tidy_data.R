@@ -9,15 +9,23 @@
 #' @export
 #'
 #' @examples
-#' sample_names <- sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
-#'                                   "ERR2044665", "ERR2044666", "ERR2044667",
-#'                                   "ERR2044668", "ERR2044669", "ERR2044670")
+#' library(dplyr)
+#' #
+#' sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
+#'                    "ERR2044665", "ERR2044666", "ERR2044667",
+#'                    "ERR2044668", "ERR2044669", "ERR2044670")
 #'
 #' # Example for samples in cols and with additional data available
 #' prepare_tidy_data(nice, sample_names = sample_names, samples_in = "cols")
 #'
 #' # Example for samples in rows
-#' nice_rows
+#' # Select columns with samples from nice
+#' nice_rows <- nice %>% select(all_of(sample_names))
+#' # Change columns to rows
+#' nice_rows <- nice_rows %>% t() %>% as.data.frame()
+#' # Turn colnames into taxonomic units ID
+#' colnames(nice_rows) <- paste0("OTU_", seq_along(colnames(nice_rows)))
+#'
 #' prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")
 #'
 #' @import dplyr
