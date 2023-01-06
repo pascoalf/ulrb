@@ -32,18 +32,15 @@ prepare_tidy_data <- function(data,
     }
 
   # Samples are in rows
-
-  ### Still dont have data to test this part!!!
   if(samples_in == "rows"){
 
     # capture taxonomic units ID
     taxonomic_units <- colnames(data)
 
     if(nrow(data) != length(sample_names)){
-      stop("for samples_in = `rows`, each row must correspond to a specific sample")
+      stop("For samples_in = `rows`, the length of sample_names must equal the number of rows.")
     }
-
-    # If the user provides the samples in the rownames, better automatically set them
+    # sample names are in rownames
     if(mean(rownames(data) == sample_names) == 1){
       #
       data <- data %>% t() %>% as.data.frame()
@@ -55,7 +52,7 @@ prepare_tidy_data <- function(data,
 
     } else {
       # if the user doesn't include the sample names in rownames, then we assume that the order of samples in rows and in the sample vector is the same
-      warning("Please check if samples in sample_names vector and rownames of data are in the same order") ## this is not ideal}
+      warning("Please check if samples in sample_names vector and rownames of data are in the same order.")
       data <- data %>% t() %>% as.data.frame()
       #
       colnames(data) <- sample_names
@@ -72,7 +69,7 @@ prepare_tidy_data <- function(data,
       group_by(.data$Sample) %>%
       mutate(Taxa_id = taxonomic_units)
     #
-    message("Taxa_id assumes that assuming each column is a taxonomic unit.")
+    message("Taxa_id assumes each column is a taxonomic unit.")
   }
   return(tidy_data)
 }
