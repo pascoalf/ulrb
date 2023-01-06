@@ -53,4 +53,38 @@ test_that("color vector must be the same size as number of classifications", {
                                          sample_id = "ERR2044662"))
 })
 
+test_that("function output can be modified with other ggplot functions", {
+
+  classified_species <- define_rb(nice_tidy)
+
+  expect_no_error(sanity_check_rb_sample(classified_species,
+                                      taxa_id = "OTU",
+                                      sample_id = "ERR2044662") + ggplot2::theme_void())
+})
+
+test_that("optional labs can overwrite default labs", {
+
+  classified_species <- define_rb(nice_tidy)
+
+  expect_no_error(sanity_check_rb_sample(classified_species,
+                                         taxa_id = "OTU",
+                                         sample_id = "ERR2044662") +
+                    ggplot2::labs(Title = "Something else",
+                                  x = "Something else",
+                                  y = "Something else"))
+})
+
+test_that("the abundance argument can be changed into any type of score, for example, relative abundance", {
+
+  classified_species <- define_rb(nice_tidy)
+
+  classified_species <- classified_species %>%
+    group_by(Sample) %>%
+    mutate(Abundance = Abundance*100/sum(Abundance))
+
+  expect_no_error(sanity_check_rb_sample(classified_species,
+                                         taxa_id = "OTU",
+                                         sample_id = "ERR2044662") +
+                    ggplot2::labs(y = "Relative abundance"))
+})
 
