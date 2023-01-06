@@ -21,14 +21,15 @@ prepare_tidy_data <- function(data,
   if(samples_in == "cols"){
     tidy_data <- tidyr::pivot_longer(data,
                         cols = all_of(sample_names),
-                        names_to = "Sample", values_to = "Abundance")
+                        names_to = "Sample",
+                        values_to = "Abundance")
     }
 
   # Samples are in rows
   if(samples_in == "rows"){
     data <- data %>% t() %>% as.data.frame()
     #
-    colnames(data) <- sample_names ### Problem if there is extra data
+    colnames(data) <- sample_names
     #
     tidy_data <- tidyr::pivot_longer(data,
                         cols = all_of(sample_names),
