@@ -4,10 +4,37 @@
 \alias{sanity_check_all}
 \title{Sanity check of results for all samples}
 \usage{
-sanity_check_all(data, ...)
+sanity_check_all(
+  data,
+  sample_names,
+  taxa_id,
+  sample_id,
+  classification_id,
+  abundance_id,
+  colors = c("#0072B2", "#D55E00", "#CC79A7"),
+  export_output = "yes",
+  output_name = "Sanity check figures",
+  ...
+)
 }
 \arguments{
 \item{data}{output from sanity_check_sample_rb}
+
+\item{sample_names}{a vector with the name of all samples.}
+
+\item{taxa_id}{string with name of column with taxonomic units. Usually OTU or ASV.}
+
+\item{sample_id}{string with name of selected sample.}
+
+\item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
+
+\item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
+
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
+
+\item{export_output}{can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced, else the plots are not printed into pdf.}
+
+\item{output_name}{name of pdf file with ouput. Only works if export_output = "yes".}
 
 \item{...}{other arguments}
 }
