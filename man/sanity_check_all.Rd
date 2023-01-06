@@ -32,7 +32,8 @@ sanity_check_all(
 
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
-\item{export_output}{can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced, else the plots are not printed into pdf.}
+\item{export_output}{can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced,
+else the plots are not printed into pdf and a list is returned instead.}
 
 \item{output_name}{name of pdf file with ouput. Only works if export_output = "yes".}
 

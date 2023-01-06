@@ -2,8 +2,9 @@
 #'
 #' @inheritParams sanity_check_sample_rb
 #' @inheritParams prepare_tidy_data
-#' @param data output from sanity_check_sample_rb
-#' @param export_output can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced, else the plots are not printed into pdf.
+#' @param data a tidy data.frame with samples, abundance and classification for each taxonomic unit.
+#' @param export_output can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced,
+#'  else the plots are not printed into pdf and a list is returned instead.
 #' @param output_name name of pdf file with ouput. Only works if export_output = "yes".
 #' @param ... other arguments
 #'
@@ -14,9 +15,8 @@
 sanity_check_all <- function(data,
                              sample_names,
                              taxa_id,
-                             sample_id,
-                             classification_id,
-                             abundance_id,
+                             classification_id = "Classification",
+                             abundance_id = "Abundance",
                              colors = c("#0072B2", "#D55E00", "#CC79A7"),
                              export_output = "yes",
                              output_name = "Sanity check figures",
@@ -30,7 +30,12 @@ sanity_check_all <- function(data,
                              abundance_id = abundance_id,
                              colors = colors)})
     #
-    pdf(output_name)
-    lapply(plot_list,print)
-    dev.off()
+    if(export_output == "yes"){
+      pdf(output_name)
+      lapply(plot_list, print)
+      dev.off()
+    } else {
+      return(plot_list)
+    }
+
 }
