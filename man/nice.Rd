@@ -3,7 +3,7 @@
 \docType{data}
 \name{nice}
 \alias{nice}
-\title{SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
+\title{OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
 \format{
 ## `nice`
 A data frame with 524 rows and 17 columns:
@@ -11,24 +11,27 @@ A data frame with 524 rows and 17 columns:
   \item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
   \item{OTU}{Taxonomic unit ID}
   \item{Domain}{Domain level classification of taxonomic unit}
-  \item{Phylum}{Domain level classification of taxonomic unit}
-  \item{Class}{Domain level classification of taxonomic unit}
-  \item{Order}{Domain level classification of taxonomic unit}
-  \item{Family}{Domain level classification of taxonomic unit}
-  \item{Genus}{Domain level classification of taxonomic unit}
-  \item{Species}{Domain level classification of taxonomic unit}
+  \item{Phylum}{Phylum level classification of taxonomic unit}
+  \item{Class}{Class level classification of taxonomic unit}
+  \item{Order}{Order level classification of taxonomic unit}
+  \item{Family}{Family level classification of taxonomic unit}
+  \item{Genus}{Genus level classification of taxonomic unit}
+  \item{Species}{Species level classification of taxonomic unit}
   ...
 }
 }
 \source{
-<https://www.ebi.ac.uk/metagenomics/api/v1/studies/MGYS00001922/pipelines/5.0/file/ERP024265_taxonomy_abundances_SSU_v5.0.tsv>
+<https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
 }
 \usage{
 nice
 }
 \description{
-A raw OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition.
-Raw reads were processed into OTUs by the MGnify platform (v5). Original .fastq files with
-sequences are publicly available in European Nucleotide Archive under accesion number XXXXXX
+Table with abundance and taxonomic classification of each OTU.
+This OTU table was cleaned (see: XXXX) so that it only includes samples from 16S rRNA amplicon sequencing
+and eukaryotes were filtered out. Additionally, we added a column with (OTU) with a ID for each OTU.
+Raw reads were processed into OTUs by the MGnify platform (v5).
+Original .fastq files with sequences are publicly available in European Nucleotide Archive under accesion number XXXX.
+The original raw OTU table is publicly available in MGnify under accession number XXXX.
 }
 \keyword{datasets}

@@ -3,12 +3,13 @@
 \docType{data}
 \name{nice_tidy}
 \alias{nice_tidy}
-\title{SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
+\title{Tidy OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
 \format{
 ## `nice_tidy`
-A data frame with 524 rows and 17 columns:
+A data frame with 4716 rows and 10 columns:
 \describe{
-  \item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
+  \item{Sample}{Sample ID}
+  \item{Abundance}{Abundance}
   \item{OTU}{Taxonomic unit ID}
   \item{Domain}{Domain level classification of taxonomic unit}
   \item{Phylum}{Domain level classification of taxonomic unit}
@@ -21,14 +22,14 @@ A data frame with 524 rows and 17 columns:
 }
 }
 \source{
-<https://www.ebi.ac.uk/metagenomics/api/v1/studies/MGYS00001922/pipelines/5.0/file/ERP024265_taxonomy_abundances_SSU_v5.0.tsv>
+<https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
 }
 \usage{
 nice_tidy
 }
 \description{
-A raw OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition.
-Raw reads were processed into OTUs by the MGnify platform (v5). Original .fastq files with
-sequences are publicly available in European Nucleotide Archive under accesion number XXXXXX
+Tidy version of original OTU table (nice).
+A new column (Sample) includes the sample identifiers and a new column (Abundance) includes the abundance for each taxonomic unit.
+For details on OTU table processing see help page of nice data.
 }
 \keyword{datasets}
