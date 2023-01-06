@@ -8,7 +8,20 @@
 #' @return A tibble with the initial columns and new columns for the cluster and classification of each species.
 #' @export
 #'
-#' @examples 1
+#' @examples
+#'
+#' define_rb(nice_tidy)
+#'
+#' # If data is in wide format, with samples in cols
+#' sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
+#'                    "ERR2044665", "ERR2044666", "ERR2044667",
+#'                    "ERR2044668", "ERR2044669", "ERR2044670")
+#'
+#' nice_tidy <- prepare_tidy_data(nice, sample_names = sample_names, samples_in = "cols")
+#' define_rb(nice_tidy)
+#'
+#' # If data is in wide format, with samples in rows
+#' ### do this later ###
 #'
 #' @import dplyr
 #' @importFrom rlang .data
