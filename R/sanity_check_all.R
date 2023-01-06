@@ -4,7 +4,7 @@
 #' @inheritParams prepare_tidy_data
 #' @param data a tidy data.frame with samples, abundance and classification for each taxonomic unit.
 #' @param export_output can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced,
-#'  else the plots are not printed into pdf and a list is returned instead.
+#'  else the plots are not printed into pdf and a are returned to R session instead.
 #' @param output_name name of pdf file with ouput. Only works if export_output = "yes".
 #' @param ... other arguments
 #'
@@ -12,6 +12,8 @@
 #' @export
 #'
 #' @examples 1
+#'
+#' @importFrom grDevices dev.off pdf
 sanity_check_all <- function(data,
                              sample_names,
                              taxa_id,

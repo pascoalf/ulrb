@@ -8,9 +8,8 @@ sanity_check_all(
   data,
   sample_names,
   taxa_id,
-  sample_id,
-  classification_id,
-  abundance_id,
+  classification_id = "Classification",
+  abundance_id = "Abundance",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
   export_output = "yes",
   output_name = "Sanity check figures",
@@ -18,13 +17,11 @@ sanity_check_all(
 )
 }
 \arguments{
-\item{data}{output from sanity_check_sample_rb}
+\item{data}{a tidy data.frame with samples, abundance and classification for each taxonomic unit.}
 
 \item{sample_names}{a vector with the name of all samples.}
 
 \item{taxa_id}{string with name of column with taxonomic units. Usually OTU or ASV.}
-
-\item{sample_id}{string with name of selected sample.}
 
 \item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
 
@@ -33,7 +30,7 @@ sanity_check_all(
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
 \item{export_output}{can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced,
-else the plots are not printed into pdf and a list is returned instead.}
+else the plots are not printed into pdf and a are returned to R session instead.}
 
 \item{output_name}{name of pdf file with ouput. Only works if export_output = "yes".}
 
@@ -47,4 +44,5 @@ Sanity check of results for all samples
 }
 \examples{
 1
+
 }
