@@ -16,12 +16,20 @@ prepare_tidy_data(data, sample_names, samples_in = "cols", ...)
 \item{...}{additional arguments}
 }
 \value{
-a tibble with with the arguments for define_rb() in tidy format.
+A tibble with the arguments for define_rb() in tidy format. Can include extra variables.
 }
 \description{
 Prepare data in tidy format
 }
 \examples{
-1
+sample_names <- sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
+                                  "ERR2044665", "ERR2044666", "ERR2044667",
+                                  "ERR2044668", "ERR2044669", "ERR2044670")
+
+# Example for samples in cols and with additional data available
+prepare_tidy_data(nice, sample_names = sample_names, samples_in = "cols")
+
+# Example for samples in rows
+prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")
 
 }

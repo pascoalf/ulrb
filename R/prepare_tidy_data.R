@@ -5,10 +5,20 @@
 #' @param samples_in a vector specifyng the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.
 #' @param ... additional arguments
 #'
-#' @return a tibble with with the arguments for define_rb() in tidy format.
+#' @return A tibble with the arguments for define_rb() in tidy format. Can include extra variables.
 #' @export
 #'
-#' @examples 1
+#' @examples
+#' sample_names <- sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
+#'                                   "ERR2044665", "ERR2044666", "ERR2044667",
+#'                                   "ERR2044668", "ERR2044669", "ERR2044670")
+#'
+#' # Example for samples in cols and with additional data available
+#' prepare_tidy_data(nice, sample_names = sample_names, samples_in = "cols")
+#'
+#' # Example for samples in rows
+#' nice_rows
+#' prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")
 #'
 #' @import dplyr
 #' @importFrom rlang .data
