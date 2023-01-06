@@ -43,6 +43,18 @@ else the plots are not printed into pdf and a are returned to R session instead.
 Sanity check of results for all samples
 }
 \examples{
-1
+#
+sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
+                   "ERR2044665", "ERR2044666", "ERR2044667",
+                   "ERR2044668", "ERR2044669", "ERR2044670")
+#
+classified_species <- define_rb(nice_tidy)
+#
+sanity_check_all(classified_species,
+                 sample_names = sample_names,
+                 taxa_id = "OTU",
+                 abundance_id = "Abundance",
+                 export_output = "no",
+                 classification_id = "Classification")
 
 }

@@ -36,6 +36,11 @@ a ggplot object
 Sanity check rare biosphere definition for one sample
 }
 \examples{
-1
+classified_species <- define_rb(nice_tidy)
+
+sanity_check_sample_rb(classified_species,
+                       sample_id = "ERR2044669",
+                       taxa_id = "OTU",
+                       abundance_id = "Abundance")
 
 }

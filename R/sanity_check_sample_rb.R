@@ -11,7 +11,13 @@
 #' @return a ggplot object
 #' @export
 #'
-#' @examples 1
+#' @examples
+#' classified_species <- define_rb(nice_tidy)
+#'
+#' sanity_check_sample_rb(classified_species,
+#'                        sample_id = "ERR2044669",
+#'                        taxa_id = "OTU",
+#'                        abundance_id = "Abundance")
 #'
 #' @import dplyr
 #' @importFrom rlang .data
