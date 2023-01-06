@@ -1,8 +1,6 @@
 test_that("function works", {
   # get sample names
-  sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
-                    "ERR2044665", "ERR2044666", "ERR2044667",
-                    "ERR2044668", "ERR2044669", "ERR2044670")
+  sample_names <- get_samples()
 
   expect_no_error(prepare_tidy_data(nice, sample_names = sample_names))
 })
@@ -29,7 +27,7 @@ test_that("function works with samples in rows option",{
   # Make version of nice data with samples in rows, without the other variables
   nice_rows <- nice %>% select(contains("ERR")) %>% t() %>% as.data.frame()
   #
-  prepare_tidy_data(nice_rows, )
+  prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")
 })
 
 

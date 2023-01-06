@@ -36,12 +36,16 @@ prepare_tidy_data <- function(data,
   ### Still dont have data to test this part!!!
   if(samples_in == "rows"){
 
+    # capture taxonomic units ID
+    taxonomic_units <- colnames(data)
+
     if(nrow(data) != length(sample_names)){
       stop("for samples_in = `rows`, each row must correspond to a specific sample")
     }
 
     # If the user provides the samples in the rownames, better automatically set them
-    if(rownames(data) == sample_names){
+    if(mean(rownames(data) == sample_names) == 1){
+      #
       data <- data %>% t() %>% as.data.frame()
       #
       tidy_data <- tidyr::pivot_longer(data,
@@ -51,7 +55,7 @@ prepare_tidy_data <- function(data,
 
     } else {
       # if the user doesn't include the sample names in rownames, then we assume that the order of samples in rows and in the sample vector is the same
-      warning("please check if samples in sample_names vector and rownames of data are in the same order") ## this is not ideal}
+      warning("Please check if samples in sample_names vector and rownames of data are in the same order") ## this is not ideal}
       data <- data %>% t() %>% as.data.frame()
       #
       colnames(data) <- sample_names
@@ -61,7 +65,14 @@ prepare_tidy_data <- function(data,
                                        names_to = "Sample",
                                        values_to = "Abundance")
 
-      ### !! missing column with taxonomic units info.
+  }
+    # Add taxonomic units column
+    tidy_data <-
+      tidy_data %>%
+      group_by(.data$Sample) %>%
+      mutate(Taxa_id = taxonomic_units)
+    #
+    message("Taxa_id assumes that assuming each column is a taxonomic unit.")
   }
   return(tidy_data)
 }
