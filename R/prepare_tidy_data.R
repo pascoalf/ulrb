@@ -17,8 +17,14 @@ prepare_tidy_data <- function(data,
                               sample_names,
                               samples_in = "cols",
                               ...){
+
+  if(missing(sample_names)){
+    message("Missing argument sample_names. This is a vector with the names of the samples, as in the data input")
+  }
+
   # Samples are in cols
   if(samples_in == "cols"){
+
     tidy_data <- tidyr::pivot_longer(data,
                         cols = all_of(sample_names),
                         names_to = "Sample",
@@ -26,15 +32,34 @@ prepare_tidy_data <- function(data,
     }
 
   # Samples are in rows
+
+  ### Still dont have data to test this part!!!
   if(samples_in == "rows"){
-    data <- data %>% t() %>% as.data.frame()
-    #
-    colnames(data) <- sample_names
-    #
-    tidy_data <- tidyr::pivot_longer(data,
-                        cols = all_of(sample_names),
-                        names_to = "Sample",
-                        values_to = "Abundance")
+
+    if(nrow(data) != length(sample_names)){
+      stop("for samples_in = `rows`, each row must correspond to a specific sample")
+    }
+
+    # If the user provides the samples in the rownames, better automatically set them
+    if(rownames(data) == sample_names){
+      data <- data %>% t() %>% as.data.frame()
+      #
+      tidy_data <- tidyr::pivot_longer(data,
+                                       cols = all_of(sample_names),
+                                       names_to = "Sample",
+                                       values_to = "Abundance")
+
+    } else {
+      # if the user doesn't include the sample names in rownames, then we assume that the order of samples in rows and in the sample vector is the same
+      warning("please check if samples in sample_names vector and rownames of data are in the same order") ## this is not ideal}
+      data <- data %>% t() %>% as.data.frame()
+      #
+      colnames(data) <- sample_names
+      #
+      tidy_data <- tidyr::pivot_longer(data,
+                                       cols = all_of(sample_names),
+                                       names_to = "Sample",
+                                       values_to = "Abundance")
   }
   return(tidy_data)
 }
