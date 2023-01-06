@@ -60,6 +60,8 @@ prepare_tidy_data <- function(data,
                                        cols = all_of(sample_names),
                                        names_to = "Sample",
                                        values_to = "Abundance")
+
+      ### !! missing column with taxonomic units info.
   }
   return(tidy_data)
 }

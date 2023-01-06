@@ -23,6 +23,15 @@ test_that("for samples in rows, colnames of data must contain sample_names",{
   expect_error(prepare_tidy_data(nice, sample_names = c("not a sample name"))) ## not sure if this is specific enough
 })
 
-test_that("for samples in cols, number of rows must have the same size of sample_names",{
-  expect_error(prepare_tidy_data(nice, sample_names = c("not a sample name")))
+## samples in cols part
+
+test_that("function works with samples in rows option",{
+  # Make version of nice data with samples in rows, without the other variables
+  nice_rows <- nice %>% select(contains("ERR")) %>% t() %>% as.data.frame()
+  #
+  prepare_tidy_data(nice_rows, )
 })
+
+
+
+
