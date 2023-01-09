@@ -28,7 +28,8 @@
 define_rb <- function(data,
                       classification_vector = c("Rare","Undetermined","Abundant"),
                       samples_id = "Sample",
-                      abundance_id = "Abundance") {
+                      abundance_id = "Abundance",
+                      simplified = FALSE) {
 
   # Define number of cluster based on possible classifications
   k <- length(classification_vector)
@@ -40,17 +41,34 @@ define_rb <- function(data,
            Abundance = all_of(abundance_id))
 
   # Calculate kmedoids
-  clustered_data <-
-    data %>%
-    filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
-    group_by(.data$Sample) %>%
-    tidyr::nest() %>%
-    mutate(Level = purrr::map(.x = data,
-                       .f = ~cluster::pam(.x$Abundance,
-                                 k = k,
-                                 cluster.only = TRUE,
-                                 diss = FALSE))) %>%
-    tidyr::unnest(cols = c(data,.data$Level))
+  # Complete option
+  if(simplified == FALSE){
+    clustered_data <-
+      data %>%
+      filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
+      group_by(.data$Sample) %>%
+      tidyr::nest() %>%
+      mutate(pam_object = purrr::map(.x = data,
+                                     .f = ~cluster::pam(.x$Abundance,
+                                                        k = k,
+                                                        diss = FALSE))) %>%
+      mutate(Level = map(.x = full_cluster, .f = ~.x[[3]]), # obtain clusters
+             Sil_scores = map(.x = full_cluster, .f = ~.x[[7]][[1]]) ## obtain silhouete plots
+             tidyr::unnest(cols = c(data,.data$Level, .data$Sil_scores))
+  }
+  if(simplified == TRUE){
+    clustered_data <-
+      data %>%
+      filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
+      group_by(.data$Sample) %>%
+      tidyr::nest() %>%
+      mutate(Level = purrr::map(.x = data,
+                                     .f = ~cluster::pam(.x$Abundance,
+                                                        k = k,
+                                                        cluster.only = TRUE,
+                                                        diss = FALSE))) %>%
+             tidyr::unnest(cols = c(data,.data$Level))
+  }
 
   # Make classification table
   classification_table <- clustered_data %>%
