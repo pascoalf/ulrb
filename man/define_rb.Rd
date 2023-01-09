@@ -8,7 +8,8 @@ define_rb(
   data,
   classification_vector = c("Rare", "Undetermined", "Abundant"),
   samples_id = "Sample",
-  abundance_id = "Abundance"
+  abundance_id = "Abundance",
+  simplified = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ define_rb(
 \item{samples_id}{String with name of column with sample names}
 
 \item{abundance_id}{String with name of column with abundance values}
+
+\item{simplified}{Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results (pam_details) and Silhouette scores (Silhouette_scores).}
 }
 \value{
 A tibble with the initial columns and new columns for the cluster and classification of each species.

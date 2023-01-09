@@ -1,6 +1,9 @@
 test_that("Function runs without error", {
   expect_no_error(define_rb(nice_tidy))
 })
+test_that("Function runs without error, with simplified to TRUE", {
+  expect_no_error(define_rb(nice_tidy, simplified = TRUE))
+})
 test_that("Check if result is reproducible",{
   expect_equal(define_rb(nice_tidy),
                define_rb(nice_tidy))
@@ -199,4 +202,23 @@ test_that("Input must be tidy",{
   untidy_data <- nice_tidy %>% tidyr::pivot_wider(names_from = Sample, values_from = Abundance)
 
   expect_error(define_rb(untidy_data))
+})
+
+
+## Misssing tests exploring output of new option simplified == FALSE
+
+test_that("silhouete scores obtained double", {
+  classified_species <- define_rb(nice_tidy, simplified = FALSE)
+
+  silhouete_scores <- classified_species %>% pull(Silhouette_scores)
+
+  expect_type(silhouete_scores, "double")
+})
+
+test_that("pam object is list", {
+  classified_species <- define_rb(nice_tidy, simplified = FALSE)
+
+  pam_object <- classified_species %>% pull(pam_object)
+
+  expect_type(pam_object, "list")
 })

@@ -4,6 +4,8 @@
 #' @param classification_vector A vector of strings with the names for each cluster, from lower to higher abundance. Default is c("Rare", "Undetermined", "Abundance")
 #' @param samples_id String with name of column with sample names
 #' @param abundance_id String with name of column with abundance values
+#' @param simplified Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results (pam_details) and Silhouette scores (Silhouette_scores).
+#'
 #'
 #' @return A tibble with the initial columns and new columns for the cluster and classification of each species.
 #' @export
@@ -52,9 +54,9 @@ define_rb <- function(data,
                                      .f = ~cluster::pam(.x$Abundance,
                                                         k = k,
                                                         diss = FALSE))) %>%
-      mutate(Level = purrr::map(.x = pam_object, .f = ~.x[[3]]), # obtain clusters
-             Sil_scores = purrr::map(.x = pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouete plots
-      tidyr::unnest(cols = c(data,.data$Level, .data$Sil_scores))
+      mutate(Level = purrr::map(.x = .data$pam_object, .f = ~.x[[3]]), # obtain clusters
+             Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouete plots
+      tidyr::unnest(cols = c(data,.data$Level, .data$Silhouette_scores))
   }
   if(simplified == TRUE){
     clustered_data <-
