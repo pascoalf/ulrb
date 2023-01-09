@@ -4,10 +4,28 @@
 \alias{sanity_check_sample_sil}
 \title{Sanity check of Silhouette plot of selected sample}
 \usage{
-sanity_check_sample_sil(data)
+sanity_check_sample_sil(
+  data,
+  sample_id,
+  taxa_id,
+  classification_id = "Classification",
+  silhouette_score = "Silhouette_scores",
+  colors = c("#0072B2", "#D55E00", "#CC79A7"),
+  ...
+)
 }
 \arguments{
 \item{data}{...}
+
+\item{sample_id}{string with name of selected sample.}
+
+\item{taxa_id}{string with name of column with taxonomic units. Usually OTU or ASV.}
+
+\item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
+
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
+
+\item{...}{other arguments}
 }
 \value{
 A ggplot object of Silhouette plot obtained from the selected sample.
