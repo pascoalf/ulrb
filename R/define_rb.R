@@ -52,9 +52,9 @@ define_rb <- function(data,
                                      .f = ~cluster::pam(.x$Abundance,
                                                         k = k,
                                                         diss = FALSE))) %>%
-      mutate(Level = map(.x = full_cluster, .f = ~.x[[3]]), # obtain clusters
-             Sil_scores = map(.x = full_cluster, .f = ~.x[[7]][[1]]) ## obtain silhouete plots
-             tidyr::unnest(cols = c(data,.data$Level, .data$Sil_scores))
+      mutate(Level = purrr::map(.x = pam_object, .f = ~.x[[3]]), # obtain clusters
+             Sil_scores = purrr::map(.x = pam_object, .f = ~.x[[7]][[1]])) %>%  ## obtain silhouete plots
+      tidyr::unnest(cols = c(data,.data$Level, .data$Sil_scores))
   }
   if(simplified == TRUE){
     clustered_data <-
