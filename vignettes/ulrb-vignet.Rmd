@@ -1,0 +1,70 @@
+---
+title: "ulrb-vignet"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ulrb-vignet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Unsupervised Learning Based Definition Of Microbial Rare Biosphere
+
+The R package ulrb solves the problem of the definition of rarity in molecular microbiology by replacing human decision with a unsupervised machine learning algorithm (kmedoids). This algorithm works for any type of microbiome data, provided there is an abundance score for each taxonomic unit. For validation of this method to several kinds of molecular data and environments, please see REF.
+
+In this vignete we will illustrate a full analysis of the rare biosphere with a small, publically available dataset, the Norwegian Young Sea Ice Expedition, 2016 (N-ICE). The molecular data will be from amplicon sequencing of 16S rRNA gene (for sequencing details, see Sousa et al., 2019), raw sequences are available in the European Nucleotide Archive (ENA) under accession number #####, and they were processed into OTUs by MGnify (for details on MGnify bioinformatics processing see Mitchel et al.,).
+
+The N-ICE dataset consists of 9 samples, collected during the winter to spring transition of 2015 by fixing the vessel on drifting ice. Samples were collected at various depths (from 5m to 250m) and the ice drifted across different regions.
+
+For this vignete we are using the OTU table downloaded from the link https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis in 06-01-2023.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ulrb)
+library(dplyr)
+```
+
+### Brief note on nomenclature
+
+We use the term "taxonomic units" to refer to the highest resolution, distinct unit identified. This can be species, OTU, ASV...
+
+We use the term "abundance table" to refer to the table with, at least, the abundance score for each taxonomic unit. Any additional data can be added, this can be an OTU table, ASV table... 
+
+We also use the term "scale" or "scaling", which can also appear in the literature as "normalization".
+
+## Pre-processing of data prior to kmedoids algorithm
+
+The package ulrb will require that the abundance table is in tidy format, with a column for the abundance score used and another column for samples. Any additional columns are allowed.
+
+**Regarding the abundance score**, we are not scaling the abundance socre in this vignete, because the kmedoids algorithm will be applied "per sample" to the values of the abundance score. This means that any scalling, e.g. relative abundance, clr... will not have an effect on the algorithm, because the distance values between observations will remain the same. However, if the algorithm was applied to more variables (not only abundance), then scaling could make a difference. Thus, we consider that is best to use absolute values in this tutorial, to avoid misleading the reader into thinking that some scaling has to be done. 
+
+Notwistanding, for publication purposes and for the purposes of other data processing steps, it might make sense to apply some sort of scaling, as long as the number of observations, i.e. the number of taxonomic units, is the same, then the distance between them will be the same.
+
+If the user decides to apply any quality filtering to the abundance table, like rarefaction, it should be done *before* the kmedoids algorithm.
+
+In summary, the algorithm will be applied to your final, clean abundance table, with any abundance score.
+
+### Step 0 - Load and clean abundance table
+
+```{r}
+# Load raw OTU table from N-ICE
+nice_raw <- read.delim("~/Downloads/ERP024265_taxonomy_abundances_SSU_v5.0.tsv")
+
+# Change name of first column
+nice_clean <- rename(nice_raw, Taxonomy = "X.SampleID")
+
+# Select 16S rRNA amplicon sequencing samples
+selected_samples <- c("ERR2044662", "ERR2044663", "ERR2044664",
+                      "ERR2044665", "ERR2044666", "ERR2044667",
+                      "ERR2044668", "ERR2044669", "ERR2044670")
+
+nice_clean <- select(nice_clean, selected_samples, OTU, Taxonomy)
+
+#
+```
+

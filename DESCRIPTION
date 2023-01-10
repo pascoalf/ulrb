@@ -12,6 +12,8 @@ LazyData: true
 Depends: 
     R (>= 2.10)
 Suggests: 
+    knitr,
+    rmarkdown,
     stringr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -26,3 +28,4 @@ Imports:
     rlang,
     stats,
     tidyr
+VignetteBuilder: knitr
