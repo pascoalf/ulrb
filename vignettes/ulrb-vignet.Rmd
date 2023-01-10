@@ -54,16 +54,18 @@ In summary, the algorithm will be applied to your final, clean abundance table, 
 
 ```{r}
 # Load raw OTU table from N-ICE
-load("data/nice_raw.rda")
+load("../data/nice_raw.rda")
 
 # Change name of first column
 nice_clean <- rename(nice_raw, Taxonomy = "X.SampleID")
 
 # Select 16S rRNA amplicon sequencing samples
-selected_samples <- c("ERR2044662", "ERR2044663", "ERR2044664",
-                      "ERR2044665", "ERR2044666", "ERR2044667",
-                      "ERR2044668", "ERR2044669", "ERR2044670")
+selected_samples <- c("ERR2044662", "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670")
 
+# Add a column with taxonomic units ID (OTU in this case)
+nice_clean <- mutate(nice_clean, OTU = paste0("OTU_", row_number()))
+
+# Select relevant collumns
 nice_clean <- select(nice_clean, selected_samples, OTU, Taxonomy)
 
 # Separate Taxonomy column into each taxonomic level
@@ -78,10 +80,29 @@ nice_clean <- filter(nice_clean, Domain != "sk__Eukaryota")
 # Remove unclassified OTUs at phylum level
 nice_clean <- filter(nice_clean, !is.na(Phylum))
 
-# Check if everything looks normal
-head(nice_clean)
-
 # Simplify name
 nice <- nice_clean
+
+# Check if everything looks normal
+head(nice)
 ```
+
+### Step 1 - Transform abundance table into tidy format
+
+Now that we have a cleaned OTU table, we can transform it to tidy format. You can do this part in any order and according to your own data format. We made a function to help transform the two most common data formats for abundance tables:
+1) taxonomic units in rows, samples in collumns;
+2) taxonomic units in collumns, samples in rows.
+
+In this example, we have a data.frame with taxonomic units as rows and samples in various collumns, so this is not a tidy format. The transformation we need to do is to collapse all columns with samples into a single "Abundance" and "Samples" collumn, so that each variable corresponds to a single collumn, i.e. tidy.
+
+For this we just need to apply the prepare_tidy_data() function to the cleaned data. Note that you need to specify in which format your abundance table is, in this case, samples are in different collumns, so we set the argument samples_in to "cols"; is it was the opposite situation, with samples in rows, we would set samples_in to "rows".
+
+This function is optional and if you use it you really should verify if it is transforming the data correctly, because your own data might be different from our standard examples.
+
+```{r}
+nice_tidy <- prepare_tidy_data(nice, sample_names = selected_samples, samples_in = "cols")
+
+head(nice_tidy)
+```
+
 
