@@ -177,3 +177,14 @@ sanity_check_sample_sil(classified_table,
 
 
 As expected, most points were very close to +1, with very few points falling below 0.5
+
+## Sanity check summary
+
+Finally, we provide the function sanity_check_all that wraps around sanity_check_sample_rb and sanity_check_sample_sil to plot the RAC and Silhouette plot of each sample, side by side.
+
+sanity_check_all(classified_table,
+                 sample_names = selected_samples,
+                 taxa_id = "OTU", 
+                 export_output = FALSE) # if TRUE, provides a pdf file with a page for each plot
+
+
