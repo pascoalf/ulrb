@@ -73,6 +73,4 @@ sanity_check_sample_rb <- function(data,
   } else {
     make_plot()
   }
-
-
 }
