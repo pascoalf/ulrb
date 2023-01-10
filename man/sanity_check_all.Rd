@@ -10,9 +10,9 @@ sanity_check_all(
   taxa_id,
   classification_id = "Classification",
   abundance_id = "Abundance",
-  silhouette_score = "Silhoutte_scores",
+  silhouette_score = "Silhouette_scores",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
-  export_output = "yes",
+  export_output = "no",
   output_name = "Sanity check figures",
   ...
 )

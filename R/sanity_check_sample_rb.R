@@ -6,6 +6,7 @@
 #' @param classification_id string with name of column with classification for each row. Default value is "Classification".
 #' @param abundance_id string with name of column with abundance values. Default is "Abundance".
 #' @param colors vector with colors. Should have the same lenght as the number of classifications
+#' @param log_scaled if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.
 #' @param ... other arguments
 #'
 #' @return a ggplot object
@@ -26,7 +27,9 @@ sanity_check_sample_rb <- function(data,
                                    taxa_id,
                                    classification_id = "Classification",
                                    abundance_id = "Abundance",
-                                   colors = c("#0072B2", "#D55E00", "#CC79A7"), ...){
+                                   colors = c("#0072B2", "#D55E00", "#CC79A7"),
+                                   log_scaled = FALSE,
+                                   ...){
   #
   if(missing(sample_id)){
     stop("You must specify one sample from the column with samples ID's.")
@@ -46,16 +49,30 @@ sanity_check_sample_rb <- function(data,
            Classification = classification_id,
            Abundance = abundance_id)
 
-  data %>%
-    filter(.data$Sample == all_of(sample_id)) %>%
-    ggplot2::ggplot(ggplot2::aes(x = .data$ID, .data$Abundance, col = .data$Classification)) +
-    ggplot2::geom_point()+
-    ggplot2::theme(axis.text.x = ggplot2::element_blank(),
-                   axis.ticks.x = ggplot2::element_blank(),
-                   panel.grid = ggplot2::element_blank(),
-                   axis.line.x.bottom = ggplot2::element_line(),
-                   axis.line.y.left = ggplot2::element_line(),
-                   panel.background = ggplot2::element_blank())+
-    ggplot2::scale_color_manual(values = colors)+
-    ggplot2::labs(title = paste("Sample", sample_id))
+  make_plot <- function(){
+    data %>%
+      filter(.data$Sample == all_of(sample_id)) %>%
+      ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, -.data$Abundance),
+                                   .data$Abundance, col = .data$Classification)) +
+      ggplot2::geom_point()+
+      ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+                     axis.ticks.x = ggplot2::element_blank(),
+                     panel.grid = ggplot2::element_blank(),
+                     axis.line.x.bottom = ggplot2::element_line(),
+                     axis.line.y.left = ggplot2::element_line(),
+                     panel.background = ggplot2::element_blank())+
+      ggplot2::scale_color_manual(values = colors)+
+      ggplot2::labs(title = paste("Rank Abundance Curve for ", sample_id),
+                    x = taxa_id)
+  }
+
+  if(log_scaled == TRUE){
+    make_plot() +
+      ggplot2::scale_y_log10()+
+      ggplot2::labs(y = "Abundance in Log10 scale")
+  } else {
+    make_plot()
+  }
+
+
 }

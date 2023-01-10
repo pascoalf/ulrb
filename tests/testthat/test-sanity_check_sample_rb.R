@@ -88,3 +88,11 @@ test_that("the abundance argument can be changed into any type of score, for exa
                     ggplot2::labs(y = "Relative abundance"))
 })
 
+test_that("log_scaled argument works", {
+  classified_species <- define_rb(nice_tidy)
+
+  expect_no_error(sanity_check_sample_rb(classified_species,
+                                         taxa_id = "OTU",
+                                         sample_id = "ERR2044662",
+                                         log_scaled = TRUE))
+})

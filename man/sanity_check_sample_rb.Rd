@@ -11,6 +11,7 @@ sanity_check_sample_rb(
   classification_id = "Classification",
   abundance_id = "Abundance",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
+  log_scaled = FALSE,
   ...
 )
 }
@@ -26,6 +27,8 @@ sanity_check_sample_rb(
 \item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
 
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
+
+\item{log_scaled}{if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.}
 
 \item{...}{other arguments}
 }

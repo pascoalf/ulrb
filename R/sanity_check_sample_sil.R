@@ -31,14 +31,16 @@ sanity_check_sample_sil <- function(data,
                                  fill = .data$Classification,
                                  col = .data$Classification)) +
     ggplot2::geom_col()+
+    ggplot2::geom_hline(yintercept = c(-0.25, 0, 0.25, 0.5, 0.75),
+                        colour = c("red", "red", "black", "black", "black"),
+                        linetype = "dashed")+
     ggplot2::coord_flip()+
     ggplot2::theme(axis.text.y = ggplot2::element_blank(),
                    axis.ticks.y = ggplot2::element_blank(),
                    panel.grid = ggplot2::element_blank(),
                    axis.line.x.bottom = ggplot2::element_line(),
                    axis.line.y.left = ggplot2::element_line(),
-                   panel.background = ggplot2::element_blank(),
-                   panel.grid.major.x = ggplot2::element_line(linetype = "dashed", size = 0.3))+
+                   panel.background = ggplot2::element_blank())+
     ggplot2::scale_color_manual(values = colors)+
     ggplot2::scale_fill_manual(values = colors)+
     ggplot2::labs(title = paste("Silhouette plot for", sample_id),
