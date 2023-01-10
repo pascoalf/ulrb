@@ -32,14 +32,17 @@ sanity_check_sample_sil <- function(data,
                                  col = .data$Classification)) +
     ggplot2::geom_col()+
     ggplot2::coord_flip()+
-    ggplot2::theme(axis.text.x = ggplot2::element_blank(),
-                   axis.ticks.x = ggplot2::element_blank(),
+    ggplot2::theme(axis.text.y = ggplot2::element_blank(),
+                   axis.ticks.y = ggplot2::element_blank(),
                    panel.grid = ggplot2::element_blank(),
                    axis.line.x.bottom = ggplot2::element_line(),
                    axis.line.y.left = ggplot2::element_line(),
-                   panel.background = ggplot2::element_blank())+
+                   panel.background = ggplot2::element_blank(),
+                   panel.grid.major.x = ggplot2::element_line(linetype = "dashed", size = 0.3))+
     ggplot2::scale_color_manual(values = colors)+
-    ggplot2::scale_fill_manual(values = colors)
-  #  ggplot2::labs(title = paste("Sample", sample_id))
+    ggplot2::scale_fill_manual(values = colors)+
+    ggplot2::labs(title = paste("Silhouette plot for", sample_id),
+                  y = "Silhouette scores",
+                  x = taxa_id)
 
 }

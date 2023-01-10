@@ -62,7 +62,7 @@ sanity_check_all <- function(data,
       lapply(plot_list, print)
       dev.off()
     } else {
-      return(plot_list)
+      return(print(plot_list))
     }
 
 }
