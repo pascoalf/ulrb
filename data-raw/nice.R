@@ -1,7 +1,7 @@
 #
 # Obtained from link: https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis
 # At 06/01/2023
-nice_raw <- read.delim("~/Downloads/ERP024265_taxonomy_abundances_SSU_v5.0.tsv")
+load("data/nice_raw.rda")
 
 # Change name of first column
 nice_clean <- dplyr::rename(nice_raw, Taxonomy = "X.SampleID")
