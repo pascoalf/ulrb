@@ -23,6 +23,8 @@ sanity_check_sample_sil(
 
 \item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
 
+\item{silhouette_score}{string with collumn name with silhouette score values. Default is "Silhouette_scores"}
+
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
 \item{...}{other arguments}
@@ -34,5 +36,7 @@ A ggplot object of Silhouette plot obtained from the selected sample.
 Sanity check of Silhouette plot of selected sample
 }
 \examples{
-sanity_check_sample_sil(data = define_rb(nice_tidy, simplified = FALSE))
+sanity_check_sample_sil(data = define_rb(nice_tidy, simplified = FALSE),
+ taxa_id = "OTU", sample_id = "ERR2044662")
+
 }

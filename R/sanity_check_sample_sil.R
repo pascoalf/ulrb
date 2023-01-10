@@ -2,12 +2,16 @@
 #'
 #' @inheritParams sanity_check_sample_rb
 #' @param data ...
+#' @param silhouette_score string with collumn name with silhouette score values. Default is "Silhouette_scores"
 #'
 #' @return A ggplot object of Silhouette plot obtained from the selected sample.
 #' @export
 #'
+#' @importFrom stats reorder
 #' @examples
-#' sanity_check_sample_sil(data = define_rb(nice_tidy, simplified = FALSE))
+#' sanity_check_sample_sil(data = define_rb(nice_tidy, simplified = FALSE),
+#'  taxa_id = "OTU", sample_id = "ERR2044662")
+#'
 sanity_check_sample_sil <- function(data,
                                     sample_id,
                                     taxa_id,

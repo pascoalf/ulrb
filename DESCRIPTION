@@ -21,6 +21,7 @@ Imports:
     dplyr,
     ggplot2,
     grDevices,
+    gridExtra,
     purrr,
     rlang,
     stats,

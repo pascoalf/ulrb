@@ -10,6 +10,7 @@ sanity_check_all(
   taxa_id,
   classification_id = "Classification",
   abundance_id = "Abundance",
+  silhouette_score = "Silhoutte_scores",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
   export_output = "yes",
   output_name = "Sanity check figures",
@@ -26,6 +27,8 @@ sanity_check_all(
 \item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
 
 \item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
+
+\item{silhouette_score}{string with collumn name with silhouette score values. Default is "Silhouette_scores"}
 
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 

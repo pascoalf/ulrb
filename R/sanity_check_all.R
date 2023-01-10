@@ -1,6 +1,7 @@
 #' Sanity check of results for all samples
 #'
 #' @inheritParams sanity_check_sample_rb
+#' @inheritParams sanity_check_sample_sil
 #' @inheritParams prepare_tidy_data
 #' @param data a tidy data.frame with samples, abundance and classification for each taxonomic unit.
 #' @param export_output can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced,
@@ -32,18 +33,29 @@ sanity_check_all <- function(data,
                              taxa_id,
                              classification_id = "Classification",
                              abundance_id = "Abundance",
+                             silhouette_score = "Silhouette_scores",
                              colors = c("#0072B2", "#D55E00", "#CC79A7"),
-                             export_output = "yes",
+                             export_output = "no", ## setting default to no for safety
                              output_name = "Sanity check figures",
                              ...){
     #
     plot_list <- lapply(sample_names, function(x){
-      sanity_check_sample_rb(data = data,
-                             sample_id = x,
-                             taxa_id = taxa_id,
-                             classification_id = classification_id,
-                             abundance_id = abundance_id,
-                             colors = colors)})
+      gridExtra::grid.arrange(
+        sanity_check_sample_rb(data = data,
+                               sample_id = x,
+                               taxa_id = taxa_id,
+                               classification_id = classification_id,
+                               abundance_id = abundance_id,
+                               colors = colors),
+        sanity_check_sample_sil(data = data,
+                                sample_id = x,
+                                taxa_id = taxa_id,
+                                classification_id = classification_id,
+                                silhouette_score = silhouette_score,
+                                colors = colors)
+      )
+
+      })
     #
     if(export_output == "yes"){
       pdf(output_name)
