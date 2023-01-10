@@ -2,10 +2,17 @@ Package: ulrb
 Type: Package
 Title: Unsupervised Learning Based Definition Of Microbial Rare Biosphere
 Version: 0.0.0.9000
-Authors@R: person("Francisco", "Pascoal",,"fpascoal1996@gmail.com", role = c("aut","cre"))
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(
+    person("Francisco", "Pascoal",,"fpascoal1996@gmail.com", role = c("aut","cre")),
+    person("Luís", "Torgo",,"ltorgo@dal.ca", role = c("aut")),
+    person("Rodrigo", "Costa",,"rodrigoscosta@tecnico.ulisboa.pt", role = c("aut")),
+    person("Catarina", "Magalhães",,"catarinamagalhaes1972@gmail.com", role = c("aut")))
+Maintainer: Francisco Pascoal <fpascoal1996@gmail.com>
+Description: The ulrb package solves the problem of the definition of rarity in molecular microbiology 
+    by replacing human decision with an unsupervised machine learning algorithm (kmedoids). 
+    This algorithm works for any type of microbiome data, provided there is an abundance score
+    for each taxonomic unit. For validation of this method to several kinds of molecular data
+    and environments, please see REF.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
