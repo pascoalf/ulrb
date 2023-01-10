@@ -137,7 +137,7 @@ classified_table %>%
 
 It is good practice to cehck if results from unsupervised learning look sane. To help with this task, we made a group of functions that will help researchers understand if they need more or less classifications, or if the algorithm just doesn't work. There is no hard rule to verify unsupervised learning, but results should look sensible and follow expectations. We have seen that the results from this method are consistent with previous definitions of rarity, for example, most taxonomic units are rare and only very few are abundant, but we avoid introducing a human decision on which points are rare or abundant. 
 
-The sanity checks are the (1) Rank Abundance Curve and the (2) Silhouette plots.
+The sanity checks are the (1) Rank Abundance Curve and the (2) Silhouette plots. The first will be more helpfull for microbial ecologists, while the second will be more helpfull for data scientists.
 
 ### (1) Rank Abunddance Curve (RAC)
 
@@ -165,6 +165,15 @@ From the RAC obtained, we confirm that the unsupervised classification provides 
 
 ### (2) Silhouette plots
 
+
+
+
+```{r}
+sanity_check_sample_sil(classified_table, 
+                       sample_id = selected_samples[1],
+                       taxa_id = "OTU")
+
+```
 
 
 
