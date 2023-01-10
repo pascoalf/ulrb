@@ -50,7 +50,7 @@ If the user decides to apply any quality filtering to the abundance table, like 
 
 In summary, the algorithm will be applied to your final, clean abundance table, with any abundance score.
 
-### Step 0 - Load and clean abundance table
+### Load and clean abundance table
 
 ```{r}
 # Load raw OTU table from N-ICE
@@ -87,7 +87,7 @@ nice <- nice_clean
 head(nice)
 ```
 
-### Step 1 - Transform abundance table into tidy format
+### Transform abundance table into tidy format
 
 Now that we have a cleaned OTU table, we can transform it to tidy format. You can do this part in any order and according to your own data format. We made a function to help transform the two most common data formats for abundance tables:
 1) taxonomic units in rows, samples in collumns;
@@ -104,5 +104,67 @@ nice_tidy <- prepare_tidy_data(nice, sample_names = selected_samples, samples_in
 
 head(nice_tidy)
 ```
+
+
+## Apply definition of rare biosphere with unsupervised learning
+
+Now we are ready to use the central function of the package ulrb, which is define_rb.
+
+This function will add new collumns to the input data.frame, automatically deciding the classification of each taxonomic unit, per sample, by means of kmedoid algorithm.
+
+The algorithm is run by the pam function of the cluster package, and provides the clusters, which we translate into classifications, and provides statistical scores to interpret the robustness of the clusters formed. From those statistics, we select the silhouette scores, which will be used to evaluate the results later on. Additionally, the data.frame will include a nested list with the output from pam, for more experienced users to analyse if necessary.
+
+Regarding the classifications, we are setting a default to "rare", "undertermined" and "abundant", based on REF. However, the user can set any vector of classifications, as long as they follow the rules of the number of clusters, or k, from pam. Meaning, the number of classifications can't be more than the number of distinct observations in the data, as is logical. In practice this is not a concern, because we think most researchers will either use our default, or "rare" vs "abundant", or a more nuanced "very rare", "rare", "abundant", "very abundant". This are some examples, the point is that the classification can decided in a study by study context.
+
+Since the default output includes so many collumns that are there to support the classification obtained, we added an argument, simplified, which if TRUE will return a simplified version of the output, without silhouete scores, just the final classification, plus all the input data. We will use the default, simplified = FALSE.
+
+
+```{r}
+classified_table <- define_rb(nice_tidy)
+
+# Quick output check
+colnames(classified_table)
+
+classified_table %>% 
+  select(OTU, Sample, Abundance, 
+         Classification, Silhouette_scores, Cluster_median_abundance, 
+         pam_object) %>% 
+  head()
+```
+
+
+## Verify results
+
+It is good practice to cehck if results from unsupervised learning look sane. To help with this task, we made a group of functions that will help researchers understand if they need more or less classifications, or if the algorithm just doesn't work. There is no hard rule to verify unsupervised learning, but results should look sensible and follow expectations. We have seen that the results from this method are consistent with previous definitions of rarity, for example, most taxonomic units are rare and only very few are abundant, but we avoid introducing a human decision on which points are rare or abundant. 
+
+The sanity checks are the (1) Rank Abundance Curve and the (2) Silhouette plots.
+
+### (1) Rank Abunddance Curve (RAC)
+
+The RAC is a common tool in microbial ecology to describe the detectation limits of different methods and the distribution of species abundance (Pedrós-Alió, 2012). The RAC described for most environments shows that a few microorganisms are very abundant, but most follow the "long-tail", which is called the rare biosphere. But the point where the "long-tail" begins is subjective.
+
+The ulrb method considers that the terms "rare" and "abundant" are relative, i.e. one taxonomic unit is rare if, and only if, compared to an abundant one. We explore the consequences and assumptions that play into this in REF. But this means that the method is not looking for the begining of the "long-tail", it is comparing the abundance of all taxonomic units, and clustering them accordingly.
+
+Thus, if we plot the standard RAC and then collor each taxonomic unit according with the unsupervised classification, we can check if the unsupervised classification is consistent with the notion that the rare-biosphere is within the "long-tail".
+
+To do this, we provide the function sanity_check_sample_rb. Again, the abundance score can be transformed, and the Log10 scale can be applied optionally.
+
+```{r}
+sanity_check_sample_rb(classified_table, 
+                       sample_id = selected_samples[1],
+                       taxa_id = "OTU")
+
+# With Log10 scale
+sanity_check_sample_rb(classified_table, 
+                       sample_id = selected_samples[1],
+                       taxa_id = "OTU",
+                       log_scaled = TRUE)
+```
+
+From the RAC obtained, we confirm that the unsupervised classification provides a sensible result. Because the rare biosphere is indeed in the "long-tail", followed by a transition region, which we term "undertermined", because they are neither rare, nore abundant, and a few extreme points which are abundant.
+
+### (2) Silhouette plots
+
+
 
 
