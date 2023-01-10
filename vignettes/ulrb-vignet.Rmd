@@ -165,7 +165,7 @@ From the RAC obtained, we confirm that the unsupervised classification provides 
 
 ### (2) Silhouette plots
 
-
+The Silhouette plot provides a notion of the coherence of the points inside each cluster. The values for each observation range between -1 and +1, the closer to +1, the more coherent is the cluster. Usually, most observations will be very close to +1, and a few will have low values. As a rule of thumb, if most values are above 0.75, then the clusters are strong, but if you have many observations close to 0, but positive, the cluster might be artificial; for negative values, then the clusters have no structure.  
 
 
 ```{r}
@@ -176,4 +176,4 @@ sanity_check_sample_sil(classified_table,
 ```
 
 
-
+As expected, most points were very close to +1, with very few points falling below 0.5
