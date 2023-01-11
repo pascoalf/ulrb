@@ -39,7 +39,7 @@ sanity_check_all <- function(data,
                              output_name = "Sanity check figures",
                              ...){
     #
-    plot_list <- lapply(sample_names, function(x){
+    plot_list <- lapply(all_of(sample_names), function(x){
       gridExtra::grid.arrange(
         sanity_check_sample_rb(data = data,
                                sample_id = x,
