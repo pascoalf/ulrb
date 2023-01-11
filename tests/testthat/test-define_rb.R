@@ -125,7 +125,7 @@ test_that("User can give any col names to the data", {
 test_that("User must specify colnames if they are not default", {
 
   # Modify colnames
-  data_modified <- nice_tidy
+  data_modified <- select(nice_tidy, OTU, Sample, Abundance)
   colnames(data_modified) <- c("a", "b", "c")
 
   expect_error(define_rb(data_modified))
@@ -133,7 +133,8 @@ test_that("User must specify colnames if they are not default", {
 test_that("define_rb works for a single sample", {
 
   # Modify colnames
-  one_sample <- filter(nice_tidy, Sample == "ERR2044662")
+  data_modified <- select(nice_tidy, OTU, Sample, Abundance)
+  one_sample <- filter(data_modified, Sample == "ERR2044662")
 
   expect_no_error(define_rb(one_sample))
 })
