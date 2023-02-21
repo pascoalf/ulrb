@@ -39,34 +39,37 @@ sanity_check_all <- function(data,
                              output_name = "Sanity check figures",
                              log_scaled = FALSE,
                              ...){
-    #
-    plot_list <- lapply(all_of(sample_names), function(x){
-      #gridExtra::grid.arrange(
+    # list for rac plots
+    plot_list_rac <- lapply(all_of(sample_names), function(x){
         sanity_check_sample_rb(data = data,
                                sample_id = x,
                                taxa_id = taxa_id,
                                classification_id = classification_id,
                                abundance_id = abundance_id,
                                colors = colors,
-                               log_scaled = log_scaled)#,
+                               log_scaled = log_scaled)})
+    # list for silhouette plots
+    plot_list_sil <- lapply(all_of(sample_names), function(x){
         sanity_check_sample_sil(data = data,
                                 sample_id = x,
                                 taxa_id = taxa_id,
                                 classification_id = classification_id,
                                 silhouette_score = silhouette_score,
-                                colors = colors)#,
-        #ncol= 2
-      #)
+                                colors = colors)})
 
-      })
     #
     if(!isTRUE(export_output)){
-      return(print(plot_list))
+      return(print(plot_list_rac))
+      return(print(plot_list_sil))
     } else {
-        pdf(paste0(output_name, ".pdf"))
-          lapply(plot_list, print)
-        dev.off()
-
+      # RAC file
+      pdf(paste0(output_name, "_rac.pdf"))
+        lapply(plot_list_rac, print)
+      dev.off()
+      # Silhouette plots file
+      pdf(paste0(output_name, "_silhouette.pdf"))
+        lapply(plot_list_sil, print)
+      dev.off()
     }
 
 }
