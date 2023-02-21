@@ -59,8 +59,8 @@ sanity_check_all <- function(data,
 
     #
     if(!isTRUE(export_output)){
-      return(print(plot_list_rac))
-      return(print(plot_list_sil))
+      print(
+        list(plot_list_rac, plot_list_sil))
     } else {
       # RAC file
       pdf(paste0(output_name, "_rac.pdf"))
