@@ -14,6 +14,7 @@ sanity_check_all(
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
   export_output = "no",
   output_name = "Sanity check figures",
+  log_scaled = FALSE,
   ...
 )
 }
@@ -36,6 +37,8 @@ sanity_check_all(
 else the plots are not printed into pdf and a are returned to R session instead.}
 
 \item{output_name}{name of pdf file with ouput. Only works if export_output = "yes".}
+
+\item{log_scaled}{if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.}
 
 \item{...}{other arguments}
 }
