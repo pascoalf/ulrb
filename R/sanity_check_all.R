@@ -35,7 +35,7 @@ sanity_check_all <- function(data,
                              abundance_id = "Abundance",
                              silhouette_score = "Silhouette_scores",
                              colors = c("#0072B2", "#D55E00", "#CC79A7"),
-                             export_output = "no",
+                             export_output = FALSE,
                              output_name = "Sanity check figures",
                              log_scaled = FALSE,
                              ...){
@@ -60,12 +60,13 @@ sanity_check_all <- function(data,
 
       })
     #
-    if(export_output == "no"){
-    return(print(plot_list))
+    if(!isTRUE(export_output)){
+      return(print(plot_list))
     } else {
-    pdf(paste0(output_name, ".pdf"))
-    lapply(plot_list, print)
-    dev.off()
+      return(
+        pdf(paste0(output_name, ".pdf"))
+          lapply(plot_list, print)
+        dev.off())
 
     }
 
