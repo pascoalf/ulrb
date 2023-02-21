@@ -54,8 +54,8 @@ sanity_check_all <- function(data,
                                 taxa_id = taxa_id,
                                 classification_id = classification_id,
                                 silhouette_score = silhouette_score,
-                                colors = colors),
-        ncol= 2
+                                colors = colors)#,
+        #ncol= 2
       #)
 
       })
