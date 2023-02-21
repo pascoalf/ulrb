@@ -46,7 +46,8 @@ sanity_check_all <- function(data,
                                taxa_id = taxa_id,
                                classification_id = classification_id,
                                abundance_id = abundance_id,
-                               colors = colors),
+                               colors = colors,
+                               log_scaled = log_scaled),
         sanity_check_sample_sil(data = data,
                                 sample_id = x,
                                 taxa_id = taxa_id,
@@ -62,7 +63,7 @@ sanity_check_all <- function(data,
     return(print(plot_list))
     } else {
     pdf(output_name)
-    lapply(all_of(plot_list), print)
+    lapply(plot_list, print)
     dev.off()
 
     }
