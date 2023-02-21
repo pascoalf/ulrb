@@ -30,6 +30,30 @@ test_that("function fails if data is in matrix format", {
                                       taxa_id = "OTU"))
 })
 
+test_that("function stops if log_scaled isn't logical (TRUE/FALSE)", {
+
+  classified_species <- define_rb(nice_tidy)
+
+  classified_species_matrix <- as.matrix(classified_species)
+
+  expect_error(sanity_check_sample_rb(classified_species_matrix,
+                                      sample_id = "ERR2044662",
+                                      taxa_id = "OTU",
+                                      log_scaled = "yes"))
+})
+
+test_that("function works normally if log_scaled is logical (TRUE/FALSE)", {
+
+  classified_species <- define_rb(nice_tidy)
+
+  classified_species_matrix <- as.matrix(classified_species)
+
+  expect_error(sanity_check_sample_rb(classified_species_matrix,
+                                      sample_id = "ERR2044662",
+                                      taxa_id = "OTU",
+                                      log_scaled = TRUE))
+})
+
 test_that("any color vector works if it has the same length as the number of classifications", {
 
   classified_species <- define_rb(nice_tidy)
