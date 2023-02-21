@@ -37,6 +37,7 @@ sanity_check_all <- function(data,
                              colors = c("#0072B2", "#D55E00", "#CC79A7"),
                              export_output = "no",
                              output_name = "Sanity check figures",
+                             log_scaled = FALSE,
                              ...){
     #
     plot_list <- lapply(all_of(sample_names), function(x){
@@ -62,7 +63,7 @@ sanity_check_all <- function(data,
     if(export_output == "no"){
     return(print(plot_list))
     } else {
-    pdf(output_name)
+    pdf(paste0(output_name, ".pdf"))
     lapply(plot_list, print)
     dev.off()
 
