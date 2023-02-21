@@ -42,6 +42,9 @@ sanity_check_sample_rb <- function(data,
   if(length(colors) != length(unique(data$Classification))){
     stop("Number of colors must correspond to number of classifications used.")
   }
+  if(!is.logical(log_scaled)){
+    stop("'log_scaled' argument needs to be logical (TRUE/FALSE)")
+  }
 
   # Make sure the taxa_id corresponds to the correct column
   data <- data %>%
@@ -67,7 +70,7 @@ sanity_check_sample_rb <- function(data,
                     x = taxa_id)
   }
 
-  if(log_scaled == TRUE){
+  if(isTRUE(log_scaled)){
     intermediate_plot <- make_plot()
     intermediate_plot +
       ggplot2::scale_y_log10()+
