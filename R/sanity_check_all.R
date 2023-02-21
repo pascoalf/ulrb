@@ -62,7 +62,7 @@ sanity_check_all <- function(data,
     return(print(plot_list))
     } else {
     pdf(output_name)
-    lapply(plot_list, print)
+    lapply(all_of(plot_list), print)
     dev.off()
 
     }
