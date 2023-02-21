@@ -60,14 +60,16 @@ sanity_check_sample_rb <- function(data,
                      panel.grid = ggplot2::element_blank(),
                      axis.line.x.bottom = ggplot2::element_line(),
                      axis.line.y.left = ggplot2::element_line(),
-                     panel.background = ggplot2::element_blank())+
+                     panel.background = ggplot2::element_blank(),
+                     legend.position = "top")+
       ggplot2::scale_color_manual(values = colors)+
       ggplot2::labs(title = paste("Rank Abundance Curve for ", sample_id),
                     x = taxa_id)
   }
 
   if(log_scaled == TRUE){
-    make_plot() +
+    intermediate_plot <- make_plot()
+    intermediate_plot +
       ggplot2::scale_y_log10()+
       ggplot2::labs(y = "Abundance in Log10 scale")
   } else {
