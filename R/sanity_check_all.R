@@ -41,14 +41,14 @@ sanity_check_all <- function(data,
                              ...){
     #
     plot_list <- lapply(all_of(sample_names), function(x){
-      gridExtra::grid.arrange(
+      #gridExtra::grid.arrange(
         sanity_check_sample_rb(data = data,
                                sample_id = x,
                                taxa_id = taxa_id,
                                classification_id = classification_id,
                                abundance_id = abundance_id,
                                colors = colors,
-                               log_scaled = log_scaled),
+                               log_scaled = log_scaled)#,
         sanity_check_sample_sil(data = data,
                                 sample_id = x,
                                 taxa_id = taxa_id,
@@ -56,7 +56,7 @@ sanity_check_all <- function(data,
                                 silhouette_score = silhouette_score,
                                 colors = colors),
         ncol= 2
-      )
+      #)
 
       })
     #
