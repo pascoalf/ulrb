@@ -40,7 +40,8 @@ sanity_check_sample_sil <- function(data,
                    panel.grid = ggplot2::element_blank(),
                    axis.line.x.bottom = ggplot2::element_line(),
                    axis.line.y.left = ggplot2::element_line(),
-                   panel.background = ggplot2::element_blank())+
+                   panel.background = ggplot2::element_blank(),
+                   legend.position = "top")+
     ggplot2::scale_color_manual(values = colors)+
     ggplot2::scale_fill_manual(values = colors)+
     ggplot2::labs(title = paste("Silhouette plot for", sample_id),
