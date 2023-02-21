@@ -63,11 +63,10 @@ sanity_check_all <- function(data,
     if(!isTRUE(export_output)){
       return(print(plot_list))
     } else {
-      #return(
         pdf(paste0(output_name, ".pdf"))
-          lapply(plot_list, print)
+          #lapply(plot_list, print)
+            print(plot_list)
         dev.off()
-       # )
 
     }
 
