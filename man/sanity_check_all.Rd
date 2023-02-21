@@ -12,7 +12,7 @@ sanity_check_all(
   abundance_id = "Abundance",
   silhouette_score = "Silhouette_scores",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
-  export_output = "no",
+  export_output = FALSE,
   output_name = "Sanity check figures",
   log_scaled = FALSE,
   ...
