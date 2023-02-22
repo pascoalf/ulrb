@@ -48,7 +48,7 @@ define_rb <- function(data,
     clustered_data <-
       data %>%
       filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
-      group_by(.data$Sample) %>%
+      group_by(.data$Sample, .add = TRUE) %>%
       tidyr::nest() %>%
       mutate(pam_object = purrr::map(.x = data,
                                      .f = ~cluster::pam(.x$Abundance,
@@ -62,7 +62,7 @@ define_rb <- function(data,
     clustered_data <-
       data %>%
       filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
-      group_by(.data$Sample) %>%
+      group_by(.data$Sample, .add = TRUE) %>%
       tidyr::nest() %>%
       mutate(Level = purrr::map(.x = data,
                                      .f = ~cluster::pam(.x$Abundance,
