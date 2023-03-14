@@ -206,7 +206,7 @@ test_that("Input must be tidy",{
 })
 
 
-## Misssing tests exploring output of new option simplified == FALSE
+## Missing tests exploring output of new option simplified == FALSE
 
 test_that("silhouete scores obtained double", {
   classified_species <- define_rb(nice_tidy, simplified = FALSE)
@@ -223,3 +223,4 @@ test_that("pam object is list", {
 
   expect_type(pam_object, "list")
 })
+
