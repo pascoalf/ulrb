@@ -65,10 +65,10 @@ define_rb <- function(data,
       group_by(.data$Sample, .add = TRUE) %>%
       tidyr::nest() %>%
       mutate(Level = purrr::map(.x = data,
-                                     .f = ~cluster::pam(.x$Abundance,
-                                                        k = k,
-                                                        cluster.only = TRUE,
-                                                        diss = FALSE))) %>%
+                                .f = ~cluster::pam(.x$Abundance,
+                                                   k = k,
+                                                   cluster.only = TRUE,
+                                                   diss = FALSE))) %>%
              tidyr::unnest(cols = c(data,.data$Level))
   }
 

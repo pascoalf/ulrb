@@ -120,3 +120,4 @@ test_that("log_scaled argument works", {
                                          sample_id = "ERR2044662",
                                          log_scaled = TRUE))
 })
+
