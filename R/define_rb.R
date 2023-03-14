@@ -77,8 +77,7 @@ define_rb <- function(data,
     group_by(.data$Sample, Level = as.factor(.data$Level), .add = TRUE) %>%
     summarize(Cluster_median_abundance = stats::median(.data$Abundance)) %>%
     arrange(.data$Sample, .data$Cluster_median_abundance) %>%
-    mutate(Classification = factor(all_of(classification_vector),
-                                   levels = all_of(classification_vector)))
+    mutate(Classification = factor(classification_vector, levels = classification_vector))
 
   # Apply classification_table to classify clusters
   classified_clusters <- clustered_data %>%
