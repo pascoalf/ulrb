@@ -56,7 +56,7 @@ define_rb <- function(data,
                                                         diss = FALSE))) %>%
       mutate(Level = purrr::map(.x = .data$pam_object, .f = ~.x[[3]]), # obtain clusters
              Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouete plots
-      tidyr::unnest(cols = c(data,.data$Level, .data$Silhouette_scores))
+      tidyr::unnest(cols = c(data, Level, Silhouette_scores))
   }
   if(simplified == TRUE){
     clustered_data <-
