@@ -48,9 +48,9 @@ sanity_check_sample_rb <- function(data,
 
   # Make sure the taxa_id corresponds to the correct column
   data <- data %>%
-    rename(ID = taxa_id,
-           Classification = classification_id,
-           Abundance = abundance_id)
+    rename(ID = all_of(taxa_id),
+           Classification = all_of(classification_id),
+           Abundance = all_of(abundance_id))
 
   make_plot <- function(){
     data %>%
