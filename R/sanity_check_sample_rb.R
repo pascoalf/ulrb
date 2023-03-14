@@ -54,7 +54,7 @@ sanity_check_sample_rb <- function(data,
 
   make_plot <- function(){
     data %>%
-      filter(.data$Sample == all_of(sample_id)) %>%
+      filter(.data$Sample == sample_id) %>%
       ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, -.data$Abundance),
                                    .data$Abundance, col = .data$Classification)) +
       ggplot2::geom_point()+
