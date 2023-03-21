@@ -25,7 +25,7 @@ sanity_check_sample_sil <- function(data,
            Classification = classification_id)
 
   data %>%
-    filter(.data$Sample == all_of(sample_id)) %>%
+    filter(.data$Sample == sample_id) %>%
     ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, .data$Silhouette_scores),
                                  .data$Silhouette_scores,
                                  fill = .data$Classification,
