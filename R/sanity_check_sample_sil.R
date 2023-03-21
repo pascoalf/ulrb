@@ -20,9 +20,9 @@ sanity_check_sample_sil <- function(data,
                                     colors = c("#0072B2", "#D55E00", "#CC79A7"),
                                     ...){
   data <- data %>%
-    rename(ID = taxa_id,
-           Silhouette_scores = silhouette_score,
-           Classification = classification_id)
+    rename(ID = all_of(taxa_id),
+           Silhouette_scores = all_of(silhouette_score),
+           Classification = all_of(classification_id))
 
   data %>%
     filter(.data$Sample == sample_id) %>%
