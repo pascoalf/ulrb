@@ -69,7 +69,7 @@ define_rb <- function(data,
                                                    k = k,
                                                    cluster.only = TRUE,
                                                    diss = FALSE))) %>%
-             tidyr::unnest(cols = c(data,.data$Level))
+             tidyr::unnest(cols = c(data, Level))
   }
 
   # Make classification table
