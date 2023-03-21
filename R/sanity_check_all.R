@@ -40,7 +40,7 @@ sanity_check_all <- function(data,
                              log_scaled = FALSE,
                              ...){
     # list for rac plots
-    plot_list_rac <- lapply(all_of(sample_names), function(x){
+    plot_list_rac <- lapply(sample_names, function(x){
         sanity_check_sample_rb(data = data,
                                sample_id = x,
                                taxa_id = taxa_id,
@@ -49,7 +49,7 @@ sanity_check_all <- function(data,
                                colors = colors,
                                log_scaled = log_scaled)})
     # list for silhouette plots
-    plot_list_sil <- lapply(all_of(sample_names), function(x){
+    plot_list_sil <- lapply(sample_names, function(x){
         sanity_check_sample_sil(data = data,
                                 sample_id = x,
                                 taxa_id = taxa_id,
