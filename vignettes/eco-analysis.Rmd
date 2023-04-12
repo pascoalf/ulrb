@@ -1,0 +1,37 @@
+---
+title: "eco-analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{eco-analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ulrb)
+library(vegan)
+```
+
+
+# Ecological analysis of microbial rare biosphere defined by ulrb
+
+In this tutorial we will show how the output from `define_rb()` can be readily used for some common ecological analysis. In this case, we will just look at alpha diversity. 
+
+To do so, we have several steps:
+
+a) Clean OTU table (we just want prokaryotes);
+b) Rarefy samples (we show this option, because it is very common);
+c) Classify OTUs into rare, undetermined or abundant;
+d) Merge OTU table with metadata information;
+e) Calculate and plot alpha diversity metrics against environmental variables.
+
+
+
+
