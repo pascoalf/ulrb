@@ -1,0 +1,33 @@
+---
+title: "Alternative classifications"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Alternative classifications}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ulrb)
+```
+
+
+# Explore alternative classifications
+
+So far, we have been considering that the microbial communities are divided into "rare", "undetermined" and "abundant". This division implies that the kmedoids algorithm is considering **k=3**, *i.e.* there are three clusters. However, there are at least two situations where you might want to change the number of clusters:
+
+1. The clusters obtained are non-sense;
+2. The biological/ecological questions requires another division.
+
+
+
+
+
+

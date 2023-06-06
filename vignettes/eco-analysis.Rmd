@@ -1,8 +1,8 @@
 ---
-title: "eco-analysis"
+title: "Rare Biosphere alpha diversity"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{eco-analysis}
+  %\VignetteIndexEntry{Rare Biosphere alpha diversity}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,11 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(ulrb)
-library(vegan)
-```
-
 
 # Ecological analysis of microbial rare biosphere defined by ulrb
 
@@ -26,12 +21,103 @@ In this tutorial we will show how the output from `define_rb()` can be readily u
 
 To do so, we have several steps:
 
-a) Clean OTU table (we just want prokaryotes);
+a) Load and clean OTU table (we just want prokaryotes);
 b) Rarefy samples (we show this option, because it is very common);
-c) Classify OTUs into rare, undetermined or abundant;
+c) Classify OTUs into rare, undetermined or abundant (with `define_rb()` function);
 d) Merge OTU table with metadata information;
 e) Calculate and plot alpha diversity metrics against environmental variables.
 
 
+```{r setup}
+library(ulrb)
+library(dplyr)
+library(tidyr)
+library(vegan)
+library(ggplot2)
+library(purrr)
+```
+
+
+## (a) Load and clean OTU table
+
+```{r}
+# Load raw OTU table from N-ICE
+load("../data/nice_raw.rda")
+load("../data/nice_env.rda")
+
+# Change name of first column
+nice_clean <- rename(nice_raw, Taxonomy = "X.SampleID")
+
+# Select 16S rRNA amplicon sequencing samples
+selected_samples <- c("ERR2044662", "ERR2044663", "ERR2044664",
+                      "ERR2044665", "ERR2044666", "ERR2044667",
+                      "ERR2044668", "ERR2044669", "ERR2044670")
+
+# Add a column with taxonomic units ID (OTU in this case)
+nice_clean <- mutate(nice_clean, OTU = paste0("OTU_", row_number()))
+
+# Select relevant collumns
+nice_clean <- select(nice_clean, selected_samples, OTU, Taxonomy)
+
+# Separate Taxonomy column into each taxonomic level
+nice_clean <- separate(nice_clean, Taxonomy, c("Domain","Kingdom","Phylum","Class","Order","Family","Genus","Species"),sep=";")
+
+# Remove Kingdom column, because it is not used for prokaryotes
+nice_clean <- select(nice_clean, -Kingdom)
+
+# Remove eukaryotes
+nice_clean <- filter(nice_clean, Domain != "sk__Eukaryota")
+
+# Remove unclassified OTUs at phylum level
+nice_clean <- filter(nice_clean, !is.na(Phylum))
+
+# Simplify name
+nice <- nice_clean
+
+# Check if everything looks normal
+head(nice)
+
+# Change table to tidy format
+# You can automatically do this with an ulrb function
+nice_tidy <- prepare_tidy_data(nice, ## data to tidy 
+                  sample_names = contains("ERR"), ## vector with ID samples
+                  samples_in = "cols") ## samples can be in columns (cols) or rows. 
+
+```
+
+## (b) Rarefy samples
+
+Now that we have a tidy table, it will be important to keep in mind how the data is organized. In this tutorial, we will be using functions like `group_by()` or `nest()`, if you are not familiarized with them, try to search for tidyverse packages, functions and mindset. We are also going to use the package vegan, which can be used for most ecology statistics. Note, however, that vegan works with matrices in very specific formats, so hopefully this sections will also help you to see how you can use tidy verse approaches to very speicifc data types.
+
+The first step will be to verify how many reads each sample got
+
+```{r}
+## First, check how many reads each sample got
+nice_tidy %>% 
+  group_by(Sample) %>% ## because data is in tidy format
+  summarise(TotalReads = sum(Abundance)) %>% 
+  ggplot(aes(Sample, TotalReads)) + 
+  geom_hline(yintercept = 40000) + 
+  geom_col() + 
+  theme_bw() + 
+  coord_flip()
+```
+
+All samples have more than about 50 000 reads, with one sample having a little bit less. But we think we can keep all samples and rarefy down to 40 000 reads.
+
+```{r}
+nice_rarefid <- 
+  nice_tidy %>% 
+  group_by(Sample) %>%
+  nest() %>% 
+  mutate(Rarefied_reads = map(.x = data, 
+                              ~as.data.frame(
+                                t(
+                                  rrarefy(
+                                    .x$Abundance, 
+                                    sample = 40000))))) %>% 
+  unnest(c(data,Rarefied_reads))%>% 
+  rename(Rarefied_abundance = "V1")  
+```
 
 
