@@ -120,4 +120,41 @@ nice_rarefid <-
   rename(Rarefied_abundance = "V1")  
 ```
 
+For sanity check, lets plot the total number of reads per sample, again:
+
+```{r}
+## First, check how many reads each sample got
+nice_rarefid %>% 
+  group_by(Sample) %>% ## because data is in tidy format
+  summarise(TotalRarefiedReads = sum(Rarefied_abundance)) %>%  
+  ## Attention! We still have the original abundance in another collumn
+  ggplot(aes(Sample, TotalRarefiedReads)) + 
+  geom_hline(yintercept = 40000) + 
+  geom_col() + 
+  theme_bw() + 
+  coord_flip()
+```
+
+## (b) Classify OTUs into rare, undetermined or abundant (with `define_rb()` function);
+
+At this stage, we can simply apply the define_rb() function, which will include a nesting and grouping step inside of itself. For this reason, the data does not need to be grouped before the function. During unit testing, however, we noticed that this could introduce problems, so the function implicitly removes any grouping of the tidy table used by the author. This way, only the pre-specific grouping of the function is used. To have control over this, you just need to be carefull with the sample collumn, because ulrb method assumes that the calculations are made "by sample" -- so, it will do an `ungroup()` followed by `group_by(Sample)`.
+
+In practice, this is very simple:
+
+```{r}
+nice_classified <- define_rb(nice_tidy, simplified = TRUE)
+head(nice_classified)
+```
+
+By default, the function can give lots of details, but in this case, since we are just going to look at the ecology component, and not at the machine learning aspects of this, we can set the argument *simplified* to `TRUE`. Note that the additional computational time required for the additional details should be negligible for small datasets (we don't know how it behaves for bigger datasets).
+
+## (c) Merge OTU table with metadata information
+
+We are almost ready to analyse ecological questions, but first we need metadata. All we have to do is merge our classified OTU table with the metadata table. To do this we will use join functions from dplyr, just note that the sample ID from the two tables that we want to merge are different, but this is easy to solve.
+
+```{r}
+nice_eco <- nice_classified %>% left_join(nice_env, by = c("Sample" = "ENA_ID"))
+```
+
+
 
