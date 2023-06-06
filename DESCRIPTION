@@ -22,7 +22,8 @@ Suggests:
     knitr,
     rmarkdown,
     stringr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vegan
 Config/testthat/edition: 3
 RoxygenNote: 7.2.3
 Imports: 

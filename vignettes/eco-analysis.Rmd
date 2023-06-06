@@ -35,6 +35,8 @@ library(tidyr)
 library(vegan)
 library(ggplot2)
 library(purrr)
+#
+set.seed(123)
 ```
 
 
@@ -157,4 +159,181 @@ nice_eco <- nice_classified %>% left_join(nice_env, by = c("Sample" = "ENA_ID"))
 ```
 
 
+## (e) Calculate and plot alpha diversity metrics against environmental variables.
 
+At this point, we can calculate some common alpha diversity metrics. If we use the dplyr and ggplot functions, then it becomes really easy to make a simple overview of prokaryotic diversity, by classification.
+
+```{r}
+# Calculate diversity
+nice_diversity <- nice_eco %>% 
+  group_by(Sample, Classification, Month, Depth, Water.mass) %>% 
+  summarise(SpeciesRichness = specnumber(Abundance),
+            ShannonIndex = diversity(Abundance, index = "shannon"),
+            SimpsonIndex = diversity(Abundance, index = "simpson")) %>% 
+  ungroup()
+```
+```{r}
+## Re-organize table to have all diversity indices in a single col.
+nice_diversity_tidy <- nice_diversity %>% 
+  pivot_longer(cols = c("SpeciesRichness", "ShannonIndex", "SimpsonIndex"),
+               names_to = "Index",
+               values_to = "Diversity") %>% 
+  mutate(Month = factor(Month, levels = c("March", "April", "June"))) ## correct order
+```
+### Alpha diversity
+
+- Month variation
+
+```{r, fig.width = 6, fig.height = 4.5}
+qualitative_colors <- 
+  c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+## Plots
+nice_diversity_tidy %>% 
+  ggplot(aes(Month, Diversity, col = Classification)) + 
+  geom_point() + 
+  facet_wrap(~Index, scales = "free_y")+
+  scale_color_manual(values = qualitative_colors[c(5,3,6)]) + 
+  theme_bw()
+```
+
+- Water mass variation
+
+```{r}
+nice_diversity_tidy %>% 
+  ggplot(aes(Water.mass, Diversity, col = Classification)) + 
+  geom_point() + 
+  facet_wrap(~Index, scales = "free_y")+
+  scale_color_manual(values = qualitative_colors[c(5,3,6)]) + 
+  theme_bw()
+```
+
+### Beta diversity
+
+We can also do some basic beta diversity. Note that it might require a little bit more of data wrangling.
+
+In this section, we will only focus on the rare biosphere.
+
+- Months
+
+```{r}
+rare_biosphere <- 
+  nice_eco %>%  
+  filter(Classification == "Rare") %>% 
+  select(Sample, Abundance, OTU, Depth, Month, Water.mass) %>% 
+  mutate(Sample_unique = paste(Sample, Month))
+
+rb_env <- rare_biosphere %>% 
+  ungroup() %>% 
+  select(Sample_unique, Depth, Water.mass, Month) %>% 
+  distinct()
+
+rb_sp_prep <- rare_biosphere %>% 
+  ungroup() %>% 
+  select(Sample_unique, Abundance, OTU)
+
+rb_sp_prep %>% head() # sanity check
+
+rb_sp <- 
+  rb_sp_prep %>% 
+  tidyr::pivot_wider(names_from = "OTU",
+                     values_from = "Abundance",
+                     values_fn = list(count= list)) %>% 
+  print() %>% 
+  unchop(everything())
+```
+
+```{r}
+rb_sp[is.na(rb_sp)] <- 0
+
+# Prepare aesthetics
+rb_env <- rb_env %>% 
+  mutate(col_month = case_when(Month == "March" ~ qualitative_colors[1],
+                               Month == "April" ~ qualitative_colors[2],
+                               TRUE ~ qualitative_colors[3])) %>% 
+  mutate()
+```
+
+```{r, fig.height = 8, fig.width= 8}
+cca_plot_rare_biosphere <- 
+  cca(rb_sp[,-1], display = "sites", scale = TRUE) %>% 
+  plot(display = "sites", type = "p", main = "Rare biosphere")
+#
+cca_plot_rare_biosphere
+points(cca_plot_rare_biosphere,
+       bg = rb_env$col_month,
+       pch = 21, 
+       col = "grey", 
+       cex = 2)
+#
+with(rb_env,
+     ordispider(cca_plot_rare_biosphere,
+                Month, lty = "dashed", label = TRUE))
+```
+
+From this analysis, it seems that the community composition of the rare biosphere is different between June and the remaining months.
+
+
+- Water Masses
+
+
+Note: the code will be a little bit repetitive, in the future I might improve it.
+
+```{r, fig.height = 8, fig.width= 8}
+rare_biosphere_water <- 
+  nice_eco %>%  
+  filter(Classification == "Rare") %>% 
+  select(Sample, Abundance, OTU, Depth, Month, Water.mass) %>% 
+  mutate(Sample_unique = paste(Sample, Water.mass))
+
+rb_sp_prep_water <- rare_biosphere_water %>% 
+  ungroup() %>% 
+  select(Sample_unique, Abundance, OTU)
+
+rb_sp_water <- 
+  rb_sp_prep_water %>% 
+  tidyr::pivot_wider(names_from = "OTU",
+                     values_from = "Abundance",
+                     values_fn = list(count= list)) %>% 
+  print() %>% 
+  unchop(everything())
+#
+rb_sp_water[is.na(rb_sp_water)] <- 0
+
+#
+rb_env_water <- rare_biosphere_water %>% 
+  ungroup() %>% 
+  select(Sample_unique, Depth, Water.mass, Month) %>% 
+  distinct()
+
+#
+rb_env_water %>% 
+  mutate(col_water = case_when(Water.mass == "PSW" ~ qualitative_colors[2],
+                               Water.mass == "PSWw" ~ qualitative_colors[5],
+                               Water.mass == "MAW" ~ qualitative_colors[3],
+                               Water.mass == "AW" ~ qualitative_colors[1])) %>% 
+  mutate()
+
+#
+cca_plot_rare_biosphere_water <- 
+  cca(rb_sp_water[,-1], display = "sites", scale = TRUE) %>% 
+  plot(display = "sites", type = "p", main = "Rare biosphere")
+
+#
+cca_plot_rare_biosphere_water
+points(cca_plot_rare_biosphere_water,
+       bg = rb_env_water$col_water,
+       pch = 21, 
+       col = "grey", 
+       cex = 2)
+#
+with(rb_env,
+     ordispider(cca_plot_rare_biosphere_water,
+                Water.mass, lty = "dashed", label = TRUE))
+```
+
+From the last plot, it seems that the rare biosphere is more distinct in the Modified Atlantic Water.
+
+# Final considerations
+
+Hopefully, you got a sense of how the ulrb package can be integrated in a more general microbial ecology workflow. Of course, many more questions could be approaced, such as taxonomy and so on. 
