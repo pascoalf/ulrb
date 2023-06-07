@@ -1,8 +1,8 @@
 ---
-title: "Define rare biosphere with ulrb"
+title: "Tutorial to define rare biosphere with ulrb"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Define rare biosphere with ulrb}
+  %\VignetteIndexEntry{Tutorial to define rare biosphere with ulrb}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

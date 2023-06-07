@@ -1,8 +1,8 @@
 ---
-title: "Rare Biosphere alpha diversity"
+title: "Integration of ulrb in a simple microbial ecology workflow"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Rare Biosphere alpha diversity}
+  %\VignetteIndexEntry{Integration of ulrb in a simple microbial ecology workflow}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -159,7 +159,7 @@ nice_eco <- nice_classified %>% left_join(nice_env, by = c("Sample" = "ENA_ID"))
 ```
 
 
-## (e) Calculate and plot alpha diversity metrics against environmental variables.
+## (e) Calculate and plot diversity metrics against environmental variables.
 
 At this point, we can calculate some common alpha diversity metrics. If we use the dplyr and ggplot functions, then it becomes really easy to make a simple overview of prokaryotic diversity, by classification.
 
@@ -180,6 +180,7 @@ nice_diversity_tidy <- nice_diversity %>%
                values_to = "Diversity") %>% 
   mutate(Month = factor(Month, levels = c("March", "April", "June"))) ## correct order
 ```
+
 ### Alpha diversity
 
 - Month variation
