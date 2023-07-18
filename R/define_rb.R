@@ -45,6 +45,7 @@ define_rb <- function(data,
   # Calculate kmedoids
   # Complete option
   if(simplified == FALSE){
+    ## Apply cluster algorithm
     clustered_data <-
       data %>%
       filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
@@ -55,7 +56,7 @@ define_rb <- function(data,
                                                         k = k,
                                                         diss = FALSE))) %>%
       mutate(Level = purrr::map(.x = .data$pam_object, .f = ~.x[[3]]), # obtain clusters
-             Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouete plots
+             Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouette plots
       tidyr::unnest(cols = c(data, .data$Level, .data$Silhouette_scores))
   }
   if(simplified == TRUE){
