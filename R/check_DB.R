@@ -16,6 +16,9 @@
 #' check_DB(sample_2044662, range = 4:11)
 #'
 check_DB <- function(data, range = 3:10){
+  stopifnot(range > 1)
+  stopifnot(range < length(unique(data)))
+  stopifnot(is.vector(data))
   sapply(range, function(k){
     clusterSim::index.DB(x = data,
                          cl = cluster::pam(data, k = k, cluster.only = TRUE)
