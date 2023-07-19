@@ -15,6 +15,9 @@
 #' check_CH(sample_2044662, range = 4:11)
 #'
 check_CH <- function(data, range = 3:10){
+  stopifnot(range > 1)
+  stopifnot(range < length(unique(data)))
+  stopifnot(is.vector(data))
   # Calculate Calinsky-Harabasz index
     sapply(range, function(k){
     clusterSim::index.G1(x = data,
