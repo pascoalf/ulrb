@@ -14,7 +14,7 @@ Description: The ulrb package solves the problem of the definition of rarity in 
     This algorithm works for any type of microbiome data, provided there is an abundance score
     for each taxonomic unit. For validation of this method to several kinds of molecular data
     and environments, please see REF.
-License: GPL (>= 3)
+License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: 
