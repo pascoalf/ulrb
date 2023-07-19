@@ -15,6 +15,9 @@
 #' check_avgSil(sample_2044662, range = 4:11)
 #'
 check_avgSil <- function(data, range = 3:10){
+  stopifnot(range > 1)
+  stopifnot(range < length(unique(data)))
+  stopifnot(is.vector(data))
   # Calculate Average Silhouette score index
   sapply(range, function(k){
     mean(
