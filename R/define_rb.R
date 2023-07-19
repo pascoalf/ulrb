@@ -114,7 +114,7 @@ define_rb <- function(data,
   if(bad_samples > 0){
     warning(paste(bad_samples, "samples got a bad Silhouette score. Consider changing the number of classifications."))
     warning("Evaluation was based on the median Silhouette score.")
-    warning("If half the observations within a classification are below 0.5 (-1 to 1), we consider that the clustering was 'Bad'.")
+    warning("If half the observations within a classification are below 0.5 Silhouette score, we consider that the clustering was 'Bad'.")
     warning("Check 'Evaluation' collumn for more details.")
   }
 
