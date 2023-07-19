@@ -20,9 +20,9 @@ Check Average Silhouette score index
 \examples{
 library(dplyr)
 sample_2044662 <- nice_tidy \%>\% filter(Sample == "ERR2044662") \%>\% pull(Abundance)
-check_CH(sample_2044662)
+check_avgSil(sample_2044662)
 
 # To change range
-check_CH(sample_2044662, range = 4:11)
+check_avgSil(sample_2044662, range = 4:11)
 
 }
