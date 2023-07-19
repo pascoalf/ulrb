@@ -1,0 +1,25 @@
+#' Check Average Silhouette score index
+#'
+#' @inheritParams check_DB
+#'
+#'
+#' @return Vector with average Silhouette score index for each pre-specified k.
+#' @export
+#'
+#' @examples
+#' library(dplyr)
+#' sample_2044662 <- nice_tidy %>% filter(Sample == "ERR2044662") %>% pull(Abundance)
+#' check_CH(sample_2044662)
+#'
+#' # To change range
+#' check_CH(sample_2044662, range = 4:11)
+#'
+check_avgSil <- function(data, range = 3:10){
+  # Calculate Average Silhouette score index
+  sapply(range, function(k){
+    mean(
+      cluster::silhouette(
+        cluster::pam(data, k)$clustering,
+        stats::dist(data))[,3])
+  })
+}
