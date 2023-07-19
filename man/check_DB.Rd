@@ -11,6 +11,9 @@ check_DB(data, range = 3:10)
 
 \item{range}{The range of values of k to test.}
 }
+\value{
+A vector with Davies-Boulding index for eac pre-specified k.
+}
 \description{
 Check Davies-Bouldin Index
 }
