@@ -44,7 +44,7 @@ define_rb <- function(data,
 
   # Calculate kmedoids
   # Complete option
-  if(simplified == FALSE){
+#  if(simplified == FALSE){
     ## Apply cluster algorithm
     clustered_data <-
       data %>%
@@ -58,20 +58,20 @@ define_rb <- function(data,
       mutate(Level = purrr::map(.x = .data$pam_object, .f = ~.x[[3]]), # obtain clusters
              Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouette plots
       tidyr::unnest(cols = c(data, .data$Level, .data$Silhouette_scores))
-  }
-  if(simplified == TRUE){
-    clustered_data <-
-      data %>%
-      filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
-      group_by(.data$Sample, .add = TRUE) %>%
-      tidyr::nest() %>%
-      mutate(Level = purrr::map(.x = data,
-                                .f = ~cluster::pam(.x$Abundance,
-                                                   k = k,
-                                                   cluster.only = TRUE,
-                                                   diss = FALSE))) %>%
-             tidyr::unnest(cols = c(data, .data$Level))
-  }
+#  }
+#  if(simplified == TRUE){
+#    clustered_data <-
+#      data %>%
+#      filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
+#      group_by(.data$Sample, .add = TRUE) %>%
+#      tidyr::nest() %>%
+#      mutate(Level = purrr::map(.x = data,
+#                                .f = ~cluster::pam(.x$Abundance,
+#                                                   k = k,
+#                                                   cluster.only = TRUE,
+#                                                   diss = FALSE))) %>%
+#             tidyr::unnest(cols = c(data, .data$Level))
+#  }
 
   # Make classification table
   classification_table <- clustered_data %>%
@@ -84,6 +84,47 @@ define_rb <- function(data,
   classified_clusters <- clustered_data %>%
     mutate(Level = as.factor(.data$Level)) %>%
     left_join(classification_table)
+
+  # Evaluate
+  classified_clusters <-
+    classified_clusters %>%
+    group_by(.data$Sample, .data$Classification) %>%
+    tidyr::nest() %>%
+    mutate(median_Silhouette = purrr::map(.x = data, .f = ~median(.x$Silhouette_scores))) %>%
+    mutate(Evaluation = purrr::map(.x = .data$median_Silhouette, .f = ~case_when(median_Silhouette > 0.9 ~ "Very good",
+                                                                                 median_Silhouette > 0.75 ~ "Good",
+                                                                                 median_Silhouette > 0.5 ~ "Sufficient",
+                                                                                 median_Silhouette <= 0.5 ~ "Bad"))) %>%
+    tidyr::unnest(cols = c(data, .data$median_Silhouette, .data$Evaluation))
+
+  ## the nest steps only check if a warning is necessary, the output is classified clusters
+  clusters_report <- classified_clusters %>%
+    select(.data$Sample, .data$Classification, .data$median_Silhouette, .data$Evaluation) %>% ### break from here
+    distinct() %>%
+    group_by(.data$Classification) %>%
+    count(.data$Evaluation)
+
+  # Count number of samples with bad scores
+  bad_samples <- clusters_report %>%
+    filter(.data$Evaluation == "Bad") %>%
+    pull(.data$n) %>%
+    sum()
+
+  #
+  if(bad_samples > 0){
+    warning(paste(bad_samples, "samples got a bad Silhouette score. Consider changing the number of classifications."))
+    warning("Evaluation was based on the median Silhouette score.")
+    warning("If half the observations within a classification are below 0.5 (-1 to 1), we consider that the clustering was 'Bad'.")
+    warning("Check 'Evaluation' collumn for more details.")
+  }
+
+
+  # Option to simplify
+  if(simplified == TRUE){
+    # Remove unnecessary columns
+    classified_clusters %>%
+      select(-.data$Level, -.data$pam_object, -.data$Evaluation, -.data$median_Silhouette, -.data$Silhouette_scores, -.data$Cluster_median_abundance)
+  }
 
   return(classified_clusters)
 }
