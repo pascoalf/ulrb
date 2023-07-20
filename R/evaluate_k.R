@@ -16,7 +16,9 @@ evaluate_k <- function(data,
                        samples_id = "Sample",
                        abundance_id = "Abundance",
                        ...){
-
+  stopifnot(range > 1)
+  stopifnot(range < length(unique(data)))
+  stopifnot(is.vector(data))
   # Match samples_id and abundance_id with Samples and Abundance, respectively
   data <-
     data %>%

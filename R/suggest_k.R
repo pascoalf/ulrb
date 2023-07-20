@@ -20,7 +20,8 @@ suggest_k <- function(data,
                       index = "Average Silhouette Score",
                       detailed = FALSE,
                       ...){
-
+  stopifnot(range > 1)
+  stopifnot(range < length(unique(data)))
   all_scores <-
     evaluate_k(data = data,
                range = range,
@@ -65,11 +66,11 @@ suggest_k <- function(data,
            data.frame(Score =
                         c("Davies-Bouldin index",
                           "Calinsky-Harabasz index",
-                          "average Silhouette Score"),
+                          "Average Silhouette Score"),
                       Criteria =
-                        c("minimum value for best k",
-                          "maximum value for best k",
-                          "maximum value for best k"),
+                        c("Minimum value for best k",
+                          "Maximum value for best k",
+                          "Maximum value for best k"),
                       Details =
                         c("Measures cluster separation",
                           "Measures cluster definition",
