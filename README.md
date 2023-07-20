@@ -3,7 +3,7 @@
   [![R-CMD-check](https://github.com/pascoalf/ulrb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
-The R package "ulrb" stands for Unsupervised Machine Learning definition of the Rare Biosphere. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.
+The R package **ulrb** stands for **Unsupervised Machine Learning definition of the Rare Biosphere**. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.
 
 More specifically, the k-medoid algorithm is used to divide phylogenetic units (ASVs, OTUs, Species, ...) within a microbial community (usually, a sample) into clusters. The clusters are then ordered based on a user-defined classification vector. By default, our method classifies all phylogenetic units in one of these: "rare", "undetermined" or "abundant". However, this can be changed by the user if necessary.
 
