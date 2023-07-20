@@ -61,10 +61,26 @@ suggest_k <- function(data,
     ## some list
 
     best_k <-
-      list(Introduction = "introductory text",
-           Indices = data.frame(Score = c("DB", "CH", "etc")),
-           SamplesSummary = data.frame(),
-           CHresults = list(best_CH_k))
+      list("This list contains several details that might help you decide a k parameter.",
+           data.frame(Score =
+                        c("Davies-Bouldin index",
+                          "Calinsky-Harabasz index",
+                          "average Silhouette Score"),
+                      Criteria =
+                        c("minimum value for best k",
+                          "maximum value for best k",
+                          "maximum value for best k"),
+                      Details =
+                        c("Measures cluster separation",
+                          "Measures cluster definition",
+                          "Measures cluster density")),
+           SamplesSummary = paste("You study has",
+                                  length(unique(pull(data, .data$Sample))),
+           "samples. For each one we calculated all indices obtained for each k, from",
+           min(range), "to", max(range)),
+           DaviesBouldin = best_CH_k,
+           CalinskyHarabasz = best_CH_k,
+           averageSilhouette = best_avgSil_k)
 
   }
 return(best_k)
