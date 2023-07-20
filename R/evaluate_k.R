@@ -1,21 +1,28 @@
-#' Evaluate k
+#' Evaluate k from all samples in a dataset
 #'
-#' @inheritParams check_DB
-#' @param ... Extra arguments.
+#' @param data A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.
+#' @param samples_id String with name of column with sample names.
+#' @param abundance_id String with name of column with abundance values.
+#' @param range
+#' @param ...
 #'
-#' @return testing
+#' @return
 #' @export
 #'
 #' @examples
-#' #testing
+#' #test
 evaluate_k <- function(data, range = 3:10, ...){
 
-  ## One sample
-    data.frame(DB = check_DB(data, range = range),
-               CH = check_CH(data, range = range),
-               average_Silhouette = check_avgSil(data, range = range),
-               k = range)
+  # Match samples_id and abundance_id with Samples and Abundance, respectively
+  data <-
+    data %>%
+    rename(Sample = all_of(samples_id),
+           Abundance = all_of(abundance_id))
 
+  # Apply evaluate_sample_k to all samples
+  data %>%
+    filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
+    group_by(.data$Sample, .add = TRUE) %>%
+    tidyr::nest() %>%
 
-  ### All samples
 }
