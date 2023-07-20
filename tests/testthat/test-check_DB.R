@@ -18,8 +18,14 @@ test_that("Expect error for k = 1", {
   expect_error(check_DB(sample_ERR2044662$Abundance, range = 1:10))
 })
 
-test_that("Should work for all possible k's without errors", {
+test_that("If all possible k's include zero, it should throw an error", {
   sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")[, "Abundance"]
+  max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
+  expect_error(check_DB(sample_ERR2044662$Abundance, range = 2:(max_k_of_ERR2044662-1)))
+})
+
+test_that("Without zeros, the automatic calculation of maximum k wil not result in an error", {
+  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662", Abundance>0)[, "Abundance"]
   max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
   expect_no_error(check_DB(sample_ERR2044662$Abundance, range = 2:(max_k_of_ERR2044662-1)))
 })

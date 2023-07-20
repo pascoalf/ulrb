@@ -17,7 +17,7 @@
 #'
 check_DB <- function(data, range = 3:10){
   stopifnot(range > 1)
-  stopifnot(range < length(unique(data)))
+  stopifnot(range < length(unique(data[data>0])))
   stopifnot(is.vector(data))
   sapply(range, function(k){
     clusterSim::index.DB(x = data,

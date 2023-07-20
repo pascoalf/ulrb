@@ -21,7 +21,15 @@ suggest_k <- function(data,
                       detailed = FALSE,
                       ...){
   stopifnot(range > 1)
-  stopifnot(range < length(unique(data)))
+  # calculate maximum k
+  maxk = data %>%
+    group_by(.data$Sample) %>%
+    summarise(topK = length(unique(.data$Abundance))) %>%
+    ungroup() %>%
+    pull(topK) %>%
+    min()
+  #
+  stopifnot(range < maxk)
   all_scores <-
     evaluate_k(data = data,
                range = range,

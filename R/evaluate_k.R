@@ -17,13 +17,15 @@ evaluate_k <- function(data,
                        abundance_id = "Abundance",
                        ...){
   stopifnot(range > 1)
-  stopifnot(range < length(unique(data)))
-  stopifnot(is.vector(data))
+  #
+
   # Match samples_id and abundance_id with Samples and Abundance, respectively
   data <-
     data %>%
     rename(Sample = all_of(samples_id),
            Abundance = all_of(abundance_id))
+  # check if max k has been reached
+  stopifnot(range < length(unique(data$Abundance)))
 
   # Apply evaluate_sample_k to all samples
   data %>%
