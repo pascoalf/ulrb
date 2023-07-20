@@ -26,7 +26,7 @@ suggest_k <- function(data,
     group_by(.data$Sample) %>%
     summarise(topK = length(unique(.data$Abundance))) %>%
     ungroup() %>%
-    pull(topK) %>%
+    pull(.data$topK) %>%
     min()
   #
   stopifnot(range < maxk)

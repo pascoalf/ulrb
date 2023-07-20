@@ -16,9 +16,17 @@
 #' check_DB(sample_2044662, range = 4:11)
 #'
 check_DB <- function(data, range = 3:10){
+
+  # Remove NAs
+  data <- data[!is.na(data)]
+  # Remove zeros
+  data <- data[data > 0]
+
+  # Conditions for function to run
   stopifnot(range > 1)
-  stopifnot(range < length(unique(data[data>0])))
+  stopifnot(range < length(unique(data)))
   stopifnot(is.vector(data))
+
   sapply(range, function(k){
     clusterSim::index.DB(x = data,
                          cl = cluster::pam(data, k = k, cluster.only = TRUE)

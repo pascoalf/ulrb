@@ -42,3 +42,9 @@ test_that("Input vector as one dimension", {
   ## a data.frame, instead of a vector, should throw an error
   expect_error(check_DB(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
 })
+
+test_that("No error for a sample that includes both NA and zero values", {
+  mock_data <- c(sample(100,100), 0, NA)
+  expect_no_error(check_DB(mock_data))
+})
+
