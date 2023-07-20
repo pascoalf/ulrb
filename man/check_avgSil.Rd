@@ -9,7 +9,7 @@ check_avgSil(data, range = 3:10)
 \arguments{
 \item{data}{Vector of abundance scores from a single sample.}
 
-\item{range}{The range of values of k to test.}
+\item{range}{The range of values of k to test, default is from 3 to 10.}
 }
 \value{
 Vector with average Silhouette score index for each pre-specified k.

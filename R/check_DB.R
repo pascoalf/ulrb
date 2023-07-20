@@ -1,7 +1,7 @@
 #' Check Davies-Bouldin Index
 #'
 #' @param data Vector of abundance scores from a single sample.
-#' @param range The range of values of k to test.
+#' @param range The range of values of k to test, default is from 3 to 10.
 #'
 #' @return A vector with Davies-Boulding index for eac pre-specified k.
 #' @export

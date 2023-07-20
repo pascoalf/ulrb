@@ -9,7 +9,7 @@ evaluate_sample_k(data, range = 3:10, ...)
 \arguments{
 \item{data}{Vector of abundance scores from a single sample.}
 
-\item{range}{The range of values of k to test.}
+\item{range}{The range of values of k to test, default is from 3 to 10.}
 
 \item{...}{Extra arguments.}
 }
@@ -18,7 +18,7 @@ testing
 }
 \description{
 This functions calculates three indices (Davies-Bouldin, Calinsky-Harabasz and average Silhouette score) for each k.
-Calculations are made for a single sample.
+Calculations are made for a single sample and for a default range of k that goes from 3 to 10.
 }
 \examples{
 #testing
