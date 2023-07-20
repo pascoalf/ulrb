@@ -6,6 +6,7 @@
 #'
 #' @inheritParams evaluate_k
 #' @param index Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinsky-Harabasz".
+#' @param detailed If False (default) returns an integer with best overall k. If TRUE, returns a list with full details.
 #'
 #' @return Integer indicating best k from selected index. Optionally, can return a list with details.
 #' @export
@@ -13,18 +14,17 @@
 #' @examples
 #' #test
 suggest_k <- function(data,
-                      range,
-                      sample_ids,
-                      abundance_id,
+                      range = 3:10,
+                      samples_id = "Sample",
+                      abundance_id = "Abundance",
                       index = "Average Silhouette Score",
                       detailed = FALSE,
                       ...){
 
-
   all_scores <-
     evaluate_k(data = data,
                range = range,
-               sample_ids = sample_ids,
+               samples_id = samples_id,
                abundance_id = abundance_id)
 
   best_avgSil_k <-
@@ -32,33 +32,40 @@ suggest_k <- function(data,
     group_by(.data$Sample) %>%
     filter(.data$average_Silhouette == max(.data$average_Silhouette)) %>%
     select(.data$Sample, .data$average_Silhouette, .data$k) %>%
-    tidyr::ungroup()
+    ungroup()
 
   best_DB_k <-
     all_scores %>%
     group_by(.data$Sample) %>%
     filter(.data$DB == min(.data$DB)) %>%
     select(.data$Sample, .data$DB, .data$k) %>%
-    tidyr::ungroup()
+    ungroup()
 
   best_CH_k <-
     all_scores %>%
     group_by(.data$Sample) %>%
     filter(.data$CH == max(.data$CH)) %>%
     select(.data$Sample, .data$CH, .data$k) %>%
-    tidyr::ungroup()
+    ungroup()
 
   if(detailed == FALSE){
   if(index == "Average Silhouette Score"){
-    best_k <- pull(best_avgSil_k, k) %>% mean() %>% as.integer()
+    best_k <- pull(best_avgSil_k, .data$k) %>% mean() %>% as.integer()
   }
   if(index == "Davies-Bouldin"){
-    best_k <- pull(best_DB_k, k) %>% mean() %>% as.integer()
+    best_k <- pull(best_DB_k, .data$k) %>% mean() %>% as.integer()
   }
   if(index == "Calinsky-Harabasz"){
-    best_k <- pull(best_CH_k, k) %>% mean() %>% as.integer()
+    best_k <- pull(best_CH_k, .data$k) %>% mean() %>% as.integer()
   }} else {
     ## some list
-  }
 
+    best_k <-
+      list(Introduction = "introductory text",
+           Indices = data.frame(Score = c("DB", "CH", "etc")),
+           SamplesSummary = data.frame(),
+           CHresults = list(best_CH_k))
+
+  }
+return(best_k)
 }
