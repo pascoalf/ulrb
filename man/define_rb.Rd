@@ -9,7 +9,10 @@ define_rb(
   classification_vector = c("Rare", "Undetermined", "Abundant"),
   samples_id = "Sample",
   abundance_id = "Abundance",
-  simplified = FALSE
+  simplified = FALSE,
+  automatic = FALSE,
+  index = "Average Silhouette Score",
+  ...
 )
 }
 \arguments{
@@ -22,6 +25,13 @@ define_rb(
 \item{abundance_id}{String with name of column with abundance values}
 
 \item{simplified}{Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results (pam_details) and Silhouette scores (Silhouette_scores).}
+
+\item{automatic}{If TRUE, then it will automatically select the number of classifications (or k),
+based on the index argument.}
+
+\item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinsky-Harabasz".}
+
+\item{...}{Extra arguments.}
 }
 \value{
 A tibble with the initial columns and new columns for the cluster and classification of each species.
