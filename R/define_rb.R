@@ -34,6 +34,11 @@ define_rb <- function(data,
                       simplified = FALSE,
                       automatic = FALSE) {
 
+  #If automatic, use suggest_k()
+  if(isTRUE(automatic)){
+    classification_vector <- seq_along(1:suggest_k(data))
+  }
+
   # Define number of cluster based on possible classifications
   k <- length(classification_vector)
 
@@ -44,8 +49,6 @@ define_rb <- function(data,
            Abundance = all_of(abundance_id))
 
   # Calculate kmedoids
-  # Complete option
-#  if(simplified == FALSE){
     ## Apply cluster algorithm
     clustered_data <-
       data %>%
@@ -59,20 +62,6 @@ define_rb <- function(data,
       mutate(Level = purrr::map(.x = .data$pam_object, .f = ~.x[[3]]), # obtain clusters
              Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouette plots
       tidyr::unnest(cols = c(data, .data$Level, .data$Silhouette_scores))
-#  }
-#  if(simplified == TRUE){
-#    clustered_data <-
-#      data %>%
-#      filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
-#      group_by(.data$Sample, .add = TRUE) %>%
-#      tidyr::nest() %>%
-#      mutate(Level = purrr::map(.x = data,
-#                                .f = ~cluster::pam(.x$Abundance,
-#                                                   k = k,
-#                                                   cluster.only = TRUE,
-#                                                   diss = FALSE))) %>%
-#             tidyr::unnest(cols = c(data, .data$Level))
-#  }
 
   # Make classification table
   classification_table <- clustered_data %>%
