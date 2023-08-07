@@ -40,9 +40,9 @@ define_rb <- function(data,
 
   #If automatic, use suggest_k()
   if(isTRUE(automatic)){
-    automatic_k <- suggest_k(data, index = index)
+    automatic_k <- suggest_k(data, index = index, ...)
     classification_vector <- seq_along(1:automatic_k)
-    warning(paste("K=", automatic_k, "based on", index,"."))
+    message(paste0("K= ", automatic_k, " based on ", index,"."))
   }
 
   # Define number of cluster based on possible classifications
@@ -109,9 +109,8 @@ define_rb <- function(data,
   #
   if(bad_samples > 0){
     warning(paste(bad_samples, "samples got a bad Silhouette score. Consider changing the number of classifications."))
-    warning("Evaluation was based on the median Silhouette score.")
-    warning("If half the observations within a classification are below 0.5 Silhouette score, we consider that the clustering was 'Bad'.")
-    warning("Check 'Evaluation' collumn for more details.")
+    message("If half the observations within a classification are below 0.5 Silhouette score, we consider that the clustering was 'Bad'.")
+    message("Check 'Evaluation' collumn for more details.")
   }
 
 

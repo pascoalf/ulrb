@@ -224,3 +224,36 @@ test_that("pam object is list", {
   expect_type(pam_object, "list")
 })
 
+## Tests for automatic option
+
+test_that("Function runs with automatic k without errors", {
+  # index is standard
+  expect_no_error(define_rb(nice_tidy, automatic = TRUE))
+})
+
+test_that("Function runs with automatic k for another index, Calinsky-Harabasz,", {
+  # index is Calinsky-Harabasz
+  index <- "Calinsky-Harabasz"
+  expect_no_error(define_rb(nice_tidy, automatic = TRUE, index = index))
+})
+
+test_that("Function runs with automatic k for another index, Calinsky-Harabasz,", {
+  # index is Calinsky-Harabasz
+  index <- "Calinsky-Harabasz"
+  expect_no_error(define_rb(nice_tidy, automatic = TRUE, index = index))
+})
+
+test_that("Function runs with automatic k for another index, Davies-Bouldin,", {
+  # For Davies-Bouldin we expect a bad clustering, so a warning will show up
+  index <- "Davies-Bouldin"
+  expect_warning(define_rb(nice_tidy, automatic = TRUE, index = index),
+                 regexp = "\\d+ samples got a bad Silhouette score. Consider changing the number of classifications.")
+})
+
+# shuffle arguments and see if automatic option works fine
+test_that("Function runs without errors with simplified to TRUE and automatic k", {
+  # index is standard
+  expect_no_error(define_rb(nice_tidy,simplified = TRUE, automatic = TRUE))
+})
+
+
