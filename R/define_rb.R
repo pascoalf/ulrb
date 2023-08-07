@@ -31,7 +31,8 @@ define_rb <- function(data,
                       classification_vector = c("Rare","Undetermined","Abundant"),
                       samples_id = "Sample",
                       abundance_id = "Abundance",
-                      simplified = FALSE) {
+                      simplified = FALSE,
+                      automatic = FALSE) {
 
   # Define number of cluster based on possible classifications
   k <- length(classification_vector)
