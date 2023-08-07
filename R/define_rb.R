@@ -5,7 +5,9 @@
 #' @param samples_id String with name of column with sample names
 #' @param abundance_id String with name of column with abundance values
 #' @param simplified Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results (pam_details) and Silhouette scores (Silhouette_scores).
-#'
+#' @param automatic If TRUE, then it will automatically select the number of classifications (or k),
+#' based on the index argument.
+#' @inheritParams suggest_k
 #'
 #' @return A tibble with the initial columns and new columns for the cluster and classification of each species.
 #' @export
@@ -32,11 +34,15 @@ define_rb <- function(data,
                       samples_id = "Sample",
                       abundance_id = "Abundance",
                       simplified = FALSE,
-                      automatic = FALSE) {
+                      automatic = FALSE,
+                      index = "Average Silhouette Score",
+                      ...) {
 
   #If automatic, use suggest_k()
   if(isTRUE(automatic)){
-    classification_vector <- seq_along(1:suggest_k(data))
+    automatic_k <- suggest_k(data, index = index)
+    classification_vector <- seq_along(1:automatic_k)
+    warning(paste("K=", automatic_k, "based on", index,"."))
   }
 
   # Define number of cluster based on possible classifications
