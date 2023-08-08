@@ -41,6 +41,12 @@ plot_ulrb <- function(data,
   ################
 
   # list conditions
+  # make a function for each index -> one sample
+  # and then for all samples
+  ## divide by ifs what to do.
+
+  # also, plot everything??
+
 
 
   ####

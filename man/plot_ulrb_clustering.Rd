@@ -7,9 +7,9 @@
 plot_ulrb_clustering(
   data,
   sample_id,
-  taxa_id,
-  classification_id = "Classification",
-  abundance_id = "Abundance",
+  taxa_col,
+  classification_col = "Classification",
+  abundance_col = "Abundance",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
   log_scaled = FALSE,
   ...
@@ -20,11 +20,11 @@ plot_ulrb_clustering(
 
 \item{sample_id}{string with name of selected sample.}
 
-\item{taxa_id}{string with name of column with taxonomic units. Usually OTU or ASV.}
+\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
 
-\item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
+\item{classification_col}{string with name of column with classification for each row. Default value is "Classification".}
 
-\item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
+\item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
@@ -43,7 +43,7 @@ classified_species <- define_rb(nice_tidy)
 
 plot_ulrb_clustering(classified_species,
                        sample_id = "ERR2044669",
-                       taxa_id = "OTU",
-                       abundance_id = "Abundance")
+                       taxa_col = "OTU",
+                       abundance_col = "Abundance")
 
 }

@@ -2,9 +2,9 @@
 #'
 #' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
 #' @param sample_id string with name of selected sample.
-#' @param taxa_id string with name of column with taxonomic units. Usually OTU or ASV.
-#' @param classification_id string with name of column with classification for each row. Default value is "Classification".
-#' @param abundance_id string with name of column with abundance values. Default is "Abundance".
+#' @param taxa_col string with name of column with taxonomic units. Usually OTU or ASV.
+#' @param classification_col string with name of column with classification for each row. Default value is "Classification".
+#' @param abundance_col string with name of column with abundance values. Default is "Abundance".
 #' @param colors vector with colors. Should have the same lenght as the number of classifications
 #' @param log_scaled if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.
 #' @param ... other arguments
@@ -17,16 +17,16 @@
 #'
 #' plot_ulrb_clustering(classified_species,
 #'                        sample_id = "ERR2044669",
-#'                        taxa_id = "OTU",
-#'                        abundance_id = "Abundance")
+#'                        taxa_col = "OTU",
+#'                        abundance_col = "Abundance")
 #'
 #' @import dplyr
 #' @importFrom rlang .data
 plot_ulrb_clustering <- function(data,
                                    sample_id,
-                                   taxa_id,
-                                   classification_id = "Classification",
-                                   abundance_id = "Abundance",
+                                   taxa_col,
+                                   classification_col = "Classification",
+                                   abundance_col = "Abundance",
                                    colors = c("#0072B2", "#D55E00", "#CC79A7"),
                                    log_scaled = FALSE,
                                    ...){
@@ -34,7 +34,7 @@ plot_ulrb_clustering <- function(data,
   if(missing(sample_id)){
     stop("You must specify one sample from the column with samples ID's.")
   }
-  if(missing(taxa_id)){
+  if(missing(taxa_col)){
     stop("You must specify which column includes the taxonomic units.")
   }
   if(is.matrix(data))
@@ -46,11 +46,11 @@ plot_ulrb_clustering <- function(data,
     stop("'log_scaled' argument needs to be logical (TRUE/FALSE)")
   }
 
-  # Make sure the taxa_id corresponds to the correct column
+  # Make sure the taxa_col corresponds to the correct column
   data <- data %>%
-    rename(ID = all_of(taxa_id),
-           Classification = all_of(classification_id),
-           Abundance = all_of(abundance_id))
+    rename(ID = all_of(taxa_col),
+           Classification = all_of(classification_col),
+           Abundance = all_of(abundance_col))
 
   make_plot <- function(){
     data %>%
@@ -67,7 +67,7 @@ plot_ulrb_clustering <- function(data,
                      legend.position = "top")+
       ggplot2::scale_color_manual(values = colors)+
       ggplot2::labs(title = paste("Rank Abundance Curve for ", sample_id),
-                    x = taxa_id)
+                    x = taxa_col)
   }
 
   if(isTRUE(log_scaled)){

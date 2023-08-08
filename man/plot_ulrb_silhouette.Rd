@@ -19,10 +19,6 @@ plot_ulrb_silhouette(
 
 \item{sample_id}{string with name of selected sample.}
 
-\item{taxa_id}{string with name of column with taxonomic units. Usually OTU or ASV.}
-
-\item{classification_id}{string with name of column with classification for each row. Default value is "Classification".}
-
 \item{silhouette_score}{string with column name with silhouette score values. Default is "Silhouette_scores"}
 
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
