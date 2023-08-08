@@ -120,7 +120,7 @@ test_that("User can give any col names to the data", {
   colnames(data_modified) <- letters[seq_along(colnames(nice_tidy))]
 
   # Sample is now "i" and Abundance is "j"
-  expect_no_error(define_rb(data_modified, samples_id = "i", abundance_id = "j"))
+  expect_no_error(define_rb(data_modified, samples_col = "i", abundance_col = "j"))
 })
 test_that("User must specify colnames if they are not default", {
 

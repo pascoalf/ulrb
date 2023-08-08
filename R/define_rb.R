@@ -2,8 +2,8 @@
 #'
 #' @param data A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.
 #' @param classification_vector A vector of strings with the names for each cluster, from lower to higher abundance. Default is c("Rare", "Undetermined", "Abundance")
-#' @param samples_id String with name of column with sample names
-#' @param abundance_id String with name of column with abundance values
+#' @param samples_col String with name of column with sample names
+#' @param abundance_col String with name of column with abundance values
 #' @param simplified Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results (pam_details) and Silhouette scores (Silhouette_scores).
 #' @param automatic If TRUE, then it will automatically select the number of classifications (or k),
 #' based on the index argument.
@@ -31,8 +31,8 @@
 #' @importFrom rlang .data
 define_rb <- function(data,
                       classification_vector = c("Rare","Undetermined","Abundant"),
-                      samples_id = "Sample",
-                      abundance_id = "Abundance",
+                      samples_col = "Sample",
+                      abundance_col = "Abundance",
                       simplified = FALSE,
                       automatic = FALSE,
                       index = "Average Silhouette Score",
@@ -48,11 +48,11 @@ define_rb <- function(data,
   # Define number of cluster based on possible classifications
   k <- length(classification_vector)
 
-  # Match samples_id and abundance_id with Samples and Abundance, respectively
+  # Match samples_col and abundance_col with Samples and Abundance, respectively
   data <-
     data %>%
-    rename(Sample = all_of(samples_id),
-           Abundance = all_of(abundance_id))
+    rename(Sample = all_of(samples_col),
+           Abundance = all_of(abundance_col))
 
   # Calculate kmedoids
     ## Apply cluster algorithm
