@@ -29,7 +29,7 @@ sanity_check_all(
 
 \item{abundance_id}{string with name of column with abundance values. Default is "Abundance".}
 
-\item{silhouette_score}{string with collumn name with silhouette score values. Default is "Silhouette_scores"}
+\item{silhouette_score}{string with column name with silhouette score values. Default is "Silhouette_scores"}
 
 \item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 

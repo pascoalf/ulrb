@@ -1,7 +1,7 @@
 #' Sanity check of results for all samples
 #'
-#' @inheritParams sanity_check_sample_rb
-#' @inheritParams sanity_check_sample_sil
+#' @inheritParams plot_ulrb_clustering
+#' @inheritParams plot_ulrb_silhouette
 #' @inheritParams prepare_tidy_data
 #' @param data a tidy data.frame with samples, abundance and classification for each taxonomic unit.
 #' @param export_output can be "yes" (default) or "no". If "yes", then a pdf file with all plots is produced,
@@ -41,7 +41,7 @@ sanity_check_all <- function(data,
                              ...){
     # list for rac plots
     plot_list_rac <- lapply(sample_names, function(x){
-        sanity_check_sample_rb(data = data,
+        plot_ulrb_clustering(data = data,
                                sample_id = x,
                                taxa_id = taxa_id,
                                classification_id = classification_id,
@@ -50,7 +50,7 @@ sanity_check_all <- function(data,
                                log_scaled = log_scaled)})
     # list for silhouette plots
     plot_list_sil <- lapply(sample_names, function(x){
-        sanity_check_sample_sil(data = data,
+        plot_ulrb_silhouette(data = data,
                                 sample_id = x,
                                 taxa_id = taxa_id,
                                 classification_id = classification_id,

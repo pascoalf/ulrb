@@ -147,15 +147,15 @@ The ulrb method considers that the terms "rare" and "abundant" are relative, i.e
 
 Thus, if we plot the standard RAC and then color each taxonomic unit according with the unsupervised classification, we can check if the unsupervised classification is consistent with the notion that the rare-biosphere is within the "long-tail".
 
-To do this, we provide the function `sanity_check_sample_rb()`. Again, the abundance score can be transformed, and the Log10 scale can be applied optionally.
+To do this, we provide the function `plot_ulrb_clustering()`. Again, the abundance score can be transformed, and the Log10 scale can be applied optionally.
 
 ```{r}
-sanity_check_sample_rb(classified_table, 
+plot_ulrb_clustering(classified_table, 
                        sample_id = selected_samples[1],
                        taxa_id = "OTU")
 
 # With Log10 scale
-sanity_check_sample_rb(classified_table, 
+plot_ulrb_clustering(classified_table, 
                        sample_id = selected_samples[1],
                        taxa_id = "OTU",
                        log_scaled = TRUE)
@@ -169,7 +169,7 @@ The Silhouette plot provides a notion of the coherence of the points inside each
 
 
 ```{r}
-sanity_check_sample_sil(classified_table, 
+plot_ulrb_silhouette(classified_table, 
                        sample_id = selected_samples[1],
                        taxa_id = "OTU")
 
@@ -180,7 +180,7 @@ As expected, most points were very close to +1, with very few points falling bel
 
 ## Sanity check summary
 
-We provide the function `sanity_check_all()` that wraps around `sanity_check_sample_rb()` and `sanity_check_sample_sil()` to plot the RAC and Silhouette plot of each sample. The function can either output the figures to the users session or to a pdf file (with export_output = FALSE).
+We provide the function `sanity_check_all()` that wraps around `plot_ulrb_clustering()` and `sanity_check_sample_sil()` to plot the RAC and Silhouette plot of each sample. The function can either output the figures to the users session or to a pdf file (with export_output = FALSE).
 
 
 ```{r, eval=FALSE}
