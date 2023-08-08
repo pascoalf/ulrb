@@ -18,8 +18,7 @@ suggest_k <- function(data,
                       samples_id = "Sample",
                       abundance_id = "Abundance",
                       index = "Average Silhouette Score",
-                      detailed = FALSE,
-                      ...){
+                      detailed = FALSE, ...){
   stopifnot(range > 1)
   # calculate maximum k
   maxk = data %>%

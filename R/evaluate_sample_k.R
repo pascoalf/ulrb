@@ -5,17 +5,51 @@
 #'
 #'
 #' @inheritParams check_DB
+#' @inheritParams plot_ulrb_clustering
 #' @param ... Extra arguments.
 #'
 #' @return testing
 #' @export
 #'
 #' @examples
-#' #testing
-evaluate_sample_k <- function(data, range = 3:10, ...){
+#' library(dplyr)
+#' sample_2044662 <- "ERR2044662"
+#' # Just scores
+#' evaluate_sample_k(nice_tidy, sample_id = "ERR2044662")
+#'
+#' # To change range
+#' evaluate_sample_k(nice_tidy, sample_id = "ERR2044662", range = 4:11)
+#'
+evaluate_sample_k <- function(data,
+                              sample_id,
+                              range = 3:10,
+                              with_plot = FALSE,
+                              ...){
   ## One sample
-  data.frame(DB = check_DB(data, range = range),
-             CH = check_CH(data, range = range),
-             average_Silhouette = check_avgSil(data, range = range),
+  scores <- data.frame(DB = check_DB(data, sample_id = sample_id, range = range, ...),
+             CH = check_CH(data, sample_id = sample_id, range = range, ...),
+             average_Silhouette = check_avgSil(data, sample_id = sample_id, range = range, ...),
              k = range)
+
+  if(isTRUE(with_plot)){
+  scores_tidy <- scores %>%
+    tidyr::pivot_longer(cols = c("DB", "CH", "average_Silhouette"),
+                        names_to = "Index",
+                        values_to = "Score") %>%
+    mutate(Index = case_when(Index == "DB" ~ "Davies-Bouldin",
+                             Index == "CH" ~ "Calinsky-Harabasz",
+                             TRUE ~ "Average Silhouette score" ))
+
+  scores_tidy %>%
+    ggplot2::ggplot(ggplot2::aes(x = .data$k, y = .data$Score)) +
+    ggplot2::geom_point() +
+    ggplot2::facet_wrap(~.data$Index, scales = "free_y") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(legend.position = "top") +
+    ggplot2::scale_color_manual(values = colors) +
+    ggplot2::labs(title = paste("Metrics obtained for ", sample_id))
+
+  } else {
+    scores
+  }
 }
