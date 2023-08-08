@@ -4,12 +4,25 @@
 \alias{evaluate_sample_k}
 \title{Evaluate sample k}
 \usage{
-evaluate_sample_k(data, range = 3:10, ...)
+evaluate_sample_k(
+  data,
+  sample_id = NULL,
+  range = 3:10,
+  with_plot = FALSE,
+  inside_nest = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
+\item{sample_id}{string with name of selected sample.}
+
 \item{range}{The range of values of k to test, default is from 3 to 10.}
+
+\item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
+
+\item{inside_nest}{Default is FALSE. This argument indicates if the function is being used within a nest. If TRUE, a single vector of Abundance is accepted and returned.}
 
 \item{...}{Extra arguments.}
 }
@@ -21,5 +34,11 @@ This functions calculates three indices (Davies-Bouldin, Calinsky-Harabasz and a
 Calculations are made for a single sample and for a default range of k that goes from 3 to 10.
 }
 \examples{
-#testing
+library(dplyr)
+#
+evaluate_sample_k(nice_tidy, sample_id = "ERR2044662")
+
+# To change range
+evaluate_sample_k(nice_tidy, sample_id = "ERR2044662", range = 4:11)
+
 }

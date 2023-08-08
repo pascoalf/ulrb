@@ -4,25 +4,39 @@
 \alias{check_CH}
 \title{Check Calinsky-Harabasz index}
 \usage{
-check_CH(data, range = 3:10)
-}
-\arguments{
-\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
-
-\item{range}{The range of values of k to test, default is from 3 to 10.}
+check_CH(
+  data,
+  sample_id = NULL,
+  samples_col = "Sample",
+  abundance_col = "Abundance",
+  range = 3:10,
+  with_plot = FALSE,
+  inside_nest = FALSE,
+  ...
+)
 }
 \value{
-Vector with Calinsky-Harabasz index for each pre-specified k.
+Vector or plot with Calinsky-Harabasz index for each pre-specified k.
 }
 \description{
 Check Calinsky-Harabasz index
 }
 \examples{
 library(dplyr)
-sample_2044662 <- nice_tidy \%>\% filter(Sample == "ERR2044662") \%>\% pull(Abundance)
-check_CH(sample_2044662)
+sample_2044662 <- "ERR2044662"
+# Just scores
+check_CH(nice_tidy, sample_id = "ERR2044662")
 
 # To change range
-check_CH(sample_2044662, range = 4:11)
+check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11)
+
+# To see a simple plot
+check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
+
+# If inside_nest = TRUE (not recommended)
+#' nice_tidy \%>\%
+  filter(Sample == "ERR2044662") \%>\%
+  pull(Abundance) \%>\%
+  check_CH(inside_nest = TRUE)
 
 }

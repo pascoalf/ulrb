@@ -12,11 +12,14 @@
 #' @export
 #'
 #' @examples
-#' #test
+#' suggest_k(nice_tidy, detailed = TRUE)
+#'
+#' suggest_k(nice_tidy, detailed = FALSE)
+#'
 suggest_k <- function(data,
                       range = 3:10,
-                      samples_id = "Sample",
-                      abundance_id = "Abundance",
+                      sample_col = "Sample",
+                      abundance_col = "Abundance",
                       index = "Average Silhouette Score",
                       detailed = FALSE, ...){
   stopifnot(range > 1)
@@ -32,8 +35,9 @@ suggest_k <- function(data,
   all_scores <-
     evaluate_k(data = data,
                range = range,
-               samples_id = samples_id,
-               abundance_id = abundance_id)
+               sample_col = sample_col,
+               abundance_col = abundance_col,
+               ...)
 
   best_avgSil_k <-
     all_scores %>%

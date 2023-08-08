@@ -18,9 +18,14 @@
 #' # To see a simple plot
 #' check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 #'
-
+#' # If inside_nest = TRUE (not recommended)
+#' #' nice_tidy %>%
+#'   filter(Sample == "ERR2044662") %>%
+#'   pull(Abundance) %>%
+#'   check_CH(inside_nest = TRUE)
+#'
 check_CH <- function(data,
-                     sample_id,
+                     sample_id = NULL,
                      samples_col = "Sample",
                      abundance_col = "Abundance",
                      range = 3:10,
@@ -29,6 +34,18 @@ check_CH <- function(data,
 
   # Conditions for function to run
   stopifnot(range > 1)
+  #
+  if(isTRUE(inside_nest)){
+    stopifnot(!isTRUE(with_plot))
+    if(!is.vector(data)){
+      stop("If inside_nest = TRUE, then data must be a vector.")
+      }
+    sapply(range, function(k){
+      clusterSim::index.G1(x = data,
+                           cl = cluster::pam(data, k = k, cluster.only = TRUE))
+      })
+  } else {
+        if(is.null(sample_id)){stop("Please provide the ID of the sample you want to check in argument sample_id.")}
 
   # Match samples_col and abundance_col with Samples and Abundance, respectively
   data <-
@@ -53,7 +70,10 @@ check_CH <- function(data,
 
   if(isTRUE(with_plot)){
     plot(y = scores, x = range, main = "Calinsky-Harabasz index", ...)
-    } else {
+  } else {
       scores
-    }
-}
+  }
+      }
+  }
+
+

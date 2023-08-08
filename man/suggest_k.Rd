@@ -7,8 +7,8 @@
 suggest_k(
   data,
   range = 3:10,
-  samples_id = "Sample",
-  abundance_id = "Abundance",
+  sample_col = "Sample",
+  abundance_col = "Abundance",
   index = "Average Silhouette Score",
   detailed = FALSE,
   ...
@@ -19,9 +19,7 @@ suggest_k(
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
-\item{samples_id}{String with name of column with sample names.}
-
-\item{abundance_id}{String with name of column with abundance values.}
+\item{abundance_col}{String with name of column with abundance values.}
 
 \item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinsky-Harabasz".}
 
@@ -37,5 +35,8 @@ The best k is selected for each sample, based on the selected index. If differen
 (probable) then we calculate the mean value of k and return it as an integer.
 }
 \examples{
-#test
+suggest_k(nice_tidy, detailed = TRUE)
+
+suggest_k(nice_tidy, detailed = FALSE)
+
 }

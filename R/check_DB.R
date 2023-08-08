@@ -21,8 +21,7 @@
 #' # To see a simple plot
 #'check_DB(nice_tidy, sample_id == "ERR2044662", range = 4:11, with_plot=TRUE)
 #'
-#' # If inside_nest = TRUE (not recomended)
-#'
+#' # If inside_nest = TRUE (not recommended)
 #' nice_tidy %>%
 #'   filter(Sample == "ERR2044662") %>%
 #'   pull(Abundance) %>%
@@ -47,7 +46,7 @@ check_DB <- function(data,
                            cl = cluster::pam(data, k = k, cluster.only = TRUE))$DB
     })
   } else {
-    stop("Please provide the ID of the sample you want to check.")
+    if(is.null(sample_id)){stop("Please provide the ID of the sample you want to check in argument sample_id.")}
 
     # Match samples_col and abundance_col with Samples and Abundance, respectively
     data <-

@@ -7,8 +7,8 @@
 evaluate_k(
   data,
   range = 3:10,
-  samples_id = "Sample",
-  abundance_id = "Abundance",
+  samples_col = "Sample",
+  abundance_col = "Abundance",
   ...
 )
 }
@@ -17,9 +17,9 @@ evaluate_k(
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
-\item{samples_id}{String with name of column with sample names.}
+\item{samples_col}{String with name of column with sample names.}
 
-\item{abundance_id}{String with name of column with abundance values.}
+\item{abundance_col}{String with name of column with abundance values.}
 
 \item{...}{Extra arguments.}
 }
@@ -30,5 +30,7 @@ Tidy table with three indices for each k within each sample.
 Evaluate k from all samples in a dataset
 }
 \examples{
-#test
+evaluate_k(nice_tidy)
+
+
 }
