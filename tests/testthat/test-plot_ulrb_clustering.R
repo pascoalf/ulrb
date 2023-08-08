@@ -72,9 +72,9 @@ test_that("color vector must be the same size as number of classifications", {
   classifications <- unique(classified_species$Classification)
 
   expect_error(sanity_check_sample_rb(classified_species,
-                                         colors = c(seq_along(classifications),2), # extra color
-                                         taxa_id = "OTU",
-                                         sample_id = "ERR2044662"))
+                                      colors = c(seq_along(classifications),2), # extra color
+                                      taxa_id = "OTU",
+                                      sample_id = "ERR2044662"))
 })
 
 test_that("function output can be modified with other ggplot functions", {
@@ -82,8 +82,8 @@ test_that("function output can be modified with other ggplot functions", {
   classified_species <- define_rb(nice_tidy)
 
   expect_no_error(sanity_check_sample_rb(classified_species,
-                                      taxa_id = "OTU",
-                                      sample_id = "ERR2044662") + ggplot2::theme_void())
+                                         taxa_id = "OTU",
+                                         sample_id = "ERR2044662") + ggplot2::theme_void())
 })
 
 test_that("optional labs can overwrite default labs", {

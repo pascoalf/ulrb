@@ -22,7 +22,7 @@
 #'
 #' @import dplyr
 #' @importFrom rlang .data
-sanity_check_sample_rb <- function(data,
+plot_ulrb_clustering <- function(data,
                                    sample_id,
                                    taxa_id,
                                    classification_id = "Classification",
