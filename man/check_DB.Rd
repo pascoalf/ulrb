@@ -4,15 +4,31 @@
 \alias{check_DB}
 \title{Check Davies-Bouldin Index}
 \usage{
-check_DB(data, range = 3:10)
+check_DB(
+  data,
+  sample_id,
+  samples_col = "Sample",
+  abundance_col = "Abundance",
+  range = 3:10,
+  with_plot = FALSE,
+  ...
+)
 }
 \arguments{
-\item{data}{Vector of abundance scores from a single sample.}
+\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
+
+\item{samples_col}{String with name of column with sample names}
+
+\item{abundance_col}{String with name of column with abundance values}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
+
+\item{with_plot}{If FALSE (default) returns a vector, but if TRUE will returna plot with the scores.}
+
+\item{...}{Extra arguments.}
 }
 \value{
-A vector with Davies-Boulding index for eac pre-specified k.
+A vector or plot with Davies-Bouldin index for each pre-specified k in a given sample.
 }
 \description{
 Check Davies-Bouldin Index

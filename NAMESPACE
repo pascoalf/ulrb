@@ -2,10 +2,12 @@
 
 export(check_CH)
 export(check_DB)
+export(check_DB_plot)
 export(check_avgSil)
 export(define_rb)
 export(evaluate_k)
 export(evaluate_sample_k)
+export(plot_ulrb)
 export(plot_ulrb_clustering)
 export(plot_ulrb_silhouette)
 export(prepare_tidy_data)

@@ -7,7 +7,7 @@
 evaluate_sample_k(data, range = 3:10, ...)
 }
 \arguments{
-\item{data}{Vector of abundance scores from a single sample.}
+\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 

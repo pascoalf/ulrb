@@ -1,50 +1,33 @@
-test_that("No error", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")[, "Abundance"]
-  expect_no_error(check_DB(sample_ERR2044662$Abundance))
+test_that("No error with default arguments", {
+  sample_ERR2044662 <- "ERR2044662"
+  expect_no_error(check_DB(nice_tidy, sample_id = sample_ERR2044662))
 })
 
-test_that("No error after removing absent species", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662", Abundance > 0)[, "Abundance"]
-  expect_no_error(check_DB(sample_ERR2044662$Abundance))
+test_that("No error if pre-processing of data is added before function", {
+  sample_ERR2044662 <- "ERR2044662"
+  nice_no_absents <- nice_tidy %>% filter(Abundance > 0)
+  expect_no_error(check_DB(nice_no_absents, sample_id = sample_ERR2044662))
 })
 
-test_that("Test if it is ok to cange range of values", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662", Abundance > 0)[, "Abundance"]
-  expect_no_error(check_DB(sample_ERR2044662$Abundance, range = 20:30))
+test_that("Test if it is ok to change range of values", {
+  sample_ERR2044662 <- "ERR2044662"
+  expect_no_error(check_DB(nice_tidy, sample_id = sample_ERR2044662, range = 20:30))
 })
 
 test_that("Expect error for k = 1", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")[, "Abundance"]
-  expect_error(check_DB(sample_ERR2044662$Abundance, range = 1:10))
+  sample_ERR2044662 <- "ERR2044662"
+  expect_error(check_DB(nice_tidy, sample_id = sample_ERR2044662, range = 1:5))
 })
 
-test_that("If all possible k's include zero, it should throw an error", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")[, "Abundance"]
-  max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  expect_error(check_DB(sample_ERR2044662$Abundance, range = 2:(max_k_of_ERR2044662-1)))
-})
-
-test_that("Without zeros, the automatic calculation of maximum k wil not result in an error", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662", Abundance>0)[, "Abundance"]
-  max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  expect_no_error(check_DB(sample_ERR2044662$Abundance, range = 2:(max_k_of_ERR2044662-1)))
-})
-
+## new tests are necessary, because input changed ##
 test_that("Should throw error if max k is reached", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")[, "Abundance"]
-  max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  expect_error(check_DB(sample_ERR2044662$Abundance, range = 2:(max_k_of_ERR2044662+1)))
-})
-
-test_that("Input vector as one dimension", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")[, "Abundance"]
-  max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  ## a data.frame, instead of a vector, should throw an error
-  expect_error(check_DB(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
-})
-
-test_that("No error for a sample that includes both NA and zero values", {
-  mock_data <- c(sample(100,100), 0, NA)
-  expect_no_error(check_DB(mock_data))
+  sample_ERR2044662 <-"ERR2044662"
+  max_k_of_ERR2044662 <- length(
+    unique(
+      pull(
+        filter(nice_tidy, Sample == sample_ERR2044662),
+        Abundance)))
+  #
+  expect_error(check_DB(nice_tidy, sample_id = sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
 })
 

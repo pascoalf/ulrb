@@ -7,8 +7,8 @@
 define_rb(
   data,
   classification_vector = c("Rare", "Undetermined", "Abundant"),
-  samples_id = "Sample",
-  abundance_id = "Abundance",
+  samples_col = "Sample",
+  abundance_col = "Abundance",
   simplified = FALSE,
   automatic = FALSE,
   index = "Average Silhouette Score",
@@ -20,9 +20,9 @@ define_rb(
 
 \item{classification_vector}{A vector of strings with the names for each cluster, from lower to higher abundance. Default is c("Rare", "Undetermined", "Abundance")}
 
-\item{samples_id}{String with name of column with sample names}
+\item{samples_col}{String with name of column with sample names}
 
-\item{abundance_id}{String with name of column with abundance values}
+\item{abundance_col}{String with name of column with abundance values}
 
 \item{simplified}{Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results (pam_details) and Silhouette scores (Silhouette_scores).}
 
