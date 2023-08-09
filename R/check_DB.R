@@ -10,17 +10,18 @@
 #' @export
 #'
 #' @examples
+#'
 #' library(dplyr)
-#' sample_2044662 <- "ERR2044662"
+#'
 #'
 #' # Just scores
-#' check_DB(nice_tidy, sample_id == "ERR2044662")
+#' check_DB(nice_tidy, sample_id = "ERR2044662")
 #'
 #' # To change range
-#' check_DB(nice_tidy, sample_id == "ERR2044662", range = 4:11)
+#' check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 #'
 #' # To see a simple plot
-#'check_DB(nice_tidy, sample_id == "ERR2044662", range = 4:11, with_plot=TRUE)
+#' check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 #'
 #' # If inside_nest = TRUE (not recommended)
 #' nice_tidy %>%

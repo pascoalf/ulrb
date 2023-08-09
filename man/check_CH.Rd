@@ -51,7 +51,7 @@ check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 
 # If inside_nest = TRUE (not recommended)
-#' nice_tidy \%>\%
+ nice_tidy \%>\%
   filter(Sample == "ERR2044662") \%>\%
   pull(Abundance) \%>\%
   check_CH(inside_nest = TRUE)

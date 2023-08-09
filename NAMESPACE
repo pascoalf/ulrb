@@ -2,7 +2,6 @@
 
 export(check_CH)
 export(check_DB)
-export(check_DB_plot)
 export(check_avgSil)
 export(define_rb)
 export(evaluate_k)

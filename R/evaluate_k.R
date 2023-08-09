@@ -48,7 +48,9 @@ evaluate_k <- function(data,
                                  .f = ~evaluate_sample_k(data = .x$Abundance,
                                                         sample_col = .y$Sample,
                                                         range = range, # default range = 3:10
-                                                        inside_nest = TRUE))) %>%
+                                                        inside_nest = TRUE) ## working on removing this
+                                 )
+           ) %>%
     tidyr::unnest(cols = .data$Metrics)
 
 }
