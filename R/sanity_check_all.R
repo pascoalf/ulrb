@@ -22,7 +22,7 @@
 #' #
 #' sanity_check_all(classified_species,
 #'                  sample_names = sample_names,
-#'                  taxa_id = "OTU",
+#'                  taxa_col = "OTU",
 #'                  abundance_id = "Abundance",
 #'                  export_output = "no",
 #'                  classification_id = "Classification")
@@ -30,7 +30,7 @@
 #' @importFrom grDevices dev.off pdf
 sanity_check_all <- function(data,
                              sample_names,
-                             taxa_id,
+                             taxa_col,
                              classification_id = "Classification",
                              abundance_id = "Abundance",
                              silhouette_score = "Silhouette_scores",
@@ -43,7 +43,7 @@ sanity_check_all <- function(data,
     plot_list_rac <- lapply(sample_names, function(x){
         plot_ulrb_clustering(data = data,
                                sample_id = x,
-                               taxa_id = taxa_id,
+                               taxa_col = taxa_col,
                                classification_id = classification_id,
                                abundance_id = abundance_id,
                                colors = colors,
@@ -52,7 +52,7 @@ sanity_check_all <- function(data,
     plot_list_sil <- lapply(sample_names, function(x){
         plot_ulrb_silhouette(data = data,
                                 sample_id = x,
-                                taxa_id = taxa_id,
+                                taxa_col = taxa_col,
                                 classification_id = classification_id,
                                 silhouette_score = silhouette_score,
                                 colors = colors)})

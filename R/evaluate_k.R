@@ -36,7 +36,7 @@ evaluate_k <- function(data,
     min()
 
   # Check if range is below the maximum k
-  stopifnot(range > length(unique(max_k)))
+  stopifnot(length(range) <= length(unique(max_k)))
 
   # Apply evaluate_sample_k to all samples
   data %>%

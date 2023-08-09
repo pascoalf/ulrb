@@ -35,3 +35,4 @@ test_that("Input vector as one dimension", {
   ## a data.frame, instead of a vector, should throw an error
   expect_error(evaluate_k(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
 })
+

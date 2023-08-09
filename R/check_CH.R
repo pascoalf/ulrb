@@ -59,7 +59,7 @@ check_CH <- function(data,
   pulled_data <- pull(data, Abundance)
 
   # Before continuing, verify if max k was reached in range provided
-  stopifnot(range < length(unique(pulled_data)))
+  stopifnot(length(range) <= length(unique(pulled_data)))
 
   # Calculate Calinsky-Harabasz index
   scores <- sapply(range, function(k){

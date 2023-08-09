@@ -16,7 +16,7 @@ test_that("Test if it is ok to change range of values", {
 
 test_that("Expect error for k = 1", {
   sample_ERR2044662 <- "ERR2044662"
-  expect_error(check_DB(nice_tidy, sample_id = sample_ERR2044662, range = 1:5))
+  expect_error(check_DB(nice_tidy, sample_id = sample_ERR2044662, range = 1:10))
 })
 
 ## new tests are necessary, because input changed ##

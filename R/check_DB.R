@@ -60,7 +60,7 @@ check_DB <- function(data,
     pulled_data <- pull(data, Abundance)
 
     # Before continuing, verify if max k was reached in range provided
-    stopifnot(range < length(unique(pulled_data)))
+    stopifnot(length(range) <= length(unique(pulled_data)))
 
     scores <- sapply(range, function(k){
       clusterSim::index.DB(x = pulled_data,

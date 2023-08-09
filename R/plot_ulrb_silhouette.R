@@ -10,17 +10,17 @@
 #' @importFrom stats reorder
 #' @examples
 #' plot_ulrb_silhouette(data = define_rb(nice_tidy, simplified = FALSE),
-#'  taxa_id = "OTU", sample_id = "ERR2044662")
+#'  taxa_col = "OTU", sample_id = "ERR2044662")
 #'
 plot_ulrb_silhouette <- function(data,
                                     sample_id,
-                                    taxa_id,
+                                    taxa_col,
                                     classification_id = "Classification",
                                     silhouette_score = "Silhouette_scores",
                                     colors = c("#0072B2", "#D55E00", "#CC79A7"),
                                     ...){
   data <- data %>%
-    rename(ID = all_of(taxa_id),
+    rename(ID = all_of(taxa_col),
            Silhouette_scores = all_of(silhouette_score),
            Classification = all_of(classification_id))
 
@@ -46,6 +46,6 @@ plot_ulrb_silhouette <- function(data,
     ggplot2::scale_fill_manual(values = colors)+
     ggplot2::labs(title = paste("Silhouette plot for", sample_id),
                   y = "Silhouette scores",
-                  x = taxa_id)
+                  x = taxa_col)
 
 }

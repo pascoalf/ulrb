@@ -33,6 +33,7 @@ check_avgSil <- function(data,
 
   # Conditions for function to run
   stopifnot(range > 1)
+
   # option for nests
   if(isTRUE(inside_nest)){
     stopifnot(!isTRUE(with_plot))
@@ -61,7 +62,7 @@ check_avgSil <- function(data,
   pulled_data <- pull(data, Abundance)
 
   # Before continuing, verify if max k was reached in range provided
-  stopifnot(range < length(unique(pulled_data)))
+  stopifnot(length(range) <= length(unique(pulled_data)))
 
   # Calculate Average Silhouette score index
   scores <- sapply(range, function(k){
