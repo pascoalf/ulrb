@@ -1,3 +1,6 @@
+### modify all tests, input should be a data.frame ###
+
+
 test_that("No error", {
   sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")
   expect_no_error(evaluate_k(sample_ERR2044662))

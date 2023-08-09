@@ -36,9 +36,9 @@ evaluate_sample_k <- function(data,
 
   ## One sample
   scores <- data.frame(DB = check_DB(data, sample_id = sample_id, range = range, ...),
-             CH = check_CH(data, sample_id = sample_id, range = range, ...),
-             average_Silhouette = check_avgSil(data, sample_id = sample_id, range = range, ...),
-             k = range)
+                       CH = check_CH(data, sample_id = sample_id, range = range, ...),
+                       average_Silhouette = check_avgSil(data, sample_id = sample_id, range = range, ...),
+                       k = range)
 
   if(isTRUE(with_plot)){
   scores_tidy <- scores %>%

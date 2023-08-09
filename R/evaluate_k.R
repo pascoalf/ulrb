@@ -38,17 +38,20 @@ evaluate_k <- function(data,
   # Check if range is below the maximum k
   stopifnot(length(range) <= max_k)
 
+  all_samples_ids <- unique(pull(data, .data$Sample))
+
   # Apply evaluate_sample_k to all samples
   data %>%
     filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
+    mutate(SamplePlaceholder = Sample) %>%
     group_by(.data$Sample, .add = TRUE) %>%
     tidyr::nest() %>%
-    mutate(Metrics = purrr::map2(.x = data,
-                                 .y = .data$Sample,
-                                 .f = ~evaluate_sample_k(data = .x$Abundance,
-                                                        sample_col = .y$Sample,
+    mutate(Metrics = purrr::map(.x = data,
+                                .f = ~evaluate_sample_k(data = .x,
+                                                        sample_id = unique(.x$SamplePlaceholder),
+                                                        samples_col = "SamplePlaceholder",
                                                         range = range, # default range = 3:10
-                                                        inside_nest = TRUE) ## working on removing this
+                                                        inside_nest = FALSE) ## working on removing this
                                  )
            ) %>%
     tidyr::unnest(cols = .data$Metrics)

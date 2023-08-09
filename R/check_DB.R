@@ -36,7 +36,6 @@ check_DB <- function(data,
                      range = 3:10,
                      with_plot = FALSE,
                      inside_nest = FALSE, ...){
-
   # range can not begin at 1
   stopifnot(range > 1)
 
@@ -59,15 +58,16 @@ check_DB <- function(data,
       filter(.data$Abundance > 0, !is.na(.data$Abundance))
 
     # Make vector with abundance scores
-    pulled_data <- pull(data, .data$Abundance)
+      pulled_data <- pull(data, .data$Abundance)
 
-    # Before continuing, verify if max k was reached in range provided
-    stopifnot(length(range) <= length(unique(pulled_data)))
-
-    scores <- sapply(range, function(k){
-      clusterSim::index.DB(x = pulled_data,
-                           cl = cluster::pam(pulled_data, k = k, cluster.only = TRUE))$DB
-    })
+      # Before continuing, verify if max k was reached in range provided
+      stopifnot(range <= length(unique(pulled_data)))
+      scores <- sapply(range,
+                       function(k){
+                         clusterSim::index.DB(x = pulled_data,
+                                              cl = cluster::pam(pulled_data,
+                                                                k = k,
+                                                                cluster.only = TRUE))$DB})
 
     if(isTRUE(with_plot)){
       plot(y = scores, x = range, main = "Davies-Boulding index", ...)
