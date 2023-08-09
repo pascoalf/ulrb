@@ -59,7 +59,7 @@ check_avgSil <- function(data,
     filter(.data$Abundance > 0, !is.na(.data$Abundance))
 
   # Make vector with abundance scores
-  pulled_data <- pull(data, Abundance)
+  pulled_data <- pull(data, .data$Abundance)
 
   # Before continuing, verify if max k was reached in range provided
   stopifnot(length(range) <= length(unique(pulled_data)))

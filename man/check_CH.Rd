@@ -15,6 +15,23 @@ check_CH(
   ...
 )
 }
+\arguments{
+\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
+
+\item{sample_id}{String with name of the sample to apply this function.}
+
+\item{samples_col}{String with name of column with sample names}
+
+\item{abundance_col}{String with name of column with abundance values}
+
+\item{range}{The range of values of k to test, default is from 3 to 10.}
+
+\item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
+
+\item{inside_nest}{Default is FALSE. This argument indicates if the function is being used within a nest. If TRUE, a single vector of Abundance is accepted and returned.}
+
+\item{...}{Extra arguments.}
+}
 \value{
 Vector or plot with Calinsky-Harabasz index for each pre-specified k.
 }

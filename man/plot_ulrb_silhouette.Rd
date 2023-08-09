@@ -7,8 +7,8 @@
 plot_ulrb_silhouette(
   data,
   sample_id,
-  taxa_id,
-  classification_id = "Classification",
+  taxa_col,
+  classification_col = "Classification",
   silhouette_score = "Silhouette_scores",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
   ...
@@ -18,6 +18,10 @@ plot_ulrb_silhouette(
 \item{data}{...}
 
 \item{sample_id}{string with name of selected sample.}
+
+\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
+
+\item{classification_col}{string with name of column with classification for each row. Default value is "Classification".}
 
 \item{silhouette_score}{string with column name with silhouette score values. Default is "Silhouette_scores"}
 
@@ -33,6 +37,6 @@ Sanity check of Silhouette plot of selected sample
 }
 \examples{
 plot_ulrb_silhouette(data = define_rb(nice_tidy, simplified = FALSE),
- taxa_id = "OTU", sample_id = "ERR2044662")
+ taxa_col = "OTU", sample_id = "ERR2044662")
 
 }

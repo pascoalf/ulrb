@@ -23,16 +23,16 @@
 #' sanity_check_all(classified_species,
 #'                  sample_names = sample_names,
 #'                  taxa_col = "OTU",
-#'                  abundance_id = "Abundance",
+#'                  abundance_col = "Abundance",
 #'                  export_output = "no",
-#'                  classification_id = "Classification")
+#'                  classification_col = "Classification")
 #'
 #' @importFrom grDevices dev.off pdf
 sanity_check_all <- function(data,
                              sample_names,
                              taxa_col,
-                             classification_id = "Classification",
-                             abundance_id = "Abundance",
+                             classification_col = "Classification",
+                             abundance_col = "Abundance",
                              silhouette_score = "Silhouette_scores",
                              colors = c("#0072B2", "#D55E00", "#CC79A7"),
                              export_output = FALSE,
@@ -44,18 +44,18 @@ sanity_check_all <- function(data,
         plot_ulrb_clustering(data = data,
                                sample_id = x,
                                taxa_col = taxa_col,
-                               classification_id = classification_id,
-                               abundance_id = abundance_id,
+                               classification_col = classification_col,
+                               abundance_col = abundance_col,
                                colors = colors,
                                log_scaled = log_scaled)})
     # list for silhouette plots
     plot_list_sil <- lapply(sample_names, function(x){
         plot_ulrb_silhouette(data = data,
-                                sample_id = x,
-                                taxa_col = taxa_col,
-                                classification_id = classification_id,
-                                silhouette_score = silhouette_score,
-                                colors = colors)})
+                             sample_id = x,
+                             taxa_col = taxa_col,
+                             classification_col = classification_col,
+                             silhouette_score = silhouette_score,
+                             colors = colors)})
 
     #
     if(!isTRUE(export_output)){

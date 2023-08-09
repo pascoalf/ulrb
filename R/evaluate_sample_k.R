@@ -55,7 +55,7 @@ evaluate_sample_k <- function(data,
     ggplot2::facet_wrap(~.data$Index, scales = "free_y") +
     ggplot2::theme_bw() +
     ggplot2::theme(legend.position = "top") +
-    ggplot2::scale_color_manual(values = colors) +
+    ggplot2::scale_color_manual(values = .data$colors) +
     ggplot2::labs(title = paste("Metrics obtained for ", sample_id))
 
   } else {

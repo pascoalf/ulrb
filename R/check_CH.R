@@ -1,7 +1,6 @@
 #' Check Calinsky-Harabasz index
 #'
-#' @inheritParams check_CH
-#'
+#' @inheritParams check_DB
 #'
 #' @return Vector or plot with Calinsky-Harabasz index for each pre-specified k.
 #' @export
@@ -19,7 +18,7 @@
 #' check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 #'
 #' # If inside_nest = TRUE (not recommended)
-#' #' nice_tidy %>%
+#'  nice_tidy %>%
 #'   filter(Sample == "ERR2044662") %>%
 #'   pull(Abundance) %>%
 #'   check_CH(inside_nest = TRUE)
@@ -56,7 +55,7 @@ check_CH <- function(data,
     filter(.data$Abundance > 0, !is.na(.data$Abundance))
 
   # Make vector with abundance scores
-  pulled_data <- pull(data, Abundance)
+  pulled_data <- pull(data, .data$Abundance)
 
   # Before continuing, verify if max k was reached in range provided
   stopifnot(length(range) <= length(unique(pulled_data)))

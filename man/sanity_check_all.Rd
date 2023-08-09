@@ -7,9 +7,9 @@
 sanity_check_all(
   data,
   sample_names,
-  taxa_id,
-  classification_id = "Classification",
-  abundance_id = "Abundance",
+  taxa_col,
+  classification_col = "Classification",
+  abundance_col = "Abundance",
   silhouette_score = "Silhouette_scores",
   colors = c("#0072B2", "#D55E00", "#CC79A7"),
   export_output = FALSE,
@@ -22,6 +22,12 @@ sanity_check_all(
 \item{data}{a tidy data.frame with samples, abundance and classification for each taxonomic unit.}
 
 \item{sample_names}{a vector with the name of all samples.}
+
+\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
+
+\item{classification_col}{string with name of column with classification for each row. Default value is "Classification".}
+
+\item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
 \item{silhouette_score}{string with column name with silhouette score values. Default is "Silhouette_scores"}
 
@@ -52,9 +58,9 @@ classified_species <- define_rb(nice_tidy)
 #
 sanity_check_all(classified_species,
                  sample_names = sample_names,
-                 taxa_id = "OTU",
-                 abundance_id = "Abundance",
+                 taxa_col = "OTU",
+                 abundance_col = "Abundance",
                  export_output = "no",
-                 classification_id = "Classification")
+                 classification_col = "Classification")
 
 }

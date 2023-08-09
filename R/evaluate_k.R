@@ -30,13 +30,13 @@ evaluate_k <- function(data,
   # Get max k that can work for all samples provided
   max_k <- data %>%
     group_by(.data$Sample) %>%
-    summarise(topK = length(unique(Abundance))) %>%
+    summarise(topK = length(unique(.data$Abundance))) %>%
     ungroup() %>%
-    pull(topK) %>%
+    pull(.data$topK) %>%
     min()
 
   # Check if range is below the maximum k
-  stopifnot(length(range) <= length(unique(max_k)))
+  stopifnot(length(range) <= max_k)
 
   # Apply evaluate_sample_k to all samples
   data %>%
@@ -44,7 +44,7 @@ evaluate_k <- function(data,
     group_by(.data$Sample, .add = TRUE) %>%
     tidyr::nest() %>%
     mutate(Metrics = purrr::map2(.x = data,
-                                 .y = Sample,
+                                 .y = .data$Sample,
                                  .f = ~evaluate_sample_k(data = .x$Abundance,
                                                         sample_col = .y$Sample,
                                                         range = range, # default range = 3:10

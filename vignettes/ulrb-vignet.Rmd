@@ -152,12 +152,12 @@ To do this, we provide the function `plot_ulrb_clustering()`. Again, the abundan
 ```{r}
 plot_ulrb_clustering(classified_table, 
                        sample_id = selected_samples[1],
-                       taxa_id = "OTU")
+                       taxa_col = "OTU")
 
 # With Log10 scale
 plot_ulrb_clustering(classified_table, 
                        sample_id = selected_samples[1],
-                       taxa_id = "OTU",
+                       taxa_col = "OTU",
                        log_scaled = TRUE)
 ```
 
@@ -171,7 +171,7 @@ The Silhouette plot provides a notion of the coherence of the points inside each
 ```{r}
 plot_ulrb_silhouette(classified_table, 
                        sample_id = selected_samples[1],
-                       taxa_id = "OTU")
+                       taxa_col = "OTU")
 
 ```
 
@@ -186,7 +186,7 @@ We provide the function `sanity_check_all()` that wraps around `plot_ulrb_cluste
 ```{r, eval=FALSE}
 sanity_check_all(classified_table,
                  sample_names = selected_samples,
-                 taxa_id = "OTU", 
+                 taxa_col = "OTU", 
                  export_output = FALSE) # if TRUE, provides a pdf file with a page for each plot
 
 ```

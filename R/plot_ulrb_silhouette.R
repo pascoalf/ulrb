@@ -13,16 +13,16 @@
 #'  taxa_col = "OTU", sample_id = "ERR2044662")
 #'
 plot_ulrb_silhouette <- function(data,
-                                    sample_id,
-                                    taxa_col,
-                                    classification_id = "Classification",
-                                    silhouette_score = "Silhouette_scores",
-                                    colors = c("#0072B2", "#D55E00", "#CC79A7"),
-                                    ...){
+                                 sample_id,
+                                 taxa_col,
+                                 classification_col = "Classification",
+                                 silhouette_score = "Silhouette_scores",
+                                 colors = c("#0072B2", "#D55E00", "#CC79A7"),
+                                 ...){
   data <- data %>%
     rename(ID = all_of(taxa_col),
            Silhouette_scores = all_of(silhouette_score),
-           Classification = all_of(classification_id))
+           Classification = all_of(classification_col))
 
   data %>%
     filter(.data$Sample == sample_id) %>%

@@ -1,6 +1,7 @@
 #' Check Davies-Bouldin Index
 #'
 #' @inheritParams define_rb
+#' @param sample_id String with name of the sample to apply this function.
 #' @param range The range of values of k to test, default is from 3 to 10.
 #' @param with_plot If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.
 #' @param inside_nest Default is FALSE. This argument indicates if the function is being used within a nest. If TRUE, a single vector of Abundance is accepted and returned.
@@ -57,7 +58,7 @@ check_DB <- function(data,
       filter(.data$Abundance > 0, !is.na(.data$Abundance))
 
     # Make vector with abundance scores
-    pulled_data <- pull(data, Abundance)
+    pulled_data <- pull(data, .data$Abundance)
 
     # Before continuing, verify if max k was reached in range provided
     stopifnot(length(range) <= length(unique(pulled_data)))

@@ -19,7 +19,7 @@
 #' plot_ulrb(classified_species,
 #'                        sample_id = "ERR2044669",
 #'                        taxa_col = "OTU",
-#'                        abundance_id = "Abundance")
+#'                        abundance_col = "Abundance")
 #'
 #' @import dplyr
 #' @importFrom rlang .data
@@ -28,7 +28,7 @@ plot_ulrb <- function(data,
                       sample_id = NULL,
                       taxa_col,
                       classification_col = "Classification",
-                      abundance_id = "Abundance",
+                      abundance_col = "Abundance",
                       colors = c("#0072B2", "#D55E00", "#CC79A7"),
                       log_scaled = FALSE,
                       ...){
@@ -71,7 +71,7 @@ plot_ulrb <- function(data,
   data <- data %>%
     rename(ID = all_of(taxa_col),
            Classification = all_of(classification_col),
-           Abundance = all_of(abundance_id))
+           Abundance = all_of(abundance_col))
 
   make_plot <- function(){
     data %>%

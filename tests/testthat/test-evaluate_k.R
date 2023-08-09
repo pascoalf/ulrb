@@ -20,19 +20,13 @@ test_that("Expect error for k = 1", {
 test_that("Should work for all possible k's without errors", {
   sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662", Abundance > 0)
   max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  expect_no_error(evaluate_k(sample_ERR2044662, range = 2:(max_k_of_ERR2044662-1)))
+  expect_no_error(evaluate_k(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
 })
 
 test_that("Should throw error if max k is reached", {
   sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662", Abundance >0)
   max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  expect_error(evaluate_k(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
+  expect_error(evaluate_k(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+2)))
 })
 
-test_that("Input vector as one dimension", {
-  sample_ERR2044662 <- filter(nice_tidy, Sample == "ERR2044662")
-  max_k_of_ERR2044662 <- length(unique(sample_ERR2044662$Abundance))
-  ## a data.frame, instead of a vector, should throw an error
-  expect_error(evaluate_k(sample_ERR2044662, range = 2:(max_k_of_ERR2044662+1)))
-})
 

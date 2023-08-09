@@ -18,7 +18,7 @@
 #'
 suggest_k <- function(data,
                       range = 3:10,
-                      sample_col = "Sample",
+                      samples_col = "Sample",
                       abundance_col = "Abundance",
                       index = "Average Silhouette Score",
                       detailed = FALSE, ...){
@@ -35,7 +35,7 @@ suggest_k <- function(data,
   all_scores <-
     evaluate_k(data = data,
                range = range,
-               sample_col = sample_col,
+               samples_col = samples_col,
                abundance_col = abundance_col,
                ...)
 

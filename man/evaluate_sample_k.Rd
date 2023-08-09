@@ -16,7 +16,7 @@ evaluate_sample_k(
 \arguments{
 \item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
-\item{sample_id}{string with name of selected sample.}
+\item{sample_id}{String with name of the sample to apply this function.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
