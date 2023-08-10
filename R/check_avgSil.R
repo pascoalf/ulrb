@@ -2,7 +2,6 @@
 #'
 #' @inheritParams check_DB
 #'
-#'
 #' @return Vector with average Silhouette score index for each pre-specified k.
 #' @export
 #'
@@ -22,8 +21,7 @@ check_avgSil <- function(data,
                          samples_col = "Sample",
                          abundance_col = "Abundance",
                          range = 3:10,
-                         with_plot = FALSE,
-                         inside_nest = FALSE, ...){
+                         with_plot = FALSE, ...){
 
   # Conditions for function to run
   stopifnot(range > 1)
@@ -53,7 +51,7 @@ check_avgSil <- function(data,
   if(isTRUE(with_plot)){
     scores_data.frame <- data.frame(Score = scores, k = range)
     scores_data.frame %>%
-      ggplot2::ggplot(ggplot2::aes(x = k, y = Score)) +
+      ggplot2::ggplot(ggplot2::aes(x = .data$k, y = .data$Score)) +
       ggplot2::geom_point() +
       ggplot2::labs(title = "Average Silhouette score") +
       ggplot2::theme_bw()

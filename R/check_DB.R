@@ -53,7 +53,7 @@ check_DB <- function(data,
     if(isTRUE(with_plot)){
       scores_data.frame <- data.frame(Score = scores, k = range)
       scores_data.frame %>%
-        ggplot2::ggplot(ggplot2::aes(x = k, y = Score)) +
+        ggplot2::ggplot(ggplot2::aes(x = .data$k, y = .data$Score)) +
         ggplot2::geom_point() +
         ggplot2::labs(title = "Davies-Boulding index") +
         ggplot2::theme_bw()

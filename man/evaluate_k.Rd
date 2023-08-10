@@ -22,6 +22,8 @@ evaluate_k(
 
 \item{abundance_col}{String with name of column with abundance values.}
 
+\item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
+
 \item{...}{Extra arguments.}
 }
 \value{

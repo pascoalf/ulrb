@@ -4,6 +4,7 @@
 #' @param samples_col String with name of column with sample names.
 #' @param abundance_col String with name of column with abundance values.
 #' @param range The range of values of k to test, default is from 3 to 10.
+#' @inheritParams check_DB
 #' @param ... Extra arguments.
 #'
 #' @return Tidy table with three indices for each k within each sample.
@@ -45,7 +46,7 @@ evaluate_k <- function(data,
   scores <-
     data %>%
     filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
-    mutate(SamplePlaceholder = Sample) %>%
+    mutate(SamplePlaceholder = .data$Sample) %>%
     group_by(.data$Sample, .add = TRUE) %>%
     tidyr::nest() %>%
     mutate(Metrics = purrr::map(.x = data,

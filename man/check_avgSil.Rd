@@ -11,7 +11,6 @@ check_avgSil(
   abundance_col = "Abundance",
   range = 3:10,
   with_plot = FALSE,
-  inside_nest = FALSE,
   ...
 )
 }
