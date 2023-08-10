@@ -6,32 +6,35 @@
 \usage{
 plot_ulrb(
   data,
-  see = "clustering",
   sample_id = NULL,
   taxa_col,
+  plot_all = FALSE,
+  silhouette_score = "Silhouette_scores",
   classification_col = "Classification",
   abundance_col = "Abundance",
-  colors = c("#0072B2", "#D55E00", "#CC79A7"),
   log_scaled = FALSE,
+  colors = c("#009E73", "#F0E442", "#CC79A7"),
   ...
 )
 }
 \arguments{
 \item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
 
-\item{see}{What you want to see in the plot. Can be either "clustering" (default), "Silhouette score", "Calinsky-Harabasz" or "Davies-Bouldin".}
+\item{sample_id}{string with name of selected sample.}
 
-\item{sample_id}{Default is NULL. If you want to analyze one specific sample, specify its name as a string.}
+\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
 
-\item{taxa_col}{string with name of column with taxonomic units, e.g., OTU, ASV...}
+\item{plot_all}{If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.}
+
+\item{silhouette_score}{string with column name with silhouette score values. Default is "Silhouette_scores"}
 
 \item{classification_col}{string with name of column with classification for each row. Default value is "Classification".}
 
 \item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
-\item{colors}{vector with colors. Should have the same length as the number of classifications}
-
 \item{log_scaled}{if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.}
+
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
 
 \item{...}{other arguments}
 }

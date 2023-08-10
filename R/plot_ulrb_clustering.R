@@ -3,6 +3,7 @@
 #' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
 #' @param sample_id string with name of selected sample.
 #' @param taxa_col string with name of column with taxonomic units. Usually OTU or ASV.
+#' @param plot_all If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.
 #' @param classification_col string with name of column with classification for each row. Default value is "Classification".
 #' @param abundance_col string with name of column with abundance values. Default is "Abundance".
 #' @param colors vector with colors. Should have the same lenght as the number of classifications
