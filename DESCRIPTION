@@ -31,7 +31,6 @@ Imports:
     cluster,
     dplyr,
     ggplot2,
-    grDevices,
     purrr,
     rlang,
     stats,
@@ -39,3 +38,4 @@ Imports:
     clusterSim,
     gridExtra
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

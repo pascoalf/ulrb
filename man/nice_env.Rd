@@ -5,21 +5,23 @@
 \alias{nice_env}
 \title{Metadata of samples from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
 \format{
-## `nice_tidy`
+\subsection{\code{nice_tidy}}{
+
 A data frame with 4716 rows and 10 columns:
 \describe{
-  \item{Sample}{Sample ID used in the original study}
-  \item{ENA_ID}{Sample ID equivalent to Sample in the OTU table}
-  \item{Month}{Month of sampling}
-  \item{Region}{Ocean region of sampling event}
-  \item{Water.mass}{Water mass of sampling event}
-  \item{Latitude}{Latitude of sampling event}
-  \item{Longitude}{Longitude of sampling event}
+\item{Sample}{Sample ID used in the original study}
+\item{ENA_ID}{Sample ID equivalent to Sample in the OTU table}
+\item{Month}{Month of sampling}
+\item{Region}{Ocean region of sampling event}
+\item{Water.mass}{Water mass of sampling event}
+\item{Latitude}{Latitude of sampling event}
+\item{Longitude}{Longitude of sampling event}
 
 }
 }
+}
 \source{
-<https://link.springer.com/article/10.1007/s00248-021-01821-9>
+\url{https://link.springer.com/article/10.1007/s00248-021-01821-9}
 }
 \usage{
 nice_env

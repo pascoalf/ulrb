@@ -5,24 +5,26 @@
 \alias{nice_tidy}
 \title{Tidy OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
 \format{
-## `nice_tidy`
+\subsection{\code{nice_tidy}}{
+
 A data frame with 4716 rows and 10 columns:
 \describe{
-  \item{Sample}{Sample ID}
-  \item{Abundance}{Abundance}
-  \item{OTU}{Taxonomic unit ID}
-  \item{Domain}{Domain level classification of taxonomic unit}
-  \item{Phylum}{Domain level classification of taxonomic unit}
-  \item{Class}{Domain level classification of taxonomic unit}
-  \item{Order}{Domain level classification of taxonomic unit}
-  \item{Family}{Domain level classification of taxonomic unit}
-  \item{Genus}{Domain level classification of taxonomic unit}
-  \item{Species}{Domain level classification of taxonomic unit}
-  ...
+\item{Sample}{Sample ID}
+\item{Abundance}{Abundance}
+\item{OTU}{Taxonomic unit ID}
+\item{Domain}{Domain level classification of taxonomic unit}
+\item{Phylum}{Domain level classification of taxonomic unit}
+\item{Class}{Domain level classification of taxonomic unit}
+\item{Order}{Domain level classification of taxonomic unit}
+\item{Family}{Domain level classification of taxonomic unit}
+\item{Genus}{Domain level classification of taxonomic unit}
+\item{Species}{Domain level classification of taxonomic unit}
+...
+}
 }
 }
 \source{
-<https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
+\url{https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis}
 }
 \usage{
 nice_tidy

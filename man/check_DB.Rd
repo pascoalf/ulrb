@@ -19,9 +19,9 @@ check_DB(
 
 \item{sample_id}{String with name of the sample to apply this function.}
 
-\item{samples_col}{String with name of column with sample names}
+\item{samples_col}{String with name of column with sample names.}
 
-\item{abundance_col}{String with name of column with abundance values}
+\item{abundance_col}{String with name of column with abundance values.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 

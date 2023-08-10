@@ -5,23 +5,25 @@
 \alias{nice_raw}
 \title{Raw OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
 \format{
-## `nice_raw`
+\subsection{\code{nice_raw}}{
+
 A data frame with 524 rows and 17 columns:
 \describe{
-  \item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
-  \item{OTU}{Taxonomic unit ID}
-  \item{Domain}{Domain level classification of taxonomic unit}
-  \item{Phylum}{Phylum level classification of taxonomic unit}
-  \item{Class}{Class level classification of taxonomic unit}
-  \item{Order}{Order level classification of taxonomic unit}
-  \item{Family}{Family level classification of taxonomic unit}
-  \item{Genus}{Genus level classification of taxonomic unit}
-  \item{Species}{Species level classification of taxonomic unit}
-  ...
+\item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
+\item{OTU}{Taxonomic unit ID}
+\item{Domain}{Domain level classification of taxonomic unit}
+\item{Phylum}{Phylum level classification of taxonomic unit}
+\item{Class}{Class level classification of taxonomic unit}
+\item{Order}{Order level classification of taxonomic unit}
+\item{Family}{Family level classification of taxonomic unit}
+\item{Genus}{Genus level classification of taxonomic unit}
+\item{Species}{Species level classification of taxonomic unit}
+...
+}
 }
 }
 \source{
-<https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
+\url{https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis}
 }
 \usage{
 nice_raw
