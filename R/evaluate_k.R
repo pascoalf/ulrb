@@ -67,7 +67,7 @@ evaluate_k <- function(data,
       mutate(Index = case_when(Index == "DB" ~ "Davies-Bouldin",
                                Index == "CH" ~ "Calinsky-Harabasz",
                                TRUE ~ "Average Silhouette score")) %>%
-      ggplot2::ggplot(ggplot2::aes(x = k, y = Score))+
+      ggplot2::ggplot(ggplot2::aes(x = .data$k, y = .data$Score))+
       ggplot2::stat_summary() +
       ggplot2::facet_wrap(~Index, scales = "free_y") +
       ggplot2::theme_bw() +
