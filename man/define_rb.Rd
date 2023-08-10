@@ -99,7 +99,7 @@ You can make your own plots and analysis, but we also provide another function,
 
 \strong{Notes}:
 
-Understand that \link{ulrb} package considers each sample as an independent
+Understand that \strong{ulrb} package considers each sample as an independent
 community of taxa, which means clustering is also independent across
 different samples.
 Thus, be aware that you will have clustering results and metrics for each
