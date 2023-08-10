@@ -32,25 +32,7 @@ plot_ulrb <- function(data,
                       colors = c("#0072B2", "#D55E00", "#CC79A7"),
                       log_scaled = FALSE,
                       ...){
-  ## Notes to erase afterwards ##
-  # this function will be divided into 2 logical sections
-  # On the one side, it might be used *before* doing the clustering
-  # but it can also be used to verify the results of the clustering.
-
-  # then, further divide into one or several samples
-  ################
-
-  # list conditions
-  # make a function for each index -> one sample
-  # and then for all samples
-  ## divide by ifs what to do.
-
-  # also, plot everything??
-
-
-
   ####
-
   #
   if(missing(sample_id)){
     stop("You must specify one sample from the column with samples ID's.")

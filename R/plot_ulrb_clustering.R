@@ -29,7 +29,7 @@ plot_ulrb_clustering <- function(data,
                                  classification_col = "Classification",
                                  abundance_col = "Abundance",
                                  log_scaled = FALSE,
-                                 colors = c("#0072B2", "#D55E00", "#CC79A7"),
+                                 colors = c("#009E73", "#F0E442","#CC79A7"),
                                  ...){
   #
   if(missing(taxa_col)){stop("You must specify which column includes the taxonomic units.")}
