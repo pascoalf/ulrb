@@ -5,51 +5,72 @@
 #' @details
 #' **Overview**
 #'
-#' Function to cluster species abundance with k-medoid algorithm. By default, We propose the division into three clusters (k = 3),
-#' which can have the convenient description of: "rare", "undetermined" and "abundant". The species from the cluster with lowest median abundance
+#' Function to cluster species abundance with k-medoids algorithm. By default,
+#' We propose the division into three clusters (k = 3),
+#' which can have the convenient description of: "rare", "undetermined" and "abundant".
+#' The species from the cluster with lowest median abundance
 #' is considered to be the "rare biosphere".
 #'
 #' @details
-#' The classification vector
+#' **The classification vector**
 #'
-#' The classification vector (argument classification_vector) represents the different clusters to be used, by ascending order of median abundance.
-#' To change the number of clusters, change the number of elements in the classification vector, but order matters! Depending on the number of clusters used, you can change the meaning that best applies to your research. For example,
-#' you can use a classification vector with the designations: "very rare", "rare", "abundant" and "very abundant"; which would apply a k = 4 underneath.
-#' It is possible to use any number of clusters, as long as they are within 2 and the maximum possible k. The maximum possible k is the
-#' number of different abundance scores observed in a single sample. Note, however, that we do not recommend any clustering for k > 10
-#' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2023; and in the "explore-classifications".
+#' The classification vector (argument classification_vector) represents the
+#' different clusters to be used, by ascending order of median abundance.
+#' To change the number of clusters, change the number of elements in the
+#' classification vector, **but order matters!** Depending on the number of clusters used,
+#' you can change the meaning that best applies to your research. For example,
+#' you can use a classification vector with the designations: "very rare", "rare",
+#' "abundant" and "very abundant"; which would apply a k = 4 underneath.
+#' It is possible to use any number of clusters, as long as they are within 2 and
+#' the maximum possible k. The maximum possible k is the
+#' number of different abundance scores observed in a single sample. Note, however,
+#'  that we do not recommend any clustering for k > 10
+#' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2023;
+#' and in the vignette **explore-classifications**.
 #'
 #' @details
-#' Automatic selection of cluster numbers
+#' **Automatic selection of cluster numbers**
 #'
-#' To automatically decide the number of clusters (i.e., the value of k), it is possible to do so with the argument @param `automatic=TRUE`. For details on
-#' complete automation of define_rb(), please see the documentation for suggest_k(). Briefly, the k with best average Silhouette score
-#' is selected, from a range of k values between 3 and 10. It is possible to decide k based on other indices ("Davies-Bouldin" or "Calinsky-Harabasz").
+#' To automatically decide the number of clusters (i.e., the value of k), it is possible to do so with the argument **automatic=TRUE**. For details on
+#' complete automation of [define_rb()], please see the documentation for [suggest_k()]. Briefly, the k with best average Silhouette score
+#' is selected from a range of k values between 3 and 10. It is possible to decide k based on other indices ("Davies-Bouldin" or "Calinsky-Harabasz").
 #'
 #' If you want a more fine grained analysis of k values, we provide other functions to help you, see **missing vignette**.
 #'
 #' @details
-#' Verify clustering results
+#' **Verify clustering results**
 #'
-#' If half of the taxa of any cluster got a Silhouette score below 0.5 in any sample, then a warning is provided. The warning provides the number of times this issue occurred.
-#' You can inspect other alternatives to reduce the number of bad clusterings, but it is possible that, in some situations, you just can't find an optimal clustering.
+#' If half of the taxa of any cluster got a Silhouette score below 0.5 in any sample, then a warning is provided.
+#' The warning provides the number of times this issue occurred.
+#' You can inspect other alternatives to reduce the number of bad clusterings,
+#' but it is possible that, in some situations, you just can't find an optimal clustering.
 #'
 #' The detailed output gives you access to all of the clustering results:
-#'  - "pam_object" is a list with the original results from the k-medoids clustering, see pam() documentation.
-#'  - "Level" is an integer indicating the specific cluster attributed by the pam() function for each observation. Its order is random.
-#'  - "Silhouette_scores" provides the Silhouette score obtained for each observation, i.e. a score for each taxa.
-#'  - "Cluster_median_abundance" provides the median taxa abundance of each cluster.
-#'  - "median_Silhouette" provides the median Silhouette score obtained for each cluster.
-#'  - "Evaluation" indicates if the silhouette score obtained for a given observation is below the median Silhouette of its cluster and sample.
+#'  - `pam_object` is a list with the original results from the k-medoids clustering,
+#'  see [cluster::pam()] documentation.
+#'  - `Level` is an integer indicating the specific cluster attributed by the [cluster::pam()]
+#'  function for each observation. Its order is random.
+#'  - `Silhouette_scores` provides the Silhouette score obtained for each
+#'  observation, i.e. a score for each taxa.
+#'  - `Cluster_median_abundance` provides the median taxa abundance of each cluster.
+#'  - `median_Silhouette` provides the median Silhouette score obtained for each cluster.
+#'  - `Evaluation` indicates if the silhouette score obtained for a given observation
+#'   is below the median Silhouette of its cluster and sample.
 #'
-#' You can make your own plots and analysis, but we also provide another function, plot_ulrb(), which illustrates the results obtained.
+#' You can make your own plots and analysis, but we also provide another function,
+#'  [plot_ulrb()], which illustrates the results obtained.
 #'
 #' @details
-#' Notes
+#' **Notes**:
 #'
-#' Understand that ulrb considers each sample as an independent community of taxa, which means clustering is also independent across different samples.
-#' Thus, be aware that you will have clustering results and metrics for each single sample, which is why we also provide some functions to analyze results across
-#' any number of samples (see: [plot_ulrb] for clustering results and `evaluate_k` for k selection).
+#' Understand that **ulrb** package considers each sample as an independent
+#'  community of taxa, which means clustering is also independent across
+#'  different samples.
+#' Thus, be aware that you will have clustering results and metrics for each
+#' single sample,
+#' which is why we also provide some functions to analyze results across
+#' any number of samples (see: [plot_ulrb()] for clustering results
+#' and [evaluate_k()] for k selection).
 #'
 #'
 #' @param data A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.
@@ -67,34 +88,47 @@
 #' @export
 #'
 #' @examples
-#'
+#' library(dplyr)
 #' # Sample ID's
 #' sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
 #'                    "ERR2044665", "ERR2044666", "ERR2044667",
 #'                    "ERR2044668", "ERR2044669", "ERR2044670")
 #'
 #' # If data is in wide format, with samples in cols
-#' nice_tidy <- prepare_tidy_data(nice, sample_names = sample_names, samples_in = "cols")
+#' nice_tidy <- prepare_tidy_data(nice,
+#'                                sample_names = sample_names,
+#'                                samples_in = "cols")
 #'
-#' # If table is in tidy format with a column for Samples and another for abundance
+#' # Straightforward with tidy format
 #' define_rb(nice_tidy)
 #'
 #' # Automatic decision, instead of a predefined definition
 #' define_rb(nice_tidy, automatic = TRUE)
 #'
-#' # Automatic decision, using Davies-Boulding index, instead of average Silhouette score (default)
+#' # Automatic decision, using Davies-Boulding index,
+#' # instead of average Silhouette score (default)
 #' define_rb(nice_tidy, automatic = TRUE, index = "Davies-Bouldin")
 #'
 #' # User defined classifications
-#' user_classifications <- c("very rare", "rare", "undetermined", "abundant", "very abundant")
+#' user_classifications <- c("very rare",
+#'                           "rare",
+#'                           "undetermined",
+#'                           "abundant",
+#'                           "very abundant")
 #'
 #' define_rb(nice_tidy, classification_vector = user_classifications)
 #'
 #' # Easy to incorporate in big pipes
+#' # Remove Archaea
+#' # Remove taxa below 10 reads
+#' # Classify according to a different set of classifications
 #' nice_tidy %>%
-#'  filter(Domain != "sk__Archaea") %>% # Removed Archaea
-#'  filter(Abundance > 10) %>% #Removed taxa below 10 reads
-#'  define_rb(classification_vector = c("very rare", "rare", "abundant", "very abundant")) # Classify according to a different set of classifications
+#'  filter(Domain != "sk__Archaea") %>%
+#'  filter(Abundance > 10) %>%
+#'  define_rb(classification_vector = c("very rare",
+#'                                      "rare",
+#'                                      "abundant",
+#'                                      "very abundant"))
 #'
 #' @import dplyr
 #' @importFrom rlang .data
