@@ -17,14 +17,8 @@
 #' # To see a simple plot
 #' check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 #'
-#' # If inside_nest = TRUE (not recommended)
-#' nice_tidy %>%
-#'   filter(Sample == "ERR2044662") %>%
-#'   pull(Abundance) %>%
-#'   check_avgSil(inside_nest = TRUE)
-#'
 check_avgSil <- function(data,
-                         sample_id = NULL,
+                         sample_id,
                          samples_col = "Sample",
                          abundance_col = "Abundance",
                          range = 3:10,
@@ -33,22 +27,6 @@ check_avgSil <- function(data,
 
   # Conditions for function to run
   stopifnot(range > 1)
-
-  # option for nests
-  if(isTRUE(inside_nest)){
-    stopifnot(!isTRUE(with_plot))
-    if(!is.vector(data)){
-      stop("If inside_nest = TRUE, then data must be a vector.")
-    }
-    sapply(range, function(k){
-      mean(
-        cluster::silhouette(
-          cluster::pam(data, k)$clustering,
-          stats::dist(data))[,3])
-    })
-  } else {
-    if(is.null(sample_id)){stop("Please provide the ID of the sample you want to check in argument sample_id.")}
-
 
   # Match samples_col and abundance_col with Samples and Abundance, respectively
   data <-
@@ -73,9 +51,13 @@ check_avgSil <- function(data,
   })
 
   if(isTRUE(with_plot)){
-    plot(y = scores, x = range, main = "Average Silhouette score", ...)
+    scores_data.frame <- data.frame(Score = scores, k = range)
+    scores_data.frame %>%
+      ggplot2::ggplot(ggplot2::aes(x = k, y = Score)) +
+      ggplot2::geom_point() +
+      ggplot2::labs(title = "Average Silhouette score") +
+      ggplot2::theme_bw()
   } else {
     scores
   }
-}
 }

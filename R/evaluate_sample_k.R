@@ -20,20 +20,10 @@
 #' evaluate_sample_k(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 #'
 evaluate_sample_k <- function(data,
-                              sample_id = NULL,
+                              sample_id,
                               range = 3:10,
                               with_plot = FALSE,
-                              inside_nest = FALSE,
                               ...){
-  # option for nests
-  if(isTRUE(inside_nest)){
-    data.frame(DB = check_DB(data, sample_id = sample_id, range = range, inside_nest = TRUE, ...),
-               CH = check_CH(data, sample_id = sample_id, range = range, inside_nest = TRUE, ...),
-               average_Silhouette = check_avgSil(data, sample_id = sample_id, range = range, inside_nest = TRUE, ...),
-               k = range)
-  } else {
-    if(is.null(sample_id)){stop("Please provide the ID of the sample you want to check in argument sample_id.")}
-
   ## One sample
   scores <- data.frame(DB = check_DB(data, sample_id = sample_id, range = range, ...),
                        CH = check_CH(data, sample_id = sample_id, range = range, ...),
@@ -62,4 +52,4 @@ evaluate_sample_k <- function(data,
     scores
     }
   }
-}
+

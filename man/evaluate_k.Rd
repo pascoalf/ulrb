@@ -9,6 +9,7 @@ evaluate_k(
   range = 3:10,
   samples_col = "Sample",
   abundance_col = "Abundance",
+  with_plot = FALSE,
   ...
 )
 }

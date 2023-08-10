@@ -6,12 +6,11 @@
 \usage{
 check_DB(
   data,
-  sample_id = NULL,
+  sample_id,
   samples_col = "Sample",
   abundance_col = "Abundance",
   range = 3:10,
   with_plot = FALSE,
-  inside_nest = FALSE,
   ...
 )
 }
@@ -28,8 +27,6 @@ check_DB(
 
 \item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
 
-\item{inside_nest}{Default is FALSE. This argument indicates if the function is being used within a nest. If TRUE, a single vector of Abundance is accepted and returned.}
-
 \item{...}{Extra arguments.}
 }
 \value{
@@ -41,8 +38,6 @@ Check Davies-Bouldin Index
 \examples{
 
 library(dplyr)
-
-
 # Just scores
 check_DB(nice_tidy, sample_id = "ERR2044662")
 
@@ -52,10 +47,5 @@ check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 # To see a simple plot
 check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 
-# If inside_nest = TRUE (not recommended)
-nice_tidy \%>\%
-  filter(Sample == "ERR2044662") \%>\%
-  pull(Abundance) \%>\%
-  check_DB(inside_nest = TRUE)
 
 }

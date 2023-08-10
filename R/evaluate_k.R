@@ -17,6 +17,7 @@ evaluate_k <- function(data,
                        range = 3:10,
                        samples_col = "Sample",
                        abundance_col = "Abundance",
+                       with_plot = FALSE,
                        ...){
   stopifnot(range > 1)
   #
@@ -41,7 +42,8 @@ evaluate_k <- function(data,
   all_samples_ids <- unique(pull(data, .data$Sample))
 
   # Apply evaluate_sample_k to all samples
-  data %>%
+  scores <-
+    data %>%
     filter(.data$Abundance > 0, !is.na(.data$Abundance)) %>%
     mutate(SamplePlaceholder = Sample) %>%
     group_by(.data$Sample, .add = TRUE) %>%
@@ -56,4 +58,21 @@ evaluate_k <- function(data,
            ) %>%
     tidyr::unnest(cols = .data$Metrics)
 
+  if(isTRUE(with_plot)){
+    scores %>%
+      tidyr::pivot_longer(cols = c("DB", "CH", "average_Silhouette"),
+                          names_to = "Index",
+                          values_to = "Score") %>%
+      mutate(Index = case_when(Index == "DB" ~ "Davies-Bouldin",
+                               Index == "CH" ~ "Calinsky-Harabasz",
+                               TRUE ~ "Average Silhouette score")) %>%
+      ggplot2::ggplot(ggplot2::aes(x = k, y = Score))+
+      ggplot2::stat_summary() +
+      ggplot2::facet_wrap(~Index, scales = "free_y") +
+      ggplot2::theme_bw() +
+      ggplot2::labs(y = "Mean (\U00B1 sd) score",
+                    title = paste("n =", length(unique(data$Sample))))
+  } else {
+    return(scores)
+  }
 }
