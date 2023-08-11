@@ -31,12 +31,58 @@ suggest_k(
 Integer indicating best k from selected index. Optionally, can return a list with details.
 }
 \description{
-The best k is selected for each sample, based on the selected index. If different k's are obtained for different samples
-(probable) then we calculate the mean value of k and return it as an integer.
+Tool to help decide how many clusters to use for k-medoids algorithm.
+}
+\details{
+The best k is selected for each sample, based on the selected index.
+If different k's are obtained for different samples (probable) then we
+calculate the mean value of k and return it as an integer. Alternatively, we can
+return a more detailed result in the form of a list.
+
+\strong{Note}; this function is used within \code{\link[=define_rb]{define_rb()}}, with default parameters, for the
+otional automatic selection of k.
+
+\strong{Detailed option}
+
+If \code{detailed = TRUE}, then the output is a list with information to help decide for k.
+More specifically, the list will include:
+\itemize{
+\item A data.frame summarizing what information each index provides and how to interpret the value.
+\item A brief summary indicating the number of samples in the dataset and the range of k values used.
+\item A data.frame with the best k for each sample, based on each index.
+}
+
+\strong{Automatic k selection}
+
+If \code{detailed = FALSE}, this function will provide a single integer with the best k.
+The \strong{default} decision is based on the maximum average Silhouette score obtained
+for the values of k between 3 and 10. To better understand why the average Silhouette score and
+this range of k's were selected, we refer to Pascoal et al., 2023.
+
+Alternatively, this function can also provide the best k, as an integer, based on another index
+(Davies-Bouldin and Calinsky-Harabasz) and can compare the entire of possible k's.
 }
 \examples{
+
+# Get the best k with default parameters
+suggest_k(nice_tidy)
+
+# Get detailed results to decide for yourself
 suggest_k(nice_tidy, detailed = TRUE)
 
-suggest_k(nice_tidy, detailed = FALSE)
+# Get best k, based on Davies-Bouldin index
+suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin")
 
+# Get best k, based on Calinsky-Harabasz index
+suggest_k(nice_tidy, detailed = FALSE, index = "Calinsky-Harabasz")
+
+# Try a different range of values and index
+suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin", range = 2:7)
+
+# Get details for a specific range of k values
+suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
+
+}
+\seealso{
+\code{\link[=evaluate_k]{evaluate_k()}}, \code{\link[=evaluate_sample_k]{evaluate_sample_k()}}, \code{\link[=check_DB]{check_DB()}}, \code{\link[=check_CH]{check_CH()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[cluster:pam]{cluster::pam()}}
 }

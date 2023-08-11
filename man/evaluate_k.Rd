@@ -49,6 +49,5 @@ evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
 
 }
 \seealso{
-\code{\link[=evaluate_sample_k]{evaluate_sample_k()}}, \code{\link[=check_DB]{check_DB()}},
-\code{\link[=check_CH]{check_CH()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=suggest_k]{suggest_k()}}
+\code{\link[=evaluate_sample_k]{evaluate_sample_k()}}, \code{\link[=check_DB]{check_DB()}}, \code{\link[=check_CH]{check_CH()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=suggest_k]{suggest_k()}}
 }
