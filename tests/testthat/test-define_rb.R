@@ -280,7 +280,7 @@ test_that("Function runs without errors with automatic = TRUE, for a different r
   expect_no_error(define_rb(nice_tidy,automatic = TRUE, range = 2:20))
 })
 
-# If the range includes k = 1, then it should trhow an error
+# If the range includes k = 1, then it should throw an error
 test_that("Is a range includes k = 1, it should throw an error", {
   expect_error(define_rb(nice_tidy, automatic = TRUE, range = 1:20))
 })

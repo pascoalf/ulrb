@@ -33,7 +33,34 @@ check_DB(
 A vector or plot with Davies-Bouldin index for each pre-specified k in a given sample.
 }
 \description{
-Check Davies-Bouldin Index
+Calculates Davies-Bouldin (DB)Index for a given sample.
+}
+\details{
+DB is an index used to decide the number of clusters in a clustering algorithm.
+This function, \code{\link[=check_DB]{check_DB()}}, calculates the DB index for every k in a pre-specified range
+of values. Thus providing a score for each number of clusters tested (k). The default
+range of cluster values (k) is \code{range = 3:10} (see why this is in Pascoal et al., 2023).
+However, this function may calculate the DB index for all possible k's.
+
+Note that DB index is not an absolute value that indicates the quality of a single clustering.
+Instead, it allows the comparison of clustering results. Thus, if you have several clusterings, the
+best one will be the one with higher DB index.
+
+Data input
+
+This function takes a data.frame with a column for samples and a column for abundance
+(minimum), but can take any number of other columns. It will then filter the specific sample
+that you want to analyze. You can also pre-filter for your specific sample, but you still need to
+provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
+(indicate how you name them with the arguments samples_col and abundance_col).
+
+Output options
+
+The default option returns a vector with DB scores for each k. This is a simple output that can then be used
+for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}) with
+the DB score for each k.
+
+\strong{Explanation of Davies-Bouldin index}
 }
 \examples{
 

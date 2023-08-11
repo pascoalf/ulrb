@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_avgSil.R
 \name{check_avgSil}
 \alias{check_avgSil}
-\title{Check Average Silhouette score index}
+\title{Check average Silhouette score index}
 \usage{
 check_avgSil(
   data,
@@ -33,7 +33,22 @@ check_avgSil(
 Vector with average Silhouette score index for each pre-specified k.
 }
 \description{
-Check Average Silhouette score index
+Calculates average Silhouette score for a given sample
+}
+\details{
+Data input
+
+This function takes a data.frame with a column for samples and a column for abundance
+(minimum), but can take any number of other columns. It will then filter the specific sample
+that you want to analyze. You can also pre-filter for your specific sample, but you still need to
+provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
+(indicate how you name them with the arguments samples_col and abundance_col).
+
+Output options
+
+The default option returns a vector with CH scores for each k. This is a simple output that can then be used
+for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}) with
+the CH score for each k.
 }
 \examples{
 library(dplyr)

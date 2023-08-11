@@ -1,4 +1,24 @@
-#' Check Average Silhouette score index
+#' Check average Silhouette score index
+#'
+#' Calculates average Silhouette score for a given sample
+#'
+#' @details
+#' Data input
+#'
+#' This function takes a data.frame with a column for samples and a column for abundance
+#' (minimum), but can take any number of other columns. It will then filter the specific sample
+#' that you want to analyze. You can also pre-filter for your specific sample, but you still need to
+#' provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
+#' (indicate how you name them with the arguments samples_col and abundance_col).
+#'
+#' @details
+#' Output options
+#'
+#' The default option returns a vector with CH scores for each k. This is a simple output that can then be used
+#' for other analysis. However, we also provide the option to show a plot (set `with_plot = TRUE`) with
+#' the CH score for each k.
+#'
+#'
 #'
 #' @inheritParams check_DB
 #'

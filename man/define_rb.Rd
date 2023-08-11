@@ -123,12 +123,19 @@ nice_tidy <- prepare_tidy_data(nice,
 # Straightforward with tidy format
 define_rb(nice_tidy)
 
+#Closer look
+classified_table <- define_rb(nice_tidy)
+classified_table \%>\%
+select(Sample, Abundance, Classification) \%>\%
+head()
+
 # Automatic decision, instead of a predefined definition
-define_rb(nice_tidy, automatic = TRUE)
+define_rb(nice_tidy, automatic = TRUE) \%>\% select(Sample, Abundance, Classification)
 
 # Automatic decision, using Davies-Boulding index,
 # instead of average Silhouette score (default)
-define_rb(nice_tidy, automatic = TRUE, index = "Davies-Bouldin")
+define_rb(nice_tidy, automatic = TRUE, index = "Davies-Bouldin") \%>\%
+select(Sample, Abundance, Classification)
 
 # User defined classifications
 user_classifications <- c("very rare",
@@ -137,7 +144,8 @@ user_classifications <- c("very rare",
                           "abundant",
                           "very abundant")
 
-define_rb(nice_tidy, classification_vector = user_classifications)
+define_rb(nice_tidy, classification_vector = user_classifications) \%>\%
+select(Sample, Abundance, Classification)
 
 # Easy to incorporate in big pipes
 # Remove Archaea
@@ -149,7 +157,20 @@ nice_tidy \%>\%
  define_rb(classification_vector = c("very rare",
                                      "rare",
                                      "abundant",
-                                     "very abundant"))
+                                     "very abundant")) \%>\%
+ select(Sample, Abundance, Classification)
+
+ # An example that summarises results
+nice_tidy \%>\%
+ filter(Domain != "sk__Archaea") \%>\%
+ filter(Abundance > 10) \%>\%
+ define_rb(classification_vector = c("very rare",
+                                     "rare",
+                                     "abundant",
+                                     "very abundant")) \%>\%
+ select(Sample, Abundance, Classification) \%>\%
+ group_by(Sample, Classification) \%>\%
+ summarise(totalAbundance = sum(Abundance))
 
 }
 \seealso{
