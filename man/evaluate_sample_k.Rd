@@ -4,12 +4,24 @@
 \alias{evaluate_sample_k}
 \title{Evaluate sample k}
 \usage{
-evaluate_sample_k(data, sample_id, range = 3:10, with_plot = FALSE, ...)
+evaluate_sample_k(
+  data,
+  sample_id,
+  samples_col = "Sample",
+  abundance_col = "Abundance",
+  range = 3:10,
+  with_plot = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
 \item{sample_id}{String with name of the sample to apply this function.}
+
+\item{samples_col}{String with name of column with sample names.}
+
+\item{abundance_col}{String with name of column with abundance values.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
@@ -18,11 +30,37 @@ evaluate_sample_k(data, sample_id, range = 3:10, with_plot = FALSE, ...)
 \item{...}{Extra arguments.}
 }
 \value{
-testing
+A data.frame (or plot) with several indices for each number of clusters.
 }
 \description{
 This functions calculates three indices (Davies-Bouldin, Calinsky-Harabasz and average Silhouette score) for each k.
 Calculations are made for a single sample and for a default range of k that goes from 3 to 10.
+}
+\details{
+\strong{Note}: To get the indices for all samples, use \code{\link[=evaluate_k]{evaluate_k()}} instead.
+
+\strong{Data input}
+
+This function takes a data.frame with a column for samples and a column for abundance
+(minimum), but can take any number of other columns. It will then filter the specific sample
+that you want to analyze. You can also pre-filter for your specific sample, but you still need to
+provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
+(indicate how you name them with the arguments samples_col and abundance_col).
+
+\strong{Output options}
+
+The default option returns a data.frame with Davies-Bouldin, Calinsky-Harabasz and
+average Silhouette scores for each k. This is a simple output that can then be used
+for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}).
+
+Indices calculation
+
+Three indices are calculated by this function:
+\itemize{
+\item Davies-Bouldin with \code{\link[=check_DB]{check_DB()}};
+\item Calinsky-Harabasz with \code{\link[=check_DB]{check_DB()}};
+\item average Silhouette score \code{\link[=check_avgSil]{check_avgSil()}}.
+}
 }
 \examples{
 library(dplyr)
@@ -32,4 +70,10 @@ evaluate_sample_k(nice_tidy, sample_id = "ERR2044662")
 # To change range
 evaluate_sample_k(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 
+# To make simple plot
+evaluate_sample_k(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot =TRUE)
+
+}
+\seealso{
+\code{\link[=check_CH]{check_CH()}}, \code{\link[=check_DB]{check_DB()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=suggest_k]{suggest_k()}}, \code{\link[=evaluate_k]{evaluate_k()}}
 }

@@ -31,9 +31,47 @@
 #' @details
 #' **Explanation of Davies-Bouldin index**
 #'
-#' The DB index (Davies and Bouldin, 1979) measures the similarity between any number of clusters.
+#' The DB index (Davies and Bouldin, 1979) is an averaged measure of cluster
+#' similarity to the closest cluster. This provides a sense of how separated the clusters are.
+#'
+#' Lower DB scores are better, because they represent more distinct clusters.
+#' Higher values of DB indicate overlapping clusters.
 #'
 #'
+#'
+#' Let \eqn{N} be the number of clusters and \eqn{R_i} the similarity between the i'th cluster and
+#' the cluster most similar to it.
+#' The DB index is calculated as the mean similarity between each cluster and the most similar cluster,
+#'
+#' \deqn{DB = \frac{1}{N}\sum_{i=1}^{N}R_i}
+#'
+#' Thus, \eqn{R_i} is the maximum similarity among all possible combinations of
+#'  \eqn{R_ij}, with \eqn{i \neq j}.
+#'
+#' To get \eqn{R_ij}, let \eqn{S_i} be the intra-cluster dispersion of \eqn{i},
+#' \eqn{S_j} be the intra-cluster dispersion of cluster \eqn{j} and \eqn{M_ij} be the
+#' distance between clusters \eqn{i} and \eqn{j}.
+#'
+#' The similarity between any two clusters, \eqn{i} and \eqn{j}, is:
+#'
+#'  \deqn{ R_{ij} = \frac{S_i + S_j}{M_ij}}
+#'
+#' The distance between any two clusters, \eqn{M_ij}, is measured as the
+#' distance between the
+#' centroids of both clusters, \eqn{\left\lvert C_i - C_j \right\rvert}.
+#'
+#' The dispersion of clusters, \eqn{S_i}, provides a sense of intra-dispersion
+#'  of a given cluster.
+#'
+#' To calculate \eqn{S_i}, let \eqn{T_i} and \eqn{T_j} be the number of
+#' observations in \eqn{i} and \eqn{j}, respectively; let \eqn{X_j} be the value for
+#' j'th observation (again, \eqn{i \neq j}).
+#'
+#' \deqn{S_i = \sqrt{\frac{1}{T_i}\sum_{j=1}^{T_i}\left\lvert X_j - C_i \right\rvert}}
+#'
+#'  **Note** that this is the case for euclidean distances.
+#'
+#' link for extra: https://pyshark.com/davies-bouldin-index-for-k-means-clustering-evaluation-in-python/
 #'
 #' @references
 #' Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2).
@@ -45,6 +83,8 @@
 #'
 #' @return A vector or plot with Davies-Bouldin index for each pre-specified k in a given sample.
 #' @export
+#'
+#' @seealso [clusterSim::index.DB()]
 #'
 #'
 #' @examples
@@ -68,6 +108,14 @@ check_DB <- function(data,
                      with_plot = FALSE, ...){
   # range can not begin at 1
   stopifnot(range > 1)
+
+  # stop if a vector is used as input
+  if(is.vector(data)){stop("Input must be a data.frame with at least a column for Samples and another for Abundance.")}
+
+  # stop if abundance values are not numeric (integer or double type)
+  if(!is.numeric(pull(data, all_of(abundance_col)))){
+    stop("The column with abundance scores must be numeric (integer our double type).")
+  }
 
     # Match samples_col and abundance_col with Samples and Abundance, respectively
     data <-

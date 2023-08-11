@@ -46,7 +46,7 @@ Note that CH index is not an absolute value that indicates the quality of a sing
 Instead, it allows the comparison of clustering results. Thus, if you have several clusterings, the
 best one will be the one with higher CH index.
 
-Data input
+\strong{Data input}
 
 This function takes a data.frame with a column for samples and a column for abundance
 (minimum), but can take any number of other columns. It will then filter the specific sample
@@ -54,7 +54,7 @@ that you want to analyze. You can also pre-filter for your specific sample, but 
 provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
 (indicate how you name them with the arguments samples_col and abundance_col).
 
-Output options
+\strong{Output options}
 
 The default option returns a vector with CH scores for each k. This is a simple output that can then be used
 for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}) with

@@ -46,7 +46,7 @@ Note that DB index is not an absolute value that indicates the quality of a sing
 Instead, it allows the comparison of clustering results. Thus, if you have several clusterings, the
 best one will be the one with higher DB index.
 
-Data input
+\strong{Data input}
 
 This function takes a data.frame with a column for samples and a column for abundance
 (minimum), but can take any number of other columns. It will then filter the specific sample
@@ -54,7 +54,7 @@ that you want to analyze. You can also pre-filter for your specific sample, but 
 provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
 (indicate how you name them with the arguments samples_col and abundance_col).
 
-Output options
+\strong{Output options}
 
 The default option returns a vector with DB scores for each k. This is a simple output that can then be used
 for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}) with
@@ -62,7 +62,45 @@ the DB score for each k.
 
 \strong{Explanation of Davies-Bouldin index}
 
-The DB index (Davies and Bouldin, 1979) measures the similarity between any number of clusters, of any size.
+The DB index (Davies and Bouldin, 1979) is an averaged measure of cluster
+similarity to the closest cluster. This provides a sense of how separated the clusters are.
+
+Lower DB scores are better, because they represent more distinct clusters.
+Higher values of DB indicate overlapping clusters.
+
+Let \eqn{N} be the number of clusters and \eqn{R_i} the similarity between the i'th cluster and
+the cluster most similar to it.
+The DB index is calculated as the mean similarity between each cluster and the most similar cluster,
+
+\deqn{DB = \frac{1}{N}\sum_{i=1}^{N}R_i}
+
+Thus, \eqn{R_i} is the maximum similarity among all possible combinations of
+\eqn{R_ij}, with \eqn{i \neq j}.
+
+To get \eqn{R_ij}, let \eqn{S_i} be the intra-cluster dispersion of \eqn{i},
+\eqn{S_j} be the intra-cluster dispersion of cluster \eqn{j} and \eqn{M_ij} be the
+distance between clusters \eqn{i} and \eqn{j}.
+
+The similarity between any two clusters, \eqn{i} and \eqn{j}, is:
+
+\deqn{ R_{ij} = \frac{S_i + S_j}{M_ij}}
+
+The distance between any two clusters, \eqn{M_ij}, is measured as the
+distance between the
+centroids of both clusters, \eqn{\left\lvert C_i - C_j \right\rvert}.
+
+The dispersion of clusters, \eqn{S_i}, provides a sense of intra-dispersion
+of a given cluster.
+
+To calculate \eqn{S_i}, let \eqn{T_i} and \eqn{T_j} be the number of
+observations in \eqn{i} and \eqn{j}, respectively; let \eqn{X_j} be the value for
+j'th observation (again, \eqn{i \neq j}).
+
+\deqn{S_i = \sqrt{\frac{1}{T_i}\sum_{j=1}^{T_i}\left\lvert X_j - C_i \right\rvert}}
+
+\strong{Note} that this is the case for euclidean distances.
+
+link for extra: https://pyshark.com/davies-bouldin-index-for-k-means-clustering-evaluation-in-python/
 }
 \examples{
 
@@ -79,5 +117,8 @@ check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 
 }
 \references{
-Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2). https://doi.org/10.1109/TPAMI.1979.4766909
+Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2).
+}
+\seealso{
+\code{\link[clusterSim:index.DB]{clusterSim::index.DB()}}
 }

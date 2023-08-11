@@ -115,6 +115,14 @@ check_CH <- function(data,
   # Conditions for function to run
   stopifnot(range > 1)
 
+  # stop if a vector is used as input
+  if(is.vector(data)){stop("Input must be a data.frame with at least a column for Samples and another for Abundance.")}
+
+  # stop if abundance values are not numeric (integer or double type)
+  if(!is.numeric(pull(data, all_of(abundance_col)))){
+    stop("The column with abundance scores must be numeric (integer our double type).")
+  }
+
   # Match samples_col and abundance_col with Samples and Abundance, respectively
   data <-
     data %>%

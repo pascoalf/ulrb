@@ -6,7 +6,7 @@
 \usage{
 check_avgSil(
   data,
-  sample_id,
+  sample_id = NULL,
   samples_col = "Sample",
   abundance_col = "Abundance",
   range = 3:10,
@@ -33,10 +33,23 @@ check_avgSil(
 Vector with average Silhouette score index for each pre-specified k.
 }
 \description{
-Calculates average Silhouette score for a given sample
+Calculates average Silhouette score for a given sample.
 }
 \details{
-Data input
+The average Silhouette score index provides a sense of cluster definition and separation.
+It varies between -1 (complete cluster overlap) and 1 (no cluster overlap),
+the closest to 1, the better. Thus,
+\strong{the k value with highest average Silhouette score is the best k}.
+This is the standard metric used by the \strong{ulrb} package for automation of the decision
+of k, in functions \code{\link[=suggest_k]{suggest_k()}} and \code{\link[=define_rb]{define_rb()}}.
+
+\strong{Note}: The average Silhouette score is different from the common calculation of
+the Silhouette index, which provides a score for each observation in a clustering result.
+Just like the name says, we are taking the average of all silhouette scores
+obtained in a clustering result. In this way we can have a single, comparable
+value for each k we test.
+
+\strong{Data input}
 
 This function takes a data.frame with a column for samples and a column for abundance
 (minimum), but can take any number of other columns. It will then filter the specific sample
@@ -44,11 +57,58 @@ that you want to analyze. You can also pre-filter for your specific sample, but 
 provide the sample ID (sample_id) and the table always needs a column for Sample and another for Abundance
 (indicate how you name them with the arguments samples_col and abundance_col).
 
-Output options
+\strong{Output options}
 
 The default option returns a vector with CH scores for each k. This is a simple output that can then be used
 for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}) with
 the CH score for each k.
+
+Note that this function does not plot the classical Silhouette plot of a clustering result.
+To do that particular plot, use the function \code{\link[=plot_ulrb_silhouette]{plot_ulrb_silhouette()}} instead.
+
+\strong{Explanation of average Silhouette score}
+
+To calculate the Silhouette score for a single observation, let:
+\itemize{
+\item \eqn{a} be the mean distance between an observation and all other
+observations from the same cluster; and
+\item \eqn{b} be the mean distance between all observations in a cluster and the
+centroid of the nearest cluster.
+}
+
+The silhouette score (Sil), is given by:
+
+\deqn{Sil = \frac{(b-a)}{max(a,b)}}
+
+Once you have the Silhouette score for all observations in a clustering result, just
+take the simple mean and get the average Silhouette score.
+
+\strong{Silhouette score intuition}
+
+From the above formula, \eqn{Sil = \frac{(b-a)}{max(a,b)}}, it is clear that,
+for a given observation:
+\itemize{
+\item if \eqn{a > b}, the Silhouette score approaches \strong{1}; this means that the
+distance between an observation and its own cluster is larger than the
+distance to the nearest different cluster. This is the distance that must be
+maximized so that all points in a cluster are more similar with each other,
+than they are with other clusters.
+\item if \eqn{a = b}, then the Silhouette score is \strong{0}; this means that the distance
+between the observation and its own cluster is equivalent to distance between
+the nearest different cluster.
+\item if \eqn{a < b}, then the Silhouette score approaches \strong{-1}; in this
+situation, an observation is nearer the nearest different cluster,
+than it is to its own cluster. Thus, a negative score indicates that the observation
+is not in the correct cluster.
+}
+
+\strong{average Silhouette score intuition}
+
+If we take the average of the Silhouette score obtained for each observation in
+a clustering result, then we have the ability to compare the overall success of that
+clustering with another clustering. Thus, if we compare the average Silhouette
+score across different k values, i.e. different number of clusters, we can
+select the k with highest average Silhouette score.
 }
 \examples{
 library(dplyr)
@@ -61,4 +121,10 @@ check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 # To see a simple plot
 check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 
+}
+\references{
+Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
+}
+\seealso{
+\code{\link[=define_rb]{define_rb()}}, \code{\link[=suggest_k]{suggest_k()}}, \code{\link[cluster:pam]{cluster::pam()}}, \code{\link[cluster:silhouette]{cluster::silhouette()}}
 }
