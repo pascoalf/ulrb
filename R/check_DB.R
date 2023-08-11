@@ -13,7 +13,7 @@
 #' best one will be the one with higher DB index.
 #'
 #' @details
-#' Data input
+#' **Data input**
 #'
 #' This function takes a data.frame with a column for samples and a column for abundance
 #' (minimum), but can take any number of other columns. It will then filter the specific sample
@@ -22,7 +22,7 @@
 #' (indicate how you name them with the arguments samples_col and abundance_col).
 #'
 #' @details
-#' Output options
+#' **Output options**
 #'
 #' The default option returns a vector with DB scores for each k. This is a simple output that can then be used
 #' for other analysis. However, we also provide the option to show a plot (set `with_plot = TRUE`) with
@@ -31,6 +31,12 @@
 #' @details
 #' **Explanation of Davies-Bouldin index**
 #'
+#' The DB index (Davies and Bouldin, 1979) measures the similarity between any number of clusters.
+#'
+#'
+#'
+#' @references
+#' Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2).
 #'
 #' @inheritParams define_rb
 #' @param sample_id String with name of the sample to apply this function.
@@ -39,6 +45,7 @@
 #'
 #' @return A vector or plot with Davies-Bouldin index for each pre-specified k in a given sample.
 #' @export
+#'
 #'
 #' @examples
 #'

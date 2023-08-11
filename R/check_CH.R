@@ -13,7 +13,7 @@
 #' best one will be the one with higher CH index.
 #'
 #' @details
-#' Data input
+#' **Data input**
 #'
 #' This function takes a data.frame with a column for samples and a column for abundance
 #' (minimum), but can take any number of other columns. It will then filter the specific sample
@@ -22,7 +22,7 @@
 #' (indicate how you name them with the arguments samples_col and abundance_col).
 #'
 #' @details
-#' Output options
+#' **Output options**
 #'
 #' The default option returns a vector with CH scores for each k. This is a simple output that can then be used
 #' for other analysis. However, we also provide the option to show a plot (set `with_plot = TRUE`) with

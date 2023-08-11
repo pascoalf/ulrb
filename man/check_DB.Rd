@@ -61,6 +61,8 @@ for other analysis. However, we also provide the option to show a plot (set \cod
 the DB score for each k.
 
 \strong{Explanation of Davies-Bouldin index}
+
+The DB index (Davies and Bouldin, 1979) measures the similarity between any number of clusters, of any size.
 }
 \examples{
 
@@ -75,4 +77,7 @@ check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11)
 check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 
 
+}
+\references{
+Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2). https://doi.org/10.1109/TPAMI.1979.4766909
 }
