@@ -78,6 +78,7 @@
 #'
 #' @inheritParams define_rb
 #' @param sample_id String with name of the sample to apply this function.
+#' @param samples_col String with name of column with sample names.
 #' @param range The range of values of k to test, default is from 3 to 10.
 #' @param with_plot If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.
 #'
