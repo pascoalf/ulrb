@@ -14,26 +14,41 @@ evaluate_k(
 )
 }
 \arguments{
-\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
+\item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
-\item{samples_col}{String with name of column with sample names.}
-
-\item{abundance_col}{String with name of column with abundance values.}
+\item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
 \item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
 
 \item{...}{Extra arguments.}
 }
 \value{
-Tidy table with three indices for each k within each sample.
+A nested data.frame (or a plot) with three indices for each k and for each sample.
 }
 \description{
-Evaluate k from all samples in a dataset
+This function extends \code{\link[=evaluate_sample_k]{evaluate_sample_k()}} for any number of samples in a dataset.
+}
+\details{
+The plot option (with_plot = TRUE) provides centrality metrics for all samples used.
+
+For more details on indices calculation, please see the documentation for \code{\link[=evaluate_sample_k]{evaluate_sample_k()}}, \code{\link[=check_DB]{check_DB()}},
+\code{\link[=check_CH]{check_CH()}} and \code{\link[=check_avgSil]{check_avgSil()}}.
 }
 \examples{
+library(dplyr)
+#
 evaluate_k(nice_tidy)
 
+# To change range
+evaluate_k(nice_tidy, range = 4:11)
 
+# To make simple plot
+evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
+
+}
+\seealso{
+\code{\link[=evaluate_sample_k]{evaluate_sample_k()}}, \code{\link[=check_DB]{check_DB()}},
+\code{\link[=check_CH]{check_CH()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=suggest_k]{suggest_k()}}
 }

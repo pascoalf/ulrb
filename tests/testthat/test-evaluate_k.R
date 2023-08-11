@@ -44,3 +44,24 @@ test_that("Should throw error if max k is reached", {
 })
 
 
+
+test_that("no error for plot option", {
+  expect_no_error(evaluate_k(nice_tidy, with_plot = TRUE))
+})
+
+test_that("Throws an error if input is a vector", {
+  sample_ERR2044662 <- nice_tidy %>% filter(Sample == "ERR2044662") %>% pull(Abundance)
+  expect_error(evaluate_k(sample_ERR2044662, sample_id = sample_ERR2044662))
+})
+
+test_that("Throws an error is Abundance column is not numeric, example with character", {
+  nice_tidy_wrong <- nice_tidy %>% mutate(Abundance = as.character(Abundance))
+  expect_error(evaluate_k(nice_tidy_wrong))
+})
+
+test_that("Throws an error is Abundance column is not numeric, example with factor", {
+  nice_tidy_wrong <- nice_tidy %>% mutate(Abundance = as.factor(Abundance))
+  expect_error(evaluate_k(nice_tidy_wrong))
+})
+
+

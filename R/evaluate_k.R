@@ -1,18 +1,30 @@
 #' Evaluate k from all samples in a dataset
 #'
-#' @param data A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.
-#' @param samples_col String with name of column with sample names.
-#' @param abundance_col String with name of column with abundance values.
-#' @param range The range of values of k to test, default is from 3 to 10.
-#' @inheritParams check_DB
+#' This function extends [evaluate_sample_k()] for any number of samples in a dataset.
+#'
+#' The plot option (with_plot = TRUE) provides centrality metrics for all samples used.
+#'
+#' For more details on indices calculation, please see the documentation for [evaluate_sample_k()], [check_DB()],
+#' [check_CH()] and [check_avgSil()].
+#'
+#' @inheritParams evaluate_sample_k
 #' @param ... Extra arguments.
 #'
-#' @return Tidy table with three indices for each k within each sample.
+#' @return A nested data.frame (or a plot) with three indices for each k and for each sample.
 #' @export
 #'
+#' @seealso [evaluate_sample_k()], [check_DB()], [check_CH()], [check_avgSil()], [suggest_k()]
+#'
 #' @examples
+#' library(dplyr)
+#' #
 #' evaluate_k(nice_tidy)
 #'
+#' # To change range
+#' evaluate_k(nice_tidy, range = 4:11)
+#'
+#' # To make simple plot
+#' evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
 #'
 evaluate_k <- function(data,
                        range = 3:10,
@@ -22,6 +34,13 @@ evaluate_k <- function(data,
                        ...){
   stopifnot(range > 1)
   #
+  # stop if a vector is used as input
+  if(is.vector(data)){stop("Input must be a data.frame with at least a column for Samples and another for Abundance.")}
+
+  # stop if abundance values are not numeric (integer or double type)
+  if(!is.numeric(pull(data, all_of(abundance_col)))){
+    stop("The column with abundance scores must be numeric (integer our double type).")
+  }
 
   # Match samples_col and abundance_col with Samples and Abundance, respectively
   data <-

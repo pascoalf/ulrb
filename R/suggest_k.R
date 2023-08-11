@@ -1,7 +1,35 @@
 #' Suggest k
 #'
-#' The best k is selected for each sample, based on the selected index. If different k's are obtained for different samples
-#' (probable) then we calculate the mean value of k and return it as an integer.
+#' Tool to help decide how many clusters to use for k-medoids algorithm.
+#'
+#' The best k is selected for each sample, based on the selected index.
+#' If different k's are obtained for different samples (probable) then we
+#' calculate the mean value of k and return it as an integer. Alternatively, we can
+#' return a more detailed result in the form of a list.
+#'
+#' **Note**; this function is used within [define_rb()], with default parameters, for the
+#' otional automatic selection of k.
+#'
+#' @details
+#' **Detailed option**
+#'
+#' If `detailed = TRUE`, then the output is a list with information to help decide for k.
+#' More specifically, the list will include:
+#'
+#' - A data.frame summarizing what information each index provides and how to interpret the value.
+#' - A brief summary indicating the number of samples in the dataset and the range of k values used.
+#' - A data.frame with the best k for each sample, based on each index.
+#'
+#' @details
+#' **Automatic k selection**
+#'
+#' If `detailed = FALSE`, this function will provide a single integer with the best k.
+#' The **default** decision is based on the maximum average Silhouette score obtained
+#' for the values of k between 3 and 10. To better understand why the average Silhouette score and
+#' this range of k's were selected, we refer to Pascoal et al., 2023.
+#'
+#' Alternatively, this function can also provide the best k, as an integer, based on another index
+#' (Davies-Bouldin and Calinsky-Harabasz) and can compare the entire of possible k's.
 #'
 #'
 #' @inheritParams evaluate_k
@@ -11,10 +39,27 @@
 #' @return Integer indicating best k from selected index. Optionally, can return a list with details.
 #' @export
 #'
+#' @seealso [evaluate_k()], [evaluate_sample_k()], [check_DB()], [check_CH()], [check_avgSil()], [cluster::pam()]
+#'
 #' @examples
+#'
+#' # Get the best k with default parameters
+#' suggest_k(nice_tidy)
+#'
+#' # Get detailed results to decide for yourself
 #' suggest_k(nice_tidy, detailed = TRUE)
 #'
-#' suggest_k(nice_tidy, detailed = FALSE)
+#' # Get best k, based on Davies-Bouldin index
+#' suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin")
+#'
+#' # Get best k, based on Calinsky-Harabasz index
+#' suggest_k(nice_tidy, detailed = FALSE, index = "Calinsky-Harabasz")
+#'
+#' # Try a different range of values and index
+#' suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin", range = 2:7)
+#'
+#' # Get details for a specific range of k values
+#' suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
 #'
 suggest_k <- function(data,
                       range = 3:10,
@@ -23,6 +68,14 @@ suggest_k <- function(data,
                       index = "Average Silhouette Score",
                       detailed = FALSE, ...){
   stopifnot(range > 1)
+  # stop if a vector is used as input
+  if(is.vector(data)){stop("Input must be a data.frame with at least a column for Samples and another for Abundance.")}
+
+  # stop if abundance values are not numeric (integer or double type)
+  if(!is.numeric(pull(data, all_of(abundance_col)))){
+    stop("The column with abundance scores must be numeric (integer our double type).")
+  }
+
   # calculate maximum k
   maxk = data %>%
     group_by(.data$Sample) %>%
