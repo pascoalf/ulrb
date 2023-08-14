@@ -1,12 +1,33 @@
 #' Prepare data in tidy format
 #'
+#' Helper function for [define_rb()].
+#'
+#' This function guarantees that the species table includes one column with sample ID's and
+#' one column with abundance.
+#'
+#' @details
+#' Common species table formats
+#'
+#' There are two common formats for Species tables:
+#'  - samples as rows and species as columns;
+#'  - species as rows and samples as columns.
+#'
+#' However, both formats are not tidy, because they include several columns with the same variable. They
+#' are in a "wide format" instead of a "long format".
+#'
+#' This function re-organizes samples and species so that there is a single column with the samples ID's and
+#' another with the abundance scores; Extra columns are allowed.
+#'
+#'
 #' @param data a data.frame in "wide" format, with samples in either columns or rows. This data.frame should not include any data besides abundance values per sample, per taxonomic unit. Additional data (e.g. taxonomy details) should be added afterwards.
 #' @param sample_names a vector with the name of all samples.
 #' @param samples_in a vector specifyng the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.
 #' @param ... additional arguments
 #'
-#' @return A tibble with the arguments for define_rb() in tidy format. Can include extra variables.
+#' @return A speceis table in long format, compatible with dplyr pipes and **ulrb** package functions.
 #' @export
+#'
+#' @seealso [define_rb()]
 #'
 #' @examples
 #' library(dplyr)
@@ -21,8 +42,10 @@
 #' # Example for samples in rows
 #' # Select columns with samples from nice
 #' nice_rows <- nice %>% select(all_of(sample_names))
+#'
 #' # Change columns to rows
 #' nice_rows <- nice_rows %>% t() %>% as.data.frame()
+#'
 #' # Turn colnames into taxonomic units ID
 #' colnames(nice_rows) <- paste0("OTU_", seq_along(colnames(nice_rows)))
 #'

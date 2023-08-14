@@ -18,6 +18,8 @@ evaluate_k(
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
+\item{samples_col}{String with name of column with sample names.}
+
 \item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
 \item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
