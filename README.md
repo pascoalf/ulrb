@@ -24,8 +24,9 @@ For tutorials and documentation of the **urlb** package, visite our website: lin
 
 - To install from CRAN (recommended)
 
-`r install.packages("ulrb")` **note - not available yet**
-
+```{r}
+install.packages("ulrb") #not available yet
+```
 - To install from GitHub 
 
 ```{r}
