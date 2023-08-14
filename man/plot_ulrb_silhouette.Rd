@@ -29,11 +29,11 @@ plot_ulrb_silhouette(
 
 \item{silhouette_score}{string with column name with silhouette score values. Default is "Silhouette_scores"}
 
-\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications.}
 
 \item{log_scaled}{if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.}
 
-\item{...}{other arguments}
+\item{...}{other arguments.}
 }
 \value{
 A ggplot object of Silhouette plot obtained from the selected sample.

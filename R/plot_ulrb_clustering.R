@@ -1,25 +1,50 @@
 #' Sanity check rare biosphere definition for one sample
 #'
+#' Plots the clustering results from [define_rb()]
+#'
+#' This works as a sanity check of the results obtained by the unsupervised learning method used
+#' to classify species. This is specially important if you used an automatic number of clusters.
+#'
+#' The function works for either a single sample (that you specify with sample_id argument), or
+#' it can apply a centrality metric for species across all your samples (plot_all = TRUE).
+#'
 #' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
 #' @param sample_id string with name of selected sample.
 #' @param taxa_col string with name of column with taxonomic units. Usually OTU or ASV.
 #' @param plot_all If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.
 #' @param classification_col string with name of column with classification for each row. Default value is "Classification".
 #' @param abundance_col string with name of column with abundance values. Default is "Abundance".
-#' @param colors vector with colors. Should have the same lenght as the number of classifications
+#' @param colors vector with colors. Should have the same lenght as the number of classifications.
 #' @param log_scaled if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.
-#' @param ... other arguments
+#' @param ... other arguments.
 #'
-#' @return a ggplot object
+#' @return A ggplot object with clustering results from [define_rb()].
 #' @export
+#'
+#' @seealso [define_rb()], [plot_ulrb()], [plot_ulrb_silhouette()]
 #'
 #' @examples
 #' classified_species <- define_rb(nice_tidy)
 #'
+#' # Standard plot for a single sample
 #' plot_ulrb_clustering(classified_species,
 #'                        sample_id = "ERR2044669",
 #'                        taxa_col = "OTU",
 #'                        abundance_col = "Abundance")
+#' # All samples in a dataset
+#' plot_ulrb_clustering(classified_species,
+#'           sample_id = "ERR2044669",
+#'           taxa_col = "OTU",
+#'           abundance_col = "Abundance",
+#'           plot_all = TRUE)
+#'
+#' # All samples with a log scale
+#' plot_ulrb_clustering(classified_species,
+#'           sample_id = "ERR2044669",
+#'           taxa_col = "OTU",
+#'           abundance_col = "Abundance",
+#'           plot_all = TRUE,
+#'           log_scaled = TRUE)
 #'
 #' @import dplyr
 #' @importFrom rlang .data

@@ -59,3 +59,25 @@ test_that("Stops if log scales argument is not logical",{
               plot_all = TRUE,
               log_scaled = 1))
 })
+
+test_that("Error if silhouette score column is wrong",{
+  urlb_results <- define_rb(nice_tidy) %>% as.matrix()
+  expect_error(
+    plot_ulrb(urlb_results,
+              taxa_col = "OTU",
+              plot_all = TRUE,
+              log_scaled = TRUE,
+              silhouette_score = "Sil"))
+})
+
+test_that("Stops if number of colors is wrong
+         in extra arguments does not correspond to the
+         size of the classification vector",{
+           urlb_results <- define_rb(nice_tidy) %>% as.matrix()
+           expect_error(
+             plot_ulrb(urlb_results,
+                       taxa_col = "OTU",
+                       plot_all = TRUE,
+                       log_scaled = TRUE,
+                       colors = c(1,2)))
+})

@@ -31,15 +31,22 @@ plot_ulrb_clustering(
 
 \item{log_scaled}{if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.}
 
-\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications.}
 
-\item{...}{other arguments}
+\item{...}{other arguments.}
 }
 \value{
-a ggplot object
+A ggplot object with clustering results from \code{\link[=define_rb]{define_rb()}}.
 }
 \description{
-Sanity check rare biosphere definition for one sample
+Plots clustering results from \code{\link[=define_rb]{define_rb()}}
+}
+\details{
+This works as a sanity check of the results obtained by the unsupervised learning method used
+to classify species. This is specially important if you used an automatic number of clusters.
+
+The function works for either a single sample (that you specify with sample_id argument), or
+it can apply a centrality metric for species across all your samples (plot_all = TRUE).
 }
 \examples{
 classified_species <- define_rb(nice_tidy)
@@ -49,4 +56,7 @@ plot_ulrb_clustering(classified_species,
                        taxa_col = "OTU",
                        abundance_col = "Abundance")
 
+}
+\seealso{
+\code{\link[=define_rb]{define_rb()}}, \code{\link[=plot_ulrb]{plot_ulrb()}}, \code{\link[=plot_ulrb_silhouette]{plot_ulrb_silhouette()}}
 }

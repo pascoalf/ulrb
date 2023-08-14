@@ -34,7 +34,7 @@ plot_ulrb(
 
 \item{log_scaled}{if TRUE then abundance scores will be shown in Log10 scale. Default to FALSE.}
 
-\item{colors}{vector with colors. Should have the same lenght as the number of classifications}
+\item{colors}{vector with colors. Should have the same lenght as the number of classifications.}
 
 \item{...}{other arguments}
 }
