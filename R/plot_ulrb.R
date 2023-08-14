@@ -1,11 +1,24 @@
-#' Plot relevant metrics obtained from ulrb clustering
+#' Plot ulrb clustering results
+#'
+#' Function to help access clustering results from ulrb.
+#'
+#' This function combined [plot_ulrb_clustering()] and [plot_ulrb_silhouette()].
+#' The plots can be done for a single sample or for all samples.
+#'
+#' The results from the main function of ulrb package, [define_rb()], will include the classification of
+#' each species (OTU, ASVs, etc) and the silhouette score obtained for each observation. Thus, to access the clustering results, there are two main plots to check:
+#'  - the rank abundance curve obtained after ulrb classification;
+#'  - and the silhouette plot.
 #'
 #' @inheritParams plot_ulrb_clustering
 #' @inheritParams plot_ulrb_silhouette
 #' @param ... other arguments
 #'
-#' @return a ggplot object
+#' @return A grid of ggplot objects with clustering results and
+#' silhouette plot obtained from [define_rb()].
 #' @export
+#'
+#' @seealso [define_rb()], [check_avgSil()], [plot_ulrb_clustering()], [plot_ulrb_silhouette()]
 #'
 #' @examples
 #' classified_species <- define_rb(nice_tidy)
@@ -17,6 +30,7 @@
 #'
 #' @import dplyr
 #' @importFrom rlang .data
+#'
 plot_ulrb <- function(data,
                       sample_id = NULL,
                       taxa_col,

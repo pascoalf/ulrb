@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ulrb.R
 \name{plot_ulrb}
 \alias{plot_ulrb}
-\title{Plot relevant metrics obtained from ulrb clustering}
+\title{Plot ulrb clustering results}
 \usage{
 plot_ulrb(
   data,
@@ -39,10 +39,22 @@ plot_ulrb(
 \item{...}{other arguments}
 }
 \value{
-a ggplot object
+A grid of ggplot objects with clustering results and
+silhouette plot obtained from \code{\link[=define_rb]{define_rb()}}.
 }
 \description{
-Plot relevant metrics obtained from ulrb clustering
+Function to help access clustering results from ulrb.
+}
+\details{
+This function combined \code{\link[=plot_ulrb_clustering]{plot_ulrb_clustering()}} and \code{\link[=plot_ulrb_silhouette]{plot_ulrb_silhouette()}}.
+The plots can be done for a single sample or for all samples.
+
+The results from the main function of ulrb package, \code{\link[=define_rb]{define_rb()}}, will include the classification of
+each species (OTU, ASVs, etc) and the silhouette score obtained for each observation. Thus, to access the clustering results, there are two main plots to check:
+\itemize{
+\item the rank abundance curve obtained after ulrb classification;
+\item and the silhouette plot.
+}
 }
 \examples{
 classified_species <- define_rb(nice_tidy)
@@ -52,4 +64,7 @@ plot_ulrb(classified_species,
                        taxa_col = "OTU",
                        abundance_col = "Abundance")
 
+}
+\seealso{
+\code{\link[=define_rb]{define_rb()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=plot_ulrb_clustering]{plot_ulrb_clustering()}}, \code{\link[=plot_ulrb_silhouette]{plot_ulrb_silhouette()}}
 }
