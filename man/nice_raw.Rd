@@ -29,6 +29,24 @@ A data frame with 524 rows and 17 columns:
 nice_raw
 }
 \description{
-Not done yet.
+This is the "raw" data for the N-ICE dataset.
+}
+\details{
+The original sequencing results are available at European Nucleotide Archive
+(accession number: PRJEB15043). Those reads were processed into taxonomic units
+by MGnify platform (Study: MGYS00001922). The later study accession provides the
+table used in here.
+
+This table contains the taxonomy and an abundance score for each taxonomic lineage, which
+we will refer to as "OTU" (Operational Taxonomic Unit) for simplicity sake.
+
+For details on the sampling campaign in the Arctic ocean, sequencing protocols and
+bioinformatic processing, please see ref (de Sousa et al., 2019).
+}
+\references{
+de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
+}
+\seealso{
+\code{\link[=nice]{nice()}}, \link{nice_tidy}, \link{nice_env}
 }
 \keyword{datasets}

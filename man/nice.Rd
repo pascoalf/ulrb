@@ -29,11 +29,18 @@ A data frame with 524 rows and 17 columns:
 nice
 }
 \description{
-Table with abundance and taxonomic classification of each OTU.
-This OTU table was cleaned (see: XXXX) so that it only includes samples from 16S rRNA amplicon sequencing
-and eukaryotes were filtered out. Additionally, we added a column with (OTU) with a ID for each OTU.
-Raw reads were processed into OTUs by the MGnify platform (v5).
-Original .fastq files with sequences are publicly available in European Nucleotide Archive under accesion number XXXX.
-The original raw OTU table is publicly available in MGnify under accession number XXXX.
+Table in "wide" format with abundance and taxonomic classification of each OTU.
+}
+\details{
+This OTU table was cleaned so that it only includes samples from 16S rRNA amplicon sequencing
+and no eukaryotes (similarly to Pascoal et al., 2022). Additionally, we added a column with (OTU) with a ID for each OTU.
+
+For details on raw data, see \link{nice_raw}
+}
+\references{
+Pascoal, F., Costa, R., Assmy, P., Duarte, P., & Magalhães, C. (2022). Exploration of the Types of Rarity in the Arctic Ocean from the Perspective of Multiple Methodologies. Microbial Ecology, 84(1), 59–72. https://doi.org/10.1007/s00248-021-01821-9
+}
+\seealso{
+\code{\link[=nice_tidy]{nice_tidy()}}, \link{nice_raw}, \link{nice_env}
 }
 \keyword{datasets}

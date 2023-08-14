@@ -97,6 +97,45 @@ is below the median Silhouette of its cluster and sample.
 You can make your own plots and analysis, but we also provide another function,
 \code{\link[=plot_ulrb]{plot_ulrb()}}, which illustrates the results obtained.
 
+\strong{Partition around medoids (pam)}
+
+To calculate k-medoids, we used the partition around medoids (pam)
+algorithm, which was described in Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
+(Kaufman and Rousseeuw, 1990) and implemented by the cluster package with the \code{\link[cluster:pam]{cluster::pam()}} function.
+
+Briefly, the pam algorithm is divided into two main phases: \strong{build} and \strong{swap}.
+
+The first phase (\strong{build}) selects k observations as cluster representatives. The first
+observation selected as representative is the one that minimizes the sum of the dissimilarities to the
+remaining observations. The second, third and so on repeat the same process, until k clusters have
+been formed.
+
+The \strong{build} steps are:
+
+1 - Propose a centroid with observation, \eqn{i}, which has not been selected as a centroid yet
+
+2 - Calculate the distance between another observation, \eqn{j}, and its most similar
+observation, \eqn{D_j}; and calculate the difference with the proposed centroid,
+\eqn{i}, i.e., \eqn{d(j,i)}
+
+3 - If \eqn{d(j,i) > 0}, then calculate its contribution to the centroid:
+\deqn{max(D_j - d(j,i),0)}
+
+4 - Calculate the total gain obtained by \eqn{i}, \deqn{\sum_{j}C_{ji}}
+
+5 - From all possible centroids, select the one that maximizes the previous total gain obtained,
+\deqn{max_i \sum_jC_{ji}}
+
+6 - Repeat until k observations have been selected as cluster representatives.
+
+The purpose of the next phase, \strong{swap}, is to improve the representatives
+for the clusters. The principle is to swap the cluster representative between
+all possibilities and calculate the value sum of dissimilarities between each
+observation and the closest centroid. The swapping continues until no more improvement is
+possible, i.e., when the minimum sum of dissimilarities of the clusters is reached.
+
+note: adapted from chapter 2 of Kaufman and Rousseeuw, 1990.
+
 \strong{Notes}:
 
 Understand that \strong{ulrb} package considers each sample as an independent
@@ -172,6 +211,9 @@ nice_tidy \%>\%
  group_by(Sample, Classification) \%>\%
  summarise(totalAbundance = sum(Abundance))
 
+}
+\references{
+Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
 }
 \seealso{
 \code{\link[=suggest_k]{suggest_k()}}, \code{\link[=evaluate_k]{evaluate_k()}}, \code{\link[=plot_ulrb]{plot_ulrb()}}, \code{\link[cluster:pam]{cluster::pam()}}

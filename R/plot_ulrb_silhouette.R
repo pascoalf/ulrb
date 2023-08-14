@@ -8,7 +8,20 @@
 #' The function works for either a single sample (that you specify with sample_id argument), or
 #' it can apply a centrality metric for species across all your samples (plot_all = TRUE).
 #'
-#' For details on Silhouette score, see [check_avgSil()] and [cluster::silhouette()].
+#' For more details on Silhouette score, see [check_avgSil()] and [cluster::silhouette()].
+#'
+#' @details
+#' **Interpretation of Silhouette plot**
+#'
+#' Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
+#' (Kaufman and Rousseeuw, 1990); a possible (**subjective**) interpretation of the clustering structure based
+#' on the Silhouette plot is:
+#'
+#' - 0.71-1.00 (A strong structure has been found);
+#' - 0.51-0.70 (A reasonable structure has been found);
+#' - 0.26-0.50 (The sructure is weak and could be artificial);
+#' - < 0.26 (No structure has been found).
+#'
 #'
 #' @inheritParams plot_ulrb_clustering
 #' @param data ...

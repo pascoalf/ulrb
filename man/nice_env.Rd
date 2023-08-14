@@ -27,6 +27,15 @@ A data frame with 4716 rows and 10 columns:
 nice_env
 }
 \description{
-This dataset provides information on the samples used for rRNA amplicon of the Arctic Ocean during Winter-Spring Transition.
+This dataset provides information on the samples used for the N-ICE dataset.
+}
+\details{
+Based on de Sousa et al., 2019.
+}
+\references{
+de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408.
+}
+\seealso{
+\link{nice}, \link{nice_raw}, \link{nice_tidy}
 }
 \keyword{datasets}

@@ -51,7 +51,19 @@ to classify species. This is specially important if you used an automatic number
 The function works for either a single sample (that you specify with sample_id argument), or
 it can apply a centrality metric for species across all your samples (plot_all = TRUE).
 
-For details on Silhouette score, see \code{\link[=check_avgSil]{check_avgSil()}} and \code{\link[cluster:silhouette]{cluster::silhouette()}}.
+For more details on Silhouette score, see \code{\link[=check_avgSil]{check_avgSil()}} and \code{\link[cluster:silhouette]{cluster::silhouette()}}.
+
+\strong{Interpretation of Silhouette plot}
+
+Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
+(Kaufman and Rousseeuw, 1990); a possible (\strong{subjective}) interpretation of the clustering structure based
+on the Silhouette plot is:
+\itemize{
+\item 0.71-1.00 (A strong structure has been found);
+\item 0.51-0.70 (A reasonable structure has been found);
+\item 0.26-0.50 (The sructure is weak and could be artificial);
+\item < 0.26 (No structure has been found).
+}
 }
 \examples{
 

@@ -55,6 +55,18 @@ each species (OTU, ASVs, etc) and the silhouette score obtained for each observa
 \item the rank abundance curve obtained after ulrb classification;
 \item and the silhouette plot.
 }
+
+\strong{Interpretation of Silhouette plot}
+
+Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
+(Kaufman and Rousseeuw, 1990); a possible (\strong{subjective}) interpretation of the clustering structure based
+on the Silhouette plot is:
+\itemize{
+\item 0.71-1.00 (A strong structure has been found);
+\item 0.51-0.70 (A reasonable structure has been found);
+\item 0.26-0.50 (The sructure is weak and could be artificial);
+\item <0.26 (No structure has been found).
+}
 }
 \examples{
 classified_species <- define_rb(nice_tidy)
