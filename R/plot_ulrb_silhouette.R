@@ -80,8 +80,8 @@ plot_ulrb_silhouette <- function(data,
     # The sample id must be present in the data
     if(
       data %>%
-      filter(Sample == all_of(sample_id)) %>%
-      pull(Sample) %>%
+      filter(.data$Sample == all_of(sample_id)) %>%
+      pull(.data$Sample) %>%
       length() == 0
     ){stop("Sample ID must be present in Sample column. Verify sample_id and samples_col arguments.")}
 
