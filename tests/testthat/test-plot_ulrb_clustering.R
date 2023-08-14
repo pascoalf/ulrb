@@ -1,8 +1,17 @@
-test_that("function works", {
+test_that("Works for a sample with default arguments", {
 
   classified_species <- define_rb(nice_tidy)
 
-  expect_no_error(plot_ulrb_clustering(classified_species, sample = "NB_250", taxa_col = "OTU"))
+  expect_no_error(plot_ulrb_clustering(classified_species,
+                                       sample_id = "ERR2044669",
+                                       taxa_col = "OTU"))
+})
+
+test_that("function does not work if you provide a non existent sample ID", {
+
+  classified_species <- define_rb(nice_tidy)
+
+  expect_error(plot_ulrb_clustering(classified_species, sample = "NB_250", taxa_col = "OTU"))
 })
 
 test_that("function fails if missing sample_id argument", {
@@ -54,7 +63,7 @@ test_that("function works normally if log_scaled is logical (TRUE/FALSE)", {
                                       log_scaled = TRUE))
 })
 
-test_that("any color vector works if it has the same length as the number of classifications", {
+test_that("Any color vector works if it has the same length as the number of classifications", {
 
   classified_species <- define_rb(nice_tidy)
 
@@ -98,7 +107,8 @@ test_that("optional labs can overwrite default labs", {
                                   y = "Something else"))
 })
 
-test_that("the abundance argument can be changed into any type of score, for example, relative abundance", {
+test_that("The abundance argument can be changed into any type of score,
+          for example, relative abundance", {
 
   classified_species <- define_rb(nice_tidy)
 
@@ -112,12 +122,59 @@ test_that("the abundance argument can be changed into any type of score, for exa
                     ggplot2::labs(y = "Relative abundance"))
 })
 
-test_that("log_scaled argument works", {
-  classified_species <- define_rb(nice_tidy)
-
-  expect_no_error(plot_ulrb_clustering(classified_species,
-                                         taxa_col = "OTU",
-                                         sample_id = "ERR2044662",
-                                         log_scaled = TRUE))
+test_that("Works with a single sample",{
+  urlb_results <- define_rb(nice_tidy)
+  expect_no_error(plot_ulrb_clustering(urlb_results,
+                            sample_id = "ERR2044669",
+                            taxa_col = "OTU",
+                            plot_all = FALSE))
 })
 
+test_that("Works for all samples",{
+  urlb_results <- define_rb(nice_tidy)
+  expect_no_error(
+    suppressWarnings( ## there is an expected warning
+      plot_ulrb_clustering(urlb_results,
+                taxa_col = "OTU",
+                plot_all = TRUE)))
+})
+
+test_that("Throws error if wrong taxa_col is provided",{
+  urlb_results <- define_rb(nice_tidy)
+  expect_error(
+    suppressWarnings( ## there is an expected warning
+      plot_ulrb_clustering(urlb_results,
+                taxa_col = "ASV",
+                plot_all = TRUE)))
+})
+
+test_that("Log scales works for all samples",{
+  urlb_results <- define_rb(nice_tidy)
+  expect_no_error(
+    suppressWarnings( ## there is an expected warning
+      plot_ulrb_clustering(urlb_results,
+                taxa_col = "OTU",
+                plot_all = TRUE,
+                log_scaled = TRUE)))
+})
+
+test_that("Stops if log scales argument is not logical, with option for all samples",{
+  urlb_results <- define_rb(nice_tidy) %>% as.matrix()
+  expect_error(
+    plot_ulrb_clustering(urlb_results,
+              taxa_col = "OTU",
+              plot_all = TRUE,
+              log_scaled = 1))
+})
+
+test_that("Stops if number of colors is wrong
+         in extra arguments does not correspond to the
+         size of the classification vector",{
+           urlb_results <- define_rb(nice_tidy) %>% as.matrix()
+           expect_error(
+             plot_ulrb_clustering(urlb_results,
+                       taxa_col = "OTU",
+                       plot_all = TRUE,
+                       log_scaled = TRUE,
+                       colors = c(1,2)))
+         })

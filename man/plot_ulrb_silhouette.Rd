@@ -8,6 +8,7 @@ plot_ulrb_silhouette(
   data,
   sample_id = NULL,
   taxa_col,
+  samples_col = "Sample",
   plot_all = FALSE,
   classification_col = "Classification",
   silhouette_score = "Silhouette_scores",
@@ -22,6 +23,8 @@ plot_ulrb_silhouette(
 \item{sample_id}{string with name of selected sample.}
 
 \item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
+
+\item{samples_col}{name of column with sample ID's.}
 
 \item{plot_all}{If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.}
 
@@ -39,10 +42,43 @@ plot_ulrb_silhouette(
 A ggplot object of Silhouette plot obtained from the selected sample.
 }
 \description{
-Sanity check of Silhouette plot of selected sample
+Plots the Silhouette scores from the clustering results of \code{\link[=define_rb]{define_rb()}}.
+}
+\details{
+This works as a sanity check of the results obtained by the unsupervised learning method used
+to classify species. This is specially important if you used an automatic number of clusters.
+
+The function works for either a single sample (that you specify with sample_id argument), or
+it can apply a centrality metric for species across all your samples (plot_all = TRUE).
+
+For details on Silhouette score, see \code{\link[=check_avgSil]{check_avgSil()}} and \code{\link[cluster:silhouette]{cluster::silhouette()}}.
 }
 \examples{
-plot_ulrb_silhouette(data = define_rb(nice_tidy, simplified = FALSE),
- taxa_col = "OTU", sample_id = "ERR2044662")
 
+classified_species <- define_rb(nice_tidy)
+
+# Standard plot for a single sample
+plot_ulrb_silhouette(classified_species,
+                       sample_id = "ERR2044669",
+                       taxa_col = "OTU",
+                       abundance_col = "Abundance")
+# All samples in a dataset
+plot_ulrb_silhouette(classified_species,
+          sample_id = "ERR2044669",
+          taxa_col = "OTU",
+          abundance_col = "Abundance",
+          plot_all = TRUE)
+
+# All samples with a log scale
+plot_ulrb_silhouette(classified_species,
+          sample_id = "ERR2044669",
+          taxa_col = "OTU",
+          abundance_col = "Abundance",
+          plot_all = TRUE,
+          log_scaled = TRUE)
+
+}
+\seealso{
+\code{\link[=define_rb]{define_rb()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=plot_ulrb_clustering]{plot_ulrb_clustering()}},
+\code{\link[=plot_ulrb]{plot_ulrb()}}, \code{\link[cluster:silhouette]{cluster::silhouette()}}, \code{\link[cluster:pam]{cluster::pam()}}
 }

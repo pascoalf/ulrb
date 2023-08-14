@@ -9,6 +9,7 @@ plot_ulrb_clustering(
   sample_id = NULL,
   taxa_col,
   plot_all = FALSE,
+  samples_col = "Sample",
   classification_col = "Classification",
   abundance_col = "Abundance",
   log_scaled = FALSE,
@@ -25,6 +26,8 @@ plot_ulrb_clustering(
 
 \item{plot_all}{If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.}
 
+\item{samples_col}{name of column with sample ID's.}
+
 \item{classification_col}{string with name of column with classification for each row. Default value is "Classification".}
 
 \item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
@@ -39,7 +42,7 @@ plot_ulrb_clustering(
 A ggplot object with clustering results from \code{\link[=define_rb]{define_rb()}}.
 }
 \description{
-Plots clustering results from \code{\link[=define_rb]{define_rb()}}
+Plots the clustering results from \code{\link[=define_rb]{define_rb()}}
 }
 \details{
 This works as a sanity check of the results obtained by the unsupervised learning method used
@@ -51,10 +54,25 @@ it can apply a centrality metric for species across all your samples (plot_all =
 \examples{
 classified_species <- define_rb(nice_tidy)
 
+# Standard plot for a single sample
 plot_ulrb_clustering(classified_species,
                        sample_id = "ERR2044669",
                        taxa_col = "OTU",
                        abundance_col = "Abundance")
+# All samples in a dataset
+plot_ulrb_clustering(classified_species,
+          sample_id = "ERR2044669",
+          taxa_col = "OTU",
+          abundance_col = "Abundance",
+          plot_all = TRUE)
+
+# All samples with a log scale
+plot_ulrb_clustering(classified_species,
+          sample_id = "ERR2044669",
+          taxa_col = "OTU",
+          abundance_col = "Abundance",
+          plot_all = TRUE,
+          log_scaled = TRUE)
 
 }
 \seealso{

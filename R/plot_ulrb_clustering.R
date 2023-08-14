@@ -10,6 +10,7 @@
 #'
 #' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
 #' @param sample_id string with name of selected sample.
+#' @param samples_col name of column with sample ID's.
 #' @param taxa_col string with name of column with taxonomic units. Usually OTU or ASV.
 #' @param plot_all If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.
 #' @param classification_col string with name of column with classification for each row. Default value is "Classification".
@@ -52,6 +53,7 @@ plot_ulrb_clustering <- function(data,
                                  sample_id = NULL,
                                  taxa_col,
                                  plot_all = FALSE,
+                                 samples_col = "Sample",
                                  classification_col = "Classification",
                                  abundance_col = "Abundance",
                                  log_scaled = FALSE,
@@ -68,15 +70,23 @@ plot_ulrb_clustering <- function(data,
     stop("'log_scaled' argument needs to be logical (TRUE/FALSE)")
   }
 
-  # Make sure the taxa_col corresponds to the correct column
   data <- data %>%
     rename(ID = all_of(taxa_col),
+           Sample = all_of(samples_col),
            Classification = all_of(classification_col),
            Abundance = all_of(abundance_col))
 
   if(!isTRUE(plot_all)){
     # For one sample, the sample_id must be specified
     if(missing(sample_id)){stop("You must specify one sample from the column with samples ID's.")}
+    # The sample id must be present in the data
+    if(
+      data %>%
+      filter(Sample == all_of(sample_id)) %>%
+      pull(Sample) %>%
+      length() == 0
+    ){stop("Sample ID must be present in Sample column. Verify sample_id and samples_col arguments.")}
+
     make_plot <- function(){
       data %>%
         filter(.data$Sample == sample_id) %>%
