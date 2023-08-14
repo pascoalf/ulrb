@@ -20,7 +20,15 @@
 #' @format ## `nice_raw`
 #' A data frame with 524 rows and 17 columns:
 #' \describe{
-#'   \item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
+#'   \item{ERR2044662,
+#'         ERR2044663,
+#'         ERR2044664,
+#'         ERR2044665,
+#'         ERR2044666,
+#'         ERR2044667,
+#'         ERR2044668,
+#'         ERR2044669 and
+#'         ERR2044670}{Sample ID}
 #'   \item{OTU}{Taxonomic unit ID}
 #'   \item{Domain}{Domain level classification of taxonomic unit}
 #'   \item{Phylum}{Phylum level classification of taxonomic unit}
@@ -50,7 +58,15 @@
 #' @format ## `nice`
 #' A data frame with 524 rows and 17 columns:
 #' \describe{
-#'   \item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
+#'   \item{ERR2044662,
+#'         ERR2044663,
+#'         ERR2044664,
+#'         ERR2044665,
+#'         ERR2044666,
+#'         ERR2044667,
+#'         ERR2044668,
+#'         ERR2044669 and
+#'         ERR2044670}{Sample ID}
 #'   \item{OTU}{Taxonomic unit ID}
 #'   \item{Domain}{Domain level classification of taxonomic unit}
 #'   \item{Phylum}{Phylum level classification of taxonomic unit}
@@ -89,8 +105,11 @@
 #'
 #' @references
 #' Mitchell, A. L., Almeida, A., Beracochea, M., Boland, M., Burgin, J., Cochrane, G., Crusoe, M. R., Kale, V., Potter, S. C., Richardson, L. J., Sakharova, E., Scheremetjew, M., Korobeynikov, A., Shlemov, A., Kunyavskaya, O., Lapidus, A., & Finn, R. D. (2019). MGnify: the microbiome analysis resource in 2020. Nucleic Acids Research, 48(D1), D570–D578.
+#'
 #' Granskog, M. A., Fer, I., Rinke, A., & Steen, H. (2018). Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of Geophysical Research: Oceans, 123(3), 1586–1594.
+#'
 #' de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408.
+#'
 #' Pascoal, F., Costa, R., Assmy, P., Duarte, P., & Magalhães, C. (2022). Exploration of the Types of Rarity in the Arctic Ocean from the Perspective of Multiple Methodologies. Microbial Ecology, 84(1), 59–72.
 #'
 #' @format ## `nice_tidy`

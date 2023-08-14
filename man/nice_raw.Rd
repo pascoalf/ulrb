@@ -9,7 +9,15 @@
 
 A data frame with 524 rows and 17 columns:
 \describe{
-\item{ERR2044662, "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670"}{Country name}
+\item{ERR2044662,
+ERR2044663,
+ERR2044664,
+ERR2044665,
+ERR2044666,
+ERR2044667,
+ERR2044668,
+ERR2044669 and
+ERR2044670}{Sample ID}
 \item{OTU}{Taxonomic unit ID}
 \item{Domain}{Domain level classification of taxonomic unit}
 \item{Phylum}{Phylum level classification of taxonomic unit}
