@@ -23,10 +23,26 @@
 #' @examples
 #' classified_species <- define_rb(nice_tidy)
 #'
+#' # Default parameters for a single sample ERR2044669
 #' plot_ulrb(classified_species,
-#'                        sample_id = "ERR2044669",
-#'                        taxa_col = "OTU",
-#'                        abundance_col = "Abundance")
+#'           sample_id = "ERR2044669",
+#'           taxa_col = "OTU",
+#'           abundance_col = "Abundance")
+#'
+#' # All samples in a dataset
+#' plot_ulrb(classified_species,
+#'           sample_id = "ERR2044669",
+#'           taxa_col = "OTU",
+#'           abundance_col = "Abundance",
+#'           plot_all = TRUE)
+#'
+#' # All samples with a log scale
+#' plot_ulrb(classified_species,
+#'           sample_id = "ERR2044669",
+#'           taxa_col = "OTU",
+#'           abundance_col = "Abundance",
+#'           plot_all = TRUE,
+#'           log_scaled = TRUE)
 #'
 #' @import dplyr
 #' @importFrom rlang .data
