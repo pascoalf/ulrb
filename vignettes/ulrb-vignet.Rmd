@@ -220,16 +220,13 @@ We provide the function `plot_ulrb()` that wraps around `plot_ulrb_clustering()`
 ```{r, fig.height = 6, fig.width = 6}
 # For a single sample
 plot_ulrb(classified_table,
-          sample_names = selected_samples[1],
-          taxa_col = "OTU") + 
-  labs(title = paste("ulrb results for sample", selected_samples[1]))
+          sample_id =  selected_samples[1],
+          taxa_col = "OTU")
 
 # For all samples
 plot_ulrb(classified_table,
           taxa_col = "OTU",
-          plot_all = TRUE) + 
-  labs(title = "ulrb results for sample")
-
+          plot_all = TRUE) 
 ```
 
 
