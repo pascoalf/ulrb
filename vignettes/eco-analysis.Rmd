@@ -27,6 +27,14 @@ c) Classify OTUs into rare, undetermined or abundant (with `define_rb()` functio
 d) Merge OTU table with metadata information;
 e) Calculate and plot alpha diversity metrics against environmental variables.
 
+## Quick overview of N-ICE dataset
+
+The N-ICE dataset consists of 9 samples, collected during the winter to spring transition of 2015 by fixing the vessel on drifting ice (Granskog et al., 2018). Samples were collected at various depths (from 5m to 250m) and the ice drifted across different regions, DNA was collected for 16S amplicon sequencing and metagenomes (de Sousa et al., 2019); and bioinformatic processing of reads was performed by
+Mgnify platform (v5) (Mitchel et al., 2020).
+
+For this tutorial we are using the OTU table downloaded from the link https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis in 06-01-2023 and 
+focus solely on the 16S amplicon data.
+
 
 ```{r setup}
 library(ulrb)
@@ -62,7 +70,10 @@ nice_clean <- mutate(nice_clean, OTU = paste0("OTU_", row_number()))
 nice_clean <- select(nice_clean, selected_samples, OTU, Taxonomy)
 
 # Separate Taxonomy column into each taxonomic level
-nice_clean <- separate(nice_clean, Taxonomy, c("Domain","Kingdom","Phylum","Class","Order","Family","Genus","Species"),sep=";")
+nice_clean <- separate(nice_clean, Taxonomy,
+                       c("Domain","Kingdom","Phylum",
+                         "Class","Order","Family","Genus","Species"),
+                       sep=";")
 
 # Remove Kingdom column, because it is not used for prokaryotes
 nice_clean <- select(nice_clean, -Kingdom)
@@ -89,11 +100,11 @@ nice_tidy <- prepare_tidy_data(nice, ## data to tidy
 
 ## (b) Rarefy samples
 
-Now that we have a tidy table, it will be important to keep in mind how the data is organized. In this tutorial, we will be using functions like `group_by()` or `nest()`, if you are not familiarized with them, try to search for tidyverse packages, functions and mindset. We are also going to use the package vegan, which can be used for most ecology statistics. Note, however, that vegan works with matrices in very specific formats, so hopefully this sections will also help you to see how you can use tidy verse approaches to very speicifc data types.
+Now that we have a tidy table, it will be important to keep in mind how the data is organized. In this tutorial, we will be using functions like `group_by()` or `nest()`, if you are not familiarized with them, try to search for tidyverse packages, functions and mindset. We are also going to use the package vegan, which can be used for most ecology statistics. Note, however, that vegan works with matrices in very specific formats, so hopefully this sections will also help you to see how you can use tidy verse approaches to very specific data types.
 
 The first step will be to verify how many reads each sample got
 
-```{r}
+```{r, fig.width = 6, fig.height = 4.5}
 ## First, check how many reads each sample got
 nice_tidy %>% 
   group_by(Sample) %>% ## because data is in tidy format
@@ -122,24 +133,9 @@ nice_rarefid <-
   rename(Rarefied_abundance = "V1")  
 ```
 
-For sanity check, lets plot the total number of reads per sample, again:
-
-```{r}
-## First, check how many reads each sample got
-nice_rarefid %>% 
-  group_by(Sample) %>% ## because data is in tidy format
-  summarise(TotalRarefiedReads = sum(Rarefied_abundance)) %>%  
-  ## Attention! We still have the original abundance in another collumn
-  ggplot(aes(Sample, TotalRarefiedReads)) + 
-  geom_hline(yintercept = 40000) + 
-  geom_col() + 
-  theme_bw() + 
-  coord_flip()
-```
-
 ## (b) Classify OTUs into rare, undetermined or abundant (with `define_rb()` function);
 
-At this stage, we can simply apply the define_rb() function, which will include a nesting and grouping step inside of itself. For this reason, the data does not need to be grouped before the function. During unit testing, however, we noticed that this could introduce problems, so the function implicitly removes any grouping of the tidy table used by the author. This way, only the pre-specific grouping of the function is used. To have control over this, you just need to be carefull with the sample collumn, because ulrb method assumes that the calculations are made "by sample" -- so, it will do an `ungroup()` followed by `group_by(Sample)`.
+At this stage, we can simply apply the `define_rb()` function, which will include a nesting and grouping step inside of itself. For this reason, the data does not need to be grouped before the function. During unit testing, however, we noticed that this could introduce problems, so the function implicitly removes any grouping of the tidy table used by the author. This way, only the pre-specific grouping of the function is used. To have control over this, you just need to be careful with the sample column, because ulrb method assumes that the calculations are made "by sample" -- so, it will do an `ungroup()` followed by `group_by(Sample)`.
 
 In practice, this is very simple:
 
@@ -152,7 +148,7 @@ By default, the function can give lots of details, but in this case, since we ar
 
 ## (c) Merge OTU table with metadata information
 
-We are almost ready to analyse ecological questions, but first we need metadata. All we have to do is merge our classified OTU table with the metadata table. To do this we will use join functions from dplyr, just note that the sample ID from the two tables that we want to merge are different, but this is easy to solve.
+We are almost ready to analyze ecological questions, but first we need metadata. All we have to do is merge our classified OTU table with the metadata table. To do this we will use join functions from dplyr, just note that the sample ID from the two tables that we want to merge are different, but this is easy to solve.
 
 ```{r}
 nice_eco <- nice_classified %>% left_join(nice_env, by = c("Sample" = "ENA_ID"))
@@ -172,6 +168,7 @@ nice_diversity <- nice_eco %>%
             SimpsonIndex = diversity(Abundance, index = "simpson")) %>% 
   ungroup()
 ```
+
 ```{r}
 ## Re-organize table to have all diversity indices in a single col.
 nice_diversity_tidy <- nice_diversity %>% 
@@ -200,7 +197,7 @@ nice_diversity_tidy %>%
 
 - Water mass variation
 
-```{r}
+```{r, fig.width = 6, fig.height = 4.5}
 nice_diversity_tidy %>% 
   ggplot(aes(Water.mass, Diversity, col = Classification)) + 
   geom_point() + 
@@ -274,67 +271,15 @@ with(rb_env,
 
 From this analysis, it seems that the community composition of the rare biosphere is different between June and the remaining months.
 
-
-- Water Masses
-
-
-Note: the code will be a little bit repetitive, in the future I might improve it.
-
-```{r, fig.height = 8, fig.width= 8}
-rare_biosphere_water <- 
-  nice_eco %>%  
-  filter(Classification == "Rare") %>% 
-  select(Sample, Abundance, OTU, Depth, Month, Water.mass) %>% 
-  mutate(Sample_unique = paste(Sample, Water.mass))
-
-rb_sp_prep_water <- rare_biosphere_water %>% 
-  ungroup() %>% 
-  select(Sample_unique, Abundance, OTU)
-
-rb_sp_water <- 
-  rb_sp_prep_water %>% 
-  tidyr::pivot_wider(names_from = "OTU",
-                     values_from = "Abundance",
-                     values_fn = list(count= list)) %>% 
-  print() %>% 
-  unchop(everything())
-#
-rb_sp_water[is.na(rb_sp_water)] <- 0
-
-#
-rb_env_water <- rare_biosphere_water %>% 
-  ungroup() %>% 
-  select(Sample_unique, Depth, Water.mass, Month) %>% 
-  distinct()
-
-#
-rb_env_water %>% 
-  mutate(col_water = case_when(Water.mass == "PSW" ~ qualitative_colors[2],
-                               Water.mass == "PSWw" ~ qualitative_colors[5],
-                               Water.mass == "MAW" ~ qualitative_colors[3],
-                               Water.mass == "AW" ~ qualitative_colors[1])) %>% 
-  mutate()
-
-#
-cca_plot_rare_biosphere_water <- 
-  cca(rb_sp_water[,-1], display = "sites", scale = TRUE) %>% 
-  plot(display = "sites", type = "p", main = "Rare biosphere")
-
-#
-cca_plot_rare_biosphere_water
-points(cca_plot_rare_biosphere_water,
-       bg = rb_env_water$col_water,
-       pch = 21, 
-       col = "grey", 
-       cex = 2)
-#
-with(rb_env,
-     ordispider(cca_plot_rare_biosphere_water,
-                Water.mass, lty = "dashed", label = TRUE))
-```
-
-From the last plot, it seems that the rare biosphere is more distinct in the Modified Atlantic Water.
-
 # Final considerations
 
-Hopefully, you got a sense of how the ulrb package can be integrated in a more general microbial ecology workflow. Of course, many more questions could be approaced, such as taxonomy and so on. 
+Hopefully, you got a sense of how the ulrb package can be integrated in a more general microbial ecology workflow. Of course, many more questions could be approached, such as taxonomy and so on. 
+
+# References
+
+- de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
+
+- Mitchell, A. L., Almeida, A., Beracochea, M., Boland, M., Burgin, J., Cochrane, G., Crusoe, M. R., Kale, V., Potter, S. C., Richardson, L. J., Sakharova, E., Scheremetjew, M., Korobeynikov, A., Shlemov, A., Kunyavskaya, O., Lapidus, A., & Finn, R. D. (2019). MGnify: the microbiome analysis resource in 2020. Nucleic Acids Research, 48(D1), D570–D578. https://doi.org/10.1093/nar/gkz1035
+
+- Granskog, M. A., Fer, I., Rinke, A., & Steen, H. (2018). Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of Geophysical Research: Oceans, 123(3), 1586–1594. https://doi.org/10.1002/2017JC013328
+

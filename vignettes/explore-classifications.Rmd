@@ -25,14 +25,14 @@ library(tidyr)
 
 # Explore alternative classifications
 
-So far, we have been considering that the microbial communities are divided into "rare", "undetermined" and "abundant". This division implies that the kmedoids algorithm is considering **k=3**, *i.e.* there are three clusters. However, there are at least two situations where you might want to change the number of clusters:
+So far, we have been considering that the microbial communities are divided into "rare", "undetermined" and "abundant". This division implies that the partition around medoids algorithm is considering **k=3**, *i.e.* there are three clusters. However, there are at least two situations where you might want to change the number of clusters:
 
 1. The clusters obtained are non-sense;
 2. The biological/ecological questions requires another division.
 
 There might be other situations, of course. The bottom line is that, depending on the context of your specific research and data, you might just want a different number of classifications. We propose 3 and we think that 3 different classifications work well for most situations, but this is not set in stone.
 
-In this tutorial we will show how define_rb() can be used for different classifications and we will also try and go a little bit deeper on whats behind the actual function.
+In this tutorial we will show how `define_rb()` can be used for different classifications and we will also try and go a little bit deeper on whats behind the actual function.
 
 # Index
 
@@ -52,7 +52,6 @@ In this tutorial we will show how define_rb() can be used for different classifi
 ## Classical example
 
 The classical example will simply use the default arguments with the function `define_rb()`.
-
 
 ### Prepare data 
 
@@ -111,116 +110,84 @@ The default settings can be interpreted as the division between "rare", "undeter
 rb_default <- define_rb(nice_tidy)
 ```
 
-We can see the meaning of this division with the standard RAC.
+We can see the meaning of this division with the standard Rank Abundance Curve (RAC).
 
 Let's start with a single sample:
 
 ```{r, fig.width=5, fig.height=4}
-qualitative_colors <- 
-  c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-#
-rb_default %>% 
-  filter(Sample == "ERR2044662") %>%  
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors[c(5,3,6)])
+plot_ulrb_clustering(rb_default, 
+                     sample_id = "ERR2044662",
+                     taxa_col = "OTU",
+                     log_scaled = TRUE)
 ```
 
-To look at all samples at once, we can use a grid:
+To look at all samples at once, we use a centrality metric. Note that for a low number of samples
+you can chose to use a grid, or plot all samples; but this wont work for a high number of samples. With a centrality metric, however, we are able to see any number of samples in a single plot.
 
 
 ```{r, fig.width=8, fig.height=8}
-rb_default %>% 
-  group_by(Sample) %>% 
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors[c(5,3,6)])+
-  facet_wrap(~Sample)
+plot_ulrb_clustering(rb_default, 
+                     taxa_col = "OTU",
+                     log_scaled = TRUE,
+                     plot_all = TRUE)
 ```
-
-
-Note that if you have many more samples (which can be expected) this sort of visualization is not ideal. However, this does a good job of showing the meaning of applying k = 3 to our OTU tables.
 
 ## Apply 2 classifications: Rare vs Abundant
 
-We can do exactly the same thinh we did before, but with only "rare" and "abundant" classifications, to do that we set k = 2. Note that we do not explicitly set k = 2 in the `define_rb()` function, instead, we specify our **classification vector**.
+We can do exactly the same thing we did before, but with only "rare" and "abundant" classifications, to do that we set k = 2. Note that we do not explicitly set k = 2 in the `define_rb()` function, instead, we specify our **classification vector**.
 
 The classification vector can be anything, but in the context of k = 2, our meaning is that we have "rare" and "abundant" species; but you could call them "class1" and "class2", or whatever you want. Behind the scenes, the function `define_rb()` will calculate the size of your classification vector and from there estimate k. So, if you have a classification vector with "rare" and "abundant", it will have length 2, so k = 2; Likewise, the default parameter is set to classification_vector = c("Rare", "Undetermined", "Abundant"), so length = 3 and k = 3.
 
-To do this we just add the classification_vector argument:
+To apply this new classification scheme we change the `classification_vector` argument:
 
 ```{r}
 rb_k2 <- define_rb(nice_tidy, classification_vector = c("Rare", "Abundant"))
 ```
 
-And we can repeat the previous plots:
-
+And then we can see the clustering result just like before.
 
 ```{r, fig.width = 5, fig.height= 4}
-rb_k2 %>% 
-  filter(Sample == "ERR2044662") %>%  
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors[c(5,3,6)])
+plot_ulrb_clustering(rb_k2,
+                     taxa_col = "OTU",
+                     plot_all = TRUE, 
+                     log_scaled = TRUE, 
+                     colors = c("#009E73", "#F0E442"))
 ```
 
-```{r, fig.width=8, fig.height=8}
-rb_k2 %>% 
-  group_by(Sample) %>% 
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors[c(5,3,6)])+
-  facet_wrap(~Sample)
+And we can compare the two options directly:
+
+```{r}
+gridExtra::grid.arrange(
+  plot_ulrb_clustering(rb_default, 
+                     taxa_col = "OTU",
+                     log_scaled = TRUE,
+                     plot_all = TRUE),
+  plot_ulrb_clustering(rb_k2,
+                     taxa_col = "OTU",
+                     plot_all = TRUE, 
+                     log_scaled = TRUE, 
+                     colors = c("#009E73", "#F0E442")),
+  nrow = 1
+)
 ```
 
 
-
-Something you might have noticed is that with k = 2 the risk of having samples with a single abundant species is much higher. What happens is that the previous "undetermined" species are closer to the "rare" than to the "abundant" classifications, meaning that setting k = 2 effectively merges the "rare" and "undetermined" species. This might make sense in some settings, because most of the literature just separated species into rare or abundant.
+We do not recommend using k = 2, because it implies that there is a hard distinction between rare and abundant taxa. We consider that there should always be an intermediate or undetermined group, otherwise, we will always have species with very similar abundance scores, but opposing classifications, which is misleading. For more details on this reasoning, see Pascoal et al., 2023.
 
 
 ## Apply more complicated classification, k>3
 
-Lets supose that we wanto to distinghish our microbial community into the following groups:
+Lets suppose that we want to distinguish our microbial community into the following groups:
 
-(e.g. 1)
+(e.g. A)
 1) very rare;
 2) rare;
 3) abundant;
 4) very abundant.
 
-Or even:
+Or:
 
-(e.g. 2)
+(e.g. B)
 1) very rare;
 2) rare;
 4) undetermined;
@@ -231,95 +198,69 @@ Or even more...
 
 Hopefully, you get the idea, the point is that we just have to change the classification vector.
 
-Lets see how we would do e.g. 1. First we select a new classification vector, which will have 4 different classifications, thus (implicitly) k = 4.
+Lets see how we would do e.g. A. First we select a new classification vector, which will have 4 different classifications, thus (implicitly) k = 4.
 
 ```{r}
 #
-rb_k4 <- define_rb(nice_tidy, classification_vector = c("very rare", "rare", "abundant", "very abundant"))
+rb_k4 <- define_rb(nice_tidy, 
+                   classification_vector = c("very rare", "rare", 
+                                             "abundant", "very abundant"))
 #
 ```
 
 ```{r, fig.width=5, fig.height=4}
-rb_k4 %>% 
-  filter(Sample == "ERR2044662") %>%  
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors)
-#
+# One sample as example
+plot_ulrb(rb_k4,
+          sample_id = "ERR2044662", 
+          taxa_col = "OTU",
+          colors = c("#009E73", "#F0E442", "grey","#CC79A7"),
+          log_scaled = TRUE)
 ```
 
 ```{r, fig.width=8, fig.height=8}
-rb_k4 %>% 
-  group_by(Sample) %>% 
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors)+
-  facet_wrap(~Sample)
+# all samples
+plot_ulrb(rb_k4,
+          taxa_col = "OTU",
+          colors = c("#009E73", "#F0E442", "grey","#CC79A7"),
+          log_scaled = TRUE,
+          plot_all = TRUE)
 ```
 
 Note that this is a very acceptable interpretation of the data!
 
-Hopefully you already have the intuition to change classifications as you wish! Let's do the e.g. 2, which has k = 5, because it includes 5 different classifications.
+Hopefully you already have the intuition to change classifications as you wish! Let's do the e.g. B, which has k = 5, because it includes 5 different classifications.
 
 
 ```{r}
 #
 rb_k5 <- define_rb(nice_tidy, 
-                   classification_vector = c("very rare", "rare", "undetermined","abundant", "very abundant"))
+                   classification_vector = c("very rare", "rare", 
+                                             "undetermined",
+                                             "abundant", "very abundant"))
 ```
 
 ```{r, fig.width=5, fig.height=4}
-rb_k5 %>% 
-  filter(Sample == "ERR2044662") %>%  
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors)
-#
+# One sample as example
+plot_ulrb(rb_k5,
+          sample_id = "ERR2044662", 
+          taxa_col = "OTU",
+          colors = c("#009E73", "#F0E442", "grey", "#D55E00", "#CC79A7"),
+          log_scaled = TRUE)
 ```
 
 ```{r, fig.width=8, fig.height=8}
-rb_k5 %>% 
-  group_by(Sample) %>% 
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors)+
-  facet_wrap(~Sample)
+# All samples
+plot_ulrb(rb_k5,
+          taxa_col = "OTU",
+          colors = c("#009E73", "#F0E442", "grey", "#D55E00", "#CC79A7"),
+          log_scaled = TRUE,
+          plot_all = TRUE)
 ```
 
 
 ## Why k = 1 is non-sense
 
-At this point, you might be wondering if k is completely free. Well, some values of k are possible, but non-sense. Consider, for example, k = 1. In this situation, it is perfectly possible from a mathematical point of view, *i.e* you simply cluster all observations into a single classification. However, this is meaningless and gives no extra information on your community. Additionally, from the point of view of the rare biosphere, it is important to keep in mind that one species can only be considered "rare" **relatively** to the other species within the same community. Thus, in this context, k = 1 is self-contradictory. Despite this, do keep in mind that we are making  assumptions (even though much fewer than other studies, since we are using unsupervised machine learning) - the assumption that makes this case scenario self-contradictory is the assumption that there is such thing as a "rare" biosphere. This naive assumption caries another assumption within itself, which is that species have sufficiently different abundance relative to one another to form distinct clusters. In fact, I don't think anyone as found an environmental microbial community constituted of species with the exactly (or approximately) same abundance score. If that was the case, then we could not say that a species was neither rare or abundant, because any classification would be self-contradictory.
+Some values of k are (mathematically) possible, but non-sense. Consider, for example, **k = 1**. In this situation, it is perfectly possible from a mathematical point of view, *i.e* you simply cluster all observations into a single classification. However, this is meaningless and gives no extra information on your community. Additionally, from the point of view of the rare biosphere, it is important to keep in mind that one species can only be considered "rare" **relatively** to the other species within the same community. Thus, in this context, **k = 1 is self-contradictory**. Despite this, do keep in mind that we are making the assumption that there is such thing as a "rare" biosphere. This naive assumption caries another assumption within itself, which is that species have sufficiently different abundance relative to one another to form distinct clusters. In fact, I don't think anyone as found an environmental microbial community constituted of species with the exactly (or approximately) same abundance score. If that was the case, then we could not say that a species was neither rare or abundant, because any classification would be self-contradictory.
 
 We can do the same thing as before, setting the classification vector to just "rare" and you'll see how it is possible, but meaningless.
 
@@ -330,50 +271,21 @@ rb_k1 <- define_rb(nice_tidy, classification_vector = c("rare"))
 ```
 
 ```{r, fig.width=5, fig.height=4}
-rb_k1 %>% 
-  filter(Sample == "ERR2044662") %>%  
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors)
-#
+plot_ulrb_clustering(rb_k1, 
+                     taxa_col = "OTU", 
+                     colors = "green4", 
+                     plot_all = TRUE, 
+                     log_scaled = TRUE)
 ```
-
-```{r, fig.width=8, fig.height=8}
-rb_k1 %>% 
-  group_by(Sample) %>% 
-  mutate(RelativeAbundance = Abundance*100/sum(Abundance)) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = reorder(OTU, -Abundance), 
-             y = RelativeAbundance, 
-             col = Classification)) + 
-  geom_point() +
-  theme_bw() + 
-  theme(panel.grid = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) + 
-  scale_color_manual(values = qualitative_colors)+
-  facet_wrap(~Sample)
-```
-
-
 ## What is the maximum value of k and why?
 
+What about the maximum value of k? This is set by the limitations inherent to algorithm itself, which in this case is partition around medoids (k-medoids). The maximum number of groups on which we divide observations must be less than the total observations. Meaning that at the very maximum limit, each observation is its own group. This means that it could be possible to have a maximum value of k equal to the number of species, *i.e.* each species has its own classification. However, if you try to do that, you will get an error. This is because several species have exactly the same abundance, specially in the rare biosphere. Thus, those species can never belong to different classifications (think about it, if we are separating species by their abundance, then species with the same abundance must belong to the same group). This means that the maximum value of k will be equal to number of **different** abundance scores, which will be lower than the number of total observations.
 
-What about the maximum value of k? This is set by the limitations inherent to algorithm itself, which in this case is kmedoids (very similar to kmeans). Let's think about it for a second: The kmedoids algorithm divides observations by their scores (in this case, only abundance), thus the maximum number of groups on which we divide observations must be less than the total observations. Meaning that at the very maximum limit, we would get that each observation is its own group. This means that it could be possible to have a maximum value of k equal to the number of species, *i.e.* each species has its own classification. However, if you try to do that, you will get an error. This is because several species have exactly the same abundance, specially in the rare biosphere. Thus, those species can never belong to different classifications (think about it, if we are separating species by their abundance, then species with the same abundance must belong to the same group). This means that the maximum value of k will be equal to number of **different** abundance scores, which will be lower than the number of total observations, if the different observations (species in this case) have the same abundance, which is very likely to happen.
+If you have several samples, then the maximum value of k will differ for each sample (even if you apply normalization). If you would apply the same maximum k for all samples at once, then you would have to calculate the maximum k of all samples, and then select the minimum of those, which will be the one working for all.
 
-Also note that if you have several samples, then the maximum value of k will differ for each sample (even if you apply some fancy normalization). If you would apply the same maximum k for all samples at once, then you would have to calculate the maximum k of all samples, and then select the minimum of those, which will be the one working for all.
-
-Just like with k =1, the maximum value of k is meaningless. Even if you do it, which you mathematically can, it will not give you any additional information.
+Just like with k = 1, the maximum value of k is meaningless. Even if you do it, which you mathematically can, it will not give you any additional information.
 
 Lets illustrate the maximum k of one sample:
-
 
 ```{r}
 rb_sample1 <- nice_tidy %>% filter(Sample == "ERR2044662")
@@ -400,108 +312,151 @@ I'm not going to plot this figure, because I would need 71 different colors! The
 
 What if we want to compare all possible values of k? Or, if not all of them, just a few candidates?
 
-If you want to compare values of k, besides testing some options with you community, you should really have a look at the scores that come along with the `pam()` function, which is the function working behind the scenes to apply the kmedoid algorithm.
+To compare values of k, there are a few useful metrics that are implemented in ulrb package:
 
-Some of the most important scores are provided by the define_rb() function by default, because the argument simplify is set to FALSE.
+- Average Silhouette score (cluster density);
+- Davies-Bouldin index (cluster separation);
+- And Calinsky-Harabasz index (cluster definition).
 
+Each of these metrics evaluates different aspects of one clustering result; thus, we can calculate them for
+the clustering obtained by each value of k. By comparing the values obtained for each k, you can select the k that got best score. To do this, consider the following:
 
-Lets have a quick inspection of this "extra" columns:
+ - Average Silhouette Score: Select	maximum value for best k;
+ - Davies-Bouldin index: Select minimum value for best k;	
+ - Calinsky-Harabasz index: Select maximum value for best k.	
 
-```{r}
-rb_default %>% 
-  select(Sample, OTU, Abundance, pam_object, Level, Silhouette_scores, Cluster_median_abundance, Classification) %>%
-  head(10)
-
-## Focus on
-rb_default %>% 
-  select(Sample, OTU, Abundance, pam_object, Level, Silhouette_scores, Cluster_median_abundance, Classification) %>%
-  names()
-```
-
-For you microbial ecology analysis, you will only need the cols "Sample", "OTU", "Abundance" and "Classification". The additional ones will help you evaluate what the algorithm did.
-
-The **pam_object** is the direct output of the `pam()` function and should only be used if you have a deeper understanding of the methods beeing used and if you want to look at more specific details of the machine learning used.
-
-The **Level**, together with **Cluster_median_abundance** is what allows to have a logical order in the final classification. Basically, the kmedoid algorithm will attribute observations to randomly numbered levels, which are equal to the value of k, based on the median of the abundance of each level, we order them from the most rare to the most abundant. This means that the order of classifications in the classification vector matters, R will not read your mind, it has no idea what is the meaning of the word "rare". Strictly speaking, if "rare" is in the first position of the classification vector, then "rare" is equal to level with lowest median abundance.
-
-Finally, we have a column with **Silhouette_scores**, which are a traditional approach to compare k values. We can analyses the silhouette scores for a single sample and see how each classification behaved. We can look, for example, at situations where the silhouette score was very low and so on and so forth. But this is not ideal if you wish to compare several k values. To do that, you should consider that you want to maximize the mean silhouette score obtained. This can give you with the following framework: if I increase k, will I have an improvement in the overall silhouette score? From there, you should try to find some balance.
-
-In preliminary analysis we tried to automate the decision of k, based on this framework. However, we figured it would be simpler to just suggest a standard for k = 3. Just bear in mind that k = 3 was a human choice and you can perfectly use other methods to decide which k you want to use.
-
-
-Let's compare the silhouette score from k = 2 to k = 5, this way we can cover all examples that we did previously. Note that we are going to focus on a single sample.
-
+The most straight forward way to evaluate a sensible range of k's is by using the function `suggest_k()`.
+This function includes an argument for detailed results, which will give you the results for the three indices, between k = 3 and k = 10. We don't recommend testing k's outside of this range for the purpose of
+defining the rare biosphere, but you can analyse all possible k's (just change the range argument).
 
 ```{r}
-# calculate mean silhouette score
-sil_k2 <- rb_k2 %>% 
-  pull(Silhouette_scores) %>% 
-  mean()
-
-sil_k3 <- rb_default %>%  ## recall that the default is k = 3
-  pull(Silhouette_scores) %>% 
-  mean() 
-
-sil_k4 <- rb_k4 %>% 
-  pull(Silhouette_scores) %>% 
-  mean()
-
-sil_k5 <- rb_k5 %>% 
-  pull(Silhouette_scores) %>% 
-  mean()
-
-# Merge them in a single vector
-scores_k2to5 <- c(sil_k2, sil_k3, sil_k4, sil_k5)
-
-#
-plot(scores_k2to5, type = "b")
+suggest_k(nice_tidy, detailed = TRUE)  
 ```
 
-If we were to automatically set the value of k using this strategy, then we could see that the silhouette score would only get worse with increasing number of classifications. In fact, we would select k = 2, instead of k = 3, which after some interpretation and context works better than k = 3.
+For another group of k's, range = 10:20
+
+```{r}
+suggest_k(nice_tidy, detailed = TRUE, range = 10:20)  
+```
+
+### Fine grained analysis
+
+You can look at particular metrics and at specific samples. To do so, we made several helper functions:
+
+- `check_avgSil()` to calculate average silhouette score;
+- `check_DB()` to calculate Davies-Bouldin index;
+- `check_CH()`to calculate Calinsky-Harabasz index.
+
+You can also calculate them at the same time for one sample with `evaluate_sample_k()` or all samples with `evaluate_k()`.
+
+Let's look at several examples, using the default range of k = 3 up to k = 10:
+
+```{r}
+## One sample
+# To get values
+check_avgSil(nice_tidy, sample_id = selected_samples[1])
+
+# To plot results
+check_avgSil(nice_tidy, sample_id = selected_samples[1], with_plot = TRUE)
+```
+
+In the last plot, each value of k represents a clustering result. From the above information, we would select k = 3 (just like the default option), because it had the highest average Silhouette score.
+
+We can repeate for all other indices:
+
+```{r}
+## Davie-Boulding index
+# To get values
+check_DB(nice_tidy, sample_id = selected_samples[1])
+
+# To plot results
+check_DB(nice_tidy, sample_id = selected_samples[1], with_plot = TRUE)
+
+## Calinsky-Harabasz index
+# To get values
+check_CH(nice_tidy, sample_id = selected_samples[1])
+
+# To plot results
+check_CH(nice_tidy, sample_id = selected_samples[1], with_plot = TRUE)
+```
+
+Note that the best k changed depending on the metric selected. 
+
+Thus, for sample 1 (ERR2044662), the best k would be:
+ - 3 based on average Silhouette scores;
+ - 4 based on Davies-Bouldin index;
+ - 10 based on Calinsky-Harabasz index.
 
 
-Don't assume that this plot will always decrease! If you want to automatically set the value of k, then you must be aware that the automatic decision will be influenced by the maximum value of k.
+We can see how they compare directly with `evaluate_sample_k()`:
 
-Lets repeat the same plot for all possible values of k (again, a single sample).
+```{r}
+evaluate_sample_k(nice_tidy, sample_id = selected_samples[1], with_plot = TRUE)
+```
 
-Note that the code will be a bit more complex. To do this, it will be easier to forget the `define_rb()` function and directly used the `pam()` functions that is used on the inside.
+The ulrb method assumes that samples are independent from each other, which means that the above results for one sample, will be different for the other samples. Thus, we should look at all samples at the same time, with centrality metrics. To do so, we can use the function `evaluate_k()`:
 
-```{r, fig.width=5, fig.height=4}
-## Will repeat some of the previous code
-rb_sample1 <- nice_tidy %>% 
-  filter(Sample == "ERR2044662")
+```{r}
+## To get values
+evaluate_k(nice_tidy)
 
-# Calculate maximum k
-max_k_sample1 <- rb_sample1 %>% 
-  pull(Abundance) %>% 
-  unique() %>% 
-  length()
-
-#
-# make a function to get mean sil scores
-get_mean_sil <- 
-  function(x = x , k = k){
-    mean(
-      pam(x = x, k = k)[["silinfo"]][["widths"]][ ,3]
-      )
-    }
-
-#
-all_mean_silhouete_scores <- 
-  sapply(2:max_k_sample1,
-         function(k){
-           get_mean_sil(rb_sample1$Abundance, k = k)})
-
-#
-plot(all_mean_silhouete_scores, 
-     main = "Average Silhouette score for each possible k", 
-     xlab = "Possible k values (k>1)", 
-     ylab = "Average Silhouette score")
+## To plot
+evaluate_k(nice_tidy, with_plot = TRUE)
 ```
 
 
-The last plot compares the mean silhouette score from k = 2 up to k = 71 (maximum possible k), note that this particular score decreases within groups, highlighting the importance of the range of k values. In fact, up to k = 20, the mean silhouette score decreases, but increases above 20 up to about 40. From k= 40 upwards, the average silhouette score increases very little.
+## Automatic k selection
 
-If we discard the k=2, if you think that it doesn't make much sense to divide everything into just "rare" and "abundant", then k = 3 is the best option.  
+We can decide what k to use based on any of this metrics, beeing aware that they measure different aspects of the clustering results. The function `suggest_k()`, by default, will:
+
+ - calculate the best k, based on the average Silhouette score, for **each sample**;
+ - calculate the average best k across all samples;
+ - return best k as an integer.
+
+Thus, the default output of `suggest_k()` is a single integer; this is used in the `define_rb()` function
+ for the automatic k decision.
+
+Instead of the average Silhouette score, you can select another index (Davies-Bouldin or Calinsky-Harabasz), and the function `suggest_k()` will return the best k based on that index.
+
+Let's see some examples:
+
+```{r}
+# default option with average Silhouette score
+suggest_k(nice_tidy)
+
+# best k for Davies-Bouldin
+suggest_k(nice_tidy, index = "Davies-Bouldin")
+
+# best k for Calinsky-Harabasz
+suggest_k(nice_tidy, index = "Calinsky-Harabasz")
+```
+
+
+## How each index behaves across all possible values of k?
+
+This last section is for completion sake and should not be necessary in a study of the rare biosphere; however, it might prove useful for those interested in the details of this unsupervised learning approach.
+
+
+```{r}
+# Start by deciding the maximum range across the entire dataset
+max_k <- nice_tidy %>%
+    filter(Abundance > 0, !is.na(Abundance)) %>%
+    group_by(Sample) %>%
+    summarise(topK = length(unique(Abundance))) %>%
+    ungroup() %>%
+    pull(topK) %>%
+    min()
+# print maximum number of clusters allowed for all samples in the N-ICE dataset
+max_k
+```
+
+If we have the maximum k, we just need to use the `evaluate_k()` function for the full range of values.
+(if you try to run this code, it might take a while)
+
+```{r}
+evaluate_k(nice_tidy, with_plot = TRUE, range = 2:max_k)
+```
+
+
 
 

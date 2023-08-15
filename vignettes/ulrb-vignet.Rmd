@@ -14,9 +14,11 @@ microbiology by replacing human decision with an unsupervised machine learning a
 
 In this tutorial we will illustrate how to define the microbial rare biosphere  with a small, publicly available dataset, the Norwegian Young Sea Ice Expedition, 2016 (N-ICE). The molecular data will be from amplicon sequencing of 16S rRNA gene (for sequencing details, see Sousa et al., 2019), raw sequences are available in the European Nucleotide Archive (ENA) under accession number ERP024265, and they were processed into OTUs by MGnify (Mitchell et al.,2019).
 
-The N-ICE dataset consists of 9 samples, collected during the winter to spring transition of 2015 by fixing the vessel on drifting ice. Samples were collected at various depths (from 5m to 250m) and the ice drifted across different regions.
+The N-ICE dataset consists of 9 samples, collected during the winter to spring transition of 2015 by fixing the vessel on drifting ice (Granskog et al., 2018). Samples were collected at various depths (from 5m to 250m) and the ice drifted across different regions, DNA was collected for 16S amplicon sequencing and metagenomes (de Sousa et al., 2019); and bioinformatic processing of reads was performed by
+Mgnify platform (v5) (Mitchel et al., 2020).
 
-For this tutorial we are using the OTU table downloaded from the link https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis in 06-01-2023.
+For this tutorial we are using the OTU table downloaded from the link https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis in 06-01-2023 and 
+focus solely on the 16S amplicon data.
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -104,8 +106,6 @@ This function is optional and if you use it you really should verify if it is tr
 
 ```{r}
 nice_tidy <- prepare_tidy_data(nice, sample_names = selected_samples, samples_in = "cols")
-
-head(nice_tidy)
 ```
 
 
@@ -135,6 +135,19 @@ classified_table %>%
   head()
 ```
 
+### Fully automated version
+
+In the previous example, there is still one level of subjetive decision, which is the number
+of classifications to use (*e.g.* "rare", "undertermined" and "abundant" would be k = 3). However, we added an option to the main function, `define_rb()`, which allows for the automatic decision of the number of clusters. This automation works under the assumption that the range of good k values
+lies between 3 and 10 (see Pascoal et al., 2023 for reasoning behind this). In another article (see ref), we explain in more detail how the automation works and how you can make your own decision
+regarding k, using several metrics.
+
+```{r}
+# Simple automation example
+define_rb(nice_tidy, automatic =  TRUE)
+```
+
+
 
 ## Verify results
 
@@ -161,13 +174,12 @@ plot_ulrb_clustering(classified_table,
                        taxa_col = "OTU") +
   labs(title = paste("Clustering for sample", selected_samples[1]))
 
-plot_ulrb_clustering
 # All samples, with centrality metric
-#plot_ulrb_clustering(classified_table,
- #                    taxa_col = "OTU", 
-  #                   plot_all = TRUE, 
-   #                  log_scaled = TRUE) +
-  #labs(title = "Clustering for all samples")
+plot_ulrb_clustering(classified_table,
+                     taxa_col = "OTU", 
+                     plot_all = TRUE, 
+                     log_scaled = TRUE) +
+  labs(title = "Clustering for all samples")
 ```
 
 From the RAC obtained, we confirm that the unsupervised classification provides a sensible result. Because the rare biosphere is indeed in the "long-tail", followed by a transition region, which we term "undetermined", because they are neither rare, more abundant, and a few extreme points which are abundant.
@@ -181,7 +193,7 @@ The Silhouette plot provides a notion of the coherence of the points inside each
 For more details see the documentation from the functions `plor_ulrb_silhouette()` and `check_avgSil()`; we also refer to Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis" (Kaufman and Rousseuw, 1991), for more details on interpretation of Silhouette plots.
 
 
-```{r}
+```{r, fig.height = 6, fig.width = 6}
 # One sample as example
 plot_ulrb_silhouette(classified_table,
                      sample_id = selected_samples[1],
@@ -205,7 +217,7 @@ As expected, most points were very close to +1, with very few points falling bel
 We provide the function `plot_ulrb()` that wraps around `plot_ulrb_clustering()` and `plot_ulrb_silhouette()` to plot the RAC and Silhouette plot in the same grid. This function works for a single sample or for all samples.
 
 
-```{r, eval=FALSE}
+```{r, fig.height = 6, fig.width = 6}
 # For a single sample
 plot_ulrb(classified_table,
           sample_names = selected_samples[1],
@@ -226,8 +238,13 @@ plot_ulrb(classified_table,
 
 - Pascoal et al., 2023 (under work)
 
+- Granskog, M. A., Fer, I., Rinke, A., & Steen, H. (2018). Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of Geophysical Research: Oceans, 123(3), 1586–1594. https://doi.org/10.1002/2017JC013328
+
 - de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. <i>Microbial Ecology</i>, <i>78</i>(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
 
 - Mitchell, A. L., Almeida, A., Beracochea, M., Boland, M., Burgin, J., Cochrane, G., Crusoe, M. R., Kale, V., Potter, S. C., Richardson, L. J., Sakharova, E., Scheremetjew, M., Korobeynikov, A., Shlemov, A., Kunyavskaya, O., Lapidus, A., Finn, R. D. (2019). MGnify: the microbiome analysis resource in 2020. <i>Nucleic Acids Research</i>, <i>48</i>, D570–D578. https://doi.org/10.1093/nar/gkz1035
 
 - Pedrós-Alió, C. (2012). The Rare Bacterial Biosphere. <i>Annual Review of Marine Science</i>, <i>4</i>(1), 449–466. https://doi.org/10.1146/annurev-marine-120710-100948
+
+- Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
+
