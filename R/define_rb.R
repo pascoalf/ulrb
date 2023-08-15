@@ -1,6 +1,6 @@
 #' Define Rare Biosphere
 #'
-#' Classifies the species in each sample into either "Rare", "Undetermined" or "Abundant".
+#' Classifies species in each sample into either "Rare", "Undetermined" or "Abundant". Other classifications are allowed.
 #'
 #' @details
 #' **Overview**

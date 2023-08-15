@@ -45,14 +45,12 @@
 #'                        abundance_col = "Abundance")
 #' # All samples in a dataset
 #' plot_ulrb_silhouette(classified_species,
-#'           sample_id = "ERR2044669",
 #'           taxa_col = "OTU",
 #'           abundance_col = "Abundance",
 #'           plot_all = TRUE)
 #'
 #' # All samples with a log scale
 #' plot_ulrb_silhouette(classified_species,
-#'           sample_id = "ERR2044669",
 #'           taxa_col = "OTU",
 #'           abundance_col = "Abundance",
 #'           plot_all = TRUE,

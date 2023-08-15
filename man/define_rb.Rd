@@ -38,7 +38,7 @@ based on the index argument.}
 The input data.frame with extra columns containing the classification ()and additional metrics (if detailed = TRUE).
 }
 \description{
-Classifies the species in each sample into either "Rare", "Undetermined" or "Abundant".
+Classifies species in each sample into either "Rare", "Undetermined" or "Abundant". Other classifications are allowed.
 }
 \details{
 \strong{Overview}

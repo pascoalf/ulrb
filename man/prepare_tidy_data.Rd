@@ -19,7 +19,7 @@ prepare_tidy_data(data, sample_names, samples_in = "cols", ...)
 A speceis table in long format, compatible with dplyr pipes and \strong{ulrb} package functions.
 }
 \description{
-Helper function for \code{\link[=define_rb]{define_rb()}}.
+Function to transforms common abundance table formats into a "long" format.
 }
 \details{
 This function guarantees that the species table includes one column with sample ID's and

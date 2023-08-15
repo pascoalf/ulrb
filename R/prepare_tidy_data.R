@@ -1,6 +1,6 @@
 #' Prepare data in tidy format
 #'
-#' Helper function for [define_rb()].
+#' Function to transforms common abundance table formats into a "long" format.
 #'
 #' This function guarantees that the species table includes one column with sample ID's and
 #' one column with abundance.

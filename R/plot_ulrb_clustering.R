@@ -34,14 +34,12 @@
 #'                        abundance_col = "Abundance")
 #' # All samples in a dataset
 #' plot_ulrb_clustering(classified_species,
-#'           sample_id = "ERR2044669",
 #'           taxa_col = "OTU",
 #'           abundance_col = "Abundance",
 #'           plot_all = TRUE)
 #'
 #' # All samples with a log scale
 #' plot_ulrb_clustering(classified_species,
-#'           sample_id = "ERR2044669",
 #'           taxa_col = "OTU",
 #'           abundance_col = "Abundance",
 #'           plot_all = TRUE,
@@ -118,7 +116,8 @@ plot_ulrb_clustering <- function(data,
                        panel.background = ggplot2::element_blank(),
                        legend.position = "top")+
         ggplot2::scale_color_manual(values = colors)+
-        ggplot2::labs(title = paste("Rank Abundance Curve for ", sample_id),
+        ggplot2::labs(title = "Rank Abundance Curve for all samples",
+                      subtitle = paste("n = ", length(unique(data$Sample))),
                       x = taxa_col,
                       y = "Mean (\U00B1 sd) abundance")
     }
