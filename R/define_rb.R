@@ -207,6 +207,7 @@ define_rb <- function(data,
                       index = "Average Silhouette Score",
                       ...) {
 
+
   #If automatic, use suggest_k()
   if(isTRUE(automatic)){
     message("Automatic option set to TRUE, so classification vector was overwritten")
@@ -224,7 +225,7 @@ define_rb <- function(data,
     rename(Sample = all_of(samples_col),
            Abundance = all_of(abundance_col))
 
-  # Calculate kmedoids
+  # Calculate k-medoids
     ## Apply cluster algorithm
     clustered_data <-
       data %>%
@@ -237,7 +238,7 @@ define_rb <- function(data,
                                                         diss = FALSE))) %>%
       mutate(Level = purrr::map(.x = .data$pam_object, .f = ~.x[[3]]), # obtain clusters
              Silhouette_scores = purrr::map(.x = .data$pam_object, .f = ~.x[[7]][[1]][,3])) %>%  ## obtain silhouette plots
-      tidyr::unnest(cols = c(data, .data$Level, .data$Silhouette_scores))
+      tidyr::unnest(cols = c("data", "Level", "Silhouette_scores"))
 
   # Make classification table
   classification_table <- clustered_data %>%
@@ -261,11 +262,11 @@ define_rb <- function(data,
                                                                                  median_Silhouette > 0.75 ~ "Good",
                                                                                  median_Silhouette > 0.5 ~ "Sufficient",
                                                                                  median_Silhouette <= 0.5 ~ "Bad"))) %>%
-    tidyr::unnest(cols = c(data, .data$median_Silhouette, .data$Evaluation))
+    tidyr::unnest(cols = c(data, median_Silhouette, Evaluation))
 
   ## the nest steps only check if a warning is necessary, the output is classified clusters
   clusters_report <- classified_clusters %>%
-    select(.data$Sample, .data$Classification, .data$median_Silhouette, .data$Evaluation) %>% ### break from here
+    select(Sample, Classification, median_Silhouette, Evaluation) %>% ### break from here
     distinct() %>%
     group_by(.data$Classification) %>%
     count(.data$Evaluation)
@@ -288,7 +289,10 @@ define_rb <- function(data,
   if(simplified == TRUE){
     # Remove unnecessary columns
     classified_clusters %>%
-      select(-.data$Level, -.data$pam_object, -.data$Evaluation, -.data$median_Silhouette, -.data$Silhouette_scores, -.data$Cluster_median_abundance)
+      select(-"Level", -"pam_object",
+             -"Evaluation", -"median_Silhouette",
+             -"Silhouette_scores",
+             -"Cluster_median_abundance")
   }
 
   return(classified_clusters)

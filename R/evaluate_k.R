@@ -76,7 +76,7 @@ evaluate_k <- function(data,
                                                         inside_nest = FALSE) ## working on removing this
                                  )
            ) %>%
-    tidyr::unnest(cols = .data$Metrics)
+    tidyr::unnest(cols = Metrics)
 
   if(isTRUE(with_plot)){
     scores %>%

@@ -96,21 +96,21 @@ suggest_k <- function(data,
     all_scores %>%
     group_by(.data$Sample) %>%
     filter(.data$average_Silhouette == max(.data$average_Silhouette)) %>%
-    select(.data$Sample, .data$average_Silhouette, .data$k) %>%
+    select(Sample, average_Silhouette, k) %>%
     ungroup()
 
   best_DB_k <-
     all_scores %>%
     group_by(.data$Sample) %>%
     filter(.data$DB == min(.data$DB)) %>%
-    select(.data$Sample, .data$DB, .data$k) %>%
+    select(Sample, DB, k) %>%
     ungroup()
 
   best_CH_k <-
     all_scores %>%
     group_by(.data$Sample) %>%
     filter(.data$CH == max(.data$CH)) %>%
-    select(.data$Sample, .data$CH, .data$k) %>%
+    select(Sample, CH, k) %>%
     ungroup()
 
   if(detailed == FALSE){

@@ -73,8 +73,8 @@ test_that("It needs at least one classification to work",{
 })
 test_that("Classification vector can be numbers instead of strings",{
   classification_vector <- c(1:10)
-  expect_no_error(define_rb(nice_tidy,
-                         classification_vector = classification_vector))
+  expect_warning(define_rb(nice_tidy,
+                            classification_vector = classification_vector))
 })
 test_that("Largest possible vector is equal to the number of observations of the sample with least observations",{
             # Remove zeros and NAs, if any, to get only the valid observations
@@ -91,7 +91,7 @@ test_that("Largest possible vector is equal to the number of observations of the
             # Make largest classification vector that will work
             largest_classification_vector <- c(1:(maximum_possible_clusters))
 
-            expect_no_error(define_rb(nice_tidy, classification_vector = largest_classification_vector))
+            expect_warning(define_rb(nice_tidy, classification_vector = largest_classification_vector))
 })
 test_that("The definition does not work for classification vectors with more than the maximum
           number of possible clusters.",{

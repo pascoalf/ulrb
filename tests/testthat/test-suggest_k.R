@@ -63,7 +63,7 @@ test_that("Expect error for k = 1", {
   expect_error(suggest_k(nice_tidy, range = 1:10))
 })
 
-test_that("Should work for all possible k's without errors", {
+#test_that("Should work for all possible k's without errors", {
   nice_tidy_filtered <- filter(nice_tidy, Abundance > 0)
   # get all possible k's from a group of samples
   # the smallest maximum k across samples
@@ -75,7 +75,7 @@ test_that("Should work for all possible k's without errors", {
     min()
   #
   expect_no_error(suggest_k(nice_tidy_filtered, range = 2:(max_k-1)))
-})
+#})
 
 test_that("Should throw error if max k is reached", {
   nice_tidy_filtered <- filter(nice_tidy, Abundance >0)

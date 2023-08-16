@@ -128,7 +128,7 @@ check_CH <- function(data,
     data %>%
     rename(Sample = all_of(samples_col),
            Abundance = all_of(abundance_col)) %>%
-    filter(.data$Sample == all_of(sample_id)) %>%
+    filter(.data$Sample == sample_id) %>%
     filter(.data$Abundance > 0, !is.na(.data$Abundance))
 
   # Make vector with abundance scores
