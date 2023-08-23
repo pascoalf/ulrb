@@ -67,7 +67,11 @@ suggest_k <- function(data,
                       abundance_col = "Abundance",
                       index = "Average Silhouette Score",
                       detailed = FALSE, ...){
-  stopifnot(range > 1)
+  # range can not begin at 1
+  if(range <= 1){
+    stop("The range argument must start at 2.")
+  }
+
   # stop if a vector is used as input
   if(is.vector(data)){stop("Input must be a data.frame with at least a column for Samples and another for Abundance.")}
 
