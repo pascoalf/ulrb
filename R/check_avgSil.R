@@ -107,7 +107,9 @@ check_avgSil <- function(data,
                          with_plot = FALSE, ...){
 
   # Conditions for function to run
-  stopifnot(range > 1)
+  if(range <= 1){
+   stop("The range argument must start at 2.")
+  }
 
   # stop if a vector is used as input
   if(is.vector(data)){stop("Input must be a data.frame with at least a column for Samples and another for Abundance.")}
