@@ -113,7 +113,7 @@ check_CH <- function(data,
                      with_plot = FALSE, ...){
 
   # Conditions for function to run
-  if(range <= 1){
+  if(min(range) <= 1){
     stop("The range argument must start at 2.")
   }
 
