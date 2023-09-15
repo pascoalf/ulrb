@@ -125,7 +125,7 @@ plot_ulrb_silhouette <- function(data,
                                    .data$Silhouette_scores,
                                    fill = .data$Classification,
                                    col = .data$Classification)) +
-      ggplot2::stat_summary()+
+      ggplot2::stat_summary(fun.data = ggplot2::mean_se)+
       ggplot2::geom_hline(yintercept = c(0),
                           colour = c("black"),
                           linetype = "dashed")+
