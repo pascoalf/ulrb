@@ -1,0 +1,65 @@
+---
+title: "Glossary"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Glossary}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## why we made this tutorial
+
+This tutorial aims to clarify the nomenclature used in the urlb package. There are a few methodological issues that are very specific to microbial ecology and taxonomy; and that might be confusing for non-microbiologists. On the other hand, there are a few terms from data science and machine learning that may not be obvious for microbiologists. And finally, of course, the nomenclature should be understandable for researchers that focus on non-microbiome datasets. 
+
+## Phylogenetic units 
+
+We decided to use the term "phylogenetic units" instead of "species". Species would be the simplest term, but it is a problematic term in microbial ecology. Briefly, microbial ecology requires the usage of high-throughput sequencing based methods to distinguish microorganisms in the environment; but usually it is hard to describe them down to species level. Thus, we usually do not refer to "species" and instead refer to the a proxy of species. This proxy can be, for example, "amplicon sequence variants" (ASV), "operational taxonomic units" (OTU) and so on. However, these terms are very specific to the methods used in specific situations. To try and generalize, we compromised with the "phylogenetic units", because they represent the same idea independently of the method used (and avoid the problem of the species definition).
+
+Another possibility would be "taxa/taxon", which would be simple. However, it could cause confusion, because of the different taxonomic levels. Again, phylogenetic units might have their taxonomy more or less resolved, but for the purposes of this package we do not care about specific taxonomies, we care about what distinguishes different entities, thus, the phylogenetic units.
+
+## Phylogenetic units translated to machine learning
+
+In terms of the machine learning algorithms (not just the ones used in here), the phylogenetic units represent the observations (or objects). Thus, each row should represent a phylogenetic unit, with a column providing some ID for each phylogenetic unit. 
+
+
+## Variables and features
+
+For each phylogenetic unit we might have several variables, or features, but the single feature that is considered for ulrb is the abundance score. This abundance score will be different for each methodology, study design, etc. However, there is always some sort of abundance table with some sort of abundance score. For the purposes of ulrb it does not matter how the score was obtained.
+
+Extra variables are allowed, but they will be ignored for the purpose of the actual algorithm. Except for the sample variable, whcih will be used for grouping the phylogenetic units. Basically, the algorithm will be applied for each sample provided independently. The **sample** should not be confused with the **observation** in this context. Think of the sample as a physical representative of a community of phylogenetic units; and for each phylogenetic unit you "observe" if it was present (with a given abundance score) in said sample.
+
+Additionally, the samples will provide extra variables, because they might include environmental metadata. However, all of this additional data will be ignored by the ulrb package. Thus, you can have an abundance table in long format that includes all the available metadata (can include environmental, methodological, taxa... details) and ulrb will just add new columns with new variables -- like the abundance classification and details on the clustering result.
+
+
+## Abundance classification
+
+The word "classification" can be ambiguous, because it might refer to "taxonomic" classification, or the abundance classification. In ulrb, we are dealing with a classification problem, because we do not know how to *classify* phylogenetic units based on their abundance score. It is after we use the classification from ulrb, which is the result of a clustering, we can assert that the abundance classification of the lowest abundance phylogenetic units represents the rare biosphere, and so on. Thus, when we refer to "abundance classification" we are referring to the actual result of the ulrb, by the function `define_rb()`.
+
+
+## Summary
+
+```{r, echo = FALSE}
+knitr::kable(
+  data.frame(
+    Biology = c("Species"),
+    Microbiology = c("OTU/ASV/etc"),
+    `Data science` = c("Observation/object"),
+    ulrb = c("Phylogenetic unit")
+  ))
+```
+
+
+
+
+
+
+
+
