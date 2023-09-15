@@ -68,7 +68,7 @@ suggest_k <- function(data,
                       index = "Average Silhouette Score",
                       detailed = FALSE, ...){
   # range can not begin at 1
-  if(range <= 1){
+  if(min(range) <= 1){
     stop("The range argument must start at 2.")
   }
 

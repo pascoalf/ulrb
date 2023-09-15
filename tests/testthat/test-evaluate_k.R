@@ -1,5 +1,4 @@
 ### modify all tests, input should be a data.frame ###
-
 test_that("No error", {
   expect_no_error(evaluate_k(nice_tidy))
 })
