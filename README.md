@@ -13,6 +13,7 @@ status](https://www.r-pkg.org/badges/version/ulrb)](https://CRAN.R-project.org/p
 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 [![Github All
 Releases](https://img.shields.io/github/downloads/pascoalf/ulrb/total.svg)]()
+\[![lifecycle](https://github.com/pascoalf/ulrb/tree/main/man/figures/lifecycle-stable.svg)()\]
 <!-- badges: end -->
 
 The R package **ulrb** stands for **Unsupervised Machine Learning
