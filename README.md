@@ -46,6 +46,9 @@ You can install the development version of ulrb from
 devtools::install_github("pascoalf/ulrb")
 ```
 
+We are working on a CRAN publication. We will then provide instructions
+for CRAN installation.
+
 ## Example
 
 This is a basic example which shows you how to use ulrb to divide
