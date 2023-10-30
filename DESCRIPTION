@@ -36,6 +36,7 @@ Imports:
     stats,
     tidyr,
     clusterSim,
-    gridExtra
+    gridExtra,
+    lifecycle
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
