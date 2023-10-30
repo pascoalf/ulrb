@@ -1,0 +1,84 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ulrb
+
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/pascoalf/ulrb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/R-CMD-check.yaml)
+  [![test-coverage](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/ulrb)](https://CRAN.R-project.org/package=ulrb)
+<!-- badges: end -->
+
+The R package **ulrb** stands for **Unsupervised Machine Learning definition of the Rare Biosphere**. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.
+
+More specifically, the partitioning around medoids (k-medoids) algorithm is 
+used to divide phylogenetic units (ASVs, OTUs, Species, ...) within a 
+microbial community (usually, a sample) into clusters. The clusters are then
+ordered based on a user-defined classification vector. By default, our 
+method classifies all phylogenetic units in one of these: "rare", "undetermined"
+or "abundant". However, this can be changed by the user if necessary.
+
+For detailed theory behind our reasoning for this definition of the microbial 
+rare biosphere, results and applications, see our paper Pascoal et al., 2023 (in preparation). 
+For more details on the R functions used and data wrangling please see the package 
+documentation. 
+
+For tutorials and documentation of the **urlb** package, visite our website: link.
+
+## Installation
+
+You can install the development version of ulrb from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("pascoalf/ulrb")
+```
+
+## Example
+
+This is a basic example which shows you how to use ulrb to divide phylogenetic units into three classifications (rare, undetermined and abundant):
+
+```{r example}
+library(ulrb)
+## basic example
+define_rb(nice_tidy)
+```
+
+With ulrb, you can also format your original species table, get an automatic number of clusters and plot the results:
+
+```{r}
+# nice is an OTU table in wide format
+head(nice)
+
+# first, we tidy the "nice" OTU table
+sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
+                   "ERR2044665", "ERR2044666", "ERR2044667",
+                   "ERR2044668", "ERR2044669", "ERR2044670")
+
+# If data is in wide format, with samples in cols
+nice_tidy <- prepare_tidy_data(nice,
+                               sample_names = sample_names,
+                               samples_in = "cols")
+
+# second, we apply ulrb algorithm in automatic setting
+nice_classification_results <- define_rb(nice_tidy, automatic = TRUE)
+
+# third, we plot microbial community and the quality of k-medoids clustering
+plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
+
+# In case you want to inspect the result of a particular sample, do:
+plot_ulrb(nice_classification_results, taxa_col = "OTU", sample_id = "ERR2044662")
+
+```
