@@ -9,6 +9,11 @@
 [![test-coverage](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ulrb)](https://CRAN.R-project.org/package=ulrb)
+[![GPLv3
+license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+[![Package Control total
+downloads](https://img.shields.io/packagecontrol/dt/SwitchDictionary.svg)](https://packagecontrol.io/packages/SwitchDictionary)
+
 <!-- badges: end -->
 
 The R package **ulrb** stands for **Unsupervised Machine Learning
