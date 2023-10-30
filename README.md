@@ -11,8 +11,8 @@
 status](https://www.r-pkg.org/badges/version/ulrb)](https://CRAN.R-project.org/package=ulrb)
 [![GPLv3
 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
-[![Package Control total
-downloads](https://img.shields.io/packagecontrol/dt/SwitchDictionary.svg)](https://packagecontrol.io/packages/SwitchDictionary)
+[![Github All
+Releases](https://img.shields.io/github/downloads/pascoalf/ulrb/total.svg)]()
 
 <!-- badges: end -->
 
