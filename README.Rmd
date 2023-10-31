@@ -38,9 +38,10 @@ rare biosphere, results and applications, see our paper Pascoal et al., 2023 (in
 For more details on the R functions used and data wrangling please see the package 
 documentation. 
 
-For tutorials and documentation of the **urlb** package, visite our website: link.
+For tutorials and documentation of the **urlb** package, visit our website: link.
 
-
+**Note: the article to cite ulrb is in preparation for submission**
+ 
 ## Installation
 
 You can install the development version of ulrb from [GitHub](https://github.com/) with:

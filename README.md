@@ -34,8 +34,10 @@ microbial rare biosphere, results and applications, see our paper
 Pascoal et al., 2023 (in preparation). For more details on the R
 functions used and data wrangling please see the package documentation.
 
-For tutorials and documentation of the **urlb** package, visite our
+For tutorials and documentation of the **urlb** package, visit our
 website: link.
+
+**Note: the article to cite ulrb is in preparation for submission**
 
 ## Installation
 

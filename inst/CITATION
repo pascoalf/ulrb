@@ -3,9 +3,5 @@ bibentry(
   title    = "Unsupervised machine learning definition of the microbial rare biosphere",
   author   = "Francisco Pascoal, Paula Branco, Luís Torgo, Rodrigo Costa and Catarina Magalhães",
   journal  = "Manuscript in preparation",
-  year     = 2023,
-  volume   = "NA",
-  number   = "NA",
-  pages    = "NA",
-  doi      = "NA"
+  year     = 2023
 )
