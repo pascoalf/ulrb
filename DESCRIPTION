@@ -39,3 +39,4 @@ Imports:
     gridExtra
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+URL: https://pascoalf.github.io/ulrb/
