@@ -129,9 +129,7 @@ nice_tidy <- prepare_tidy_data(nice,
                                samples_in = "cols")
 
 # second, we apply ulrb algorithm in automatic setting
-nice_classification_results <- define_rb(nice_tidy, automatic = TRUE)
-#> Automatic option set to TRUE, so classification vector was overwritten
-#> K= 3 based on Average Silhouette Score.
+nice_classification_results <- define_rb(nice_tidy)
 #> Joining with `by = join_by(Sample, Level)`
 
 # third, we plot microbial community and the quality of k-medoids clustering

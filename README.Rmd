@@ -81,7 +81,7 @@ nice_tidy <- prepare_tidy_data(nice,
                                samples_in = "cols")
 
 # second, we apply ulrb algorithm in automatic setting
-nice_classification_results <- define_rb(nice_tidy, automatic = TRUE)
+nice_classification_results <- define_rb(nice_tidy)
 
 # third, we plot microbial community and the quality of k-medoids clustering
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)

@@ -156,7 +156,7 @@ plot_ulrb_clustering(rb_k2,
 
 And we can compare the two options directly:
 
-```{r}
+```{r, fig.width=15}
 gridExtra::grid.arrange(
   plot_ulrb_clustering(rb_default, 
                      taxa_col = "OTU",
@@ -208,7 +208,7 @@ rb_k4 <- define_rb(nice_tidy,
 #
 ```
 
-```{r, fig.width=5, fig.height=4}
+```{r, fig.width=15, fig.height=4}
 # One sample as example
 plot_ulrb(rb_k4,
           sample_id = "ERR2044662", 
@@ -217,7 +217,7 @@ plot_ulrb(rb_k4,
           log_scaled = TRUE)
 ```
 
-```{r, fig.width=8, fig.height=8}
+```{r, fig.width=15, fig.height=8}
 # all samples
 plot_ulrb(rb_k4,
           taxa_col = "OTU",
@@ -239,7 +239,7 @@ rb_k5 <- define_rb(nice_tidy,
                                              "abundant", "very abundant"))
 ```
 
-```{r, fig.width=5, fig.height=4}
+```{r, fig.width=15, fig.height=4}
 # One sample as example
 plot_ulrb(rb_k5,
           sample_id = "ERR2044662", 
@@ -248,7 +248,7 @@ plot_ulrb(rb_k5,
           log_scaled = TRUE)
 ```
 
-```{r, fig.width=8, fig.height=8}
+```{r, fig.width=15, fig.height=8}
 # All samples
 plot_ulrb(rb_k5,
           taxa_col = "OTU",

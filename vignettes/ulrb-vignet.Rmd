@@ -193,7 +193,7 @@ The Silhouette plot provides a notion of the coherence of the points inside each
 For more details see the documentation from the functions `plor_ulrb_silhouette()` and `check_avgSil()`; we also refer to Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis" (Kaufman and Rousseuw, 1991), for more details on interpretation of Silhouette plots.
 
 
-```{r, fig.height = 6, fig.width = 6}
+```{r, fig.width = 10}
 # One sample as example
 plot_ulrb_silhouette(classified_table,
                      sample_id = selected_samples[1],
@@ -217,7 +217,7 @@ As expected, most points were very close to +1, with very few points falling bel
 We provide the function `plot_ulrb()` that wraps around `plot_ulrb_clustering()` and `plot_ulrb_silhouette()` to plot the RAC and Silhouette plot in the same grid. This function works for a single sample or for all samples.
 
 
-```{r, fig.height = 6, fig.width = 6}
+```{r, fig.width = 10}
 # For a single sample
 plot_ulrb(classified_table,
           sample_id =  selected_samples[1],
