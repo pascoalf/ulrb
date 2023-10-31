@@ -6,15 +6,12 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/pascoalf/ulrb/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/R-CMD-check.yaml)
-
 [![test-coverage](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml)
-
+![Codecov](https://img.shields.io/codecov/c/github/pascoalf/ulrb)
 [![GPLv3
 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
-
-[![Github All
-Releases](https://img.shields.io/github/downloads/pascoalf/ulrb/total.svg)]()
-
+![GitHub all
+releases](https://img.shields.io/github/downloads/pascoalf/ulrb/total)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
