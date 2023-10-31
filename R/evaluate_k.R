@@ -20,11 +20,10 @@
 #' #
 #' evaluate_k(nice_tidy)
 #'
-#' # To change range
-#' evaluate_k(nice_tidy, range = 4:11)
-#'
 #' # To make simple plot
+#' \dontrun{
 #' evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
+#' }
 #'
 evaluate_k <- function(data,
                        range = 3:10,
