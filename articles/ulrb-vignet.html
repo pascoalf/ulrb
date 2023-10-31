@@ -461,7 +461,7 @@ interpretation of Silhouette plots.</p>
 <span>                     sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>                     taxa_col <span class="op">=</span> <span class="st">"OTU"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Silhouette plot of sample"</span>, <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
+<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-7-1.png" width="960"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">#</span></span>
@@ -471,7 +471,7 @@ interpretation of Silhouette plots.</p>
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Silhouette plot of all samples"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-7-2.png" width="576"></p>
+<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-7-2.png" width="960"></p>
 <p>As expected, most points were very close to +1, with very few points
 falling below 0.5.</p>
 </div>
@@ -489,7 +489,7 @@ samples.</p>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">classified_table</span>,</span>
 <span>          sample_id <span class="op">=</span>  <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
+<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-8-1.png" width="960"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># For all samples</span></span>
@@ -498,7 +498,7 @@ samples.</p>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span>
 <span><span class="co">#&gt; Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-8-2.png" width="576"></p>
+<p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-8-2.png" width="960"></p>
 </div>
 </div>
 <div class="section level2">

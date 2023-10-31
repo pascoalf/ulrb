@@ -271,7 +271,7 @@ classification_vector = c(“Rare”, “Undetermined”, “Abundant”), so le
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span>
 <span><span class="co">#&gt; Warning: Removed 177 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-8-1.png" width="1440"></p>
 <p>We do not recommend using k = 2, because it implies that there is a
 hard distinction between rare and abundant taxa. We consider that there
 should always be an intermediate or undetermined group, otherwise, we
@@ -308,7 +308,7 @@ vector, which will have 4 different classifications, thus (implicitly) k
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
 <span>          colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"grey"</span>,<span class="st">"#CC79A7"</span><span class="op">)</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-10-1.png" width="480"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-10-1.png" width="1440"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># all samples</span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">rb_k4</span>,</span>
@@ -318,7 +318,7 @@ vector, which will have 4 different classifications, thus (implicitly) k
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 208 rows containing missing values (`geom_segment()`).</span></span>
 <span><span class="co">#&gt; Removed 208 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-11-1.png" width="768"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-11-1.png" width="1440"></p>
 <p>Note that this is a very acceptable interpretation of the data!</p>
 <p>Hopefully you already have the intuition to change classifications as
 you wish! Let’s do the e.g. B, which has k = 5, because it includes 5
@@ -337,7 +337,7 @@ different classifications.</p>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
 <span>          colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"grey"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-13-1.png" width="480"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-13-1.png" width="1440"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># All samples</span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">rb_k5</span>,</span>
@@ -347,7 +347,7 @@ different classifications.</p>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 213 rows containing missing values (`geom_segment()`).</span></span>
 <span><span class="co">#&gt; Removed 213 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-14-1.png" width="1440"></p>
 </div>
 <div class="section level3">
 <h3 id="why-k-1-is-non-sense">Why k = 1 is non-sense<a class="anchor" aria-label="anchor" href="#why-k-1-is-non-sense"></a>
