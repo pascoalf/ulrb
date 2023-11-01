@@ -81,7 +81,7 @@
     
     
 <div class="section level2">
-<h2 id="why-we-made-this-tutorial">why we made this tutorial<a class="anchor" aria-label="anchor" href="#why-we-made-this-tutorial"></a>
+<h2 id="why-we-made-this-tutorial">Why we made this tutorial<a class="anchor" aria-label="anchor" href="#why-we-made-this-tutorial"></a>
 </h2>
 <p>This tutorial aims to clarify the nomenclature used in the urlb
 package. There are a few methodological issues that are very specific to
@@ -133,7 +133,7 @@ methodology, study design, etc. However, there is always some sort of
 abundance table with some sort of abundance score. For the purposes of
 ulrb it does not matter how the score was obtained.</p>
 <p>Extra variables are allowed, but they will be ignored for the purpose
-of the actual algorithm. Except for the sample variable, whcih will be
+of the actual algorithm. Except for the sample variable, which will be
 used for grouping the phylogenetic units. Basically, the algorithm will
 be applied for each sample provided independently. The
 <strong>sample</strong> should not be confused with the
@@ -153,11 +153,11 @@ classification and details on the clustering result.</p>
 <h2 id="abundance-classification">Abundance classification<a class="anchor" aria-label="anchor" href="#abundance-classification"></a>
 </h2>
 <p>The word “classification” can be ambiguous, because it might refer to
-“taxonomic” classification, or the abundance classification. In ulrb, we
-are dealing with a classification problem, because we do not know how to
-<em>classify</em> phylogenetic units based on their abundance score. It
-is after we use the classification from ulrb, which is the result of a
-clustering, we can assert that the abundance classification of the
+“taxonomic” classification, or the “abundance” classification. In ulrb,
+we are dealing with a classification problem, because we do not know how
+to <em>classify</em> phylogenetic units based on their abundance score.
+It is after we use the classification from ulrb, which is the result of
+a clustering, we can assert that the abundance classification of the
 lowest abundance phylogenetic units represents the rare biosphere, and
 so on. Thus, when we refer to “abundance classification” we are
 referring to the actual result of the ulrb, by the function

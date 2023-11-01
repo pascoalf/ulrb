@@ -93,19 +93,22 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co"># a vector with some colors</span></span>
+<span><span class="va">qualitative_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="explore-alternative-classifications">Explore alternative classifications<a class="anchor" aria-label="anchor" href="#explore-alternative-classifications"></a>
 </h2>
-<p>So far, we have been considering that the microbial communities are
-divided into “rare”, “undetermined” and “abundant”. This division
+<p>By default, we have been considering that the microbial communities
+are divided into “rare”, “undetermined” and “abundant”. This division
 implies that the partition around medoids algorithm is considering
 <strong>k=3</strong>, <em>i.e.</em> there are three clusters. However,
-there are at least two situations where you might want to change the
+there are at least three situations where you might want to change the
 number of clusters:</p>
 <ol style="list-style-type: decimal">
 <li>The clusters obtained are non-sense;</li>
-<li>The biological/ecological questions requires another division.</li>
+<li>The biological/ecological questions requires another division;</li>
+<li>You want a fully automated classification.</li>
 </ol>
 <p>There might be other situations, of course. The bottom line is that,
 depending on the context of your specific research and data, you might
@@ -124,8 +127,9 @@ bit deeper on whats behind the actual function.</p>
 <li><p>Apply 2 classifications: Rare vs Abundant;</p></li>
 <li><p>Apply more complicated classification, k&gt;3;</p></li>
 <li><p>Why k = 1 is non-sense;</p></li>
-<li><p>What is the maximum number of k and why?</p></li>
-<li><p>Approaches to evaluate k.</p></li>
+<li><p>What is the maximum number of k and why?;</p></li>
+<li><p>Approaches to evaluate k;</p></li>
+<li><p>Set k automatically.</p></li>
 </ol>
 <div class="section level3">
 <h3 id="classical-example">Classical example<a class="anchor" aria-label="anchor" href="#classical-example"></a>
@@ -135,8 +139,9 @@ function <code><a href="../reference/define_rb.html">define_rb()</a></code>.</p>
 <div class="section level4">
 <h4 id="prepare-data">Prepare data<a class="anchor" aria-label="anchor" href="#prepare-data"></a>
 </h4>
-<p>Just like in the tutorial, we have to import, clean and tidy the
-dataset before using the <code><a href="../reference/define_rb.html">define_rb()</a></code> function.</p>
+<p>Just like in the tutorial <code><a href="../articles/ulrb-vignet.html">vignette("ulrb-vignet")</a></code>, we
+have to import, clean and tidy the dataset before using the
+<code><a href="../reference/define_rb.html">define_rb()</a></code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load raw OTU table from N-ICE</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"../data/nice_raw.rda"</span><span class="op">)</span></span>
@@ -275,30 +280,31 @@ classification_vector = c(“Rare”, “Undetermined”, “Abundant”), so le
 <p>We do not recommend using k = 2, because it implies that there is a
 hard distinction between rare and abundant taxa. We consider that there
 should always be an intermediate or undetermined group, otherwise, we
-will always have species with very similar abundance scores, but
-opposing classifications, which is misleading. For more details on this
-reasoning, see Pascoal et al., 2023.</p>
+will always have phylogenetic units with very similar abundance scores,
+but opposing classifications, which is misleading. For more details on
+this reasoning, see Pascoal et al., 2023 (manuscript in
+preparation).</p>
 </div>
 <div class="section level3">
 <h3 id="apply-more-complicated-classification-k3">Apply more complicated classification, k&gt;3<a class="anchor" aria-label="anchor" href="#apply-more-complicated-classification-k3"></a>
 </h3>
 <p>Lets suppose that we want to distinguish our microbial community into
 the following groups:</p>
-<p>(e.g. A) 1) very rare; 2) rare; 3) abundant; 4) very abundant.</p>
-<p>Or:</p>
-<p>(e.g. B) 1) very rare; 2) rare; 4) undetermined; 5) abundant; 6) very
+<p>(<em>e.g.</em> A) 1) very rare; 2) rare; 3) abundant; 4) very
 abundant.</p>
+<p>Or:</p>
+<p>(<em>e.g.</em> B) 1) very rare; 2) rare; 4) undetermined; 5)
+abundant; 6) very abundant.</p>
 <p>Or even more…</p>
 <p>Hopefully, you get the idea, the point is that we just have to change
 the classification vector.</p>
-<p>Lets see how we would do e.g. A. First we select a new classification
-vector, which will have 4 different classifications, thus (implicitly) k
-= 4.</p>
+<p>Lets see how we would do <em>e.g.</em> A. First we select a new
+classification vector, which will have 4 different classifications, thus
+(implicitly) k = 4.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">rb_k4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span>, </span>
-<span>                   classification_vector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"very rare"</span>, <span class="st">"rare"</span>, </span>
-<span>                                             <span class="st">"abundant"</span>, <span class="st">"very abundant"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                   classification_vector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"very rare"</span>, <span class="st">"rare"</span>, <span class="st">"abundant"</span>, <span class="st">"very abundant"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span>
 <span><span class="co">#</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -321,28 +327,26 @@ vector, which will have 4 different classifications, thus (implicitly) k
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-11-1.png" width="1440"></p>
 <p>Note that this is a very acceptable interpretation of the data!</p>
 <p>Hopefully you already have the intuition to change classifications as
-you wish! Let’s do the e.g. B, which has k = 5, because it includes 5
-different classifications.</p>
+you wish. Let’s do the <em>e.g.</em> B, which has k = 5, because it
+includes 5 different classifications.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="va">rb_k5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span>, </span>
-<span>                   classification_vector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"very rare"</span>, <span class="st">"rare"</span>, </span>
-<span>                                             <span class="st">"undetermined"</span>,</span>
-<span>                                             <span class="st">"abundant"</span>, <span class="st">"very abundant"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                   classification_vector <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"very rare"</span>, <span class="st">"rare"</span>, <span class="st">"undetermined"</span>, <span class="st">"abundant"</span>, <span class="st">"very abundant"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># One sample as example</span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">rb_k5</span>,</span>
 <span>          sample_id <span class="op">=</span> <span class="st">"ERR2044662"</span>, </span>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
-<span>          colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"grey"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span>,</span>
+<span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-13-1.png" width="1440"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># All samples</span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">rb_k5</span>,</span>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
-<span>          colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"grey"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span>,</span>
+<span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 213 rows containing missing values (`geom_segment()`).</span></span>
@@ -358,18 +362,19 @@ perfectly possible from a mathematical point of view, <em>i.e</em> you
 simply cluster all observations into a single classification. However,
 this is meaningless and gives no extra information on your community.
 Additionally, from the point of view of the rare biosphere, it is
-important to keep in mind that one species can only be considered “rare”
-<strong>relatively</strong> to the other species within the same
-community. Thus, in this context, <strong>k = 1 is
+important to keep in mind that one phylogenetic unit can only be
+considered “rare” <strong>relatively</strong> to the other phylogenetic
+units within the same community. Thus, in this context, <strong>k = 1 is
 self-contradictory</strong>. Despite this, do keep in mind that we are
-making the assumption that there is such thing as a “rare” biosphere.
+making the assumption that there is such thing as a “rare biosphere”.
 This naive assumption caries another assumption within itself, which is
-that species have sufficiently different abundance relative to one
-another to form distinct clusters. In fact, I don’t think anyone as
-found an environmental microbial community constituted of species with
-the exactly (or approximately) same abundance score. If that was the
-case, then we could not say that a species was neither rare or abundant,
-because any classification would be self-contradictory.</p>
+that phylogenetic units have sufficiently different abundance relative
+to one another to form distinct clusters. In fact, I don’t think anyone
+as found an environmental microbial community constituted of
+phylogenetic units with the exactly (or approximately) same abundance
+score. If that was the case, then we could not say that a species was
+neither rare or abundant, because any classification would be
+self-contradictory.</p>
 <p>We can do the same thing as before, setting the classification vector
 to just “rare” and you’ll see how it is possible, but meaningless.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -389,17 +394,18 @@ to just “rare” and you’ll see how it is possible, but meaningless.</p>
 inherent to algorithm itself, which in this case is partition around
 medoids (k-medoids). The maximum number of groups on which we divide
 observations must be less than the total observations. Meaning that at
-the very maximum limit, each observation is its own group. This means
-that it could be possible to have a maximum value of k equal to the
-number of species, <em>i.e.</em> each species has its own
-classification. However, if you try to do that, you will get an error.
-This is because several species have exactly the same abundance,
-specially in the rare biosphere. Thus, those species can never belong to
-different classifications (think about it, if we are separating species
-by their abundance, then species with the same abundance must belong to
-the same group). This means that the maximum value of k will be equal to
-number of <strong>different</strong> abundance scores, which will be
-lower than the number of total observations.</p>
+the maximum limit, each possible observation is its own group. This
+means that it could be possible to have a maximum value of k equal to
+the number of different phylogenetic units, <em>i.e.</em> each
+phylogenetic unit has its own classification. However, if you try to do
+that, you will get an error. This is because several phylogenetic units
+have exactly the same abundance, specially in the rare biosphere. Thus,
+those phylogenetic units can never belong to different classifications
+(if we are separating phylogenetic units by their abundance, then
+phylogenetic units with the same abundance must belong to the same
+group). This means that the maximum value of k will be equal to number
+of <strong>different</strong> abundance scores, which will be lower than
+the number of total observations.</p>
 <p>If you have several samples, then the maximum value of k will differ
 for each sample (even if you apply normalization). If you would apply
 the same maximum k for all samples at once, then you would have to
@@ -451,7 +457,7 @@ additional information.</p>
 colors! There really is no point, this was just to show you that it is
 possible. With some data wrangling you could easily do the same for all
 samples, or any number of samples. But this is really not something that
-you should ever do.</p>
+you should ever do in the context of rare biosphere studies.</p>
 </div>
 <div class="section level3">
 <h3 id="approaches-to-evaluate-k">Approaches to evaluate k<a class="anchor" aria-label="anchor" href="#approaches-to-evaluate-k"></a>
@@ -468,20 +474,23 @@ implemented in ulrb package:</p>
 <p>Each of these metrics evaluates different aspects of one clustering
 result; thus, we can calculate them for the clustering obtained by each
 value of k. By comparing the values obtained for each k, you can select
-the k that got best score. To do this, consider the following:</p>
+the k that got the best score. To do this, consider the following:</p>
 <ul>
-<li>Average Silhouette Score: Select maximum value for best k;</li>
-<li>Davies-Bouldin index: Select minimum value for best k;<br>
+<li>Average Silhouette Score: Select <strong>maximum</strong> value for
+best k;</li>
+<li>Davies-Bouldin index: Select <strong>minimum</strong> value for best
+k;<br>
 </li>
-<li>Calinsky-Harabasz index: Select maximum value for best k.</li>
+<li>Calinsky-Harabasz index: Select <strong>maximum</strong> value for
+best k.</li>
 </ul>
-<p>The most straight forward way to evaluate a sensible range of k’s is
-by using the function <code><a href="../reference/suggest_k.html">suggest_k()</a></code>. This function includes
-an argument for detailed results, which will give you the results for
-the three indices, between k = 3 and k = 10. We don’t recommend testing
-k’s outside of this range for the purpose of defining the rare
-biosphere, but you can analyse all possible k’s (just change the range
-argument).</p>
+<p>The most straight forward way to evaluate a reasonable range of k’s
+is by using the function <code><a href="../reference/suggest_k.html">suggest_k()</a></code>. This function
+includes an argument for detailed results, which will give you the
+results for the three indices, between k = 3 and k = 10. We don’t
+recommend testing k’s outside of this range for the purpose of defining
+the rare biosphere, but you can analyze all possible k’s (just change
+the range argument).</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/suggest_k.html">suggest_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  </span>
 <span><span class="co">#&gt; [[1]]</span></span>
@@ -625,7 +634,7 @@ to k = 10:</p>
 <p>In the last plot, each value of k represents a clustering result.
 From the above information, we would select k = 3 (just like the default
 option), because it had the highest average Silhouette score.</p>
-<p>We can repeate for all other indices:</p>
+<p>We can repeat for all other indices:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Davie-Boulding index</span></span>
 <span><span class="co"># To get values</span></span>
@@ -691,8 +700,8 @@ with centrality metrics. To do so, we can use the function
 <div class="section level3">
 <h3 id="automatic-k-selection">Automatic k selection<a class="anchor" aria-label="anchor" href="#automatic-k-selection"></a>
 </h3>
-<p>We can decide what k to use based on any of this metrics, beeing
-aware that they measure different aspects of the clustering results. The
+<p>We can decide what k to use based on any of this metrics, being aware
+that they measure different aspects of the clustering results. The
 function <code><a href="../reference/suggest_k.html">suggest_k()</a></code>, by default, will:</p>
 <ul>
 <li>calculate the best k, based on the average Silhouette score, for
@@ -721,13 +730,64 @@ automatic k decision.</p>
 <span><span class="co">#&gt; [1] 9</span></span></code></pre></div>
 </div>
 <div class="section level3">
+<h3 id="everything-automatic">Everything automatic<a class="anchor" aria-label="anchor" href="#everything-automatic"></a>
+</h3>
+<p>Finally, if we have the ability to automatically suggest the value of
+k, we can do the same in the context of the definition of rarity. To so
+do, you can use the default parameters in <code><a href="../reference/define_rb.html">define_rb()</a></code>, but
+with the automatic argument set to TRUE.</p>
+<p>Like so,</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">automatic_classification</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span>, automatic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Automatic option set to TRUE, so classification vector was overwritten</span></span>
+<span><span class="co">#&gt; K= 3 based on Average Silhouette Score.</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span>
+<span></span>
+<span><span class="co"># Plot automatic result</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">automatic_classification</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p>Naturally, you can decide more parameters for the automatic selection
+of k, for example, lets suppose that you want to have groups of
+phylogenetic units that are very well defined, but you also want to
+have, at least, four classifications, but no more than 6.</p>
+<p>For those two conditions, you would have to specify the range of k
+values (4:6) and the evaluation index should be the Calinsky-Harabasz
+index:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">more_complex_automatic_classification</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span>, </span>
+<span>                                                   automatic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                                   index <span class="op">=</span> <span class="st">"Calinsky-Harabasz"</span>,</span>
+<span>                                                   range <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Automatic option set to TRUE, so classification vector was overwritten</span></span>
+<span><span class="co">#&gt; K= 5 based on Calinsky-Harabasz.</span></span>
+<span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span></code></pre></div>
+<p>Note that the function informed you that the automatic k selected was
+5. Thus, you know you will need 5 colors for the standard ulrb
+plots:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot automatic result</span></span>
+<span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">more_complex_automatic_classification</span>, </span>
+<span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, </span>
+<span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span>
+<span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 213 rows containing missing values (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Removed 213 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<p>In this example, the automatic option did not seem to give a better
+result than the default k = 3.</p>
+</div>
+<div class="section level3">
 <h3 id="how-each-index-behaves-across-all-possible-values-of-k">How each index behaves across all possible values of k?<a class="anchor" aria-label="anchor" href="#how-each-index-behaves-across-all-possible-values-of-k"></a>
 </h3>
 <p>This last section is for completion sake and should not be necessary
 in a study of the rare biosphere; however, it might prove useful for
 those interested in the details of this unsupervised learning
 approach.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Start by deciding the maximum range across the entire dataset</span></span>
 <span><span class="va">max_k</span> <span class="op">&lt;-</span> <span class="va">nice_tidy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Abundance</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">Abundance</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -742,13 +802,13 @@ approach.</p>
 <p>If we have the maximum k, we just need to use the
 <code><a href="../reference/evaluate_k.html">evaluate_k()</a></code> function for the full range of values. (if you
 try to run this code, it might take a while)</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span>, range <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="va">max_k</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 rows containing non-finite values (`stat_summary()`).</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-26-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

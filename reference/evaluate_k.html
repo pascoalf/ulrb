@@ -125,30 +125,10 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.516  <span style="text-decoration: underline;">1</span>495.              0.891     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 62 more rows</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># To change range</span></span></span>
-<span class="r-in"><span><span class="fu">evaluate_k</span><span class="op">(</span><span class="va">nice_tidy</span>, range <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample [9]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     data                   DB     CH average_Silhouette     k</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.527  <span style="text-decoration: underline;">2</span>055.              0.882     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.413  <span style="text-decoration: underline;">4</span>934.              0.856     5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.429  <span style="text-decoration: underline;">5</span>465.              0.840     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.335 <span style="text-decoration: underline;">17</span>589.              0.848     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.389 <span style="text-decoration: underline;">17</span>180.              0.784     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.395 <span style="text-decoration: underline;">18</span>083.              0.774     9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.329 <span style="text-decoration: underline;">30</span>332.              0.770    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.278 <span style="text-decoration: underline;">55</span>354.              0.763    11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.516  <span style="text-decoration: underline;">1</span>495.              0.891     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.366  <span style="text-decoration: underline;">4</span>937.              0.878     5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 62 more rows</span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To make simple plot</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">evaluate_k</span><span class="op">(</span><span class="va">nice_tidy</span>, range <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">11</span>, with_plot <span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
-<span class="r-plt img"><img src="evaluate_k-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
