@@ -69,20 +69,13 @@ Alternatively, this function can also provide the best k, as an integer, based o
 # Get the best k with default parameters
 suggest_k(nice_tidy)
 
+\dontrun{
 # Get detailed results to decide for yourself
-suggest_k(nice_tidy, detailed = TRUE)
+suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
 
 # Get best k, based on Davies-Bouldin index
 suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin")
-
-# Get best k, based on Calinsky-Harabasz index
-suggest_k(nice_tidy, detailed = FALSE, index = "Calinsky-Harabasz")
-
-# Try a different range of values and index
-suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin", range = 2:7)
-
-# Get details for a specific range of k values
-suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
+}
 
 }
 \seealso{

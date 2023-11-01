@@ -43,11 +43,10 @@ library(dplyr)
 #
 evaluate_k(nice_tidy)
 
-# To change range
-evaluate_k(nice_tidy, range = 4:11)
-
 # To make simple plot
+\dontrun{
 evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
+}
 
 }
 \seealso{
