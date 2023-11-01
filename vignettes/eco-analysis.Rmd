@@ -175,10 +175,19 @@ nice_diversity_tidy <- nice_diversity %>%
   pivot_longer(cols = c("SpeciesRichness", "ShannonIndex", "SimpsonIndex"),
                names_to = "Index",
                values_to = "Diversity") %>% 
-  mutate(Month = factor(Month, levels = c("March", "April", "June"))) ## correct order
+# correct order
+  mutate(Month = factor(Month, levels = c("March", "April", "June"))) %>% 
+# edit diversity index names
+  mutate(Index = case_when(Index == "ShannonIndex" ~ "Shannon Index",
+                           Index == "SimpsonIndex" ~ "Simpson Index",
+                           TRUE ~ "Number of OTUs")) %>%
+  # order diversity index names
+  mutate(Index = factor(Index, c("Number of OTUs", "Shannon Index","Simpson Index")))
 ```
 
-### Alpha diversity
+### Alpha diversity plots
+
+At this stage, we have everything in a single tidy data.frame, which makes ggplot plots straightforward.
 
 - Month variation
 
@@ -187,12 +196,17 @@ qualitative_colors <-
   c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 ## Plots
-nice_diversity_tidy %>% 
+nice_diversity_tidy %>%
   ggplot(aes(Month, Diversity, col = Classification)) + 
   geom_point() + 
   facet_wrap(~Index, scales = "free_y")+
   scale_color_manual(values = qualitative_colors[c(5,3,6)]) + 
-  theme_bw()
+  theme_bw() + 
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12),
+        legend.position = "top") + 
+  labs(col = "Classification: ",
+       title = "Alpha diversity across month")
 ```
 
 - Water mass variation
@@ -203,7 +217,12 @@ nice_diversity_tidy %>%
   geom_point() + 
   facet_wrap(~Index, scales = "free_y")+
   scale_color_manual(values = qualitative_colors[c(5,3,6)]) + 
-  theme_bw()
+  theme_bw() + 
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12),
+        legend.position = "top") %>%
+  labs(col = "Classification: ",
+       title = "Alpha diversity across water mass")
 ```
 
 ### Beta diversity
@@ -273,7 +292,7 @@ From this analysis, it seems that the community composition of the rare biospher
 
 # Final considerations
 
-Hopefully, you got a sense of how the ulrb package can be integrated in a more general microbial ecology workflow. Of course, many more questions could be approached, such as taxonomy and so on. 
+Hopefully, you got a sense of how the ulrb package can be integrated in a more general microbial ecology workflow. Of course, many more questions could be approached, such as taxonomy and so on. This was meant to serve as an example of how ulrb can be trivially integrated in a data analysis workflow. 
 
 # References
 

@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 
-## why we made this tutorial
+## Why we made this tutorial
 
 This tutorial aims to clarify the nomenclature used in the urlb package. There are a few methodological issues that are very specific to microbial ecology and taxonomy; and that might be confusing for non-microbiologists. On the other hand, there are a few terms from data science and machine learning that may not be obvious for microbiologists. And finally, of course, the nomenclature should be understandable for researchers that focus on non-microbiome datasets. 
 
@@ -34,14 +34,14 @@ In terms of the machine learning algorithms (not just the ones used in here), th
 
 For each phylogenetic unit we might have several variables, or features, but the single feature that is considered for ulrb is the abundance score. This abundance score will be different for each methodology, study design, etc. However, there is always some sort of abundance table with some sort of abundance score. For the purposes of ulrb it does not matter how the score was obtained.
 
-Extra variables are allowed, but they will be ignored for the purpose of the actual algorithm. Except for the sample variable, whcih will be used for grouping the phylogenetic units. Basically, the algorithm will be applied for each sample provided independently. The **sample** should not be confused with the **observation** in this context. Think of the sample as a physical representative of a community of phylogenetic units; and for each phylogenetic unit you "observe" if it was present (with a given abundance score) in said sample.
+Extra variables are allowed, but they will be ignored for the purpose of the actual algorithm. Except for the sample variable, which will be used for grouping the phylogenetic units. Basically, the algorithm will be applied for each sample provided independently. The **sample** should not be confused with the **observation** in this context. Think of the sample as a physical representative of a community of phylogenetic units; and for each phylogenetic unit you "observe" if it was present (with a given abundance score) in said sample.
 
 Additionally, the samples will provide extra variables, because they might include environmental metadata. However, all of this additional data will be ignored by the ulrb package. Thus, you can have an abundance table in long format that includes all the available metadata (can include environmental, methodological, taxa... details) and ulrb will just add new columns with new variables -- like the abundance classification and details on the clustering result.
 
 
 ## Abundance classification
 
-The word "classification" can be ambiguous, because it might refer to "taxonomic" classification, or the abundance classification. In ulrb, we are dealing with a classification problem, because we do not know how to *classify* phylogenetic units based on their abundance score. It is after we use the classification from ulrb, which is the result of a clustering, we can assert that the abundance classification of the lowest abundance phylogenetic units represents the rare biosphere, and so on. Thus, when we refer to "abundance classification" we are referring to the actual result of the ulrb, by the function `define_rb()`.
+The word "classification" can be ambiguous, because it might refer to "taxonomic" classification, or the "abundance" classification. In ulrb, we are dealing with a classification problem, because we do not know how to *classify* phylogenetic units based on their abundance score. It is after we use the classification from ulrb, which is the result of a clustering, we can assert that the abundance classification of the lowest abundance phylogenetic units represents the rare biosphere, and so on. Thus, when we refer to "abundance classification" we are referring to the actual result of the ulrb, by the function `define_rb()`.
 
 
 ## Summary
