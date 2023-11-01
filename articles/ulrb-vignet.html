@@ -84,13 +84,14 @@
 <h2 id="unsupervised-learning-based-definition-of-microbial-rare-biosphere">Unsupervised Learning Based Definition Of Microbial Rare
 Biosphere<a class="anchor" aria-label="anchor" href="#unsupervised-learning-based-definition-of-microbial-rare-biosphere"></a>
 </h2>
-<p>The R package ulrb solves the problem of the definition of rarity in
-molecular microbiology by replacing human decision with an unsupervised
-machine learning algorithm (partitioning around medoids, k-medoids).
-This algorithm works for any type of microbiome data, provided there is
-an abundance score for each taxonomic unit. For validation of this
-method to several kinds of molecular data and environments, please see
-Pascoal et al., 2023.</p>
+<p>The R package ulrb solves the problem of the definition of rarity by
+replacing human decision with an unsupervised machine learning algorithm
+(partitioning around medoids, k-medoids). This algorithm works for any
+type of microbiome data, provided there is an abundance score for each
+phylogenetic unit. For validation of this method to several kinds of
+molecular data and environments, please see Pascoal et al., 2023 (in
+preparation). Preliminary results indicate that this method works for
+oter biological systems, provided there is an abundance table.</p>
 <p>In this tutorial we will illustrate how to define the microbial rare
 biosphere with a small, publicly available dataset, the Norwegian Young
 Sea Ice Expedition, 2016 (N-ICE). The molecular data will be from
@@ -124,13 +125,14 @@ in 06-01-2023 and focus solely on the 16S amplicon data.</p>
 <div class="section level4">
 <h4 id="brief-note-on-nomenclature">Brief note on nomenclature<a class="anchor" aria-label="anchor" href="#brief-note-on-nomenclature"></a>
 </h4>
-<p>We use the term “taxonomic units” to refer to the highest resolution,
-distinct unit identified. This can be species, OTU, ASV…</p>
+<p>We use the term “phylogenetic units” to refer to the highest
+resolution, distinct unit identified. This can be species, OTU, ASV,
+…</p>
 <p>We use the term “abundance table” to refer to the table with, at
-least, the abundance score for each taxonomic unit. Any additional data
-can be added, this can be an OTU table, ASV table…</p>
+least, the abundance score for each phylogenetic unit. Any additional
+data can be added, this can be an OTU table, ASV table…</p>
 <p>We also use the term “scale” or “scaling”, which can also appear in
-the literature as “normalization”.</p>
+the literature as “normalization”, “transformation”, …</p>
 </div>
 <div class="section level3">
 <h3 id="pre-processing-of-data-prior-to-clustering-algorithm">Pre-processing of data prior to clustering algorithm<a class="anchor" aria-label="anchor" href="#pre-processing-of-data-prior-to-clustering-algorithm"></a>
@@ -141,21 +143,21 @@ column for samples. Any additional columns are allowed.</p>
 <p><strong>Regarding the abundance score</strong>, we are not scaling
 the abundance score in this vignette, because the k-medoids algorithm
 will be applied “per sample” to the values of the abundance score. This
-means that any scaling, <em>e.g.</em> relative abundance, clr… Will not
-have an effect on the algorithm, because the distance values between
-observations will remain the same. However, if the algorithm was applied
-to more variables (not only abundance), then scaling could make a
-difference. Thus, we consider that is best to use absolute values in
-this tutorial, to avoid misleading the reader into thinking that some
-scaling has to be done.</p>
+means that any scaling, <em>e.g.</em> relative abundance, center
+log-ratio, … Will not have an effect on the algorithm, because the
+distance values between observations will remain the same. However, if
+the algorithm was applied to more variables (not only abundance), then
+scaling could make a difference. Thus, we consider that it is best to
+use absolute values in this tutorial, to avoid misleading the reader
+into thinking that some scaling has to be done.</p>
 <p>Notwithstanding, for publication purposes and for the purposes of
 other data processing steps, it might make sense to apply some sort of
-scaling. As long as the number of observations, i.e. the number of
-taxonomic units, is the same, then the distance between them will be the
-same.</p>
+scaling. As long as the number of observations, <em>i.e.</em> the number
+of phylogenetic units, is the same, then the distance between them will
+be the same.</p>
 <p>If the user decides to apply any quality filtering to the abundance
-table, like rarefaction, it should be done <em>before</em> using the
-clustering method.</p>
+table, like rarefaction, it should be done <strong>before</strong> using
+the clustering method.</p>
 <p>In summary, the algorithm will be applied to your final, clean
 abundance table, with any abundance score.</p>
 <div class="section level4">
@@ -171,7 +173,7 @@ abundance table, with any abundance score.</p>
 <span><span class="co"># Select 16S rRNA amplicon sequencing samples</span></span>
 <span><span class="va">selected_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ERR2044662"</span>, <span class="st">"ERR2044663"</span>, <span class="st">"ERR2044664"</span>,<span class="st">"ERR2044665"</span>, <span class="st">"ERR2044666"</span>, <span class="st">"ERR2044667"</span>,<span class="st">"ERR2044668"</span>, <span class="st">"ERR2044669"</span>, <span class="st">"ERR2044670"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Add a column with taxonomic units ID (OTU in this case)</span></span>
+<span><span class="co"># Add a column with phylogenetic units ID (OTU in this case)</span></span>
 <span><span class="va">nice_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">nice_clean</span>, OTU <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"OTU_"</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Select relevant columns</span></span>
@@ -245,10 +247,10 @@ format. You can do this part in any order and according to your own data
 format. We made the function <code><a href="../reference/prepare_tidy_data.html">prepare_tidy_data()</a></code> to help
 transform the two most common data formats for abundance tables:</p>
 <ol style="list-style-type: decimal">
-<li>taxonomic units in rows, samples in columns;</li>
-<li>taxonomic units in columns, samples in rows.</li>
+<li>phylogenetic units in rows, samples in columns;</li>
+<li>phylogenetic units in columns, samples in rows.</li>
 </ol>
-<p>In this example, we have a data.frame with taxonomic units as rows
+<p>In this example, we have a data.frame with phylogenetic units as rows
 and samples in various columns, so this is not a tidy format. We need to
 collapse all columns with samples into a single “Abundance” and
 “Samples” column, so that each variable corresponds to a single column,
@@ -272,7 +274,7 @@ different from our standard examples.</p>
 <p>Now we are ready to use the central function of the package ulrb,
 which is <code><a href="../reference/define_rb.html">define_rb()</a></code>.</p>
 <p>This function will add new columns to the input data.frame,
-automatically deciding the classification of each taxonomic unit, per
+automatically deciding the classification of each phylogenetic unit, per
 sample, by means of the partition around medoids algorithm.</p>
 <p>The algorithm is run by the <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam()</a></code> function of the
 <code>cluster</code> package. The output are the clusters, which we
@@ -283,15 +285,16 @@ results later on. Additionally, the data.frame will include a nested
 list with the output from <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam()</a></code>, for more experienced users
 to analyze if necessary.</p>
 <p>Regarding the classifications, we are setting a default to “rare”,
-“undetermined” and “abundant”, based on Pascoal et al., 2023. However,
-the user can set any vector of classifications, as long as they follow
-the rules of the number of clusters, or k, from <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam()</a></code>.
-Meaning, the number of classifications can’t be more than the number of
-distinct observations in the data. In practice this is not a concern,
-because we think most researchers will either use our default, or “rare”
-vs “abundant”, or a more nuanced “very rare”, “rare”, “abundant”, “very
-abundant”. The point is that the classification can be decided in a
-study by study context.</p>
+“undetermined” and “abundant”, based on Pascoal et al., 2023 (manuscript
+in preparation). However, the user can set any vector of
+classifications, as long as they follow the rules of the number of
+clusters, or k, from <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam()</a></code>. Meaning, the number of
+classifications can’t be more than the number of distinct observations
+in the data. In practice this is not a concern, because we think most
+researchers will either use our default, or “rare” vs “abundant”, or a
+more nuanced “very rare”, “rare”, “abundant”, “very abundant”. The point
+is that the classification can be decided in a study by study
+context.</p>
 <p>Since the default output includes so many columns that are there to
 support the classification obtained, we added an argument, simplified,
 which if TRUE will return a simplified version of the output, without
@@ -333,16 +336,16 @@ data. We will use the default, simplified = FALSE.</p>
 <div class="section level4">
 <h4 id="fully-automated-version">Fully automated version<a class="anchor" aria-label="anchor" href="#fully-automated-version"></a>
 </h4>
-<p>In the previous example, there is still one level of subjetive
+<p>In the previous example, there is still one level of subjective
 decision, which is the number of classifications to use (<em>e.g.</em>
-“rare”, “undertermined” and “abundant” would be k = 3). However, we
-added an option to the main function, <code><a href="../reference/define_rb.html">define_rb()</a></code>, which
-allows for the automatic decision of the number of clusters. This
-automation works under the assumption that the range of good k values
-lies between 3 and 10 (see Pascoal et al., 2023 for reasoning behind
-this). In another article (see ref), we explain in more detail how the
-automation works and how you can make your own decision regarding k,
-using several metrics.</p>
+“rare”, “undetermined” and “abundant” would be k = 3). However, we added
+an option to the main function, <code><a href="../reference/define_rb.html">define_rb()</a></code>, which allows
+for the automatic decision of the number of clusters. This automation
+works under the assumption that the range of good k values lies between
+3 and 10 (see Pascoal et al., 2023 for reasoning behind this). In
+<code><a href="../articles/explore-classifications.html">vignette("explore-classifications")</a></code>, we explain in more
+detail how the automation works and how you can make your own decision
+regarding k, using several metrics.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simple automation example</span></span>
 <span><span class="fu"><a href="../reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span>, automatic <span class="op">=</span>  <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -377,11 +380,11 @@ look sane. To help with this task, we made a group of functions that
 will help researchers understand if they need more or less
 classifications (change the value of k), or if the algorithm just
 doesn’t work. There is no hard rule to verify unsupervised learning, but
-results should look sensible and follow expectations. We have seen that
-the results from this method are consistent with previous definitions of
-rarity, for example, most taxonomic units are rare and only very few are
-abundant, but we avoid introducing a human decision on which points are
-rare or abundant.</p>
+results should look reasonable and follow expectations. We have seen
+that the results from this method are consistent with previous
+definitions of rarity, for example, most phylogenetic units are rare and
+only very few are abundant, but we avoid introducing a human decision on
+which points are rare or abundant.</p>
 <p>The plots are the (1) Rank Abundance Curve and the (2) Silhouette
 plots. The first will be more helpful for microbial ecologists, while
 the second will be more helpful for data scientists.</p>
@@ -401,14 +404,14 @@ abundant, resulting in a few species with very high abundance and a
 biosphere”). However, there is no objective method to decide where the
 “long-tail” begins.</p>
 <p>The ulrb method considers that the terms “rare” and “abundant” are
-relative, i.e. one taxonomic unit is rare if, and only if, compared to
-an abundant one (and vice-versa). We explore the consequences and
-assumptions that play into this in Pascoal et al., 2023. But this means
-that the method is not looking for the beginning of the “long-tail”, it
-is comparing the abundance of all taxonomic units, and clustering them
-accordingly.</p>
-<p>Thus, if we plot the standard RAC and then color each taxonomic unit
-according with the unsupervised classification, we can check if the
+relative, i.e. one phylogenetic unit is rare if, and only if, compared
+to an abundant one (and vice-versa). We explore the consequences and
+assumptions that play into this in Pascoal et al., 2023 (manuscript in
+preparation). But this means that the method is not looking for the
+beginning of the “long-tail”, it is comparing the abundance of all
+phylogenetic units, and clustering them accordingly.</p>
+<p>Thus, if we plot the standard RAC and then color each phylogenetic
+unit according with the unsupervised classification, we can check if the
 unsupervised classification is consistent with the notion that the
 rare-biosphere is within the “long-tail”.</p>
 <p>To do this, we provide the function
@@ -434,8 +437,8 @@ and analysis.</p>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-6-2.png" width="576"></p>
 <p>From the RAC obtained, we confirm that the unsupervised
-classification provides a sensible result. Because the rare biosphere is
-indeed in the “long-tail”, followed by a transition region, which we
+classification provides a reasonable result. Because the rare biosphere
+is indeed in the “long-tail”, followed by a transition region, which we
 term “undetermined”, because they are neither rare, more abundant, and a
 few extreme points which are abundant.</p>
 </div>
@@ -451,7 +454,7 @@ clusters are strong, but if you have many observations close to 0, but
 positive, the cluster might be artificial; for negative values, then the
 clusters have no structure.</p>
 <p>For more details see the documentation from the functions
-<code>plor_ulrb_silhouette()</code> and <code><a href="../reference/check_avgSil.html">check_avgSil()</a></code>; we
+<code><a href="../reference/plot_ulrb_silhouette.html">plot_ulrb_silhouette()</a></code> and <code><a href="../reference/check_avgSil.html">check_avgSil()</a></code>; we
 also refer to Chapter 2 of “Finding Groups in Data: An Introduction to
 Cluster Analysis” (Kaufman and Rousseuw, 1991), for more details on
 interpretation of Silhouette plots.</p>
@@ -505,7 +508,7 @@ samples.</p>
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li><p>Pascoal et al., 2023 (under work)</p></li>
+<li><p>Pascoal et al., 2023 (manuscript in preparation)</p></li>
 <li><p>Granskog, M. A., Fer, I., Rinke, A., &amp; Steen, H. (2018).
 Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice
 Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of

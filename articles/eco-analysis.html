@@ -147,7 +147,7 @@ in 06-01-2023 and focus solely on the 16S amplicon data.</p>
 <span>                      <span class="st">"ERR2044665"</span>, <span class="st">"ERR2044666"</span>, <span class="st">"ERR2044667"</span>,</span>
 <span>                      <span class="st">"ERR2044668"</span>, <span class="st">"ERR2044669"</span>, <span class="st">"ERR2044670"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Add a column with taxonomic units ID (OTU in this case)</span></span>
+<span><span class="co"># Add a column with phylogenetic units ID (OTU in this case)</span></span>
 <span><span class="va">nice_clean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">nice_clean</span>, OTU <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"OTU_"</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Select relevant collumns</span></span>

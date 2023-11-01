@@ -103,39 +103,42 @@ based on the index argument.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>The input data.frame with extra columns containing the classification ()and additional metrics (if detailed = TRUE).</p>
+<p>The input data.frame with extra columns containing the classification and additional metrics (if detailed = TRUE).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><strong>Overview</strong></p>
-<p>Function to cluster species abundance with k-medoids algorithm. By default,
-We propose the division into three clusters (k = 3),
+<p>Function to cluster species abundance with partition around medoids algorithm (Kaufman and Rousseuw. 1991).
+By default, we propose the division into three clusters (k = 3),
 which can have the convenient description of: "rare", "undetermined" and "abundant".
-The species from the cluster with lowest median abundance
-is considered to be the "rare biosphere".</p>
+The phylogenetic units from the cluster with lowest median abundance is considered
+to be the "rare biosphere".</p>
 <p><strong>The classification vector</strong></p>
 <p>The classification vector (argument classification_vector) represents the
 different clusters to be used, by ascending order of median abundance.
 To change the number of clusters, change the number of elements in the
 classification vector, <strong>but order matters!</strong> Depending on the number of clusters used,
-you can change the meaning that best applies to your research. For example,
-you can use a classification vector with the designations: "very rare", "rare",
+you can change the meaning that best applies to your research.</p>
+<p>For example, you can use a classification vector with the designations: "very rare", "rare",
 "abundant" and "very abundant"; which would apply a k = 4 underneath.
 It is possible to use any number of clusters, as long as they are within 2 and
-the maximum possible k. The maximum possible k is the
-number of different abundance scores observed in a single sample. Note, however,
+the maximum possible k.</p>
+<p>The maximum possible k is the number of different abundance scores observed in a single sample. Note, however,
 that we do not recommend any clustering for k &gt; 10
 and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2023;
-and in the vignette <strong>explore-classifications</strong>.</p>
-<p><strong>Automatic selection of cluster numbers</strong></p>
+and in the vignette <code><a href="../articles/explore-classifications.html">vignette("explore-classifications")</a></code>.</p>
+<p><strong>Automatic selection of the number of clusters</strong></p>
 <p>To automatically decide the number of clusters (i.e., the value of k), it is possible to do so with the argument <strong>automatic=TRUE</strong>. For details on
 complete automation of <code>define_rb()</code>, please see the documentation for <code><a href="suggest_k.html">suggest_k()</a></code>. Briefly, the k with best average Silhouette score
 is selected from a range of k values between 3 and 10. It is possible to decide k based on other indices ("Davies-Bouldin" or "Calinsky-Harabasz").</p>
-<p>If you want a more fine grained analysis of k values, we provide other functions to help you, see <strong>missing vignette</strong>.</p>
-<p><strong>Verify clustering results</strong></p>
+<p>If you want a more fine grained analysis of k values, we provide several functions:</p><ul><li><p><code><a href="evaluate_k.html">evaluate_k()</a></code>;</p></li>
+<li><p><code><a href="check_avgSil.html">check_avgSil()</a></code>;</p></li>
+<li><p><code><a href="check_DB.html">check_DB()</a></code>;</p></li>
+<li><p><code><a href="check_CH.html">check_CH()</a></code>.</p></li>
+</ul><p><strong>Verify clustering results</strong></p>
 <p>If half of the taxa of any cluster got a Silhouette score below 0.5 in any sample, then a warning is provided.
 The warning provides the number of times this issue occurred.
-You can inspect other alternatives to reduce the number of bad clusterings,
+You can inspect other alternatives to reduce the occurrences of a bad clustering,
 but it is possible that, in some situations, you just can't find an optimal clustering.</p>
 <p>The detailed output gives you access to all of the clustering results:</p><ul><li><p><code>pam_object</code> is a list with the original results from the k-medoids clustering,
 see <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">cluster::pam()</a></code> documentation.</p></li>
@@ -152,7 +155,7 @@ is below the median Silhouette of its cluster and sample.</p></li>
 <p><strong>Partition around medoids (pam)</strong></p>
 <p>To calculate k-medoids, we used the partition around medoids (pam)
 algorithm, which was described in Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-(Kaufman and Rousseeuw, 1990) and implemented by the cluster package with the <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">cluster::pam()</a></code> function.</p>
+(Kaufman and Rousseeuw, 1991) and implemented by the cluster package with the <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">cluster::pam()</a></code> function.</p>
 <p>Briefly, the pam algorithm is divided into two main phases: <strong>build</strong> and <strong>swap</strong>.</p>
 <p>The first phase (<strong>build</strong>) selects k observations as cluster representatives. The first
 observation selected as representative is the one that minimizes the sum of the dissimilarities to the
@@ -174,10 +177,9 @@ for the clusters. The principle is to swap the cluster representative between
 all possibilities and calculate the value sum of dissimilarities between each
 observation and the closest centroid. The swapping continues until no more improvement is
 possible, i.e., when the minimum sum of dissimilarities of the clusters is reached.</p>
-<p>note: adapted from chapter 2 of Kaufman and Rousseeuw, 1990.</p>
 <p><strong>Notes</strong>:</p>
 <p>Understand that <strong>ulrb</strong> package considers each sample as an independent
-community of taxa, which means clustering is also independent across
+community of phylogenetic units, which means clustering is also independent across
 different samples.
 Thus, be aware that you will have clustering results and metrics for each
 single sample,
@@ -196,7 +198,8 @@ and <code><a href="evaluate_k.html">evaluate_k()</a></code> for k selection).</p
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Sample ID's</span></span></span>
 <span class="r-in"><span><span class="va">sample_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ERR2044662"</span>, <span class="st">"ERR2044663"</span>, <span class="st">"ERR2044664"</span>,</span></span>
 <span class="r-in"><span>                   <span class="st">"ERR2044665"</span>, <span class="st">"ERR2044666"</span>, <span class="st">"ERR2044667"</span>,</span></span>
@@ -209,89 +212,20 @@ and <code><a href="evaluate_k.html">evaluate_k()</a></code> for k selection).</p
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Straightforward with tidy format</span></span></span>
 <span class="r-in"><span><span class="fu">define_rb</span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,177 × 17</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample, Classification [27]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample    Classification OTU   Domain Phylum Class Order Family Genus Species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR20446… Rare           OTU_2 sk__A… p__Eu… c__C… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR20446… Rare           OTU_5 sk__A… p__Eu… c__T… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR20446… Rare           OTU_6 sk__A… p__Th… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR20446… Rare           OTU_7 sk__A… p__Th… c__   o__   f__    g__C… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR20446… Rare           OTU_8 sk__A… p__Th… c__   o__N… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR20446… Rare           OTU_… sk__A… p__Th… c__   o__N… f__Ni… g__N… <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR20446… Rare           OTU_… sk__B… p__Ac… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR20446… Rare           OTU_… sk__B… p__Ac… c__A… o__A… <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR20446… Rare           OTU_… sk__B… p__Ac… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR20446… Rare           OTU_… sk__B… p__Ac… c__A… <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,167 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: Abundance &lt;int&gt;, pam_object &lt;list&gt;, Level &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Silhouette_scores &lt;dbl&gt;, Cluster_median_abundance &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   median_Silhouette &lt;dbl&gt;, Evaluation &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#Closer look</span></span></span>
 <span class="r-in"><span><span class="va">classified_table</span> <span class="op">&lt;-</span> <span class="fu">define_rb</span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
 <span class="r-in"><span><span class="va">classified_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Abundance</span>, <span class="va">Classification</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample, Classification [1]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Sample     Abundance Classification</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ERR2044662       165 Rare          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ERR2044662       541 Rare          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ERR2044662         8 Rare          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ERR2044662        15 Rare          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ERR2044662         5 Rare          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ERR2044662         4 Rare          </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Automatic decision, instead of a predefined definition</span></span></span>
 <span class="r-in"><span><span class="fu">define_rb</span><span class="op">(</span><span class="va">nice_tidy</span>, automatic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Abundance</span>, <span class="va">Classification</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Automatic option set to TRUE, so classification vector was overwritten</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> K= 3 based on Average Silhouette Score.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,177 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample, Classification [27]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     Abundance Classification</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662       165 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662       541 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662         8 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662        15 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044662         5 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044662         4 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044662        19 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044662         1 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044662        61 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044662       123 1             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,167 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Automatic decision, using Davies-Boulding index,</span></span></span>
 <span class="r-in"><span><span class="co"># instead of average Silhouette score (default)</span></span></span>
 <span class="r-in"><span><span class="fu">define_rb</span><span class="op">(</span><span class="va">nice_tidy</span>, automatic <span class="op">=</span> <span class="cn">TRUE</span>, index <span class="op">=</span> <span class="st">"Davies-Bouldin"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Abundance</span>, <span class="va">Classification</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Automatic option set to TRUE, so classification vector was overwritten</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> K= 6 based on Davies-Bouldin.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 samples got a bad Silhouette score. Consider changing the number of classifications.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> If half the observations within a classification are below 0.5 Silhouette score, we consider that the clustering was 'Bad'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Check 'Evaluation' collumn for more details.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,177 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample, Classification [54]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     Abundance Classification</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662       165 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662       541 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662       190 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662       374 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044662       308 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044662       261 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044662       196 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044662       576 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044662       264 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044662       308 2             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,167 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># User defined classifications</span></span></span>
 <span class="r-in"><span><span class="va">user_classifications</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"very rare"</span>,</span></span>
@@ -302,22 +236,6 @@ and <code><a href="evaluate_k.html">evaluate_k()</a></code> for k selection).</p
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">define_rb</span><span class="op">(</span><span class="va">nice_tidy</span>, classification_vector <span class="op">=</span> <span class="va">user_classifications</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Abundance</span>, <span class="va">Classification</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,177 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample, Classification [45]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     Abundance Classification</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662       165 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662         8 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662        15 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662         5 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044662         4 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044662        19 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044662         1 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044662        61 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044662       123 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044662         1 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,167 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Easy to incorporate in big pipes</span></span></span>
 <span class="r-in"><span><span class="co"># Remove Archaea</span></span></span>
@@ -331,22 +249,6 @@ and <code><a href="evaluate_k.html">evaluate_k()</a></code> for k selection).</p
 <span class="r-in"><span>                                     <span class="st">"abundant"</span>,</span></span>
 <span class="r-in"><span>                                     <span class="st">"very abundant"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Abundance</span>, <span class="va">Classification</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 885 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample, Classification [36]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     Abundance Classification</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662        19 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662        61 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662       123 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662        75 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044662        24 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044662       190 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044662        13 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044662        23 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044662        20 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044662       374 very rare     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 875 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span> <span class="co"># An example that summarises results</span></span></span>
 <span class="r-in"><span><span class="va">nice_tidy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -359,25 +261,7 @@ and <code><a href="evaluate_k.html">evaluate_k()</a></code> for k selection).</p
 <span class="r-in"><span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Abundance</span>, <span class="va">Classification</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Classification</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>totalAbundance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">Abundance</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Joining with `by = join_by(Sample, Level)`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `summarise()` has grouped output by 'Sample'. You can override using the</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `.groups` argument.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 36 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample [9]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     Classification totalAbundance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662 very rare                <span style="text-decoration: underline;">5</span>842</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662 rare                     <span style="text-decoration: underline;">8</span>632</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662 abundant                <span style="text-decoration: underline;">12</span>953</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662 very abundant           <span style="text-decoration: underline;">24</span>242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044663 very rare                <span style="text-decoration: underline;">9</span>555</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044663 rare                    <span style="text-decoration: underline;">12</span>622</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044663 abundant                <span style="text-decoration: underline;">14</span>846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044663 very abundant           <span style="text-decoration: underline;">28</span>412</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044664 very rare                <span style="text-decoration: underline;">3</span>143</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044664 rare                     <span style="text-decoration: underline;">6</span>306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26 more rows</span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

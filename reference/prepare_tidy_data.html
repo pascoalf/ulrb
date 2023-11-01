@@ -65,7 +65,7 @@
 
 
 <dt>samples_in</dt>
-<dd><p>a vector specifyng the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.</p></dd>
+<dd><p>a vector specifying the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.</p></dd>
 
 
 <dt>...</dt>
@@ -76,18 +76,18 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A speceis table in long format, compatible with dplyr pipes and <strong>ulrb</strong> package functions.</p>
+<p>An abundance table in long format, compatible with dplyr pipes and <strong>ulrb</strong> package functions.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function guarantees that the species table includes one column with sample ID's and
+    <p>This function guarantees that the abundance table includes one column with sample ID's and
 one column with abundance.</p>
-<p>Common species table formats</p>
-<p>There are two common formats for Species tables:</p><ul><li><p>samples as rows and species as columns;</p></li>
-<li><p>species as rows and samples as columns.</p></li>
+<p><strong>Common species table formats</strong></p>
+<p>There are two common formats for abundance tables:</p><ul><li><p>samples as rows and phylogenetic units as columns;</p></li>
+<li><p>phylogenetic units as rows and samples as columns.</p></li>
 </ul><p>However, both formats are not tidy, because they include several columns with the same variable. They
 are in a "wide format" instead of a "long format".</p>
-<p>This function re-organizes samples and species so that there is a single column with the samples ID's and
+<p>This function re-organizes samples and phylogenetic units so that there is a single column with the samples ID's and
 another with the abundance scores; Extra columns are allowed.</p>
     </div>
     <div class="section level2">
@@ -127,7 +127,7 @@ another with the abundance scores; Extra columns are allowed.</p>
 <span class="r-in"><span><span class="co"># Change columns to rows</span></span></span>
 <span class="r-in"><span><span class="va">nice_rows</span> <span class="op">&lt;-</span> <span class="va">nice_rows</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Turn colnames into taxonomic units ID</span></span></span>
+<span class="r-in"><span><span class="co"># Turn colnames into phylogenetic units ID</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">nice_rows</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"OTU_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">nice_rows</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">prepare_tidy_data</span><span class="op">(</span><span class="va">nice_rows</span>, sample_names <span class="op">=</span> <span class="va">sample_names</span>, samples_in <span class="op">=</span> <span class="st">"rows"</span><span class="op">)</span></span></span>

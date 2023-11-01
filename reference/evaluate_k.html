@@ -64,7 +64,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.</p></dd>
+<dd><p>a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.</p></dd>
 
 
 <dt>range</dt>
@@ -106,27 +106,13 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">#</span></span></span>
 <span class="r-in"><span><span class="fu">evaluate_k</span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 72 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   Sample [9]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Sample     data                   DB     CH average_Silhouette     k</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.372  <span style="text-decoration: underline;">1</span>821.              0.952     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.527  <span style="text-decoration: underline;">2</span>055.              0.882     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.413  <span style="text-decoration: underline;">4</span>934.              0.856     5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.429  <span style="text-decoration: underline;">5</span>465.              0.840     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.335 <span style="text-decoration: underline;">17</span>589.              0.848     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.389 <span style="text-decoration: underline;">17</span>180.              0.784     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.395 <span style="text-decoration: underline;">18</span>083.              0.774     9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.329 <span style="text-decoration: underline;">30</span>332.              0.770    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.391  <span style="text-decoration: underline;">1</span>491.              0.955     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.516  <span style="text-decoration: underline;">1</span>495.              0.891     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 62 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To make simple plot</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">evaluate_k</span><span class="op">(</span><span class="va">nice_tidy</span>, range <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">11</span>, with_plot <span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
