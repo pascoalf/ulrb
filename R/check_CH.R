@@ -91,7 +91,8 @@
 #'
 #' @references
 #' Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
-#' Pascoal et al., 2023
+#'
+#' Pascoal et al., 2023 (manuscript in preparation)
 #'
 #' @examples
 #' library(dplyr)

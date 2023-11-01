@@ -1,4 +1,4 @@
-#' Sanity check of Silhouette plot of selected sample
+#' Plot silhouette scores from clustering results
 #'
 #' Plots the Silhouette scores from the clustering results of [define_rb()].
 #'
@@ -14,12 +14,12 @@
 #' **Interpretation of Silhouette plot**
 #'
 #' Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-#' (Kaufman and Rousseeuw, 1990); a possible (**subjective**) interpretation of the clustering structure based
+#' (Kaufman and Rousseeuw, 1991); a possible (**subjective**) interpretation of the clustering structure based
 #' on the Silhouette plot is:
 #'
 #' - 0.71-1.00 (A strong structure has been found);
 #' - 0.51-0.70 (A reasonable structure has been found);
-#' - 0.26-0.50 (The sructure is weak and could be artificial);
+#' - 0.26-0.50 (The structure is weak and could be artificial);
 #' - < 0.26 (No structure has been found).
 #'
 #'

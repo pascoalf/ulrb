@@ -3,7 +3,7 @@
 \docType{data}
 \name{nice_tidy}
 \alias{nice_tidy}
-\title{Tidy OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
+\title{V4-V5 16S rRNA gene amplicons, clean OTU table in tidy/long format (N-ICE, 2015)}
 \format{
 \subsection{\code{nice_tidy}}{
 
@@ -11,14 +11,14 @@ A data frame with 4716 rows and 10 columns:
 \describe{
 \item{Sample}{Sample ID}
 \item{Abundance}{Abundance}
-\item{OTU}{Taxonomic unit ID}
-\item{Domain}{Domain level classification of taxonomic unit}
-\item{Phylum}{Domain level classification of taxonomic unit}
-\item{Class}{Domain level classification of taxonomic unit}
-\item{Order}{Domain level classification of taxonomic unit}
-\item{Family}{Domain level classification of taxonomic unit}
-\item{Genus}{Domain level classification of taxonomic unit}
-\item{Species}{Domain level classification of taxonomic unit}
+\item{OTU}{OTU ID}
+\item{Domain}{Domain level classification of OTU}
+\item{Phylum}{Domain level classification of OTU}
+\item{Class}{Domain level classification of OTU}
+\item{Order}{Domain level classification of OTU}
+\item{Family}{Domain level classification of OTU}
+\item{Genus}{Domain level classification of OTU}
+\item{Species}{Domain level classification of OTU}
 ...
 }
 }
@@ -34,7 +34,7 @@ Original OTU table (\link{nice}) in "long" format.
 }
 \details{
 A new column (Sample) includes the sample identifiers and a new column
-(Abundance) includes the abundance for each taxonomic unit.
+(Abundance) includes the abundance for each OTU.
 For details on OTU table processing see help pages for \link{nice} and \link{nice_raw}.
 
 Some details on N-ICE dataset:

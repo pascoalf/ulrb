@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ulrb_silhouette.R
 \name{plot_ulrb_silhouette}
 \alias{plot_ulrb_silhouette}
-\title{Sanity check of Silhouette plot of selected sample}
+\title{Plot silhouette scores from clustering results}
 \usage{
 plot_ulrb_silhouette(
   data,
@@ -22,7 +22,7 @@ plot_ulrb_silhouette(
 
 \item{sample_id}{string with name of selected sample.}
 
-\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
+\item{taxa_col}{string with name of column with phylogenetic units. Usually OTU or ASV.}
 
 \item{samples_col}{name of column with sample ID's.}
 
@@ -56,12 +56,12 @@ For more details on Silhouette score, see \code{\link[=check_avgSil]{check_avgSi
 \strong{Interpretation of Silhouette plot}
 
 Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-(Kaufman and Rousseeuw, 1990); a possible (\strong{subjective}) interpretation of the clustering structure based
+(Kaufman and Rousseeuw, 1991); a possible (\strong{subjective}) interpretation of the clustering structure based
 on the Silhouette plot is:
 \itemize{
 \item 0.71-1.00 (A strong structure has been found);
 \item 0.51-0.70 (A reasonable structure has been found);
-\item 0.26-0.50 (The sructure is weak and could be artificial);
+\item 0.26-0.50 (The structure is weak and could be artificial);
 \item < 0.26 (No structure has been found).
 }
 }

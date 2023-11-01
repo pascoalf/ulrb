@@ -15,7 +15,7 @@ evaluate_sample_k(
 )
 }
 \arguments{
-\item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
+\item{data}{a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.}
 
 \item{sample_id}{String with name of the sample to apply this function.}
 

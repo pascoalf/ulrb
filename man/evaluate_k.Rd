@@ -14,7 +14,7 @@ evaluate_k(
 )
 }
 \arguments{
-\item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
+\item{data}{a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
@@ -39,12 +39,13 @@ For more details on indices calculation, please see the documentation for \code{
 \code{\link[=check_CH]{check_CH()}} and \code{\link[=check_avgSil]{check_avgSil()}}.
 }
 \examples{
+\dontrun{
 library(dplyr)
 #
 evaluate_k(nice_tidy)
 
 # To make simple plot
-\dontrun{
+
 evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
 }
 

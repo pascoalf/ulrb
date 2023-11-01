@@ -9,6 +9,7 @@
   The R package ulrb stands for Unsupervised Machine Learning definition of the
   Rare Biosphere. As the name suggests, it applies unsupervised learning principles
   to define the rare biosphere.
+
   More specifically, the partitioning around medoids (k-medoids) algorithm is used
   to divide phylogenetic units (ASVs, OTUs, Species, …) within a microbial community
   (usually, a sample) into clusters. The clusters are then ordered based on a user-defined
@@ -17,6 +18,7 @@
   to help the user decide the number of clusters and we also provide a fully automated
   option. Besides clustering, we have functions to help you evaluate the clustering
   quality (e.g. silhouette scores).
+
   For detailed theory behind our reasoning for this definition of the microbial rare biosphere,
   results and applications, see our paper Pascoal et al., 2023 (in preparation).
   For more details on the R functions used and data wrangling please see the package documentation.
@@ -38,9 +40,7 @@
   Pascoal, F., Paula, B., Torgo, L., Costa, R., Magalhães, C. (2023) \emph{Unsupervised machine learning definition of the microbial rare biosphere} Manuscript in preparation.
 }
 \author{ Francisco Pascoal \email{fpascoal1996@gmail.com}, Paula Branco
-  \email{paobranco@gmail.com}, Luis Torgo,
-  Rodrigo Costa \email{rodrigoscosta@tecnico.ulisboa.pt},
-  Catarina Magalhães \email{catarinamagalhaes1972@gmail.com}
+  \email{paobranco@gmail.com}, Luis Torgo, Rodrigo Costa \email{rodrigoscosta@tecnico.ulisboa.pt}, Catarina Magalhães \email{catarinamagalhaes1972@gmail.com}
 
   Maintainer:
     Francisco Pascoal}

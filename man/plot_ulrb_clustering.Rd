@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ulrb_clustering.R
 \name{plot_ulrb_clustering}
 \alias{plot_ulrb_clustering}
-\title{Sanity check rare biosphere definition for one sample}
+\title{Plot Rank Abundance Curve of classification results}
 \usage{
 plot_ulrb_clustering(
   data,
@@ -18,11 +18,11 @@ plot_ulrb_clustering(
 )
 }
 \arguments{
-\item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
+\item{data}{a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.}
 
 \item{sample_id}{string with name of selected sample.}
 
-\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
+\item{taxa_col}{string with name of column with phylogenetic units. Usually OTU or ASV.}
 
 \item{plot_all}{If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.}
 
@@ -42,7 +42,7 @@ plot_ulrb_clustering(
 A ggplot object with clustering results from \code{\link[=define_rb]{define_rb()}}.
 }
 \description{
-Plots the clustering results from \code{\link[=define_rb]{define_rb()}}
+Plots the clustering results from \code{\link[=define_rb]{define_rb()}}.
 }
 \details{
 This works as a sanity check of the results obtained by the unsupervised learning method used

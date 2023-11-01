@@ -5,11 +5,11 @@
 #' @details
 #' **Overview**
 #'
-#' Function to cluster species abundance with k-medoids algorithm. By default,
-#' We propose the division into three clusters (k = 3),
+#' Function to cluster species abundance with partition around medoids algorithm (Kaufman and Rousseuw. 1991).
+#' By default, we propose the division into three clusters (k = 3),
 #' which can have the convenient description of: "rare", "undetermined" and "abundant".
-#' The species from the cluster with lowest median abundance
-#' is considered to be the "rare biosphere".
+#' The phylogenetic units from the cluster with lowest median abundance is considered
+#' to be the "rare biosphere".
 #'
 #' @details
 #' **The classification vector**
@@ -18,31 +18,37 @@
 #' different clusters to be used, by ascending order of median abundance.
 #' To change the number of clusters, change the number of elements in the
 #' classification vector, **but order matters!** Depending on the number of clusters used,
-#' you can change the meaning that best applies to your research. For example,
-#' you can use a classification vector with the designations: "very rare", "rare",
+#' you can change the meaning that best applies to your research.
+#'
+#' For example, you can use a classification vector with the designations: "very rare", "rare",
 #' "abundant" and "very abundant"; which would apply a k = 4 underneath.
 #' It is possible to use any number of clusters, as long as they are within 2 and
-#' the maximum possible k. The maximum possible k is the
-#' number of different abundance scores observed in a single sample. Note, however,
+#' the maximum possible k.
+#'
+#' The maximum possible k is the number of different abundance scores observed in a single sample. Note, however,
 #'  that we do not recommend any clustering for k > 10
 #' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2023;
-#' and in the vignette **explore-classifications**.
+#' and in the vignette `vignette("explore-classifications")`.
 #'
 #' @details
-#' **Automatic selection of cluster numbers**
+#' **Automatic selection of the number of clusters**
 #'
 #' To automatically decide the number of clusters (i.e., the value of k), it is possible to do so with the argument **automatic=TRUE**. For details on
 #' complete automation of [define_rb()], please see the documentation for [suggest_k()]. Briefly, the k with best average Silhouette score
 #' is selected from a range of k values between 3 and 10. It is possible to decide k based on other indices ("Davies-Bouldin" or "Calinsky-Harabasz").
 #'
-#' If you want a more fine grained analysis of k values, we provide other functions to help you, see **missing vignette**.
+#' If you want a more fine grained analysis of k values, we provide several functions:
+#'  - [evaluate_k()];
+#'  - [check_avgSil()];
+#'  - [check_DB()];
+#'  - [check_CH()].
 #'
 #' @details
 #' **Verify clustering results**
 #'
 #' If half of the taxa of any cluster got a Silhouette score below 0.5 in any sample, then a warning is provided.
 #' The warning provides the number of times this issue occurred.
-#' You can inspect other alternatives to reduce the number of bad clusterings,
+#' You can inspect other alternatives to reduce the occurrences of a bad clustering,
 #' but it is possible that, in some situations, you just can't find an optimal clustering.
 #'
 #' The detailed output gives you access to all of the clustering results:
@@ -65,7 +71,7 @@
 #'
 #' To calculate k-medoids, we used the partition around medoids (pam)
 #' algorithm, which was described in Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-#' (Kaufman and Rousseeuw, 1990) and implemented by the cluster package with the [cluster::pam()] function.
+#' (Kaufman and Rousseeuw, 1991) and implemented by the cluster package with the [cluster::pam()] function.
 #'
 #' Briefly, the pam algorithm is divided into two main phases: **build** and **swap**.
 #'
@@ -98,14 +104,12 @@
 #' observation and the closest centroid. The swapping continues until no more improvement is
 #' possible, i.e., when the minimum sum of dissimilarities of the clusters is reached.
 #'
-#' note: adapted from chapter 2 of Kaufman and Rousseeuw, 1990.
-#'
 #'
 #' @details
 #' **Notes**:
 #'
 #' Understand that **ulrb** package considers each sample as an independent
-#'  community of taxa, which means clustering is also independent across
+#'  community of phylogenetic units, which means clustering is also independent across
 #'  different samples.
 #' Thus, be aware that you will have clustering results and metrics for each
 #' single sample,
@@ -124,7 +128,7 @@
 #' based on the index argument.
 #' @inheritParams suggest_k
 #'
-#' @returns The input data.frame with extra columns containing the classification ()and additional metrics (if detailed = TRUE).
+#' @returns The input data.frame with extra columns containing the classification and additional metrics (if detailed = TRUE).
 #' @seealso [suggest_k()], [evaluate_k()], [plot_ulrb()], [cluster::pam()]
 #' @export
 #'

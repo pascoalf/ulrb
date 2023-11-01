@@ -11,32 +11,32 @@ prepare_tidy_data(data, sample_names, samples_in = "cols", ...)
 
 \item{sample_names}{a vector with the name of all samples.}
 
-\item{samples_in}{a vector specifyng the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.}
+\item{samples_in}{a vector specifying the location of the samples. It can either be "cols" (default) if samples are in columns, or "rows" if samples are in rows.}
 
 \item{...}{additional arguments}
 }
 \value{
-A speceis table in long format, compatible with dplyr pipes and \strong{ulrb} package functions.
+An abundance table in long format, compatible with dplyr pipes and \strong{ulrb} package functions.
 }
 \description{
 Function to transforms common abundance table formats into a "long" format.
 }
 \details{
-This function guarantees that the species table includes one column with sample ID's and
+This function guarantees that the abundance table includes one column with sample ID's and
 one column with abundance.
 
-Common species table formats
+\strong{Common species table formats}
 
-There are two common formats for Species tables:
+There are two common formats for abundance tables:
 \itemize{
-\item samples as rows and species as columns;
-\item species as rows and samples as columns.
+\item samples as rows and phylogenetic units as columns;
+\item phylogenetic units as rows and samples as columns.
 }
 
 However, both formats are not tidy, because they include several columns with the same variable. They
 are in a "wide format" instead of a "long format".
 
-This function re-organizes samples and species so that there is a single column with the samples ID's and
+This function re-organizes samples and phylogenetic units so that there is a single column with the samples ID's and
 another with the abundance scores; Extra columns are allowed.
 }
 \examples{
@@ -56,7 +56,7 @@ nice_rows <- nice \%>\% select(all_of(sample_names))
 # Change columns to rows
 nice_rows <- nice_rows \%>\% t() \%>\% as.data.frame()
 
-# Turn colnames into taxonomic units ID
+# Turn colnames into phylogenetic units ID
 colnames(nice_rows) <- paste0("OTU_", seq_along(colnames(nice_rows)))
 
 prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")

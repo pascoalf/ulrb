@@ -126,7 +126,8 @@ check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 }
 \references{
 Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
-Pascoal et al., 2023
+
+Pascoal et al., 2023 (manuscript in preparation)
 }
 \seealso{
 \link[clusterSim:index.G1]{clusterSim::index.G1}

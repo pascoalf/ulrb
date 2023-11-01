@@ -15,7 +15,7 @@ suggest_k(
 )
 }
 \arguments{
-\item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
+\item{data}{a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.}
 
 \item{range}{The range of values of k to test, default is from 3 to 10.}
 
@@ -33,7 +33,7 @@ suggest_k(
 Integer indicating best k from selected index. Optionally, can return a list with details.
 }
 \description{
-Tool to help decide how many clusters to use for k-medoids algorithm.
+Tool to help decide how many clusters to use for partition around medoids algorithm.
 }
 \details{
 The best k is selected for each sample, based on the selected index.
@@ -41,8 +41,8 @@ If different k's are obtained for different samples (probable) then we
 calculate the mean value of k and return it as an integer. Alternatively, we can
 return a more detailed result in the form of a list.
 
-\strong{Note}; this function is used within \code{\link[=define_rb]{define_rb()}}, with default parameters, for the
-otional automatic selection of k.
+\strong{Note}: this function is used within \code{\link[=define_rb]{define_rb()}}, with default parameters, for the
+optional automatic selection of k.
 
 \strong{Detailed option}
 
@@ -59,17 +59,18 @@ More specifically, the list will include:
 If \code{detailed = FALSE}, this function will provide a single integer with the best k.
 The \strong{default} decision is based on the maximum average Silhouette score obtained
 for the values of k between 3 and 10. To better understand why the average Silhouette score and
-this range of k's were selected, we refer to Pascoal et al., 2023.
+this range of k's were selected, we refer to Pascoal et al., 2023 (manuscript in preparation) and to
+vignette("explore-classifications").
 
 Alternatively, this function can also provide the best k, as an integer, based on another index
 (Davies-Bouldin and Calinsky-Harabasz) and can compare the entire of possible k's.
 }
 \examples{
 
+\dontrun{
 # Get the best k with default parameters
 suggest_k(nice_tidy)
 
-\dontrun{
 # Get detailed results to decide for yourself
 suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_ulrb.R
 \name{plot_ulrb}
 \alias{plot_ulrb}
-\title{Plot ulrb clustering results}
+\title{Plot ulrb clustering results and silhouette scores}
 \usage{
 plot_ulrb(
   data,
@@ -18,11 +18,11 @@ plot_ulrb(
 )
 }
 \arguments{
-\item{data}{a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.}
+\item{data}{a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.}
 
 \item{sample_id}{string with name of selected sample.}
 
-\item{taxa_col}{string with name of column with taxonomic units. Usually OTU or ASV.}
+\item{taxa_col}{string with name of column with phylogenetic units. Usually OTU or ASV.}
 
 \item{plot_all}{If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.}
 
@@ -59,16 +59,17 @@ each species (OTU, ASVs, etc) and the silhouette score obtained for each observa
 \strong{Interpretation of Silhouette plot}
 
 Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-(Kaufman and Rousseeuw, 1990); a possible (\strong{subjective}) interpretation of the clustering structure based
+(Kaufman and Rousseeuw, 1991); a possible (\strong{subjective}) interpretation of the clustering structure based
 on the Silhouette plot is:
 \itemize{
 \item 0.71-1.00 (A strong structure has been found);
 \item 0.51-0.70 (A reasonable structure has been found);
-\item 0.26-0.50 (The sructure is weak and could be artificial);
+\item 0.26-0.50 (The structure is weak and could be artificial);
 \item <0.26 (No structure has been found).
 }
 }
 \examples{
+\dontrun{
 classified_species <- define_rb(nice_tidy)
 
 # Default parameters for a single sample ERR2044669
@@ -89,7 +90,7 @@ plot_ulrb(classified_species,
           abundance_col = "Abundance",
           plot_all = TRUE,
           log_scaled = TRUE)
-
+}
 }
 \seealso{
 \code{\link[=define_rb]{define_rb()}}, \code{\link[=check_avgSil]{check_avgSil()}}, \code{\link[=plot_ulrb_clustering]{plot_ulrb_clustering()}}, \code{\link[=plot_ulrb_silhouette]{plot_ulrb_silhouette()}}

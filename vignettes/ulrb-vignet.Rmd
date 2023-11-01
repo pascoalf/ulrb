@@ -9,8 +9,11 @@ vignette: >
 
 # Unsupervised Learning Based Definition Of Microbial Rare Biosphere
 
-The R package ulrb solves the problem of the definition of rarity in molecular 
-microbiology by replacing human decision with an unsupervised machine learning algorithm (partitioning around medoids, k-medoids). This algorithm works for any type of microbiome data, provided there is an abundance score for each taxonomic unit. For validation of this method to several kinds of molecular data and environments, please see Pascoal et al., 2023.
+The R package ulrb solves the problem of the definition of rarity by replacing human
+decision with an unsupervised machine learning algorithm (partitioning around medoids, k-medoids). 
+This algorithm works for any type of microbiome data, provided there is an abundance score for each phylogenetic unit. 
+For validation of this method to several kinds of molecular data and environments, please see Pascoal et al., 2023 (in preparation).
+Preliminary results indicate that this method works for oter biological systems, provided there is an abundance table.
 
 In this tutorial we will illustrate how to define the microbial rare biosphere  with a small, publicly available dataset, the Norwegian Young Sea Ice Expedition, 2016 (N-ICE). The molecular data will be from amplicon sequencing of 16S rRNA gene (for sequencing details, see Sousa et al., 2019), raw sequences are available in the European Nucleotide Archive (ENA) under accession number ERP024265, and they were processed into OTUs by MGnify (Mitchell et al.,2019).
 
@@ -36,21 +39,21 @@ library(ggplot2)
 
 ### Brief note on nomenclature
 
-We use the term "taxonomic units" to refer to the highest resolution, distinct unit identified. This can be species, OTU, ASV...
+We use the term "phylogenetic units" to refer to the highest resolution, distinct unit identified. This can be species, OTU, ASV, ...
 
-We use the term "abundance table" to refer to the table with, at least, the abundance score for each taxonomic unit. Any additional data can be added, this can be an OTU table, ASV table... 
+We use the term "abundance table" to refer to the table with, at least, the abundance score for each phylogenetic unit. Any additional data can be added, this can be an OTU table, ASV table... 
 
-We also use the term "scale" or "scaling", which can also appear in the literature as "normalization".
+We also use the term "scale" or "scaling", which can also appear in the literature as "normalization", "transformation", ...
 
 ## Pre-processing of data prior to clustering algorithm
 
 The package ulrb will require that the abundance table is in tidy (or long) format, with a column for the abundance score used and another column for samples. Any additional columns are allowed.
 
-**Regarding the abundance score**, we are not scaling the abundance score in this vignette, because the k-medoids algorithm will be applied "per sample" to the values of the abundance score. This means that any scaling, *e.g.* relative abundance, clr... Will not have an effect on the algorithm, because the distance values between observations will remain the same. However, if the algorithm was applied to more variables (not only abundance), then scaling could make a difference. Thus, we consider that is best to use absolute values in this tutorial, to avoid misleading the reader into thinking that some scaling has to be done. 
+**Regarding the abundance score**, we are not scaling the abundance score in this vignette, because the k-medoids algorithm will be applied "per sample" to the values of the abundance score. This means that any scaling, *e.g.* relative abundance, center log-ratio, ... Will not have an effect on the algorithm, because the distance values between observations will remain the same. However, if the algorithm was applied to more variables (not only abundance), then scaling could make a difference. Thus, we consider that it is best to use absolute values in this tutorial, to avoid misleading the reader into thinking that some scaling has to be done. 
 
-Notwithstanding, for publication purposes and for the purposes of other data processing steps, it might make sense to apply some sort of scaling. As long as the number of observations, i.e. the number of taxonomic units, is the same, then the distance between them will be the same.
+Notwithstanding, for publication purposes and for the purposes of other data processing steps, it might make sense to apply some sort of scaling. As long as the number of observations, *i.e.* the number of phylogenetic units, is the same, then the distance between them will be the same.
 
-If the user decides to apply any quality filtering to the abundance table, like rarefaction, it should be done *before* using the clustering method.
+If the user decides to apply any quality filtering to the abundance table, like rarefaction, it should be done **before** using the clustering method.
 
 In summary, the algorithm will be applied to your final, clean abundance table, with any abundance score.
 
@@ -66,7 +69,7 @@ nice_clean <- rename(nice_raw, Taxonomy = "X.SampleID")
 # Select 16S rRNA amplicon sequencing samples
 selected_samples <- c("ERR2044662", "ERR2044663", "ERR2044664","ERR2044665", "ERR2044666", "ERR2044667","ERR2044668", "ERR2044669", "ERR2044670")
 
-# Add a column with taxonomic units ID (OTU in this case)
+# Add a column with phylogenetic units ID (OTU in this case)
 nice_clean <- mutate(nice_clean, OTU = paste0("OTU_", row_number()))
 
 # Select relevant columns
@@ -93,16 +96,25 @@ head(nice)
 
 ### Transform abundance table into tidy/long format
 
-Now that we have a cleaned OTU table, we can transform it to tidy format. You can do this part in any order and according to your own data format. We made the function `prepare_tidy_data()` to help transform the two most common data formats for abundance tables:
+Now that we have a cleaned OTU table, we can transform it to tidy format. You can 
+do this part in any order and according to your own data format. We made the function 
+`prepare_tidy_data()` to help transform the two most common data formats for abundance tables:
 
-1) taxonomic units in rows, samples in columns;
-2) taxonomic units in columns, samples in rows.
+1) phylogenetic units in rows, samples in columns;
+2) phylogenetic units in columns, samples in rows.
 
-In this example, we have a data.frame with taxonomic units as rows and samples in various columns, so this is not a tidy format. We need to collapse all columns with samples into a single "Abundance" and "Samples" column, so that each variable corresponds to a single column, *i.e.* tidy.
+In this example, we have a data.frame with phylogenetic units as rows and samples 
+in various columns, so this is not a tidy format. We need to collapse all columns 
+with samples into a single "Abundance" and "Samples" column, so that each variable 
+corresponds to a single column, *i.e.* tidy.
 
-For this we just need to apply the `prepare_tidy_data()` function to the cleaned data. Note that you need to specify in which format your abundance table is. In this example, samples are in different columns, so we set the argument samples_in to "cols"; if it was the opposite situation, with samples in rows, we would set samples_in to "rows".
+For this we just need to apply the `prepare_tidy_data()` function to the cleaned
+data. Note that you need to specify in which format your abundance table is. In 
+this example, samples are in different columns, so we set the argument samples_in 
+to "cols"; if it was the opposite situation, with samples in rows, we would set samples_in to "rows".
 
-This function is optional and if you use it you really should verify if it is transforming the data correctly, because your own data might be different from our standard examples.
+This function is optional and if you use it you really should verify if it is transforming
+the data correctly, because your own data might be different from our standard examples.
 
 ```{r}
 nice_tidy <- prepare_tidy_data(nice, sample_names = selected_samples, samples_in = "cols")
@@ -113,11 +125,11 @@ nice_tidy <- prepare_tidy_data(nice, sample_names = selected_samples, samples_in
 
 Now we are ready to use the central function of the package ulrb, which is `define_rb()`.
 
-This function will add new columns to the input data.frame, automatically deciding the classification of each taxonomic unit, per sample, by means of the partition around  medoids algorithm.
+This function will add new columns to the input data.frame, automatically deciding the classification of each phylogenetic unit, per sample, by means of the partition around medoids algorithm.
 
 The algorithm is run by the `pam()` function of the `cluster` package. The output are the clusters, which we translate into classifications, and provides statistical scores to interpret the robustness of the clusters formed. From those statistics, we select the silhouette scores, which will be used to evaluate the results later on. Additionally, the data.frame will include a nested list with the output from `pam()`, for more experienced users to analyze if necessary.
 
-Regarding the classifications, we are setting a default to "rare", "undetermined" and "abundant", based on Pascoal et al., 2023. However, the user can set any vector of classifications, as long as they follow the rules of the number of clusters, or k, from `pam()`. Meaning, the number of classifications can't be more than the number of distinct observations in the data. In practice this is not a concern, because we think most researchers will either use our default, or "rare" vs "abundant", or a more nuanced "very rare", "rare", "abundant", "very abundant". The point is that the classification can be decided in a study by study context.
+Regarding the classifications, we are setting a default to "rare", "undetermined" and "abundant", based on Pascoal et al., 2023 (manuscript in preparation). However, the user can set any vector of classifications, as long as they follow the rules of the number of clusters, or k, from `pam()`. Meaning, the number of classifications can't be more than the number of distinct observations in the data. In practice this is not a concern, because we think most researchers will either use our default, or "rare" vs "abundant", or a more nuanced "very rare", "rare", "abundant", "very abundant". The point is that the classification can be decided in a study by study context.
 
 Since the default output includes so many columns that are there to support the classification obtained, we added an argument, simplified, which if TRUE will return a simplified version of the output, without silhouette scores, just the final classification, plus all the input data. We will use the default, simplified = FALSE.
 
@@ -137,21 +149,21 @@ classified_table %>%
 
 ### Fully automated version
 
-In the previous example, there is still one level of subjetive decision, which is the number
-of classifications to use (*e.g.* "rare", "undertermined" and "abundant" would be k = 3). However, we added an option to the main function, `define_rb()`, which allows for the automatic decision of the number of clusters. This automation works under the assumption that the range of good k values
-lies between 3 and 10 (see Pascoal et al., 2023 for reasoning behind this). In another article (see ref), we explain in more detail how the automation works and how you can make your own decision
-regarding k, using several metrics.
+In the previous example, there is still one level of subjective decision, which is the number
+of classifications to use (*e.g.* "rare", "undetermined" and "abundant" would be k = 3). 
+However, we added an option to the main function, `define_rb()`, which allows for the automatic 
+decision of the number of clusters. This automation works under the assumption that the range of good k values
+lies between 3 and 10 (see Pascoal et al., 2023 for reasoning behind this). In `vignette("explore-classifications")`,
+we explain in more detail how the automation works and how you can make your own decision regarding k, using several metrics.
 
 ```{r}
 # Simple automation example
 define_rb(nice_tidy, automatic =  TRUE)
 ```
 
-
-
 ## Verify results
 
-It is good practice to check if results from unsupervised learning look sane. To help with this task, we made a group of functions that will help researchers understand if they need more or less classifications (change the value of k), or if the algorithm just doesn't work. There is no hard rule to verify unsupervised learning, but results should look sensible and follow expectations. We have seen that the results from this method are consistent with previous definitions of rarity, for example, most taxonomic units are rare and only very few are abundant, but we avoid introducing a human decision on which points are rare or abundant. 
+It is good practice to check if results from unsupervised learning look sane. To help with this task, we made a group of functions that will help researchers understand if they need more or less classifications (change the value of k), or if the algorithm just doesn't work. There is no hard rule to verify unsupervised learning, but results should look reasonable and follow expectations. We have seen that the results from this method are consistent with previous definitions of rarity, for example, most phylogenetic units are rare and only very few are abundant, but we avoid introducing a human decision on which points are rare or abundant. 
 
 The plots are the (1) Rank Abundance Curve and the (2) Silhouette plots. The first will be more helpful for microbial ecologists, while the second will be more helpful for data scientists.
 
@@ -161,9 +173,9 @@ Both plots are made available by the function `plot_ulrb()` (to verify clusterin
 
 The RAC is a common tool in microbial ecology to describe the detection limits of different methods and the distribution of species abundance (Pedrós-Alió, 2012) - it ranks all species from most to least abundant, resulting in a few species with very high abundance and a "long-tail" of low abundance species (which are called the "rare biosphere"). However, there is no objective method to decide where the "long-tail" begins.
 
-The ulrb method considers that the terms "rare" and "abundant" are relative, i.e. one taxonomic unit is rare if, and only if, compared to an abundant one (and vice-versa). We explore the consequences and assumptions that play into this in Pascoal et al., 2023. But this means that the method is not looking for the beginning of the "long-tail", it is comparing the abundance of all taxonomic units, and clustering them accordingly.
+The ulrb method considers that the terms "rare" and "abundant" are relative, i.e. one phylogenetic unit is rare if, and only if, compared to an abundant one (and vice-versa). We explore the consequences and assumptions that play into this in Pascoal et al., 2023 (manuscript in preparation). But this means that the method is not looking for the beginning of the "long-tail", it is comparing the abundance of all phylogenetic units, and clustering them accordingly.
 
-Thus, if we plot the standard RAC and then color each taxonomic unit according with the unsupervised classification, we can check if the unsupervised classification is consistent with the notion that the rare-biosphere is within the "long-tail".
+Thus, if we plot the standard RAC and then color each phylogenetic unit according with the unsupervised classification, we can check if the unsupervised classification is consistent with the notion that the rare-biosphere is within the "long-tail".
 
 To do this, we provide the function `plot_ulrb_clustering()`. Again, the abundance score can be transformed and the Log10 scale can be applied optionally. Other ggplot2 functions and arguments can be used, or you can also make your own plots and analysis.  
 
@@ -182,7 +194,7 @@ plot_ulrb_clustering(classified_table,
   labs(title = "Clustering for all samples")
 ```
 
-From the RAC obtained, we confirm that the unsupervised classification provides a sensible result. Because the rare biosphere is indeed in the "long-tail", followed by a transition region, which we term "undetermined", because they are neither rare, more abundant, and a few extreme points which are abundant.
+From the RAC obtained, we confirm that the unsupervised classification provides a reasonable result. Because the rare biosphere is indeed in the "long-tail", followed by a transition region, which we term "undetermined", because they are neither rare, more abundant, and a few extreme points which are abundant.
 
 
 
@@ -190,7 +202,7 @@ From the RAC obtained, we confirm that the unsupervised classification provides 
 
 The Silhouette plot provides a notion of the coherence of the points inside each cluster. The values for each observation range between -1 and +1, the closer to +1, the more coherent is the cluster. Usually, most observations will be very close to +1, and a few will have low values. As a rule of thumb, if most values are above 0.75, then the clusters are strong, but if you have many observations close to 0, but positive, the cluster might be artificial; for negative values, then the clusters have no structure.
 
-For more details see the documentation from the functions `plor_ulrb_silhouette()` and `check_avgSil()`; we also refer to Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis" (Kaufman and Rousseuw, 1991), for more details on interpretation of Silhouette plots.
+For more details see the documentation from the functions `plot_ulrb_silhouette()` and `check_avgSil()`; we also refer to Chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis" (Kaufman and Rousseuw, 1991), for more details on interpretation of Silhouette plots.
 
 
 ```{r, fig.width = 10}
@@ -233,7 +245,7 @@ plot_ulrb(classified_table,
 
 # References
 
-- Pascoal et al., 2023 (under work)
+- Pascoal et al., 2023 (manuscript in preparation)
 
 - Granskog, M. A., Fer, I., Rinke, A., & Steen, H. (2018). Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of Geophysical Research: Oceans, 123(3), 1586–1594.
 

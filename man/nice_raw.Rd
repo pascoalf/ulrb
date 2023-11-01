@@ -3,7 +3,7 @@
 \docType{data}
 \name{nice_raw}
 \alias{nice_raw}
-\title{Raw OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
+\title{V4-V5 16S rRNA gene amplicons, raw OTU table (N-ICE, 2015)}
 \format{
 \subsection{\code{nice_raw}}{
 
@@ -18,14 +18,14 @@ ERR2044667,
 ERR2044668,
 ERR2044669 and
 ERR2044670}{Sample ID}
-\item{OTU}{Taxonomic unit ID}
-\item{Domain}{Domain level classification of taxonomic unit}
-\item{Phylum}{Phylum level classification of taxonomic unit}
-\item{Class}{Class level classification of taxonomic unit}
-\item{Order}{Order level classification of taxonomic unit}
-\item{Family}{Family level classification of taxonomic unit}
-\item{Genus}{Genus level classification of taxonomic unit}
-\item{Species}{Species level classification of taxonomic unit}
+\item{OTU}{OTU ID}
+\item{Domain}{Domain level classification of OTU}
+\item{Phylum}{Phylum level classification of OTU}
+\item{Class}{Class level classification of OTU}
+\item{Order}{Order level classification of OTU}
+\item{Family}{Family level classification of OTU}
+\item{Genus}{Genus level classification of OTU}
+\item{Species}{Species level classification of OTU}
 ...
 }
 }
@@ -41,18 +41,20 @@ This is the "raw" data for the N-ICE dataset.
 }
 \details{
 The original sequencing results are available at European Nucleotide Archive
-(accession number: PRJEB15043). Those reads were processed into taxonomic units
+(accession number: PRJEB15043). Those reads were processed into OTUs
 by MGnify platform (Study: MGYS00001922). The later study accession provides the
 table used in here.
 
 This table contains the taxonomy and an abundance score for each taxonomic lineage, which
-we will refer to as "OTU" (Operational Taxonomic Unit) for simplicity sake.
+we will refer to as "OTU" (Operational OTU) for simplicity sake.
 
 For details on the sampling campaign in the Arctic ocean, sequencing protocols and
 bioinformatic processing, please see ref (de Sousa et al., 2019).
 }
 \references{
-de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
+\itemize{
+\item de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
+}
 }
 \seealso{
 \code{\link[=nice]{nice()}}, \link{nice_tidy}, \link{nice_env}

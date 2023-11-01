@@ -1,21 +1,22 @@
-#' Raw OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition
+#' V4-V5 16S rRNA gene amplicons, raw OTU table (N-ICE, 2015)
 #'
 #' This is the "raw" data for the N-ICE dataset.
 #'
 #' The original sequencing results are available at European Nucleotide Archive
-#' (accession number: PRJEB15043). Those reads were processed into taxonomic units
+#' (accession number: PRJEB15043). Those reads were processed into OTUs
 #' by MGnify platform (Study: MGYS00001922). The later study accession provides the
 #' table used in here.
 #'
 #' This table contains the taxonomy and an abundance score for each taxonomic lineage, which
-#' we will refer to as "OTU" (Operational Taxonomic Unit) for simplicity sake.
+#' we will refer to as "OTU" (Operational OTU) for simplicity sake.
 #'
 #' For details on the sampling campaign in the Arctic ocean, sequencing protocols and
 #' bioinformatic processing, please see ref (de Sousa et al., 2019).
 #'
 #' @seealso [nice()], [nice_tidy], [nice_env]
 #'
-#' @references de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
+#' @references
+#' - de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408. https://doi.org/10.1007/s00248-018-01314-2
 #'
 #' @format ## `nice_raw`
 #' A data frame with 524 rows and 17 columns:
@@ -29,31 +30,32 @@
 #'         ERR2044668,
 #'         ERR2044669 and
 #'         ERR2044670}{Sample ID}
-#'   \item{OTU}{Taxonomic unit ID}
-#'   \item{Domain}{Domain level classification of taxonomic unit}
-#'   \item{Phylum}{Phylum level classification of taxonomic unit}
-#'   \item{Class}{Class level classification of taxonomic unit}
-#'   \item{Order}{Order level classification of taxonomic unit}
-#'   \item{Family}{Family level classification of taxonomic unit}
-#'   \item{Genus}{Genus level classification of taxonomic unit}
-#'   \item{Species}{Species level classification of taxonomic unit}
+#'   \item{OTU}{OTU ID}
+#'   \item{Domain}{Domain level classification of OTU}
+#'   \item{Phylum}{Phylum level classification of OTU}
+#'   \item{Class}{Class level classification of OTU}
+#'   \item{Order}{Order level classification of OTU}
+#'   \item{Family}{Family level classification of OTU}
+#'   \item{Genus}{Genus level classification of OTU}
+#'   \item{Species}{Species level classification of OTU}
 #'   ...
 #' }
 #' @source <https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
 "nice_raw"
 
-#' OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition
+#' V4-V5 16S rRNA gene amplicons, clean OTU table (N-ICE, 2015)
 #'
 #' Table in "wide" format with abundance and taxonomic classification of each OTU.
 #'
 #' This OTU table was cleaned so that it only includes samples from 16S rRNA amplicon sequencing
-#' and no eukaryotes (similarly to Pascoal et al., 2022). Additionally, we added a column with (OTU) with a ID for each OTU.
+#' and no eukaryotes (similarly to Pascoal et al., 2022). Additionally, we added a column with a ID for each OTU.
 #'
 #' For details on raw data, see [nice_raw]
 #'
 #' @seealso [nice_tidy()], [nice_raw], [nice_env]
 #'
-#' @references Pascoal, F., Costa, R., Assmy, P., Duarte, P., & Magalhães, C. (2022). Exploration of the Types of Rarity in the Arctic Ocean from the Perspective of Multiple Methodologies. Microbial Ecology, 84(1), 59–72. https://doi.org/10.1007/s00248-021-01821-9
+#' @references
+#' - Pascoal, F., Costa, R., Assmy, P., Duarte, P., & Magalhães, C. (2022). Exploration of the Types of Rarity in the Arctic Ocean from the Perspective of Multiple Methodologies. Microbial Ecology, 84(1), 59–72. https://doi.org/10.1007/s00248-021-01821-9
 #'
 #' @format ## `nice`
 #' A data frame with 524 rows and 17 columns:
@@ -67,25 +69,25 @@
 #'         ERR2044668,
 #'         ERR2044669 and
 #'         ERR2044670}{Sample ID}
-#'   \item{OTU}{Taxonomic unit ID}
-#'   \item{Domain}{Domain level classification of taxonomic unit}
-#'   \item{Phylum}{Phylum level classification of taxonomic unit}
-#'   \item{Class}{Class level classification of taxonomic unit}
-#'   \item{Order}{Order level classification of taxonomic unit}
-#'   \item{Family}{Family level classification of taxonomic unit}
-#'   \item{Genus}{Genus level classification of taxonomic unit}
-#'   \item{Species}{Species level classification of taxonomic unit}
+#'   \item{OTU}{OTU ID}
+#'   \item{Domain}{Domain level classification of OTU}
+#'   \item{Phylum}{Phylum level classification of OTU}
+#'   \item{Class}{Class level classification of OTU}
+#'   \item{Order}{Order level classification of OTU}
+#'   \item{Family}{Family level classification of OTU}
+#'   \item{Genus}{Genus level classification of OTU}
+#'   \item{Species}{Species level classification of OTU}
 #'   ...
 #' }
 #' @source <https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
 "nice"
 
-#' Tidy OTU table from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition
+#' V4-V5 16S rRNA gene amplicons, clean OTU table in tidy/long format (N-ICE, 2015)
 #'
 #' Original OTU table ([nice]) in "long" format.
 #'
 #' A new column (Sample) includes the sample identifiers and a new column
-#' (Abundance) includes the abundance for each taxonomic unit.
+#' (Abundance) includes the abundance for each OTU.
 #' For details on OTU table processing see help pages for [nice] and [nice_raw].
 #'
 #' @details
@@ -117,20 +119,20 @@
 #' \describe{
 #'   \item{Sample}{Sample ID}
 #'   \item{Abundance}{Abundance}
-#'   \item{OTU}{Taxonomic unit ID}
-#'   \item{Domain}{Domain level classification of taxonomic unit}
-#'   \item{Phylum}{Domain level classification of taxonomic unit}
-#'   \item{Class}{Domain level classification of taxonomic unit}
-#'   \item{Order}{Domain level classification of taxonomic unit}
-#'   \item{Family}{Domain level classification of taxonomic unit}
-#'   \item{Genus}{Domain level classification of taxonomic unit}
-#'   \item{Species}{Domain level classification of taxonomic unit}
+#'   \item{OTU}{OTU ID}
+#'   \item{Domain}{Domain level classification of OTU}
+#'   \item{Phylum}{Domain level classification of OTU}
+#'   \item{Class}{Domain level classification of OTU}
+#'   \item{Order}{Domain level classification of OTU}
+#'   \item{Family}{Domain level classification of OTU}
+#'   \item{Genus}{Domain level classification of OTU}
+#'   \item{Species}{Domain level classification of OTU}
 #'   ...
 #' }
 #' @source <https://www.ebi.ac.uk/metagenomics/studies/MGYS00001922#analysis>
 "nice_tidy"
 
-#' Metadata of samples from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition
+#' Metadata of samples from OTU tables (N-ICE, 2015)
 #'
 #' This dataset provides information on the samples used for the N-ICE dataset.
 #'
@@ -138,7 +140,8 @@
 #'
 #' @seealso [nice], [nice_raw], [nice_tidy]
 #'
-#' @references de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408.
+#' @references
+#' - de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408.
 #'
 #' @format ## `nice_tidy`
 #' A data frame with 4716 rows and 10 columns:

@@ -3,7 +3,7 @@
 \docType{data}
 \name{nice_env}
 \alias{nice_env}
-\title{Metadata of samples from SSU rRNA amplicon of the Arctic Ocean during Winter-Spring Transition}
+\title{Metadata of samples from OTU tables (N-ICE, 2015)}
 \format{
 \subsection{\code{nice_tidy}}{
 
@@ -33,7 +33,9 @@ This dataset provides information on the samples used for the N-ICE dataset.
 Based on de Sousa et al., 2019.
 }
 \references{
-de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408.
+\itemize{
+\item de Sousa, A. G. G., Tomasino, M. P., Duarte, P., Fernández-Méndez, M., Assmy, P., Ribeiro, H., Surkont, J., Leite, R. B., Pereira-Leal, J. B., Torgo, L., & Magalhães, C. (2019). Diversity and Composition of Pelagic Prokaryotic and Protist Communities in a Thin Arctic Sea-Ice Regime. Microbial Ecology, 78(2), 388–408.
+}
 }
 \seealso{
 \link{nice}, \link{nice_raw}, \link{nice_tidy}

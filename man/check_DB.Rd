@@ -99,8 +99,6 @@ j'th observation (again, \eqn{i \neq j}).
 \deqn{S_i = \sqrt{\frac{1}{T_i}\sum_{j=1}^{T_i}\left\lvert X_j - C_i \right\rvert}}
 
 \strong{Note} that this is the case for euclidean distances.
-
-link for extra: https://pyshark.com/davies-bouldin-index-for-k-means-clustering-evaluation-in-python/
 }
 \examples{
 

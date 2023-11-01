@@ -71,7 +71,6 @@
 #'
 #'  **Note** that this is the case for euclidean distances.
 #'
-#' link for extra: https://pyshark.com/davies-bouldin-index-for-k-means-clustering-evaluation-in-python/
 #'
 #' @references
 #' Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2).

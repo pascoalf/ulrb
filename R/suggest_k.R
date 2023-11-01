@@ -1,14 +1,14 @@
 #' Suggest k
 #'
-#' Tool to help decide how many clusters to use for k-medoids algorithm.
+#' Tool to help decide how many clusters to use for partition around medoids algorithm.
 #'
 #' The best k is selected for each sample, based on the selected index.
 #' If different k's are obtained for different samples (probable) then we
 #' calculate the mean value of k and return it as an integer. Alternatively, we can
 #' return a more detailed result in the form of a list.
 #'
-#' **Note**; this function is used within [define_rb()], with default parameters, for the
-#' otional automatic selection of k.
+#' **Note**: this function is used within [define_rb()], with default parameters, for the
+#' optional automatic selection of k.
 #'
 #' @details
 #' **Detailed option**
@@ -26,7 +26,8 @@
 #' If `detailed = FALSE`, this function will provide a single integer with the best k.
 #' The **default** decision is based on the maximum average Silhouette score obtained
 #' for the values of k between 3 and 10. To better understand why the average Silhouette score and
-#' this range of k's were selected, we refer to Pascoal et al., 2023.
+#' this range of k's were selected, we refer to Pascoal et al., 2023 (manuscript in preparation) and to
+#' vignette("explore-classifications").
 #'
 #' Alternatively, this function can also provide the best k, as an integer, based on another index
 #' (Davies-Bouldin and Calinsky-Harabasz) and can compare the entire of possible k's.

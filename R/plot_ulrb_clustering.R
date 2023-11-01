@@ -1,6 +1,6 @@
-#' Sanity check rare biosphere definition for one sample
+#' Plot Rank Abundance Curve of classification results
 #'
-#' Plots the clustering results from [define_rb()]
+#' Plots the clustering results from [define_rb()].
 #'
 #' This works as a sanity check of the results obtained by the unsupervised learning method used
 #' to classify species. This is specially important if you used an automatic number of clusters.
