@@ -16,12 +16,13 @@
 #' @seealso [evaluate_sample_k()], [check_DB()], [check_CH()], [check_avgSil()], [suggest_k()]
 #'
 #' @examples
+#' \dontrun{
 #' library(dplyr)
 #' #
 #' evaluate_k(nice_tidy)
 #'
 #' # To make simple plot
-#' \dontrun{
+#'
 #' evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
 #' }
 #'

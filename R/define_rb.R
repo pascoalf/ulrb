@@ -132,6 +132,7 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' library(dplyr)
 #' # Sample ID's
 #' sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -194,7 +195,7 @@
 #'  select(Sample, Abundance, Classification) %>%
 #'  group_by(Sample, Classification) %>%
 #'  summarise(totalAbundance = sum(Abundance))
-#'
+#'}
 #' @import dplyr
 #' @importFrom rlang .data
 #'

@@ -43,10 +43,10 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' # Get the best k with default parameters
 #' suggest_k(nice_tidy)
 #'
-#' \dontrun{
 #' # Get detailed results to decide for yourself
 #' suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
 #'
