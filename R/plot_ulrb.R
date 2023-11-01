@@ -19,7 +19,7 @@
 #'
 #' - 0.71-1.00 (A strong structure has been found);
 #' - 0.51-0.70 (A reasonable structure has been found);
-#' - 0.26-0.50 (The sructure is weak and could be artificial);
+#' - 0.26-0.50 (The structure is weak and could be artificial);
 #' - <0.26 (No structure has been found).
 #'
 #' @inheritParams plot_ulrb_clustering
@@ -69,9 +69,13 @@ plot_ulrb <- function(data,
                       colors = c("#009E73", "#F0E442","#CC79A7"),
                       ...){
   #
-
+  if(isFALSE(plot_all)){
+    if(missing(sample_id)){
+      stop("Are you trying to plot multiple samples? If so, please set plot_all to TRUE.")
+    }
+  }
   if(missing(taxa_col)){
-    stop("You must specify which column includes the taxonomic units.")
+    stop("Please specify the name of the column with phylohenetic units in the argument taxa_col.")
   }
 
   if(is.matrix(data))

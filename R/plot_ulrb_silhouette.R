@@ -67,7 +67,14 @@ plot_ulrb_silhouette <- function(data,
                                  log_scaled = FALSE,
                                  ...){
   # Check data before starting
-  if(missing(taxa_col)){stop("You must specify which column includes the taxonomic units.")}
+  if(isFALSE(plot_all)){
+    if(missing(sample_id)){
+      stop("Are you trying to plot multiple samples? If so, please set plot_all to TRUE.")
+    }
+  }
+  if(missing(taxa_col)){
+    stop("Please specify the name of the column with phylohenetic units in the argument taxa_col.")
+  }
   if(is.matrix(data))
     stop("Please use data.frame in tidy format.")
   if(length(colors) != length(unique(data$Classification))){

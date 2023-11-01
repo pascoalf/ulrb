@@ -178,3 +178,13 @@ test_that("Stops if number of colors is wrong
                        log_scaled = TRUE,
                        colors = c(1,2)))
          })
+
+test_that("Stops if multiple samples are used, but plot_all is not set to TRUE",{
+  urlb_results <- define_rb(nice_tidy) %>% as.matrix()
+  expect_error(
+    plot_ulrb_clustering(urlb_results,
+              taxa_col = "OTU",
+              plot_all = FALSE,
+              log_scaled = TRUE,
+              colors = c(1,2)))
+})

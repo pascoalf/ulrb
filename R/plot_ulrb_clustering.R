@@ -8,10 +8,10 @@
 #' The function works for either a single sample (that you specify with sample_id argument), or
 #' it can apply a centrality metric for species across all your samples (plot_all = TRUE).
 #'
-#' @param data a data.frame with, at least, the classification, abundance and sample information for each taxonomic unit.
+#' @param data a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.
 #' @param sample_id string with name of selected sample.
 #' @param samples_col name of column with sample ID's.
-#' @param taxa_col string with name of column with taxonomic units. Usually OTU or ASV.
+#' @param taxa_col string with name of column with phylogenetic units. Usually OTU or ASV.
 #' @param plot_all If TRUE, will make a plot for all samples with mean and standard deviation. If FALSE (default), then the plot will illustrate a single sample, that you have to specifiy in sample_id argument.
 #' @param classification_col string with name of column with classification for each row. Default value is "Classification".
 #' @param abundance_col string with name of column with abundance values. Default is "Abundance".
@@ -58,7 +58,14 @@ plot_ulrb_clustering <- function(data,
                                  colors = c("#009E73", "#F0E442","#CC79A7"),
                                  ...){
   #
-  if(missing(taxa_col)){stop("You must specify which column includes the taxonomic units.")}
+  if(isFALSE(plot_all)){
+    if(missing(sample_id)){
+      stop("Are you trying to plot multiple samples? If so, please set plot_all to TRUE.")
+    }
+  }
+  if(missing(taxa_col)){
+    stop("Please specify the name of the column with phylohenetic units in the argument taxa_col.")
+  }
   if(is.matrix(data))
     stop("Please use data.frame in tidy format.")
   if(length(colors) != length(unique(data$Classification))){
