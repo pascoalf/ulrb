@@ -9,13 +9,14 @@ Authors@R: c(
     person("Rodrigo", "Costa",,"rodrigoscosta@tecnico.ulisboa.pt", role = c("aut")),
     person("Catarina", "Magalhães",,"catarinamagalhaes1972@gmail.com", role = c("aut")))
 Maintainer: Francisco Pascoal <fpascoal1996@gmail.com>
-Description: ulrb solves the problem of the definition of rarity by replacing 
-    human decision with an unsupervised machine learning algorithm (partitioning around medoids, 
-    or k-medoids). This algorithm works for any type of microbiome data, provided
-    there is an abundance score for each phylogenetic unit. For validation of this 
-    method to several kinds of molecular data and environments, please see 
-    Pascoal et al, 2023 (in preparation). Preliminary data suggest this method also 
-    works well for non-microbiome data, if there is a species abundance table.
+Description: A tool to define rare biosphere. ulrb solves the problem of the 
+    definition of rarity by replacing human decision with an unsupervised machine 
+    learning algorithm (partitioning around medoids, or k-medoids). This algorithm 
+    works for any type of microbiome data, provided there is an abundance score 
+    for each phylogenetic unit. For validation of this method to several kinds of 
+    molecular data and environments, please see Pascoal et al, 2023 (in preparation).
+    Preliminary data suggest this method also works well for non-microbiome data, 
+    if there is a species abundance table.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
