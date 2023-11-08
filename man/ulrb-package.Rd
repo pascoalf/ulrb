@@ -1,9 +1,9 @@
-\name{urlb-package}
-\alias{urlb-package}
+\name{ulrb-package}
+\alias{ulrb-package}
 \docType{package}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-  urlb: Unsupervised Learning Based Definition of Microbial Rare Biosphere
+  ulrb: Unsupervised Learning Based Definition of Microbial Rare Biosphere
 }
 \description{
   The R package ulrb stands for Unsupervised Machine Learning definition of the
@@ -25,7 +25,7 @@
 }
 \details{
   \tabular{ll}{
-    Name: \tab urlb\cr
+    Name: \tab ulrb\cr
     Type: \tab Package\cr
     Version: \tab 0.1.0\cr
     %update!
@@ -49,7 +49,7 @@
 
 \examples{
   \dontrun{
-    library(urlb)
+    library(ulrb)
     # nice is an OTU table in wide format
     head(nice)
 
