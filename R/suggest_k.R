@@ -44,16 +44,17 @@
 #'
 #' @examples
 #'
-#' \dontrun{
+#'\donttest{
 #' # Get the best k with default parameters
 #' suggest_k(nice_tidy)
+#'
 #'
 #' # Get detailed results to decide for yourself
 #' suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
 #'
 #' # Get best k, based on Davies-Bouldin index
 #' suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin")
-#'}
+#' }
 #'
 suggest_k <- function(data,
                       range = 3:10,

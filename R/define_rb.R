@@ -136,7 +136,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(dplyr)
 #' # Sample ID's
 #' sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -157,10 +157,11 @@
 #' select(Sample, Abundance, Classification) %>%
 #' head()
 #'
+#'
 #' # Automatic decision, instead of a predefined definition
 #' define_rb(nice_tidy, automatic = TRUE) %>% select(Sample, Abundance, Classification)
 #'
-#' # Automatic decision, using Davies-Boulding index,
+#' # Automatic decision, using Davies-Bouldin index,
 #' # instead of average Silhouette score (default)
 #' define_rb(nice_tidy, automatic = TRUE, index = "Davies-Bouldin") %>%
 #' select(Sample, Abundance, Classification)

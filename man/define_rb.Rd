@@ -154,7 +154,7 @@ any number of samples (see: \code{\link[=plot_ulrb]{plot_ulrb()}} for clustering
 and \code{\link[=evaluate_k]{evaluate_k()}} for k selection).
 }
 \examples{
-\dontrun{
+
 library(dplyr)
 # Sample ID's
 sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -217,7 +217,7 @@ nice_tidy \%>\%
  select(Sample, Abundance, Classification) \%>\%
  group_by(Sample, Classification) \%>\%
  summarise(totalAbundance = sum(Abundance))
-}
+
 }
 \references{
 Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
