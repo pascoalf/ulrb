@@ -128,16 +128,71 @@ vignette("explore-classifications").</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the best k with default parameters</span></span></span>
 <span class="r-in"><span><span class="fu">suggest_k</span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get detailed results to decide for yourself</span></span></span>
 <span class="r-in"><span><span class="fu">suggest_k</span><span class="op">(</span><span class="va">nice_tidy</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span>, range <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "This list contains several details that might help you decide a k parameter."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      Score                 Criteria                     Details</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     Davies-Bouldin index Minimum value for best k Measures cluster separation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Calinsky-Harabasz index Maximum value for best k Measures cluster definition</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Average Silhouette Score Maximum value for best k    Measures cluster density</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $SamplesSummary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "You study has 9 samples. For each one we calculated all indices obtained for each k, from 2 to 7"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $DaviesBouldin</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Sample         CH     k</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ERR2044662 <span style="text-decoration: underline;">17</span>589.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ERR2044663 <span style="text-decoration: underline;">12</span>741.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ERR2044664 <span style="text-decoration: underline;">87</span>610.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ERR2044665  <span style="text-decoration: underline;">9</span>486.     6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ERR2044666 <span style="text-decoration: underline;">19</span>652.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ERR2044667  <span style="text-decoration: underline;">6</span>504.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> ERR2044669  <span style="text-decoration: underline;">6</span>616.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> ERR2044668 <span style="text-decoration: underline;">36</span>144.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> ERR2044670  <span style="text-decoration: underline;">9</span>480.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $CalinskyHarabasz</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Sample         CH     k</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ERR2044662 <span style="text-decoration: underline;">17</span>589.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ERR2044663 <span style="text-decoration: underline;">12</span>741.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ERR2044664 <span style="text-decoration: underline;">87</span>610.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ERR2044665  <span style="text-decoration: underline;">9</span>486.     6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ERR2044666 <span style="text-decoration: underline;">19</span>652.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ERR2044667  <span style="text-decoration: underline;">6</span>504.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> ERR2044669  <span style="text-decoration: underline;">6</span>616.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> ERR2044668 <span style="text-decoration: underline;">36</span>144.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> ERR2044670  <span style="text-decoration: underline;">9</span>480.     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $averageSilhouette</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Sample     average_Silhouette     k</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ERR2044662              0.977     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ERR2044663              0.978     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ERR2044664              0.984     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ERR2044665              0.979     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ERR2044666              0.983     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ERR2044667              0.972     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> ERR2044669              0.976     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> ERR2044668              0.979     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> ERR2044670              0.932     3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get best k, based on Davies-Bouldin index</span></span></span>
 <span class="r-in"><span><span class="fu">suggest_k</span><span class="op">(</span><span class="va">nice_tidy</span>, detailed <span class="op">=</span> <span class="cn">FALSE</span>, index <span class="op">=</span> <span class="st">"Davies-Bouldin"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
