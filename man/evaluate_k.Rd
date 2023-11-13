@@ -39,13 +39,15 @@ For more details on indices calculation, please see the documentation for \code{
 \code{\link[=check_CH]{check_CH()}} and \code{\link[=check_avgSil]{check_avgSil()}}.
 }
 \examples{
+\donttest{
 library(dplyr)
-#
-evaluate_k(nice_tidy)
+
+#' evaluate_k(nice_tidy)
 
 
 # To make simple plot
 evaluate_k(nice_tidy, range = 4:11, with_plot =TRUE)
+}
 
 }
 \seealso{

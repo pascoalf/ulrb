@@ -29,7 +29,7 @@
     Type: \tab Package\cr
     Version: \tab 0.1.0\cr
     %update!
-      Date: \tab 2023-11-08\cr
+      Date: \tab 2023-11-13\cr
     License: \tab GPL 3\cr
   }
 

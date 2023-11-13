@@ -67,15 +67,17 @@ Alternatively, this function can also provide the best k, as an integer, based o
 }
 \examples{
 
-
+\donttest{
 # Get the best k with default parameters
 suggest_k(nice_tidy)
+
 
 # Get detailed results to decide for yourself
 suggest_k(nice_tidy, detailed = TRUE, range = 2:7)
 
 # Get best k, based on Davies-Bouldin index
 suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin")
+}
 
 }
 \seealso{
