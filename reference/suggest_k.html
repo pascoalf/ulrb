@@ -33,7 +33,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/pascoalf/ulrb/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -41,7 +47,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Suggest k</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/pascoalf/ulrb/blob/HEAD/R/suggest_k.R" class="external-link"><code>R/suggest_k.R</code></a></small>
       <div class="d-none name"><code>suggest_k.Rd</code></div>
     </div>
 
@@ -128,10 +134,11 @@ vignette("explore-classifications").</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Get the best k with default parameters</span></span></span>
 <span class="r-in"><span><span class="fu">suggest_k</span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get detailed results to decide for yourself</span></span></span>
 <span class="r-in"><span><span class="fu">suggest_k</span><span class="op">(</span><span class="va">nice_tidy</span>, detailed <span class="op">=</span> <span class="cn">TRUE</span>, range <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></span>
@@ -193,6 +200,7 @@ vignette("explore-classifications").</p>
 <span class="r-in"><span><span class="co"># Get best k, based on Davies-Bouldin index</span></span></span>
 <span class="r-in"><span><span class="fu">suggest_k</span><span class="op">(</span><span class="va">nice_tidy</span>, detailed <span class="op">=</span> <span class="cn">FALSE</span>, index <span class="op">=</span> <span class="st">"Davies-Bouldin"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
