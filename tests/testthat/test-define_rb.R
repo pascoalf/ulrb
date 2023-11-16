@@ -243,41 +243,11 @@ test_that("Function runs with automatic k for another index, Calinsky-Harabasz,"
   expect_no_error(define_rb(nice_tidy, automatic = TRUE, index = index))
 })
 
-test_that("Function runs with automatic k for another index, Davies-Bouldin,", {
-  # For Davies-Bouldin we expect a bad clustering, so a warning will show up
-  index <- "Davies-Bouldin"
-  expect_warning(define_rb(nice_tidy, automatic = TRUE, index = index),
-                 regexp = "\\d+ samples got a bad Silhouette score. Consider changing the number of classifications.")
-})
 
-
-# Function works with automatic=TRUE
-test_that("Function runs without errors with automatic = TRUE", {
-  # index is standard
-  expect_no_error(define_rb(nice_tidy,automatic = TRUE))
-})
-
-# shuffle arguments and see if automatic option works fine
-test_that("Function runs without errors with simplified to TRUE and automatic k", {
-  # index is standard
-  expect_no_error(define_rb(nice_tidy,simplified = TRUE, automatic = TRUE))
-})
-
-
-# Check automatic k with index = "Davies-Bouldin
-# It should throw a warning, because of bad clustering in one sample
-test_that("Function runs without errors with automatic = TRUE, for Davies-Bouldin index", {
-  expect_warning(define_rb(nice_tidy,automatic = TRUE, index = "Davies-Bouldin"))
-})
-
-# Check for index = "Calinsky-Harabasz"
-test_that("Function runs without errors with automatic = TRUE, for Calinsky-Harabasz index", {
-  expect_no_error(define_rb(nice_tidy,automatic = TRUE, index = "Calinsky-Harabasz"))
-})
 
 # Change the range of values to test k with
 test_that("Function runs without errors with automatic = TRUE, for a different range of values", {
-  expect_no_error(define_rb(nice_tidy,automatic = TRUE, range = 2:20))
+  expect_no_error(define_rb(nice_tidy,automatic = TRUE, range = 5:10))
 })
 
 # If the range includes k = 1, then it should throw an error

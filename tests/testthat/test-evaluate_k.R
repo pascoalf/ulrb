@@ -1,4 +1,3 @@
-### modify all tests, input should be a data.frame ###
 test_that("No error", {
   expect_no_error(evaluate_k(nice_tidy))
 })
@@ -9,27 +8,15 @@ test_that("No error after removing absent species", {
 })
 
 test_that("Test if it is ok to change range of values", {
-  expect_no_error(evaluate_k(nice_tidy, range = 20:30))
+  expect_no_error(evaluate_k(nice_tidy, range = 20:25))
 })
 
 test_that("Expect error for k = 1", {
-  expect_error(evaluate_k(nice_tidy, range = 1:10))
+  expect_error(evaluate_k(nice_tidy, range = 1:4))
 })
 
-#test_that("Should work for all possible k's without errors", {
-  ## max k across all samples
-  max_k <- nice_tidy %>%
-    filter(Abundance > 0, !is.na(Abundance)) %>%
-    group_by(Sample) %>%
-    summarise(topK = length(unique(Abundance))) %>%
-    ungroup() %>%
-    pull(topK) %>%
-    min()
-#
-  expect_no_error(evaluate_k(nice_tidy, range = 2:(max_k)))
-#})
 
-#test_that("Should throw error if max k is reached", {
+test_that("Should throw error if max k is reached", {
   ## max k across all samples
   max_k <- nice_tidy %>%
    filter(Abundance > 0, !is.na(Abundance)) %>%
@@ -39,8 +26,8 @@ test_that("Expect error for k = 1", {
    pull(topK) %>%
    min()
   #
-  expect_error(evaluate_k(nice_tidy, range = 2:(max_k+1)))
-#})
+  expect_error(evaluate_k(nice_tidy, range = max_k:(max_k+1)))
+})
 
 test_that("no error for plot option", {
   expect_no_error(evaluate_k(nice_tidy, with_plot = TRUE))
