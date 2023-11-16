@@ -1,7 +1,7 @@
 Package: ulrb
 Type: Package
 Title: Unsupervised Learning Based Definition of Microbial Rare Biosphere
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Francisco", "Pascoal",,"fpascoal1996@gmail.com", role = c("aut","cre"), comment = c(ORCID = "0000-0003-2315-358X")),
     person("Paula", "Branco",,"paobranco@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-9917-3694")),
