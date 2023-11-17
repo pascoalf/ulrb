@@ -33,7 +33,7 @@
 #' @seealso [define_rb()], [check_avgSil()], [plot_ulrb_clustering()], [plot_ulrb_silhouette()]
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' classified_species <- define_rb(nice_tidy)
 #'
 #' # Default parameters for a single sample ERR2044669

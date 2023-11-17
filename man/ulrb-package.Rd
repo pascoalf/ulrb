@@ -48,7 +48,7 @@
 \keyword{ package }
 
 \examples{
-  \dontrun{
+  \donttest{
     library(ulrb)
     # nice is an OTU table in wide format
     head(nice)
