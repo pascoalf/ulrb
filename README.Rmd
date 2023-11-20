@@ -46,7 +46,13 @@ For tutorials and documentation of the **urlb** package, visit our website: link
  
 ## Installation
 
-You can install the development version of ulrb from [GitHub](https://github.com/) with:
+To install the last stable version, use:
+
+```{r}
+install.packages("ulrb")
+```
+
+If you want to install the last version available on GitHub, use:
 
 ``` r
 # install.packages("devtools")

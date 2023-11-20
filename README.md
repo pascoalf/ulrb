@@ -42,8 +42,15 @@ website: link.
 
 ## Installation
 
-You can install the development version of ulrb from
-[GitHub](https://github.com/) with:
+To install the last stable version, use:
+
+``` r
+install.packages("ulrb")
+#> Installing package into '/tmp/Rtmp5uCk1z/temp_libpath1d9364f4cfa1'
+#> (as 'lib' is unspecified)
+```
+
+If you want to install the last version available on GitHub, use:
 
 ``` r
 # install.packages("devtools")
@@ -139,7 +146,7 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
 #> Removed 197 rows containing missing values (`geom_segment()`).
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 ``` r
 
@@ -147,4 +154,4 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
 plot_ulrb(nice_classification_results, taxa_col = "OTU", sample_id = "ERR2044662")
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
