@@ -102,8 +102,13 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of ulrb from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>To install the last stable version, use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ulrb"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Installing package into '/tmp/Rtmp5uCk1z/temp_libpath1d9364f4cfa1'</span></span>
+<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span></code></pre></div>
+<p>If you want to install the last version available on GitHub, use:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"pascoalf/ulrb"</span><span class="op">)</span></span></code></pre></div>
 <p>We are working on a CRAN publication. We will then provide instructions for CRAN installation.</p>
@@ -112,7 +117,7 @@
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example which shows you how to use ulrb to divide phylogenetic units into three classifications (rare, undetermined and abundant):</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pascoalf.github.io/ulrb/">ulrb</a></span><span class="op">)</span></span>
 <span><span class="co">## basic example</span></span>
 <span><span class="fu"><a href="reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span>
@@ -136,7 +141,7 @@
 <span><span class="co">#&gt; #   Silhouette_scores &lt;dbl&gt;, Cluster_median_abundance &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   median_Silhouette &lt;dbl&gt;, Evaluation &lt;chr&gt;</span></span></code></pre></div>
 <p>With ulrb, you can also format your original species table, get an automatic number of clusters and plot the results:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># nice is an OTU table in wide format</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nice</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   ERR2044662 ERR2044663 ERR2044664 ERR2044665 ERR2044666 ERR2044667 ERR2044668</span></span>
@@ -186,12 +191,12 @@
 <span><span class="fu"><a href="reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">nice_classification_results</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span>
 <span><span class="co">#&gt; Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># In case you want to inspect the result of a particular sample, do:</span></span>
 <span><span class="fu"><a href="reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">nice_classification_results</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, sample_id <span class="op">=</span> <span class="st">"ERR2044662"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-2-2.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-3-2.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
