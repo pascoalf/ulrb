@@ -10,8 +10,6 @@
 [![test-coverage](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml)
 [![GPLv3
 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
-![GitHub all
-releases](https://img.shields.io/github/downloads/pascoalf/ulrb/total)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
@@ -46,7 +44,7 @@ To install the last stable version, use:
 
 ``` r
 install.packages("ulrb")
-#> Installing package into '/tmp/Rtmp5uCk1z/temp_libpath1d9364f4cfa1'
+#> Installing package into '/tmp/RtmpifPZ7b/temp_libpath3ea13f211b28'
 #> (as 'lib' is unspecified)
 ```
 
