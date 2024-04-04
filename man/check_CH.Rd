@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_CH.R
 \name{check_CH}
 \alias{check_CH}
-\title{Check Calinsky-Harabasz index}
+\title{Check Calinski-Harabasz index}
 \usage{
 check_CH(
   data,
@@ -30,16 +30,16 @@ check_CH(
 \item{...}{Extra arguments.}
 }
 \value{
-Vector or plot with Calinsky-Harabasz index for each pre-specified k.
+Vector or plot with Calinski-Harabasz index for each pre-specified k.
 }
 \description{
-Calculates Calinsky-Harabasz pseudo F-statistic (CH) for a given sample
+Calculates Calinski-Harabasz pseudo F-statistic (CH) for a given sample
 }
 \details{
 CH is an index used to decide the number of clusters in a clustering algorithm.
 This function, \code{\link[=check_CH]{check_CH()}}, calculates the CH index for every k in a pre-specified range
 of values. Thus providing a score for each number of clusters tested (k). The default
-range of cluster values (k) is \code{range = 3:10} (see why this is in Pascoal et al., 2023).
+range of cluster values (k) is \code{range = 3:10} (see why this is in Pascoal et al., 2024, in peer review).
 However, this function may calculate the CH index for all possible k's.
 
 Note that CH index is not an absolute value that indicates the quality of a single clustering.
@@ -60,7 +60,7 @@ The default option returns a vector with CH scores for each k. This is a simple 
 for other analysis. However, we also provide the option to show a plot (set \code{with_plot = TRUE}) with
 the CH score for each k.
 
-\strong{Explanation of Calinsky-Harabasz index}
+\strong{Explanation of Calinski-Harabasz index}
 
 The CH index is a \strong{variance ratio criterion}, it measures both \strong{separation} and \strong{density} of the clusters.
 The higher, the better, because it means that the points within the same cluster are close to each other; and
@@ -68,7 +68,7 @@ the different clusters are well separated.
 
 You can see CH index as:
 
-\deqn{CH = \frac{inter-cluster dispersion}{intra-cluster dispersion}}
+\deqn{CH = \frac{\text{inter cluster dispersion}}{intra cluster dispersion}}
 
 To calculate inter-cluster:
 

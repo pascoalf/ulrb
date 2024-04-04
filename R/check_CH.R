@@ -1,11 +1,11 @@
-#' Check Calinsky-Harabasz index
+#' Check Calinski-Harabasz index
 #'
-#' Calculates Calinsky-Harabasz pseudo F-statistic (CH) for a given sample
+#' Calculates Calinski-Harabasz pseudo F-statistic (CH) for a given sample
 #'
 #' CH is an index used to decide the number of clusters in a clustering algorithm.
 #' This function, [check_CH()], calculates the CH index for every k in a pre-specified range
 #' of values. Thus providing a score for each number of clusters tested (k). The default
-#' range of cluster values (k) is `range = 3:10` (see why this is in Pascoal et al., 2023).
+#' range of cluster values (k) is `range = 3:10` (see why this is in Pascoal et al., 2024, in peer review).
 #' However, this function may calculate the CH index for all possible k's.
 #'
 #' Note that CH index is not an absolute value that indicates the quality of a single clustering.
@@ -30,7 +30,7 @@
 #'
 #'
 #' @details
-#' **Explanation of Calinsky-Harabasz index**
+#' **Explanation of Calinski-Harabasz index**
 #'
 #' The CH index is a **variance ratio criterion**, it measures both **separation** and **density** of the clusters.
 #' The higher, the better, because it means that the points within the same cluster are close to each other; and
@@ -38,7 +38,7 @@
 #'
 #' You can see CH index as:
 #'
-#' \deqn{CH = \frac{inter-cluster dispersion}{intra-cluster dispersion}}
+#' \deqn{CH = \frac{\text{inter cluster dispersion}}{\text{intra cluster dispersion}}}
 #'
 #' To calculate inter-cluster:
 #'
@@ -86,13 +86,13 @@
 #'
 #' @inheritParams check_DB
 #'
-#' @return Vector or plot with Calinsky-Harabasz index for each pre-specified k.
+#' @return Vector or plot with Calinski-Harabasz index for each pre-specified k.
 #' @export
 #'
 #' @references
 #' Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
 #'
-#' Pascoal et al., 2023 (manuscript in preparation)
+#' Pascoal et al., 2024 (in peer review)
 #'
 #' @examples
 #' library(dplyr)
@@ -140,7 +140,7 @@ check_CH <- function(data,
   # Before continuing, verify if max k was reached in range provided
   stopifnot(length(range) <= length(unique(pulled_data)))
 
-  # Calculate Calinsky-Harabasz index
+  # Calculate Calinski-Harabasz index
   scores <- sapply(range, function(k){
     clusterSim::index.G1(x = pulled_data,
                          cl = cluster::pam(pulled_data, k = k, cluster.only = TRUE)
@@ -152,7 +152,7 @@ check_CH <- function(data,
     scores_data.frame %>%
       ggplot2::ggplot(ggplot2::aes(x = .data$k, y = .data$Score)) +
       ggplot2::geom_point() +
-      ggplot2::labs(title = "Calinsky-Harabasz index") +
+      ggplot2::labs(title = "Calinski-Harabasz index") +
       ggplot2::theme_bw()
   } else {
       scores

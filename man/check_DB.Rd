@@ -75,7 +75,7 @@ The DB index is calculated as the mean similarity between each cluster and the m
 \deqn{DB = \frac{1}{N}\sum_{i=1}^{N}R_i}
 
 Thus, \eqn{R_i} is the maximum similarity among all possible combinations of
-\eqn{R_ij}, with \eqn{i \neq j}.
+\eqn{R_{ij}}, with \eqn{i \neq j}.
 
 To get \eqn{R_ij}, let \eqn{S_i} be the intra-cluster dispersion of \eqn{i},
 \eqn{S_j} be the intra-cluster dispersion of cluster \eqn{j} and \eqn{M_ij} be the

@@ -38,7 +38,6 @@
 #' Higher values of DB indicate overlapping clusters.
 #'
 #'
-#'
 #' Let \eqn{N} be the number of clusters and \eqn{R_i} the similarity between the i'th cluster and
 #' the cluster most similar to it.
 #' The DB index is calculated as the mean similarity between each cluster and the most similar cluster,
@@ -46,7 +45,7 @@
 #' \deqn{DB = \frac{1}{N}\sum_{i=1}^{N}R_i}
 #'
 #' Thus, \eqn{R_i} is the maximum similarity among all possible combinations of
-#'  \eqn{R_ij}, with \eqn{i \neq j}.
+#'  \eqn{R_{ij}}, with \eqn{i \neq j}.
 #'
 #' To get \eqn{R_ij}, let \eqn{S_i} be the intra-cluster dispersion of \eqn{i},
 #' \eqn{S_j} be the intra-cluster dispersion of cluster \eqn{j} and \eqn{M_ij} be the
@@ -144,7 +143,7 @@ check_DB <- function(data,
       scores_data.frame %>%
         ggplot2::ggplot(ggplot2::aes(x = .data$k, y = .data$Score)) +
         ggplot2::geom_point() +
-        ggplot2::labs(title = "Davies-Boulding index") +
+        ggplot2::labs(title = "Davies-Bouldin index") +
         ggplot2::theme_bw()
     } else {
       scores
