@@ -233,7 +233,8 @@ a single plot.</p>
 <span>                     taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 </div>
 </div>
@@ -265,7 +266,8 @@ classification_vector = c(“Rare”, “Undetermined”, “Abundant”), so le
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 177 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 177 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
 <p>And we can compare the two options directly:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -281,8 +283,10 @@ classification_vector = c(“Rare”, “Undetermined”, “Abundant”), so le
 <span>                     colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  nrow <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Warning: Removed 177 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Warning: Removed 177 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-8-1.png" width="1440"></p>
 <p>We do not recommend using k = 2, because it implies that there is a
 hard distinction between rare and abundant taxa. We consider that there
@@ -329,8 +333,10 @@ classification vector, which will have 4 different classifications, thus
 <span>          colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"grey"</span>,<span class="st">"#CC79A7"</span><span class="op">)</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 208 rows containing missing values (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 208 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 208 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Removed 208 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-11-1.png" width="1440"></p>
 <p>Note that this is a very acceptable interpretation of the data!</p>
 <p>Hopefully you already have the intuition to change classifications as
@@ -356,8 +362,10 @@ includes 5 different classifications.</p>
 <span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 213 rows containing missing values (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 213 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 213 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Removed 213 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-14-1.png" width="1440"></p>
 </div>
 <div class="section level3">
@@ -394,7 +402,8 @@ to just “rare” and you’ll see how it is possible, but meaningless.</p>
 <span>                     colors <span class="op">=</span> <span class="st">"green4"</span>, </span>
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 168 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 168 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-16-1.png" width="480">
 ## What is the maximum value of k and why?</p>
 <p>What about the maximum value of k? This is set by the limitations
@@ -753,8 +762,10 @@ with the automatic argument set to TRUE.</p>
 <span><span class="co"># Plot automatic result</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">automatic_classification</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 197 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Removed 197 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 <p>Naturally, you can decide more parameters for the automatic selection
 of k, for example, lets suppose that you want to have groups of
@@ -781,8 +792,10 @@ plots:</p>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, </span>
 <span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>,</span>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 213 rows containing missing values (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 213 rows containing missing values (`geom_segment()`).</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: Removed 213 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span>
+<span><span class="co">#&gt; Removed 213 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
 <p>In this example, the automatic option did not seem to give a better
 result than the default k = 3.</p>
@@ -811,7 +824,8 @@ approach.</p>
 try to run this code, it might take a while)</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span>, range <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="va">max_k</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 1 rows containing non-finite values (`stat_summary()`).</span></span>
+<span><span class="co">#&gt; Warning: Removed 1 row containing non-finite outside the scale range</span></span>
+<span><span class="co">#&gt; (`stat_summary()`).</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
