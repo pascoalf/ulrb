@@ -68,7 +68,7 @@ the different clusters are well separated.
 
 You can see CH index as:
 
-\deqn{CH = \frac{\text{inter cluster dispersion}}{intra cluster dispersion}}
+\deqn{CH = \frac{\text{inter cluster dispersion}}{\text{intra cluster dispersion}}}
 
 To calculate inter-cluster:
 
@@ -127,7 +127,7 @@ check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 \references{
 Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
 
-Pascoal et al., 2023 (manuscript in preparation)
+Pascoal et al., 2024 (in peer review)
 }
 \seealso{
 \link[clusterSim:index.G1]{clusterSim::index.G1}

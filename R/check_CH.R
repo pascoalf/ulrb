@@ -138,7 +138,9 @@ check_CH <- function(data,
   pulled_data <- pull(data, .data$Abundance)
 
   # Before continuing, verify if max k was reached in range provided
-  stopifnot(length(range) <= length(unique(pulled_data)))
+  if(length(range) > length(unique(pulled_data))){
+    stop("The range of k values must be equal or less than the number of different abundance scores.")
+  }
 
   # Calculate Calinski-Harabasz index
   scores <- sapply(range, function(k){
