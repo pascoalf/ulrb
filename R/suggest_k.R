@@ -26,15 +26,15 @@
 #' If `detailed = FALSE`, this function will provide a single integer with the best k.
 #' The **default** decision is based on the maximum average Silhouette score obtained
 #' for the values of k between 3 and 10. To better understand why the average Silhouette score and
-#' this range of k's were selected, we refer to Pascoal et al., 2023 (manuscript in preparation) and to
+#' this range of k's were selected, we refer to Pascoal et al., 2024 (in peer-review) and to
 #' vignette("explore-classifications").
 #'
 #' Alternatively, this function can also provide the best k, as an integer, based on another index
-#' (Davies-Bouldin and Calinsky-Harabasz) and can compare the entire of possible k's.
+#' (Davies-Bouldin and Calinski-Harabasz) and can compare the entire of possible k's.
 #'
 #'
 #' @inheritParams evaluate_k
-#' @param index Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinsky-Harabasz".
+#' @param index Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinski-Harabasz".
 #' @param detailed If False (default) returns an integer with best overall k. If TRUE, returns a list with full details.
 #'
 #' @return Integer indicating best k from selected index. Optionally, can return a list with details.
@@ -119,7 +119,7 @@ suggest_k <- function(data,
   if(index == "Davies-Bouldin"){
     best_k <- pull(best_DB_k, .data$k) %>% mean() %>% as.integer()
   }
-  if(index == "Calinsky-Harabasz"){
+  if(index == "Calinski-Harabasz"){
     best_k <- pull(best_CH_k, .data$k) %>% mean() %>% as.integer()
   }} else {
     ## some list
@@ -128,7 +128,7 @@ suggest_k <- function(data,
       list("This list contains several details that might help you decide a k parameter.",
            data.frame(Score =
                         c("Davies-Bouldin index",
-                          "Calinsky-Harabasz index",
+                          "Calinski-Harabasz index",
                           "Average Silhouette Score"),
                       Criteria =
                         c("Minimum value for best k",
@@ -143,7 +143,7 @@ suggest_k <- function(data,
            "samples. For each one we calculated all indices obtained for each k, from",
            min(range), "to", max(range)),
            DaviesBouldin = best_CH_k,
-           CalinskyHarabasz = best_CH_k,
+           CalinskiHarabasz = best_CH_k,
            averageSilhouette = best_avgSil_k)
 
   }
