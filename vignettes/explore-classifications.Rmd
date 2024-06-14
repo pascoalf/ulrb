@@ -332,7 +332,7 @@ To compare values of k, there are a few useful metrics that are implemented in u
 
 - Average Silhouette score (cluster density);
 - Davies-Bouldin index (cluster separation);
-- And Calinsky-Harabasz index (cluster definition).
+- And Calinski-Harabasz index (cluster definition).
 
 Each of these metrics evaluates different aspects of one clustering result; thus, 
 we can calculate them for the clustering obtained by each value of k. By comparing 
@@ -341,7 +341,7 @@ To do this, consider the following:
 
  - Average Silhouette Score: Select	**maximum** value for best k;
  - Davies-Bouldin index: Select **minimum** value for best k;	
- - Calinsky-Harabasz index: Select **maximum** value for best k.	
+ - Calinski-Harabasz index: Select **maximum** value for best k.	
 
 The most straight forward way to evaluate a reasonable range of k's is by using the function `suggest_k()`.
 This function includes an argument for detailed results, which will give you the results for the three indices, between k = 3 and k = 10. 
@@ -364,7 +364,7 @@ You can look at particular metrics and at specific samples. To do so, we made se
 
 - `check_avgSil()` to calculate average silhouette score;
 - `check_DB()` to calculate Davies-Bouldin index;
-- `check_CH()`to calculate Calinsky-Harabasz index.
+- `check_CH()`to calculate Calinski-Harabasz index.
 
 You can also calculate them at the same time for one sample with `evaluate_sample_k()` or all samples with `evaluate_k()`.
 
@@ -391,7 +391,7 @@ check_DB(nice_tidy, sample_id = selected_samples[1])
 # To plot results
 check_DB(nice_tidy, sample_id = selected_samples[1], with_plot = TRUE)
 
-## Calinsky-Harabasz index
+## Calinski-Harabasz index
 # To get values
 check_CH(nice_tidy, sample_id = selected_samples[1])
 
@@ -404,7 +404,7 @@ Note that the best k changed depending on the metric selected.
 Thus, for sample 1 (ERR2044662), the best k would be:
  - 3 based on average Silhouette scores;
  - 4 based on Davies-Bouldin index;
- - 10 based on Calinsky-Harabasz index.
+ - 10 based on Calinski-Harabasz index.
 
 
 We can see how they compare directly with `evaluate_sample_k()`:
@@ -437,7 +437,7 @@ by default, will:
 Thus, the default output of `suggest_k()` is a single integer; this is used in the `define_rb()` function
  for the automatic k decision.
 
-Instead of the average Silhouette score, you can select another index (Davies-Bouldin or Calinsky-Harabasz), and the function `suggest_k()` will return the best k based on that index.
+Instead of the average Silhouette score, you can select another index (Davies-Bouldin or Calinski-Harabasz), and the function `suggest_k()` will return the best k based on that index.
 
 Let's see some examples:
 
@@ -448,8 +448,8 @@ suggest_k(nice_tidy)
 # best k for Davies-Bouldin
 suggest_k(nice_tidy, index = "Davies-Bouldin")
 
-# best k for Calinsky-Harabasz
-suggest_k(nice_tidy, index = "Calinsky-Harabasz")
+# best k for Calinski-Harabasz
+suggest_k(nice_tidy, index = "Calinski-Harabasz")
 ```
 
 
@@ -474,12 +474,12 @@ lets suppose that you want to have groups of phylogenetic units that are very we
 but you also want to have, at least, four classifications, but no more than 6. 
 
 For those two conditions, you would have to specify the range of k values (4:6) and 
-the evaluation index should be the Calinsky-Harabasz index:
+the evaluation index should be the Calinski-Harabasz index:
 
 ```{r}
 more_complex_automatic_classification <- define_rb(nice_tidy, 
                                                    automatic = TRUE,
-                                                   index = "Calinsky-Harabasz",
+                                                   index = "Calinski-Harabasz",
                                                    range = 4:6)
 ```
 

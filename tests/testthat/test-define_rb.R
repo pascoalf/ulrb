@@ -231,15 +231,15 @@ test_that("Function runs with automatic k without errors", {
   expect_no_error(define_rb(nice_tidy, automatic = TRUE))
 })
 
-test_that("Function runs with automatic k for another index, Calinsky-Harabasz,", {
-  # index is Calinsky-Harabasz
-  index <- "Calinsky-Harabasz"
+test_that("Function runs with automatic k for another index, Calinski-Harabasz,", {
+  # index is Calinski-Harabasz
+  index <- "Calinski-Harabasz"
   expect_no_error(define_rb(nice_tidy, automatic = TRUE, index = index))
 })
 
-test_that("Function runs with automatic k for another index, Calinsky-Harabasz,", {
-  # index is Calinsky-Harabasz
-  index <- "Calinsky-Harabasz"
+test_that("Function runs with automatic k for another index, Calinski-Harabasz,", {
+  # index is Calinski-Harabasz
+  index <- "Calinski-Harabasz"
   expect_no_error(define_rb(nice_tidy, automatic = TRUE, index = index))
 })
 

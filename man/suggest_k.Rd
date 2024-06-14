@@ -23,7 +23,7 @@ suggest_k(
 
 \item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
-\item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinsky-Harabasz".}
+\item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinski-Harabasz".}
 
 \item{detailed}{If False (default) returns an integer with best overall k. If TRUE, returns a list with full details.}
 
@@ -59,11 +59,11 @@ More specifically, the list will include:
 If \code{detailed = FALSE}, this function will provide a single integer with the best k.
 The \strong{default} decision is based on the maximum average Silhouette score obtained
 for the values of k between 3 and 10. To better understand why the average Silhouette score and
-this range of k's were selected, we refer to Pascoal et al., 2023 (manuscript in preparation) and to
+this range of k's were selected, we refer to Pascoal et al., 2024 (in peer-review) and to
 vignette("explore-classifications").
 
 Alternatively, this function can also provide the best k, as an integer, based on another index
-(Davies-Bouldin and Calinsky-Harabasz) and can compare the entire of possible k's.
+(Davies-Bouldin and Calinski-Harabasz) and can compare the entire of possible k's.
 }
 \examples{
 

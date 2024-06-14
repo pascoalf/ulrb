@@ -40,8 +40,8 @@ test_that("No error for specific index, Davies-Bouldin", {
   expect_no_error(suggest_k(nice_tidy, detailed = FALSE, index = "Davies-Bouldin"))
 })
 
-test_that("No error for specific index, Calinsky-Harabasz", {
-  expect_no_error(suggest_k(nice_tidy, detailed = FALSE, index = "Calinsky-Harabasz"))
+test_that("No error for specific index, Calinski-Harabasz", {
+  expect_no_error(suggest_k(nice_tidy, detailed = FALSE, index = "Calinski-Harabasz"))
 })
 
 test_that("No error after removing absent species", {

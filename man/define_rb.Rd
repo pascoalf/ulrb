@@ -30,7 +30,7 @@ and Silhouette scores. If TRUE, only the Classification result is added to the o
 \item{automatic}{By default (FALSE), will assume a classification into "Rare", "Undetermined" or "Abundant". If TRUE, then it will automatically select the number of classifications (or k),
 based on the index argument.}
 
-\item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinsky-Harabasz".}
+\item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinski-Harabasz".}
 
 \item{...}{Extra arguments.}
 }
