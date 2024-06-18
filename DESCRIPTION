@@ -15,7 +15,7 @@ Description: A tool to define rare biosphere. 'ulrb' solves the problem of the
     learning algorithm (partitioning around medoids, or k-medoids). This algorithm 
     works for any type of microbiome data, provided there is a species abundance table.
     For validation of this method to different species abundance tables see Pascoal et al, 2024 (in peer-review).
-    This method also worksfor non-microbiome data.
+    This method also works for non-microbiome data.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
