@@ -1,7 +1,7 @@
 bibentry(
   bibtype  = "Article",
-  title    = "Unsupervised machine learning definition of the microbial rare biosphere",
+  title    = "Definition of the microbial rare biosphere through unsupervised machine learning",
   author   = "Francisco Pascoal, Paula Branco, Luís Torgo, Rodrigo Costa and Catarina Magalhães",
-  journal  = "Manuscript in preparation",
-  year     = 2023
+  journal  = "Communications Biology (in peer-review)",
+  year     = 2024
 )
