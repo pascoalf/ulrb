@@ -14,29 +14,31 @@ license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.cran
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-The R package **ulrb** stands for **Unsupervised Machine Learning
-definition of the Rare Biosphere**. As the name suggests, it applies
-unsupervised learning principles to define the rare biosphere.
+The R package **ulrb** stands for **Unsupervised Learning Based
+Definition of Microbial Rare Biosphere**. As the name suggests, it
+applies unsupervised learning principles to define the rare biosphere.
 
 More specifically, the partitioning around medoids (k-medoids) algorithm
-is used to divide phylogenetic units (ASVs, OTUs, Species, …) within a
-microbial community (usually, a sample) into clusters. The clusters are
-then ordered based on a user-defined classification vector. By default,
-our method classifies all phylogenetic units in one of these: “rare”,
-“undetermined” or “abundant”. In alternative, we provide functions to
-help the user decide the number of clusters and we also provide a fully
-automated option. Besides clustering, we have functions to help you
-evaluate the clustering quality (e.g. silhouette scores).
+is used to divide species within a sample into clusters. The clusters
+are then ordered based on a user-defined classification vector. By
+default, our method classifies all species in: “rare”, “undetermined” or
+“abundant”. In alternative, the user can change the number of
+classifications. To do so, ulrb includes functions to help the user
+decide the number of classifications (k), but it is also possible for
+ulrb to automatically decide the number of clusters. Besides clustering,
+uleb includes functions to help evaluate the clustering quality
+(e.g. average Silhouette score).
 
 For detailed theory behind our reasoning for this definition of the
 microbial rare biosphere, results and applications, see our paper
-Pascoal et al., 2023 (in preparation). For more details on the R
+Pascoal et al., 2024 (in peer-review). For more details on the R
 functions used and data wrangling please see the package documentation.
 
-For tutorials and documentation of the **urlb** package, visit our
+For tutorials and documentation of the **ulrb** package, visit our
 website: link.
 
-**Note: the article to cite ulrb is in preparation for submission**
+**Note: the article to cite ulrb is undergoind peer-review in
+Communications Biology journal**
 
 ## Installation
 
@@ -44,6 +46,8 @@ To install the last stable version, use:
 
 ``` r
 install.packages("ulrb")
+#> Installing package into '/tmp/Rtmp3lIXqn/temp_libpath1b67278d2981'
+#> (as 'lib' is unspecified)
 ```
 
 If you want to install the last version available on GitHub, use:
@@ -121,6 +125,9 @@ head(nice)
 #> 4                           <NA>                                           <NA>
 #> 5                           <NA>                                           <NA>
 #> 6 g__Candidatus_Nitrosopelagicus                                           <NA>
+```
+
+``` r
 
 # first, we tidy the "nice" OTU table
 sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -135,11 +142,16 @@ nice_tidy <- prepare_tidy_data(nice,
 # second, we apply ulrb algorithm in automatic setting
 nice_classification_results <- define_rb(nice_tidy)
 #> Joining with `by = join_by(Sample, Level)`
+```
+
+``` r
 
 # third, we plot microbial community and the quality of k-medoids clustering
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
-#> Warning: Removed 197 rows containing missing values (`geom_segment()`).
-#> Removed 197 rows containing missing values (`geom_segment()`).
+#> Warning: Removed 197 rows containing missing values or values outside the scale range
+#> (`geom_segment()`).
+#> Removed 197 rows containing missing values or values outside the scale range
+#> (`geom_segment()`).
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
