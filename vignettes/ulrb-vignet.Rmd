@@ -61,7 +61,7 @@ In summary, the algorithm will be applied to your final, clean abundance table, 
 
 ```{r}
 # Load raw OTU table from N-ICE
-load("../data/nice_raw.rda")
+data("nice_raw", package = "ulrb")
 
 # Change name of first column
 nice_clean <- rename(nice_raw, Taxonomy = "X.SampleID")
