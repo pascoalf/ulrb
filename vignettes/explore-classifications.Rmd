@@ -64,7 +64,7 @@ Just like in the tutorial `vignette("ulrb-vignet")`, we have to import, clean an
 
 ```{r}
 # Load raw OTU table from N-ICE
-load("../data/nice_raw.rda")
+data("nice_raw", package = "ulrb")
 
 # Change name of first column
 nice_clean <- rename(nice_raw, Taxonomy = "X.SampleID")
