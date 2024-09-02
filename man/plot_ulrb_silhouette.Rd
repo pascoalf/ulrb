@@ -9,7 +9,7 @@ plot_ulrb_silhouette(
   sample_id = NULL,
   taxa_col,
   samples_col = "Sample",
-  plot_all = FALSE,
+  plot_all = TRUE,
   classification_col = "Classification",
   silhouette_score = "Silhouette_scores",
   colors = c("#009E73", "#F0E442", "#CC79A7"),

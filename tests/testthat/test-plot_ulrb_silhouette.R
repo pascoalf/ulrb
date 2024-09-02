@@ -18,7 +18,7 @@ test_that("function fails if missing sample_id argument", {
 
   classified_species <- define_rb(nice_tidy)
 
-  expect_error(plot_ulrb_silhouette(classified_species, taxa_col = "OTU"))
+  expect_error(plot_ulrb_silhouette(classified_species, taxa_col = "OTU", plot_all = FALSE))
 })
 
 test_that("function fails if missing taxa_col argument", {

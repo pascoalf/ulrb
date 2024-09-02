@@ -8,7 +8,7 @@ plot_ulrb_clustering(
   data,
   sample_id = NULL,
   taxa_col,
-  plot_all = FALSE,
+  plot_all = TRUE,
   samples_col = "Sample",
   classification_col = "Classification",
   abundance_col = "Abundance",
