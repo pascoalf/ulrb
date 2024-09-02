@@ -61,7 +61,7 @@
 plot_ulrb <- function(data,
                       sample_id = NULL,
                       taxa_col,
-                      plot_all = FALSE,
+                      plot_all = TRUE,
                       silhouette_score = "Silhouette_scores",
                       classification_col = "Classification",
                       abundance_col = "Abundance",
