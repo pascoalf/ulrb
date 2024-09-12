@@ -112,9 +112,16 @@ plot_ulrb_clustering <- function(data,
   } else {
     make_plot <- function(){
       data %>%
-        ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, -.data$Abundance),
+        group_by(.data$Sample, .add = TRUE) %>%
+        mutate(Group = paste(.data$Sample, .data$Classification, sep = "_")) %>%
+        arrange(desc(.data$Abundance)) %>%
+        mutate(uniqueRank = row_number()) %>%
+        ungroup() %>%
+        ggplot2::ggplot(ggplot2::aes(x = .data$uniqueRank, #reorder(.data$ID, -.data$Abundance),
                                      .data$Abundance, col = .data$Classification)) +
-        ggplot2::stat_summary(fun.data = ggplot2::mean_se)+
+        ggplot2::geom_point() +
+        ggplot2::geom_line(ggplot2::aes(group = .data$Group)) +
+        #ggplot2::stat_summary(fun.data = ggplot2::mean_se)+
         ggplot2::theme(axis.text.x = ggplot2::element_blank(),
                        axis.ticks.x = ggplot2::element_blank(),
                        panel.grid = ggplot2::element_blank(),
