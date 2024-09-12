@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ulrb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -416,9 +416,7 @@ and analysis.</p>
 <span><span class="fu"><a href="../reference/plot_ulrb_clustering.html">plot_ulrb_clustering</a></span><span class="op">(</span><span class="va">classified_table</span>, </span>
 <span>                       sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>                       taxa_col <span class="op">=</span> <span class="st">"OTU"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Clustering for sample"</span>, <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Clustering for sample"</span>, <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -427,9 +425,7 @@ and analysis.</p>
 <span>                     taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, </span>
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Clustering for all samples"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Clustering for all samples"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-6-2.png" width="576"></p>
 <p>From the RAC obtained, we confirm that the unsupervised
 classification provides a reasonable result. Because the rare biosphere
@@ -491,8 +487,6 @@ samples.</p>
 <span>          sample_id <span class="op">=</span>  <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 197 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-8-1.png" width="960"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -502,8 +496,6 @@ samples.</p>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 197 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
 <p><img src="ulrb-vignet_files/figure-html/unnamed-chunk-8-2.png" width="960"></p>
 </div>
