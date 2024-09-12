@@ -143,7 +143,7 @@ plot_ulrb_clustering <- function(data,
       ggplot2::scale_y_log10()+
       ggplot2::labs(y =
                       ifelse(isTRUE(plot_all),
-                             "Mean (\U00B1 sd) abundance in Log10 scale",
+                             "Mean (\U00B1 sd)\n abundance in Log10 scale",
                              "Abundance in Log10 scale"))
   } else {
     make_plot()
