@@ -12,7 +12,7 @@ plot_ulrb_silhouette(
   plot_all = TRUE,
   classification_col = "Classification",
   silhouette_score = "Silhouette_scores",
-  colors = c("#009E73", "#F0E442", "#CC79A7"),
+  colors = c("#009E73", "grey41", "#CC79A7"),
   log_scaled = FALSE,
   ...
 )

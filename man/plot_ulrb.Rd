@@ -13,7 +13,7 @@ plot_ulrb(
   classification_col = "Classification",
   abundance_col = "Abundance",
   log_scaled = FALSE,
-  colors = c("#009E73", "#F0E442", "#CC79A7"),
+  colors = c("#009E73", "grey41", "#CC79A7"),
   ...
 )
 }
