@@ -97,7 +97,7 @@ plot_ulrb_clustering <- function(data,
         filter(.data$Sample == sample_id) %>%
         ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, -.data$Abundance),
                                      .data$Abundance, col = .data$Classification)) +
-        ggplot2::geom_point()+
+        ggplot2::geom_point() +
         ggplot2::theme(axis.text.x = ggplot2::element_blank(),
                        axis.ticks.x = ggplot2::element_blank(),
                        panel.grid = ggplot2::element_blank(),
