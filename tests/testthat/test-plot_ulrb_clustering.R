@@ -4,7 +4,8 @@ test_that("Works for a sample with default arguments", {
 
   expect_no_error(plot_ulrb_clustering(classified_species,
                                        sample_id = "ERR2044669",
-                                       taxa_col = "OTU"))
+                                       taxa_col = "OTU",
+                                       plot_all = FALSE))
 })
 
 test_that("function does not work if you provide a non existent sample ID", {
@@ -25,7 +26,9 @@ test_that("function fails if missing taxa_col argument", {
 
   classified_species <- define_rb(nice_tidy)
 
-  expect_error(plot_ulrb_clustering(classified_species, sample_id = "ERR2044662"))
+  expect_error(plot_ulrb_clustering(classified_species,
+                                    sample_id = "ERR2044662",
+                                    plot_all = FALSE))
 })
 
 test_that("function fails if data is in matrix format", {
@@ -36,7 +39,8 @@ test_that("function fails if data is in matrix format", {
 
   expect_error(plot_ulrb_clustering(classified_species_matrix,
                                       sample_id = "ERR2044662",
-                                      taxa_col = "OTU"))
+                                      taxa_col = "OTU",
+                                    plot_all = FALSE))
 })
 
 test_that("function stops if log_scaled isn't logical (TRUE/FALSE)", {
@@ -48,7 +52,8 @@ test_that("function stops if log_scaled isn't logical (TRUE/FALSE)", {
   expect_error(plot_ulrb_clustering(classified_species_matrix,
                                       sample_id = "ERR2044662",
                                       taxa_col = "OTU",
-                                      log_scaled = "yes"))
+                                      log_scaled = "yes",
+                                      plot_all = FALSE))
 })
 
 test_that("function works normally if log_scaled is logical (TRUE/FALSE)", {
@@ -60,7 +65,8 @@ test_that("function works normally if log_scaled is logical (TRUE/FALSE)", {
   expect_error(plot_ulrb_clustering(classified_species_matrix,
                                       sample_id = "ERR2044662",
                                       taxa_col = "OTU",
-                                      log_scaled = TRUE))
+                                      log_scaled = TRUE,
+                                      plot_all = FALSE))
 })
 
 test_that("Any color vector works if it has the same length as the number of classifications", {
@@ -72,7 +78,8 @@ test_that("Any color vector works if it has the same length as the number of cla
   expect_no_error(plot_ulrb_clustering(classified_species,
                                          colors = seq_along(classifications),
                                          taxa_col = "OTU",
-                                         sample_id = "ERR2044662"))
+                                         sample_id = "ERR2044662",
+                                         plot_all = FALSE))
 })
 test_that("color vector must be the same size as number of classifications", {
 
@@ -83,7 +90,8 @@ test_that("color vector must be the same size as number of classifications", {
   expect_error(plot_ulrb_clustering(classified_species,
                                       colors = c(seq_along(classifications),2), # extra color
                                       taxa_col = "OTU",
-                                      sample_id = "ERR2044662"))
+                                      sample_id = "ERR2044662",
+                                    plot_all = FALSE))
 })
 
 test_that("function output can be modified with other ggplot functions", {
@@ -92,7 +100,8 @@ test_that("function output can be modified with other ggplot functions", {
 
   expect_no_error(plot_ulrb_clustering(classified_species,
                                          taxa_col = "OTU",
-                                         sample_id = "ERR2044662") + ggplot2::theme_void())
+                                         sample_id = "ERR2044662",
+                                       plot_all = FALSE) + ggplot2::theme_void())
 })
 
 test_that("optional labs can overwrite default labs", {
@@ -101,7 +110,8 @@ test_that("optional labs can overwrite default labs", {
 
   expect_no_error(plot_ulrb_clustering(classified_species,
                                          taxa_col = "OTU",
-                                         sample_id = "ERR2044662") +
+                                         sample_id = "ERR2044662",
+                                       plot_all = FALSE) +
                     ggplot2::labs(Title = "Something else",
                                   x = "Something else",
                                   y = "Something else"))
@@ -118,7 +128,8 @@ test_that("The abundance argument can be changed into any type of score,
 
   expect_no_error(plot_ulrb_clustering(classified_species,
                                          taxa_col = "OTU",
-                                         sample_id = "ERR2044662") +
+                                         sample_id = "ERR2044662",
+                                       plot_all = FALSE) +
                     ggplot2::labs(y = "Relative abundance"))
 })
 

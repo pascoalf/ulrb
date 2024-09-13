@@ -88,7 +88,9 @@ plot_ulrb_silhouette <- function(data,
   if(!is.logical(log_scaled)){
     stop("'log_scaled' argument needs to be logical (TRUE/FALSE)")
   }
-
+  # store number of classifications
+  n_classifications <- length(unique(data$Classification))
+  #
   # Prepare data
   data <- data %>%
     rename(ID = all_of(taxa_col),
@@ -127,14 +129,17 @@ plot_ulrb_silhouette <- function(data,
                      axis.line.x.bottom = ggplot2::element_line(),
                      axis.line.y.left = ggplot2::element_line(),
                      panel.background = ggplot2::element_blank(),
-                     legend.text = ggplot2::element_text(size = 12),
-                     legend.position = "top")+
+                     legend.text = ggplot2::element_text(size = 12)) +
+      ggplot2::theme(legend.position = ifelse(n_classifications <= 3, "top", "right"))+
       ggplot2::scale_color_manual(values = colors)+
       ggplot2::scale_fill_manual(values = colors)+
       ggplot2::labs(title = paste("Silhouette plot for", sample_id),
                     y = "Silhouette scores",
                     x = taxa_col, col = "", fill = "")
   } else {
+    if(n_classifications > 3){
+      message("Classification label might not fit, consider changing the plot.")
+    }
     data %>%
       group_by(.data$Sample, .add = TRUE) %>%
       mutate(Group = paste(.data$Sample, .data$Classification, sep = "_")) %>%
@@ -159,8 +164,8 @@ plot_ulrb_silhouette <- function(data,
                      axis.line.x.bottom = ggplot2::element_line(),
                      axis.line.y.left = ggplot2::element_line(),
                      panel.background = ggplot2::element_blank(),
-                     legend.text = ggplot2::element_text(size = 12),
-                     legend.position = "top")+
+                     legend.text = ggplot2::element_text(size = 12)) +
+      ggplot2::theme(legend.position = ifelse(n_classifications <= 3, "top", "right"))+
       ggplot2::scale_color_manual(values = colors)+
       ggplot2::scale_fill_manual(values = colors)+
       ggplot2::labs(title = paste("Silhouette plot for all samples"),

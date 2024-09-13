@@ -79,7 +79,9 @@ plot_ulrb_clustering <- function(data,
   if(!is.logical(log_scaled)){
     stop("'log_scaled' argument needs to be logical (TRUE/FALSE)")
   }
-
+  # store number of classifications
+  n_classifications <- length(unique(data$Classification))
+  #
   data <- data %>%
     rename(ID = all_of(taxa_col),
            Sample = all_of(samples_col),
@@ -113,14 +115,14 @@ plot_ulrb_clustering <- function(data,
                        axis.line.x.bottom = ggplot2::element_line(),
                        axis.line.y.left = ggplot2::element_line(),
                        panel.background = ggplot2::element_blank(),
-                       legend.text = ggplot2::element_text(size = 12),
-                       legend.position = "top")+
+                       legend.text = ggplot2::element_text(size = 12))+
+        ggplot2::theme(legend.position = ifelse(n_classifications <= 3, "top", "right"))+
         ggplot2::scale_color_manual(values = colors)+
         ggplot2::labs(title = paste("Rank Abundance Curve for ", sample_id),
                       x = taxa_col, col = "", fill = "")
     }
   } else {
-    if(length(unique(data$Classification)) > 3){
+    if(n_classifications > 3){
       message("Classification label might not fit, consider changing the plot.")
     }
     make_plot <- function(){
@@ -143,8 +145,8 @@ plot_ulrb_clustering <- function(data,
                        axis.line.x.bottom = ggplot2::element_line(),
                        axis.line.y.left = ggplot2::element_line(),
                        panel.background = ggplot2::element_blank(),
-                       legend.text = ggplot2::element_text(size = 12),
-                       legend.position = "top")+
+                       legend.text = ggplot2::element_text(size = 12))+
+        ggplot2::theme(legend.position = ifelse(n_classifications <= 3, "top", "right"))+
         ggplot2::scale_color_manual(values = colors)+
         ggplot2::labs(title = "Rank Abundance Curve for all samples",
                       #subtitle = paste("n = ", length(unique(data$Sample))),

@@ -88,27 +88,42 @@ plot_ulrb <- function(data,
   if(!is.logical(log_scaled)){
     stop("'log_scaled' argument needs to be logical (TRUE/FALSE)")
   }
+  # store number of classifications
+  n_classifications <- length(unique(data$Classification))
+  #
+  cluster_plot <- plot_ulrb_clustering(data,
+                                       sample_id = sample_id,
+                                       taxa_col = taxa_col,
+                                       plot_all = plot_all,
+                                       classification_col = classification_col,
+                                       abundance_col = abundance_col,
+                                       log_scaled = log_scaled,
+                                       colors = colors,
+                                       ...)
+  #
+  sil_plot <- plot_ulrb_silhouette(data,
+                                  sample_id = sample_id,
+                                  taxa_col = taxa_col,
+                                  plot_all = plot_all,
+                                  classification_col = classification_col,
+                                  silhouette_score = silhouette_score,
+                                  colors = colors,
+                                  log_scaled = log_scaled,
+                                  ...)
+  #
+  if(n_classifications <= 3){
+    gridExtra::grid.arrange(
+      cluster_plot,
+      sil_plot,
+      nrow = 1,
+      ncol = 2)
+    } else {
+      gridExtra::grid.arrange(
+        cluster_plot +
+          ggplot2::guides(col = "none"),
+        sil_plot,
+        nrow = 1,
+        ncol = 2)
+        }
 
-  gridExtra::grid.arrange(
-    plot_ulrb_clustering(data,
-                         sample_id = sample_id,
-                         taxa_col = taxa_col,
-                         plot_all = plot_all,
-                         classification_col = classification_col,
-                         abundance_col = abundance_col,
-                         log_scaled = log_scaled,
-                         colors = colors,
-                         ...),
-    plot_ulrb_silhouette(data,
-                         sample_id = sample_id,
-                         taxa_col = taxa_col,
-                         plot_all = plot_all,
-                         classification_col = classification_col,
-                         silhouette_score = silhouette_score,
-                         colors = colors,
-                         log_scaled = log_scaled,
-                         ...),
-    nrow = 1,
-    ncol = 2
-  )
 }
