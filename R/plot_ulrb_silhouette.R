@@ -133,7 +133,7 @@ plot_ulrb_silhouette <- function(data,
       arrange(desc(.data$Silhouette_scores)) %>%
       mutate(uniqueRank = row_number()) %>%
       ungroup() %>%
-      ggplot2::ggplot(ggplot2::aes(x = uniqueRank, #reorder(.data$ID, -.data$Silhouette_scores),
+      ggplot2::ggplot(ggplot2::aes(x = .data$uniqueRank, #reorder(.data$ID, -.data$Silhouette_scores),
                                    .data$Silhouette_scores,
                                    fill = .data$Classification,
                                    col = .data$Classification)) +
