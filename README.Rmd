@@ -93,6 +93,7 @@ nice_classification_results <- define_rb(nice_tidy)
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
 
 # In case you want to inspect the result of a particular sample, do:
-plot_ulrb(nice_classification_results, taxa_col = "OTU", sample_id = "ERR2044662")
+plot_ulrb(nice_classification_results, taxa_col = "OTU", 
+          sample_id = "ERR2044662", plot_all = FALSE, log_scaled = TRUE)
 
 ```

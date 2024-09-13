@@ -12,7 +12,7 @@ vignette: >
 The R package ulrb solves the problem of the definition of rarity by replacing human
 decision with an unsupervised machine learning algorithm (partitioning around medoids, k-medoids). 
 This algorithm works for any type of microbiome data, provided there is an abundance score for each phylogenetic unit. 
-For validation of this method to several kinds of molecular data and environments, please see Pascoal et al., 2023 (in preparation).
+For validation of this method to several kinds of molecular data and environments, please see Pascoal et al., 2024 (in peer-review).
 Preliminary results indicate that this method works for oter biological systems, provided there is an abundance table.
 
 In this tutorial we will illustrate how to define the microbial rare biosphere  with a small, publicly available dataset, the Norwegian Young Sea Ice Expedition, 2016 (N-ICE). The molecular data will be from amplicon sequencing of 16S rRNA gene (for sequencing details, see Sousa et al., 2019), raw sequences are available in the European Nucleotide Archive (ENA) under accession number ERP024265, and they were processed into OTUs by MGnify (Mitchell et al.,2019).
@@ -129,7 +129,7 @@ This function will add new columns to the input data.frame, automatically decidi
 
 The algorithm is run by the `pam()` function of the `cluster` package. The output are the clusters, which we translate into classifications, and provides statistical scores to interpret the robustness of the clusters formed. From those statistics, we select the silhouette scores, which will be used to evaluate the results later on. Additionally, the data.frame will include a nested list with the output from `pam()`, for more experienced users to analyze if necessary.
 
-Regarding the classifications, we are setting a default to "rare", "undetermined" and "abundant", based on Pascoal et al., 2023 (manuscript in preparation). However, the user can set any vector of classifications, as long as they follow the rules of the number of clusters, or k, from `pam()`. Meaning, the number of classifications can't be more than the number of distinct observations in the data. In practice this is not a concern, because we think most researchers will either use our default, or "rare" vs "abundant", or a more nuanced "very rare", "rare", "abundant", "very abundant". The point is that the classification can be decided in a study by study context.
+Regarding the classifications, we are setting a default to "rare", "undetermined" and "abundant", based on Pascoal et al., 2024 (manuscript in peer-review). However, the user can set any vector of classifications, as long as they follow the rules of the number of clusters, or k, from `pam()`. Meaning, the number of classifications can't be more than the number of distinct observations in the data. In practice this is not a concern, because we think most researchers will either use our default, or "rare" vs "abundant", or a more nuanced "very rare", "rare", "abundant", "very abundant". The point is that the classification can be decided in a study by study context.
 
 Since the default output includes so many columns that are there to support the classification obtained, we added an argument, simplified, which if TRUE will return a simplified version of the output, without silhouette scores, just the final classification, plus all the input data. We will use the default, simplified = FALSE.
 
@@ -153,7 +153,7 @@ In the previous example, there is still one level of subjective decision, which 
 of classifications to use (*e.g.* "rare", "undetermined" and "abundant" would be k = 3). 
 However, we added an option to the main function, `define_rb()`, which allows for the automatic 
 decision of the number of clusters. This automation works under the assumption that the range of good k values
-lies between 3 and 10 (see Pascoal et al., 2023 for reasoning behind this). In `vignette("explore-classifications")`,
+lies between 3 and 10 (see Pascoal et al., 2024 for reasoning behind this). In `vignette("explore-classifications")`,
 we explain in more detail how the automation works and how you can make your own decision regarding k, using several metrics.
 
 ```{r}
@@ -173,7 +173,7 @@ Both plots are made available by the function `plot_ulrb()` (to verify clusterin
 
 The RAC is a common tool in microbial ecology to describe the detection limits of different methods and the distribution of species abundance (Pedrós-Alió, 2012) - it ranks all species from most to least abundant, resulting in a few species with very high abundance and a "long-tail" of low abundance species (which are called the "rare biosphere"). However, there is no objective method to decide where the "long-tail" begins.
 
-The ulrb method considers that the terms "rare" and "abundant" are relative, i.e. one phylogenetic unit is rare if, and only if, compared to an abundant one (and vice-versa). We explore the consequences and assumptions that play into this in Pascoal et al., 2023 (manuscript in preparation). But this means that the method is not looking for the beginning of the "long-tail", it is comparing the abundance of all phylogenetic units, and clustering them accordingly.
+The ulrb method considers that the terms "rare" and "abundant" are relative, i.e. one phylogenetic unit is rare if, and only if, compared to an abundant one (and vice-versa). We explore the consequences and assumptions that play into this in Pascoal et al., 2024 (manuscript in peer-review). But this means that the method is not looking for the beginning of the "long-tail", it is comparing the abundance of all phylogenetic units, and clustering them accordingly.
 
 Thus, if we plot the standard RAC and then color each phylogenetic unit according with the unsupervised classification, we can check if the unsupervised classification is consistent with the notion that the rare-biosphere is within the "long-tail".
 
@@ -245,7 +245,7 @@ plot_ulrb(classified_table,
 
 # References
 
-- Pascoal et al., 2023 (manuscript in preparation)
+- Pascoal F., Branco P., Torgo., Costa R., Magalhães C., 2024. Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 
 - Granskog, M. A., Fer, I., Rinke, A., & Steen, H. (2018). Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of Geophysical Research: Oceans, 123(3), 1586–1594.
 

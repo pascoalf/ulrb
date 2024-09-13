@@ -46,7 +46,7 @@ To install the last stable version, use:
 
 ``` r
 install.packages("ulrb")
-#> Installing package into '/tmp/Rtmp3lIXqn/temp_libpath1b67278d2981'
+#> Installing package into '/tmp/RtmpjhMvBO/temp_libpath6643225d248f'
 #> (as 'lib' is unspecified)
 ```
 
@@ -159,7 +159,8 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
 ``` r
 
 # In case you want to inspect the result of a particular sample, do:
-plot_ulrb(nice_classification_results, taxa_col = "OTU", sample_id = "ERR2044662")
+plot_ulrb(nice_classification_results, taxa_col = "OTU", 
+          sample_id = "ERR2044662", plot_all = FALSE, log_scaled = TRUE)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
