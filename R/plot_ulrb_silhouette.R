@@ -72,6 +72,11 @@ plot_ulrb_silhouette <- function(data,
       stop("Are you trying to plot multiple samples? If so, please set plot_all to TRUE.")
     }
   }
+  if(!is.null(sample_id)){
+    if(isTRUE(plot_all)){
+      warning(paste("If you want to plot only", sample_id, "use plot_all = FALSE"))
+    }
+  }
   if(missing(taxa_col)){
     stop("Please specify the name of the column with phylohenetic units in the argument taxa_col.")
   }
