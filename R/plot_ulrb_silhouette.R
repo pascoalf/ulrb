@@ -120,7 +120,7 @@ plot_ulrb_silhouette <- function(data,
                           linetype = "dashed")+
       ggplot2::coord_flip()+
       ggplot2::theme(axis.text.y = ggplot2::element_blank(),
-                     axis.text.y = ggplot2::element_text(size = 10),
+                     axis.text.x = ggplot2::element_text(size = 10),
                      axis.title = ggplot2::element_text(size = 12),
                      axis.ticks.y = ggplot2::element_blank(),
                      panel.grid = ggplot2::element_blank(),
