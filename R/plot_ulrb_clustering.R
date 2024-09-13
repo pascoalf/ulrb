@@ -63,6 +63,11 @@ plot_ulrb_clustering <- function(data,
       stop("Are you trying to plot multiple samples? If so, please set plot_all to TRUE.")
     }
   }
+  if(!is.null(sample_id)){
+    if(isTRUE(plot_all)){
+      warning(paste("If you want to plot only", sample_id, "use plot_all = FALSE"))
+    }
+  }
   if(missing(taxa_col)){
     stop("Please specify the name of the column with phylohenetic units in the argument taxa_col.")
   }
@@ -99,15 +104,18 @@ plot_ulrb_clustering <- function(data,
                                      .data$Abundance, col = .data$Classification)) +
         ggplot2::geom_point() +
         ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+                       axis.text.y = ggplot2::element_text(size = 10),
+                       axis.title = ggplot2::element_text(size = 12),
                        axis.ticks.x = ggplot2::element_blank(),
                        panel.grid = ggplot2::element_blank(),
                        axis.line.x.bottom = ggplot2::element_line(),
                        axis.line.y.left = ggplot2::element_line(),
                        panel.background = ggplot2::element_blank(),
+                       legend.text = ggplot2::element_text(size = 12),
                        legend.position = "top")+
         ggplot2::scale_color_manual(values = colors)+
         ggplot2::labs(title = paste("Rank Abundance Curve for ", sample_id),
-                      x = taxa_col)
+                      x = taxa_col, col = "", fill = "")
     }
   } else {
     if(length(unique(data$Classification)) > 3){
