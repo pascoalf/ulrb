@@ -46,7 +46,7 @@ To install the last stable version, use:
 
 ``` r
 install.packages("ulrb")
-#> Installing package into '/tmp/RtmpjhMvBO/temp_libpath6643225d248f'
+#> Installing package into '/tmp/RtmpjhMvBO/temp_libpath66433ce97841'
 #> (as 'lib' is unspecified)
 ```
 
