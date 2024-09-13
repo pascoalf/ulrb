@@ -128,26 +128,38 @@ plot_ulrb_silhouette <- function(data,
                     x = taxa_col)
   } else {
     data %>%
-      ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, -.data$Silhouette_scores),
+      group_by(.data$Sample, .add = TRUE) %>%
+      mutate(Group = paste(.data$Sample, .data$Classification, sep = "_")) %>%
+      arrange(desc(.data$Silhouette_scores)) %>%
+      mutate(uniqueRank = row_number()) %>%
+      ungroup() %>%
+      ggplot2::ggplot(ggplot2::aes(x = uniqueRank, #reorder(.data$ID, -.data$Silhouette_scores),
                                    .data$Silhouette_scores,
                                    fill = .data$Classification,
                                    col = .data$Classification)) +
-      ggplot2::stat_summary(fun.data = ggplot2::mean_se)+
+      ggplot2::geom_point() +
+      ggplot2::geom_line(ggplot2::aes(group = .data$Group)) +
+      #ggplot2::stat_summary(fun.data = ggplot2::mean_se)+
       ggplot2::geom_hline(yintercept = c(0),
                           colour = c("black"),
                           linetype = "dashed")+
       ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_text(size = 10),
+                     axis.title = ggplot2::element_text(size = 12),
                      axis.ticks.x = ggplot2::element_blank(),
                      panel.grid = ggplot2::element_blank(),
                      axis.line.x.bottom = ggplot2::element_line(),
                      axis.line.y.left = ggplot2::element_line(),
                      panel.background = ggplot2::element_blank(),
+                     legend.text = ggplot2::element_text(size = 12),
                      legend.position = "top")+
       ggplot2::scale_color_manual(values = colors)+
       ggplot2::scale_fill_manual(values = colors)+
       ggplot2::labs(title = paste("Silhouette plot for all samples"),
+                    #subtitle = paste("n = ", length(unique(data$Sample))),
                     y = "Mean (\U00B1 sd) Silhouette scores",
-                    x = taxa_col)
+                    x = taxa_col,
+                    col = "", fill = "")
   }
 
 }

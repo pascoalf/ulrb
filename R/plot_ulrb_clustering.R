@@ -110,6 +110,9 @@ plot_ulrb_clustering <- function(data,
                       x = taxa_col)
     }
   } else {
+    if(length(unique(data$Classification)) > 3){
+      message("Classification label might not fit, consider changing the plot.")
+    }
     make_plot <- function(){
       data %>%
         group_by(.data$Sample, .add = TRUE) %>%
@@ -123,17 +126,21 @@ plot_ulrb_clustering <- function(data,
         ggplot2::geom_line(ggplot2::aes(group = .data$Group)) +
         #ggplot2::stat_summary(fun.data = ggplot2::mean_se)+
         ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+                       axis.text.y = ggplot2::element_text(size = 10),
+                       axis.title = ggplot2::element_text(size = 12),
                        axis.ticks.x = ggplot2::element_blank(),
                        panel.grid = ggplot2::element_blank(),
                        axis.line.x.bottom = ggplot2::element_line(),
                        axis.line.y.left = ggplot2::element_line(),
                        panel.background = ggplot2::element_blank(),
+                       legend.text = ggplot2::element_text(size = 12),
                        legend.position = "top")+
         ggplot2::scale_color_manual(values = colors)+
         ggplot2::labs(title = "Rank Abundance Curve for all samples",
-                      subtitle = paste("n = ", length(unique(data$Sample))),
+                      #subtitle = paste("n = ", length(unique(data$Sample))),
                       x = taxa_col,
-                      y = "Mean (\U00B1 sd) abundance")
+                      y = "Mean (\U00B1 sd) abundance",
+                      col = "")
     }
   }
 
