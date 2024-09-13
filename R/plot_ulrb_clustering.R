@@ -100,9 +100,11 @@ plot_ulrb_clustering <- function(data,
     make_plot <- function(){
       data %>%
         filter(.data$Sample == sample_id) %>%
+        mutate(Group = paste(.data$Sample, .data$Classification, sep = "_")) %>%
         ggplot2::ggplot(ggplot2::aes(x = reorder(.data$ID, -.data$Abundance),
                                      .data$Abundance, col = .data$Classification)) +
         ggplot2::geom_point() +
+        ggplot2::geom_line(ggplot2::aes(group = .data$Group)) +
         ggplot2::theme(axis.text.x = ggplot2::element_blank(),
                        axis.text.y = ggplot2::element_text(size = 10),
                        axis.title = ggplot2::element_text(size = 12),
