@@ -120,17 +120,20 @@ plot_ulrb_silhouette <- function(data,
                           linetype = "dashed")+
       ggplot2::coord_flip()+
       ggplot2::theme(axis.text.y = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_text(size = 10),
+                     axis.title = ggplot2::element_text(size = 12),
                      axis.ticks.y = ggplot2::element_blank(),
                      panel.grid = ggplot2::element_blank(),
                      axis.line.x.bottom = ggplot2::element_line(),
                      axis.line.y.left = ggplot2::element_line(),
                      panel.background = ggplot2::element_blank(),
+                     legend.text = ggplot2::element_text(size = 12),
                      legend.position = "top")+
       ggplot2::scale_color_manual(values = colors)+
       ggplot2::scale_fill_manual(values = colors)+
       ggplot2::labs(title = paste("Silhouette plot for", sample_id),
                     y = "Silhouette scores",
-                    x = taxa_col)
+                    x = taxa_col, col = "", fill = "")
   } else {
     data %>%
       group_by(.data$Sample, .add = TRUE) %>%
