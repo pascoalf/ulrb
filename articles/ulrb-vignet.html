@@ -81,8 +81,8 @@ replacing human decision with an unsupervised machine learning algorithm
 (partitioning around medoids, k-medoids). This algorithm works for any
 type of microbiome data, provided there is an abundance score for each
 phylogenetic unit. For validation of this method to several kinds of
-molecular data and environments, please see Pascoal et al., 2023 (in
-preparation). Preliminary results indicate that this method works for
+molecular data and environments, please see Pascoal et al., 2024 (in
+peer-review). Preliminary results indicate that this method works for
 oter biological systems, provided there is an abundance table.</p>
 <p>In this tutorial we will illustrate how to define the microbial rare
 biosphere with a small, publicly available dataset, the Norwegian Young
@@ -277,8 +277,8 @@ results later on. Additionally, the data.frame will include a nested
 list with the output from <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam()</a></code>, for more experienced users
 to analyze if necessary.</p>
 <p>Regarding the classifications, we are setting a default to “rare”,
-“undetermined” and “abundant”, based on Pascoal et al., 2023 (manuscript
-in preparation). However, the user can set any vector of
+“undetermined” and “abundant”, based on Pascoal et al., 2024 (manuscript
+in peer-review). However, the user can set any vector of
 classifications, as long as they follow the rules of the number of
 clusters, or k, from <code><a href="https://rdrr.io/pkg/cluster/man/pam.html" class="external-link">pam()</a></code>. Meaning, the number of
 classifications can’t be more than the number of distinct observations
@@ -334,7 +334,7 @@ decision, which is the number of classifications to use (<em>e.g.</em>
 an option to the main function, <code><a href="../reference/define_rb.html">define_rb()</a></code>, which allows
 for the automatic decision of the number of clusters. This automation
 works under the assumption that the range of good k values lies between
-3 and 10 (see Pascoal et al., 2023 for reasoning behind this). In
+3 and 10 (see Pascoal et al., 2024 for reasoning behind this). In
 <code><a href="../articles/explore-classifications.html">vignette("explore-classifications")</a></code>, we explain in more
 detail how the automation works and how you can make your own decision
 regarding k, using several metrics.</p>
@@ -398,8 +398,8 @@ biosphere”). However, there is no objective method to decide where the
 <p>The ulrb method considers that the terms “rare” and “abundant” are
 relative, i.e. one phylogenetic unit is rare if, and only if, compared
 to an abundant one (and vice-versa). We explore the consequences and
-assumptions that play into this in Pascoal et al., 2023 (manuscript in
-preparation). But this means that the method is not looking for the
+assumptions that play into this in Pascoal et al., 2024 (manuscript in
+peer-review). But this means that the method is not looking for the
 beginning of the “long-tail”, it is comparing the abundance of all
 phylogenetic units, and clustering them accordingly.</p>
 <p>Thus, if we plot the standard RAC and then color each phylogenetic
@@ -506,7 +506,9 @@ samples.</p>
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <ul>
-<li><p>Pascoal et al., 2023 (manuscript in preparation)</p></li>
+<li><p>Pascoal F., Branco P., Torgo., Costa R., Magalhães C., 2024.
+Definition of the microbial rare biosphere through unsupervised machine
+learning. Communications Biology, in peer-review.</p></li>
 <li><p>Granskog, M. A., Fer, I., Rinke, A., &amp; Steen, H. (2018).
 Atmosphere-Ice-Ocean-Ecosystem Processes in a Thinner Arctic Sea Ice
 Regime: The Norwegian Young Sea ICE (N-ICE2015) Expedition. Journal of
