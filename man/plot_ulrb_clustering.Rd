@@ -58,7 +58,8 @@ classified_species <- define_rb(nice_tidy)
 plot_ulrb_clustering(classified_species,
                        sample_id = "ERR2044669",
                        taxa_col = "OTU",
-                       abundance_col = "Abundance")
+                       abundance_col = "Abundance",
+                       plot_all = FALSE)
 # All samples in a dataset
 plot_ulrb_clustering(classified_species,
           taxa_col = "OTU",
