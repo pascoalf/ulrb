@@ -46,7 +46,7 @@ To install the last stable version, use:
 
 ``` r
 install.packages("ulrb")
-#> Installing package into '/tmp/RtmpjhMvBO/temp_libpath66433ce97841'
+#> Installing package into '/tmp/RtmpGsXOqK/temp_libpath92962015831b'
 #> (as 'lib' is unspecified)
 ```
 
@@ -125,9 +125,6 @@ head(nice)
 #> 4                           <NA>                                           <NA>
 #> 5                           <NA>                                           <NA>
 #> 6 g__Candidatus_Nitrosopelagicus                                           <NA>
-```
-
-``` r
 
 # first, we tidy the "nice" OTU table
 sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -142,9 +139,6 @@ nice_tidy <- prepare_tidy_data(nice,
 # second, we apply ulrb algorithm in automatic setting
 nice_classification_results <- define_rb(nice_tidy)
 #> Joining with `by = join_by(Sample, Level)`
-```
-
-``` r
 
 # third, we plot microbial community and the quality of k-medoids clustering
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
