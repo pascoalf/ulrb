@@ -31,7 +31,8 @@
 #' plot_ulrb_clustering(classified_species,
 #'                        sample_id = "ERR2044669",
 #'                        taxa_col = "OTU",
-#'                        abundance_col = "Abundance")
+#'                        abundance_col = "Abundance",
+#'                        plot_all = FALSE)
 #' # All samples in a dataset
 #' plot_ulrb_clustering(classified_species,
 #'           taxa_col = "OTU",
@@ -151,7 +152,7 @@ plot_ulrb_clustering <- function(data,
         ggplot2::labs(title = "Rank Abundance Curve for all samples",
                       #subtitle = paste("n = ", length(unique(data$Sample))),
                       x = taxa_col,
-                      y = "Mean (\U00B1 sd) abundance",
+                      y = "Abundance",
                       col = "")
     }
   }
@@ -160,10 +161,10 @@ plot_ulrb_clustering <- function(data,
     intermediate_plot <- make_plot()
     intermediate_plot +
       ggplot2::scale_y_log10()+
-      ggplot2::labs(y =
-                      ifelse(isTRUE(plot_all),
-                             "Mean (\U00B1 sd)\n abundance in Log10 scale",
-                             "Abundance in Log10 scale"))
+      ggplot2::labs(y ="Abundance in Log10 scale")
+#                      ifelse(isTRUE(plot_all),
+ #                            "Mean (\U00B1 sd)\n abundance in Log10 scale",
+  #                           "Abundance in Log10 scale"))
   } else {
     make_plot()
   }

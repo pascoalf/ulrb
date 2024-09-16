@@ -42,7 +42,8 @@
 #' plot_ulrb_silhouette(classified_species,
 #'                        sample_id = "ERR2044669",
 #'                        taxa_col = "OTU",
-#'                        abundance_col = "Abundance")
+#'                        abundance_col = "Abundance",
+#'                        plot_all = FALSE)
 #' # All samples in a dataset
 #' plot_ulrb_silhouette(classified_species,
 #'           taxa_col = "OTU",
@@ -170,7 +171,7 @@ plot_ulrb_silhouette <- function(data,
       ggplot2::scale_fill_manual(values = colors)+
       ggplot2::labs(title = paste("Silhouette plot for all samples"),
                     #subtitle = paste("n = ", length(unique(data$Sample))),
-                    y = "Mean (\U00B1 sd) Silhouette scores",
+                    y = "Silhouette scores",
                     x = taxa_col,
                     col = "", fill = "")
   }
