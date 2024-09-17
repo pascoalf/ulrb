@@ -29,15 +29,15 @@ one column with abundance.
 
 There are two common formats for abundance tables:
 \itemize{
-\item samples as rows and phylogenetic units as columns;
-\item phylogenetic units as rows and samples as columns.
+\item samples as rows and taxa as columns;
+\item taxa as rows and samples as columns.
 }
 
-However, both formats are not tidy, because they include several columns with the same variable. They
+However, both formats are not tidy/long, because they include several columns with the same variable. They
 are in a "wide format" instead of a "long format".
 
-This function re-organizes samples and phylogenetic units so that there is a single column with the samples ID's and
-another with the abundance scores; Extra columns are allowed.
+This function re-organizes samples and taxa so that there is a single column with the samples ID's and
+another with the abundance scores. Extra columns are allowed.
 }
 \examples{
 library(dplyr)

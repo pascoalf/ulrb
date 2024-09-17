@@ -9,15 +9,14 @@
 #' **Common species table formats**
 #'
 #' There are two common formats for abundance tables:
-#'  - samples as rows and phylogenetic units as columns;
-#'  - phylogenetic units as rows and samples as columns.
+#'  - samples as rows and taxa as columns;
+#'  - taxa as rows and samples as columns.
 #'
-#' However, both formats are not tidy, because they include several columns with the same variable. They
+#' However, both formats are not tidy/long, because they include several columns with the same variable. They
 #' are in a "wide format" instead of a "long format".
 #'
-#' This function re-organizes samples and phylogenetic units so that there is a single column with the samples ID's and
-#' another with the abundance scores; Extra columns are allowed.
-#'
+#' This function re-organizes samples and taxa so that there is a single column with the samples ID's and
+#' another with the abundance scores. Extra columns are allowed.
 #'
 #' @param data a data.frame in "wide" format, with samples in either columns or rows. This data.frame should not include any data besides abundance values per sample, per taxonomic unit. Additional data (e.g. taxonomy details) should be added afterwards.
 #' @param sample_names a vector with the name of all samples.

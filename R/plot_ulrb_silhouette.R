@@ -3,10 +3,10 @@
 #' Plots the Silhouette scores from the clustering results of [define_rb()].
 #'
 #' This works as a sanity check of the results obtained by the unsupervised learning method used
-#' to classify species. This is specially important if you used an automatic number of clusters.
+#' to classify taxa. This is specially important if you used an automatic number of clusters.
 #'
 #' The function works for either a single sample (that you specify with sample_id argument), or
-#' it can apply a centrality metric for species across all your samples (plot_all = TRUE).
+#' it can apply a centrality metric for taxa across all your samples (plot_all = TRUE).
 #'
 #' For more details on Silhouette score, see [check_avgSil()] and [cluster::silhouette()].
 #'
@@ -14,7 +14,7 @@
 #' **Interpretation of Silhouette plot**
 #'
 #' Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-#' (Kaufman and Rousseeuw, 1991); a possible (**subjective**) interpretation of the clustering structure based
+#' (Kaufman and Rousseeuw, 1991); a possible interpretation of the clustering structure based
 #' on the Silhouette plot is:
 #'
 #' - 0.71-1.00 (A strong structure has been found);

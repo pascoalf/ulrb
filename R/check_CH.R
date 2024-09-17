@@ -91,8 +91,7 @@
 #'
 #' @references
 #' Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
-#'
-#' Pascoal et al., 2024 (in peer review)
+#' Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 #'
 #' @examples
 #' library(dplyr)

@@ -16,7 +16,7 @@ define_rb(
 )
 }
 \arguments{
-\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
+\item{data}{A data.frame with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
 \item{classification_vector}{A vector of strings with the names for each cluster, from lower to higher abundance. Default is c("Rare", "Undetermined", "Abundance").}
 
@@ -24,7 +24,7 @@ define_rb(
 
 \item{abundance_col}{String with name of column with abundance values.}
 
-\item{simplified}{Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results
+\item{simplified}{Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed \code{\link[cluster:pam]{cluster::pam()}} results
 and Silhouette scores. If TRUE, only the Classification result is added to the original input data.}
 
 \item{automatic}{By default (FALSE), will assume a classification into "Rare", "Undetermined" or "Abundant". If TRUE, then it will automatically select the number of classifications (or k),
@@ -38,16 +38,15 @@ based on the index argument.}
 The input data.frame with extra columns containing the classification and additional metrics (if detailed = TRUE).
 }
 \description{
-Classifies species in each sample into either "Rare", "Undetermined" or "Abundant". Other classifications are allowed.
+Classifies taxa in each sample into either "rare", "undetermined" or "abundant". Other classifications are allowed.
 }
 \details{
 \strong{Overview}
 
-Function to cluster species abundance with partition around medoids algorithm (Kaufman and Rousseuw. 1991).
+Function to cluster taxa abundance with partition around medoids algorithm (Kaufman and Rousseuw. 1991).
 By default, we propose the division into three clusters (k = 3),
-which can have the convenient description of: "rare", "undetermined" and "abundant".
-The phylogenetic units from the cluster with lowest median abundance is considered
-to be the "rare biosphere".
+which can be translated into convenient classifications: "rare", "undetermined" and "abundant".
+Taxa from the cluster with lowest median abundance corresponds to the "rare biosphere".
 
 \strong{The classification vector}
 
@@ -64,7 +63,7 @@ the maximum possible k.
 
 The maximum possible k is the number of different abundance scores observed in a single sample. Note, however,
 that we do not recommend any clustering for k > 10
-and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2023;
+and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2024 (in peer review);
 and in the vignette \code{vignette("explore-classifications")}.
 
 \strong{Automatic selection of the number of clusters}
@@ -90,8 +89,8 @@ but it is possible that, in some situations, you just can't find an optimal clus
 
 The detailed output gives you access to all of the clustering results:
 \itemize{
-\item \code{pam_object} is a list with the original results from the k-medoids clustering,
-see \code{\link[cluster:pam]{cluster::pam()}} documentation.
+\item \code{pam_object} is a list with the original results from the \code{\link[cluster:pam]{cluster::pam()}},
+see \code{\link[cluster:pam]{cluster::pam()}} documentation for more details.
 \item \code{Level} is an integer indicating the specific cluster attributed by the \code{\link[cluster:pam]{cluster::pam()}}
 function for each observation. Its order is random.
 \item \code{Silhouette_scores} provides the Silhouette score obtained for each
@@ -145,11 +144,10 @@ possible, i.e., when the minimum sum of dissimilarities of the clusters is reach
 \strong{Notes}:
 
 Understand that \strong{ulrb} package considers each sample as an independent
-community of phylogenetic units, which means clustering is also independent across
+community of taxa, which means clustering is also independent across
 different samples.
 Thus, be aware that you will have clustering results and metrics for each
-single sample,
-which is why we also provide some functions to analyze results across
+single sample, which is why we also provide some functions to analyze results across
 any number of samples (see: \code{\link[=plot_ulrb]{plot_ulrb()}} for clustering results
 and \code{\link[=evaluate_k]{evaluate_k()}} for k selection).
 }
@@ -222,6 +220,7 @@ nice_tidy \%>\%
 }
 \references{
 Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
+Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 }
 \seealso{
 \code{\link[=suggest_k]{suggest_k()}}, \code{\link[=evaluate_k]{evaluate_k()}}, \code{\link[=plot_ulrb]{plot_ulrb()}}, \code{\link[cluster:pam]{cluster::pam()}}

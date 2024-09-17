@@ -50,7 +50,7 @@ This function combined \code{\link[=plot_ulrb_clustering]{plot_ulrb_clustering()
 The plots can be done for a single sample or for all samples.
 
 The results from the main function of ulrb package, \code{\link[=define_rb]{define_rb()}}, will include the classification of
-each species (OTU, ASVs, etc) and the silhouette score obtained for each observation. Thus, to access the clustering results, there are two main plots to check:
+each taxa and the silhouette score obtained for each observation. Thus, to access the clustering results, there are two main plots to check:
 \itemize{
 \item the rank abundance curve obtained after ulrb classification;
 \item and the silhouette plot.
@@ -59,7 +59,7 @@ each species (OTU, ASVs, etc) and the silhouette score obtained for each observa
 \strong{Interpretation of Silhouette plot}
 
 Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-(Kaufman and Rousseeuw, 1991); a possible (\strong{subjective}) interpretation of the clustering structure based
+(Kaufman and Rousseeuw, 1991); a possible interpretation of the clustering structure based
 on the Silhouette plot is:
 \itemize{
 \item 0.71-1.00 (A strong structure has been found);

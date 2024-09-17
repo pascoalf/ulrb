@@ -15,7 +15,7 @@ check_CH(
 )
 }
 \arguments{
-\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
+\item{data}{A data.frame with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
 \item{sample_id}{String with name of the sample to apply this function.}
 
@@ -126,8 +126,7 @@ check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 }
 \references{
 Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
-
-Pascoal et al., 2024 (in peer review)
+Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 }
 \seealso{
 \link[clusterSim:index.G1]{clusterSim::index.G1}

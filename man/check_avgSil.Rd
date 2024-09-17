@@ -15,7 +15,7 @@ check_avgSil(
 )
 }
 \arguments{
-\item{data}{A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.}
+\item{data}{A data.frame with, at least, a column for Abundance and Sample. Additional columns are allowed.}
 
 \item{sample_id}{String with name of the sample to apply this function.}
 
@@ -83,7 +83,7 @@ The silhouette score (Sil), is given by:
 Once you have the Silhouette score for all observations in a clustering result, just
 take the simple mean and get the average Silhouette score.
 
-\strong{Silhouette score intuition}
+\strong{Silhouette score explanation}
 
 From the above formula, \eqn{Sil = \frac{(b-a)}{max(a,b)}}, it is clear that,
 for a given observation:
@@ -124,6 +124,7 @@ check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 }
 \references{
 Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
+Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 }
 \seealso{
 \code{\link[=define_rb]{define_rb()}}, \code{\link[=suggest_k]{suggest_k()}}, \code{\link[cluster:pam]{cluster::pam()}}, \code{\link[cluster:silhouette]{cluster::silhouette()}}

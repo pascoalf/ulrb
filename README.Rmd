@@ -26,12 +26,12 @@ knitr::opts_chunk$set(
 The R package **ulrb** stands for **Unsupervised Learning Based Definition of Microbial Rare Biosphere**. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.
 
 More specifically, the partitioning around medoids (k-medoids) algorithm is 
-used to divide species within a sample into clusters. The clusters are then
+used to divide taxa within a sample into clusters. The clusters are then
 ordered based on a user-defined classification vector. By default, our 
-method classifies all species in: "rare", "undetermined" or "abundant". In alternative, 
+method classifies all taxa in: "rare", "undetermined" or "abundant". In alternative, 
 the user can change the number of classifications. To do so, ulrb includes functions to help
-the user decide the number of classifications (k), but it is also possible for ulrb to 
-automatically decide the number of clusters. Besides clustering, uleb includes functions to 
+the user decide the number of clusters (k), but it is also possible for ulrb to 
+automatically decide the number of clusters (equivalent to the number of classifications). Besides clustering, ulrb includes functions to 
 help evaluate the clustering quality (e.g. average Silhouette score).
 
 For detailed theory behind our reasoning for this definition of the microbial 
@@ -41,19 +41,19 @@ documentation.
 
 For tutorials and documentation of the **ulrb** package, visit our website: link.
 
-**Note: the article to cite ulrb is undergoind peer-review in Communications Biology journal**
+**Note: the article to cite ulrb is undergoing peer-review in Communications Biology journal**
  
 ## Installation
 
 To install the last stable version, use:
 
-```{r}
+```{r, eval=FALSE}
 install.packages("ulrb")
 ```
 
 If you want to install the last version available on GitHub, use:
 
-``` r
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("pascoalf/ulrb")
 ```
@@ -62,7 +62,7 @@ We are working on a CRAN publication. We will then provide instructions for CRAN
 
 ## Example
 
-This is a basic example which shows you how to use ulrb to divide phylogenetic units into three classifications (rare, undetermined and abundant):
+This is a basic example which shows you how to use ulrb to divide taxa into three classifications (rare, undetermined and abundant):
 
 ```{r example}
 library(ulrb)
@@ -70,7 +70,7 @@ library(ulrb)
 define_rb(nice_tidy)
 ```
 
-With ulrb, you can also format your original species table, get an automatic number of clusters and plot the results:
+With ulrb, you can also format your original abundance table, get an automatic number of clusters and plot the results:
 
 ```{r, fig.width= 10}
 # nice is an OTU table in wide format

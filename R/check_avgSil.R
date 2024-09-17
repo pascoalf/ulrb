@@ -52,7 +52,7 @@
 #' take the simple mean and get the average Silhouette score.
 #'
 #' @details
-#' **Silhouette score intuition**
+#' **Silhouette score explanation**
 #'
 #' From the above formula, \eqn{Sil = \frac{(b-a)}{max(a,b)}}, it is clear that,
 #' for a given observation:
@@ -86,7 +86,9 @@
 #'
 #' @seealso [define_rb()], [suggest_k()], [cluster::pam()], [cluster::silhouette()]
 #'
-#' @references Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
+#' @references
+#' Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
+#' Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 #'
 #' @examples
 #' library(dplyr)

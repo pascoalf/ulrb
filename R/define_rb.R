@@ -1,15 +1,14 @@
 #' Define Rare Biosphere
 #'
-#' Classifies species in each sample into either "Rare", "Undetermined" or "Abundant". Other classifications are allowed.
+#' Classifies taxa in each sample into either "rare", "undetermined" or "abundant". Other classifications are allowed.
 #'
 #' @details
 #' **Overview**
 #'
-#' Function to cluster species abundance with partition around medoids algorithm (Kaufman and Rousseuw. 1991).
+#' Function to cluster taxa abundance with partition around medoids algorithm (Kaufman and Rousseuw. 1991).
 #' By default, we propose the division into three clusters (k = 3),
-#' which can have the convenient description of: "rare", "undetermined" and "abundant".
-#' The phylogenetic units from the cluster with lowest median abundance is considered
-#' to be the "rare biosphere".
+#' which can be translated into convenient classifications: "rare", "undetermined" and "abundant".
+#' Taxa from the cluster with lowest median abundance corresponds to the "rare biosphere".
 #'
 #' @details
 #' **The classification vector**
@@ -27,7 +26,7 @@
 #'
 #' The maximum possible k is the number of different abundance scores observed in a single sample. Note, however,
 #'  that we do not recommend any clustering for k > 10
-#' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2023;
+#' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2024 (in peer review);
 #' and in the vignette `vignette("explore-classifications")`.
 #'
 #' @details
@@ -52,8 +51,8 @@
 #' but it is possible that, in some situations, you just can't find an optimal clustering.
 #'
 #' The detailed output gives you access to all of the clustering results:
-#'  - `pam_object` is a list with the original results from the k-medoids clustering,
-#'  see [cluster::pam()] documentation.
+#'  - `pam_object` is a list with the original results from the [cluster::pam()],
+#'  see [cluster::pam()] documentation for more details.
 #'  - `Level` is an integer indicating the specific cluster attributed by the [cluster::pam()]
 #'  function for each observation. Its order is random.
 #'  - `Silhouette_scores` provides the Silhouette score obtained for each
@@ -109,20 +108,19 @@
 #' **Notes**:
 #'
 #' Understand that **ulrb** package considers each sample as an independent
-#'  community of phylogenetic units, which means clustering is also independent across
-#'  different samples.
+#' community of taxa, which means clustering is also independent across
+#' different samples.
 #' Thus, be aware that you will have clustering results and metrics for each
-#' single sample,
-#' which is why we also provide some functions to analyze results across
+#' single sample, which is why we also provide some functions to analyze results across
 #' any number of samples (see: [plot_ulrb()] for clustering results
 #' and [evaluate_k()] for k selection).
 #'
 #'
-#' @param data A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.
+#' @param data A data.frame with, at least, a column for Abundance and Sample. Additional columns are allowed.
 #' @param classification_vector A vector of strings with the names for each cluster, from lower to higher abundance. Default is c("Rare", "Undetermined", "Abundance").
 #' @param samples_col String with name of column with sample names.
 #' @param abundance_col String with name of column with abundance values.
-#' @param simplified Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed pam() results
+#' @param simplified Can be TRUE/FALSE. Default (FALSE) provides an additional column with detailed [cluster::pam()] results
 #'  and Silhouette scores. If TRUE, only the Classification result is added to the original input data.
 #' @param automatic By default (FALSE), will assume a classification into "Rare", "Undetermined" or "Abundant". If TRUE, then it will automatically select the number of classifications (or k),
 #' based on the index argument.
@@ -132,8 +130,9 @@
 #' @seealso [suggest_k()], [evaluate_k()], [plot_ulrb()], [cluster::pam()]
 #' @export
 #'
-#' @references Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
-#'
+#' @references
+#' Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
+#' Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
 #'
 #' @examples
 #' \donttest{
