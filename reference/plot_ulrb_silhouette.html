@@ -109,13 +109,13 @@
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This works as a sanity check of the results obtained by the unsupervised learning method used
-to classify species. This is specially important if you used an automatic number of clusters.</p>
+to classify taxa. This is specially important if you used an automatic number of clusters.</p>
 <p>The function works for either a single sample (that you specify with sample_id argument), or
-it can apply a centrality metric for species across all your samples (plot_all = TRUE).</p>
+it can apply a centrality metric for taxa across all your samples (plot_all = TRUE).</p>
 <p>For more details on Silhouette score, see <code><a href="check_avgSil.html">check_avgSil()</a></code> and <code><a href="https://rdrr.io/pkg/cluster/man/silhouette.html" class="external-link">cluster::silhouette()</a></code>.</p>
 <p><strong>Interpretation of Silhouette plot</strong></p>
 <p>Based on chapter 2 of "Finding Groups in Data: An Introduction to Cluster Analysis."
-(Kaufman and Rousseeuw, 1991); a possible (<strong>subjective</strong>) interpretation of the clustering structure based
+(Kaufman and Rousseeuw, 1991); a possible interpretation of the clustering structure based
 on the Silhouette plot is:</p><ul><li><p>0.71-1.00 (A strong structure has been found);</p></li>
 <li><p>0.51-0.70 (A reasonable structure has been found);</p></li>
 <li><p>0.26-0.50 (The structure is weak and could be artificial);</p></li>

@@ -69,18 +69,16 @@
 <!-- badges: start -->
 
 <p>The R package <strong>ulrb</strong> stands for <strong>Unsupervised Learning Based Definition of Microbial Rare Biosphere</strong>. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.</p>
-<p>More specifically, the partitioning around medoids (k-medoids) algorithm is used to divide species within a sample into clusters. The clusters are then ordered based on a user-defined classification vector. By default, our method classifies all species in: “rare”, “undetermined” or “abundant”. In alternative, the user can change the number of classifications. To do so, ulrb includes functions to help the user decide the number of classifications (k), but it is also possible for ulrb to automatically decide the number of clusters. Besides clustering, uleb includes functions to help evaluate the clustering quality (e.g. average Silhouette score).</p>
+<p>More specifically, the partitioning around medoids (k-medoids) algorithm is used to divide taxa within a sample into clusters. The clusters are then ordered based on a user-defined classification vector. By default, our method classifies all taxa in: “rare”, “undetermined” or “abundant”. In alternative, the user can change the number of classifications. To do so, ulrb includes functions to help the user decide the number of clusters (k), but it is also possible for ulrb to automatically decide the number of clusters (equivalent to the number of classifications). Besides clustering, ulrb includes functions to help evaluate the clustering quality (e.g. average Silhouette score).</p>
 <p>For detailed theory behind our reasoning for this definition of the microbial rare biosphere, results and applications, see our paper Pascoal et al., 2024 (in peer-review). For more details on the R functions used and data wrangling please see the package documentation.</p>
 <p>For tutorials and documentation of the <strong>ulrb</strong> package, visit our website: link.</p>
-<p><strong>Note: the article to cite ulrb is undergoind peer-review in Communications Biology journal</strong></p>
+<p><strong>Note: the article to cite ulrb is undergoing peer-review in Communications Biology journal</strong></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install the last stable version, use:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ulrb"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Installing package into '/tmp/RtmpGsXOqK/temp_libpath92962015831b'</span></span>
-<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ulrb"</span><span class="op">)</span></span></code></pre></div>
 <p>If you want to install the last version available on GitHub, use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
@@ -90,7 +88,7 @@
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to use ulrb to divide phylogenetic units into three classifications (rare, undetermined and abundant):</p>
+<p>This is a basic example which shows you how to use ulrb to divide taxa into three classifications (rare, undetermined and abundant):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pascoalf.github.io/ulrb/">ulrb</a></span><span class="op">)</span></span>
 <span><span class="co">## basic example</span></span>
@@ -114,7 +112,7 @@
 <span><span class="co">#&gt; # ℹ 7 more variables: Abundance &lt;int&gt;, pam_object &lt;list&gt;, Level &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   Silhouette_scores &lt;dbl&gt;, Cluster_median_abundance &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   median_Silhouette &lt;dbl&gt;, Evaluation &lt;chr&gt;</span></span></code></pre></div>
-<p>With ulrb, you can also format your original species table, get an automatic number of clusters and plot the results:</p>
+<p>With ulrb, you can also format your original abundance table, get an automatic number of clusters and plot the results:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># nice is an OTU table in wide format</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nice</span><span class="op">)</span></span>
@@ -162,18 +160,14 @@
 <span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span>
 <span></span>
 <span><span class="co"># third, we plot microbial community and the quality of k-medoids clustering</span></span>
-<span><span class="fu"><a href="reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">nice_classification_results</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 197 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_segment()`).</span></span>
-<span><span class="co">#&gt; Removed 197 rows containing missing values or values outside the scale range</span></span>
-<span><span class="co">#&gt; (`geom_segment()`).</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<span><span class="fu"><a href="reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">nice_classification_results</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># In case you want to inspect the result of a particular sample, do:</span></span>
 <span><span class="fu"><a href="reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">nice_classification_results</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, </span>
 <span>          sample_id <span class="op">=</span> <span class="st">"ERR2044662"</span>, plot_all <span class="op">=</span> <span class="cn">FALSE</span>, log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-2.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-2.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

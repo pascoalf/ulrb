@@ -60,7 +60,7 @@
 
 
 <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A tibble with, at least, a column for Abundance and Sample. Additional columns are allowed.</p></dd>
+<dd><p>A data.frame with, at least, a column for Abundance and Sample. Additional columns are allowed.</p></dd>
 
 
 <dt id="arg-sample-id">sample_id<a class="anchor" aria-label="anchor" href="#arg-sample-id"></a></dt>
@@ -125,7 +125,7 @@ centroid of the nearest cluster.</p></li>
 <p>$$Sil = \frac{(b-a)}{max(a,b)}$$</p>
 <p>Once you have the Silhouette score for all observations in a clustering result, just
 take the simple mean and get the average Silhouette score.</p>
-<p><strong>Silhouette score intuition</strong></p>
+<p><strong>Silhouette score explanation</strong></p>
 <p>From the above formula, \(Sil = \frac{(b-a)}{max(a,b)}\), it is clear that,
 for a given observation:</p><ul><li><p>if \(a &gt; b\), the Silhouette score approaches <strong>1</strong>; this means that the
 distance between an observation and its own cluster is larger than the
@@ -148,7 +148,8 @@ select the k with highest average Silhouette score.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.</p>
+    <p>Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
+Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -76,12 +76,12 @@
     <p>This function guarantees that the abundance table includes one column with sample ID's and
 one column with abundance.</p>
 <p><strong>Common species table formats</strong></p>
-<p>There are two common formats for abundance tables:</p><ul><li><p>samples as rows and phylogenetic units as columns;</p></li>
-<li><p>phylogenetic units as rows and samples as columns.</p></li>
-</ul><p>However, both formats are not tidy, because they include several columns with the same variable. They
+<p>There are two common formats for abundance tables:</p><ul><li><p>samples as rows and taxa as columns;</p></li>
+<li><p>taxa as rows and samples as columns.</p></li>
+</ul><p>However, both formats are not tidy/long, because they include several columns with the same variable. They
 are in a "wide format" instead of a "long format".</p>
-<p>This function re-organizes samples and phylogenetic units so that there is a single column with the samples ID's and
-another with the abundance scores; Extra columns are allowed.</p>
+<p>This function re-organizes samples and taxa so that there is a single column with the samples ID's and
+another with the abundance scores. Extra columns are allowed.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
