@@ -12,6 +12,7 @@
 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![DOI](https://zenodo.org/badge/584780462.svg)](https://doi.org/10.5281/zenodo.14922441)
 <!-- badges: end -->
 
 The R package **ulrb** stands for **Unsupervised Learning Based
@@ -29,16 +30,11 @@ the number of clusters (equivalent to the number of classifications).
 Besides clustering, ulrb includes functions to help evaluate the
 clustering quality (e.g. average Silhouette score).
 
-For detailed theory behind our reasoning for this definition of the
-microbial rare biosphere, results and applications, see our paper
-Pascoal et al., 2024 (in peer-review). For more details on the R
-functions used and data wrangling please see the package documentation.
+For more details on the R functions used and data wrangling please see
+the package documentation.
 
 For tutorials and documentation of the **ulrb** package, visit our
 website: link.
-
-**Note: the article to cite ulrb is undergoing peer-review in
-Communications Biology journal**
 
 ## Installation
 
@@ -122,6 +118,9 @@ head(nice)
 #> 4                           <NA>                                           <NA>
 #> 5                           <NA>                                           <NA>
 #> 6 g__Candidatus_Nitrosopelagicus                                           <NA>
+```
+
+``` r
 
 # first, we tidy the "nice" OTU table
 sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -136,6 +135,9 @@ nice_tidy <- prepare_tidy_data(nice,
 # second, we apply ulrb algorithm in automatic setting
 nice_classification_results <- define_rb(nice_tidy)
 #> Joining with `by = join_by(Sample, Level)`
+```
+
+``` r
 
 # third, we plot microbial community and the quality of k-medoids clustering
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
@@ -151,3 +153,17 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU",
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
+
+## How to cite ulrb
+
+Pascoal, F., Branco, P., Torgo, L., Costa, R., & Magalhães, C. (2025).
+Definition of the microbial rare biosphere through unsupervised machine
+learning. Communications Biology (in Peer-Review).
+
+Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025).
+ulrb: an R Package to Automatically Define Rare Taxa. Ecological
+Informatics (in Peer-Review).
+
+To cite this GitHub repository (v0.1.6): Francisco Pascoal. (2025).
+pascoalf/ulrb: v0.1.6 (v0.1.6). Zenodo.
+<https://doi.org/10.5281/zenodo.14922442>
