@@ -13,6 +13,7 @@ license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.cran
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![DOI](https://zenodo.org/badge/584780462.svg)](https://doi.org/10.5281/zenodo.14922441)
+[![Downloads](https://cranlogs.r-pkg.org/badges/urlb)](https://cran.rstudio.com/web/packages/urlb/)
 <!-- badges: end -->
 
 The R package **ulrb** stands for **Unsupervised Learning Based
