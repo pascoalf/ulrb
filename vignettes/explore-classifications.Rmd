@@ -21,7 +21,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 # a vector with some colors
-qualitative_colors <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+qualitative_colors <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "grey50")
 ```
 
 
@@ -368,7 +368,7 @@ You can look at particular metrics and at specific samples. To do so, we made se
 
 You can also calculate them at the same time for one sample with `evaluate_sample_k()` or all samples with `evaluate_k()`.
 
-Let's look at several examples, using the default range of k = 3 up to k = 10:
+Let's look at several examples, using the default range of k = 2 up to k = 10:
 
 ```{r}
 ## One sample
@@ -379,7 +379,7 @@ check_avgSil(nice_tidy, sample_id = selected_samples[1])
 check_avgSil(nice_tidy, sample_id = selected_samples[1], with_plot = TRUE)
 ```
 
-In the last plot, each value of k represents a clustering result. From the above information, we would select k = 3 (just like the default option), because it had the highest average Silhouette score.
+In the last plot, each value of k represents a clustering result. From the above information, we would select k = 2 (default option), because it had the highest average Silhouette score.
 
 We can repeat for all other indices:
 
@@ -463,10 +463,12 @@ Like so,
 
 ```{r}
 automatic_classification <- define_rb(nice_tidy, automatic = TRUE)
-
 # Plot automatic result
 
-plot_ulrb(automatic_classification, taxa_col = "OTU", plot_all = TRUE)
+plot_ulrb(automatic_classification, 
+          taxa_col = "OTU", 
+          plot_all = TRUE,
+          colors = qualitative_colors[1:2])
 ```
 
 Naturally, you can decide more parameters for the automatic selection of k, for example, 
@@ -518,7 +520,8 @@ max_k
 ```
 
 If we have the maximum k, we just need to use the `evaluate_k()` function for the full range of values.
-(if you try to run this code, it might take a while)
+
+*note*: the next code chunk might take a while to run.
 
 ```{r}
 evaluate_k(nice_tidy, with_plot = TRUE, range = 2:max_k)
