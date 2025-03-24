@@ -12,6 +12,7 @@ define_rb(
   simplified = FALSE,
   automatic = FALSE,
   index = "Average Silhouette Score",
+  check_singles = FALSE,
   ...
 )
 }
@@ -31,6 +32,9 @@ and Silhouette scores. If TRUE, only the Classification result is added to the o
 based on the index argument.}
 
 \item{index}{Index used to select best k. Can be one of: "Average Silhouette Score", "Davies-Bouldin" or "Calinski-Harabasz".}
+
+\item{check_singles}{Default if FALSE. If TRUE, the user is warned of the number of clusters represented by a single taxon,
+if any.}
 
 \item{...}{Extra arguments.}
 }
