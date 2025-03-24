@@ -256,3 +256,17 @@ test_that("Is a range includes k = 1, it should throw an error", {
 })
 
 
+# If there are no samples with clusters represented by a single taxon,
+# then there should be no warning
+test_that("No warning, if there are no clusters with zero taxa", {
+  no_singles <- filter(nice_tidy, !Sample %in% c("ERR2044662", "ERR2044663", "ERR2044664", "ERR2044666", "ERR2044670"))
+  expect_no_warning(
+    define_rb(no_singles, check_singles = TRUE))
+})
+
+# Expect warning if there are samples with clusters represented by 1 taxon
+test_that("Warn the existence of samples with clusters of a single taxon", {
+  expect_warning(
+    define_rb(nice_tidy, check_singles = TRUE))
+})
+
