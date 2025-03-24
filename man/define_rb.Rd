@@ -63,7 +63,7 @@ the maximum possible k.
 
 The maximum possible k is the number of different abundance scores observed in a single sample. Note, however,
 that we do not recommend any clustering for k > 10
-and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2024 (in peer review);
+and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2025;
 and in the vignette \code{vignette("explore-classifications")}.
 
 \strong{Automatic selection of the number of clusters}
@@ -220,7 +220,7 @@ nice_tidy \%>\%
 }
 \references{
 Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
-Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
+Pascoal et al. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.
 }
 \seealso{
 \code{\link[=suggest_k]{suggest_k()}}, \code{\link[=evaluate_k]{evaluate_k()}}, \code{\link[=plot_ulrb]{plot_ulrb()}}, \code{\link[cluster:pam]{cluster::pam()}}

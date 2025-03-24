@@ -59,7 +59,7 @@ More specifically, the list will include:
 If \code{detailed = FALSE}, this function will provide a single integer with the best k.
 The \strong{default} decision is based on the maximum average Silhouette score obtained
 for the values of k between 3 and 10. To better understand why the average Silhouette score and
-this range of k's were selected, we refer to Pascoal et al., 2024 (in peer-review) and to
+this range of k's were selected, we refer to Pascoal et al., 2025 and to
 vignette("explore-classifications").
 
 Alternatively, this function can also provide the best k, as an integer, based on another index

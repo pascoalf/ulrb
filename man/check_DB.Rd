@@ -39,7 +39,7 @@ Calculates Davies-Bouldin (DB) index for a given sample.
 DB is an index used to decide the number of clusters in a clustering algorithm.
 This function, \code{\link[=check_DB]{check_DB()}}, calculates the DB index for every k in a pre-specified range
 of values. Thus providing a score for each number of clusters tested (k). The default
-range of cluster values (k) is \code{range = 3:10} (see why this is in Pascoal et al., 2024, in peer-review).
+range of cluster values (k) is \code{range = 3:10} (see why this is in Pascoal et al., 2025).
 However, this function may calculate the DB index for all possible k's.
 
 Note that DB index is not an absolute value that indicates the quality of a single clustering.
@@ -116,7 +116,7 @@ check_DB(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 }
 \references{
 Davies, D. L., & Bouldin, D. W. (1979). A Cluster Separation Measure. IEEE Transactions on Pattern Analysis and Machine Intelligence, PAMI-1(2).
-Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
+Pascoal et al. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.
 }
 \seealso{
 \code{\link[clusterSim:index.DB]{clusterSim::index.DB()}}

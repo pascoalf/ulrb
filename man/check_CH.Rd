@@ -126,7 +126,7 @@ check_CH(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 }
 \references{
 Calinski, T., & Harabasz, J. (1974). A dendrite method for cluster analysis. Communications in Statistics - Theory and Methods, 3(1), 1–27.
-Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
+Pascoal et al. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.
 }
 \seealso{
 \link[clusterSim:index.G1]{clusterSim::index.G1}

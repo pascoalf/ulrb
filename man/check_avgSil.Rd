@@ -124,7 +124,7 @@ check_avgSil(nice_tidy, sample_id = "ERR2044662", range = 4:11, with_plot=TRUE)
 }
 \references{
 Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
-Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
+Pascoal et al. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.
 }
 \seealso{
 \code{\link[=define_rb]{define_rb()}}, \code{\link[=suggest_k]{suggest_k()}}, \code{\link[cluster:pam]{cluster::pam()}}, \code{\link[cluster:silhouette]{cluster::silhouette()}}
