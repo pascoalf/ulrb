@@ -9,7 +9,7 @@ evaluate_sample_k(
   sample_id,
   samples_col = "Sample",
   abundance_col = "Abundance",
-  range = 3:10,
+  range = 2:10,
   with_plot = FALSE,
   ...
 )
@@ -23,7 +23,7 @@ evaluate_sample_k(
 
 \item{abundance_col}{string with name of column with abundance values. Default is "Abundance".}
 
-\item{range}{The range of values of k to test, default is from 3 to 10.}
+\item{range}{The range of values of k to test, default is from 2 to 10.}
 
 \item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
 
@@ -34,7 +34,7 @@ A data.frame (or plot) with several indices for each number of clusters.
 }
 \description{
 This functions calculates three indices (Davies-Bouldin, Calinsky-Harabasz and average Silhouette score) for each k.
-Calculations are made for a single sample and for a default range of k that goes from 3 to 10.
+Calculations are made for a single sample and for a default range of k that goes from 2 to 10.
 }
 \details{
 \strong{Note}: To get the indices for all samples, use \code{\link[=evaluate_k]{evaluate_k()}} instead.

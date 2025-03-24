@@ -9,7 +9,7 @@ check_DB(
   sample_id,
   samples_col = "Sample",
   abundance_col = "Abundance",
-  range = 3:10,
+  range = 2:10,
   with_plot = FALSE,
   ...
 )
@@ -23,7 +23,7 @@ check_DB(
 
 \item{abundance_col}{String with name of column with abundance values.}
 
-\item{range}{The range of values of k to test, default is from 3 to 10.}
+\item{range}{The range of values of k to test, default is from 2 to 10.}
 
 \item{with_plot}{If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.}
 

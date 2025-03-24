@@ -6,7 +6,7 @@
 \usage{
 evaluate_k(
   data,
-  range = 3:10,
+  range = 2:10,
   samples_col = "Sample",
   abundance_col = "Abundance",
   with_plot = FALSE,
@@ -16,7 +16,7 @@ evaluate_k(
 \arguments{
 \item{data}{a data.frame with, at least, the classification, abundance and sample information for each phylogenetic unit.}
 
-\item{range}{The range of values of k to test, default is from 3 to 10.}
+\item{range}{The range of values of k to test, default is from 2 to 10.}
 
 \item{samples_col}{String with name of column with sample names.}
 

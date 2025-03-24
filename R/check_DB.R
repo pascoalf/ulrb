@@ -77,7 +77,7 @@
 #' @inheritParams define_rb
 #' @param sample_id String with name of the sample to apply this function.
 #' @param samples_col String with name of column with sample names.
-#' @param range The range of values of k to test, default is from 3 to 10.
+#' @param range The range of values of k to test, default is from 2 to 10.
 #' @param with_plot If FALSE (default) returns a vector, but if TRUE will return a plot with the scores.
 #'
 #' @return A vector or plot with Davies-Bouldin index for each pre-specified k in a given sample.
@@ -103,7 +103,7 @@ check_DB <- function(data,
                      sample_id,
                      samples_col = "Sample",
                      abundance_col = "Abundance",
-                     range = 3:10,
+                     range = 2:10,
                      with_plot = FALSE, ...){
   # range can not begin at 1
   if(min(range) <= 1){

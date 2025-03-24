@@ -105,7 +105,7 @@ check_avgSil <- function(data,
                          sample_id = NULL,
                          samples_col = "Sample",
                          abundance_col = "Abundance",
-                         range = 3:10,
+                         range = 2:10,
                          with_plot = FALSE, ...){
 
   # Conditions for function to run

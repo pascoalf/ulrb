@@ -70,7 +70,7 @@ and in the vignette \code{vignette("explore-classifications")}.
 
 To automatically decide the number of clusters (i.e., the value of k), it is possible to do so with the argument \strong{automatic=TRUE}. For details on
 complete automation of \code{\link[=define_rb]{define_rb()}}, please see the documentation for \code{\link[=suggest_k]{suggest_k()}}. Briefly, the k with best average Silhouette score
-is selected from a range of k values between 3 and 10. It is possible to decide k based on other indices ("Davies-Bouldin" or "Calinsky-Harabasz").
+is selected from a range of k values between 2 and 10. It is possible to decide k based on other indices ("Davies-Bouldin" or "Calinsky-Harabasz").
 
 If you want a more fine grained analysis of k values, we provide several functions:
 \itemize{

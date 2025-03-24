@@ -57,7 +57,7 @@
 #' }
 #'
 suggest_k <- function(data,
-                      range = 3:10,
+                      range = 2:10,
                       samples_col = "Sample",
                       abundance_col = "Abundance",
                       index = "Average Silhouette Score",

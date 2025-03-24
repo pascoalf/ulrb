@@ -27,7 +27,7 @@
 #' }
 #'
 evaluate_k <- function(data,
-                       range = 3:10,
+                       range = 2:10,
                        samples_col = "Sample",
                        abundance_col = "Abundance",
                        with_plot = FALSE,
@@ -75,7 +75,7 @@ evaluate_k <- function(data,
                                 .f = ~evaluate_sample_k(data = .x,
                                                         sample_id = unique(.x$SamplePlaceholder),
                                                         samples_col = "SamplePlaceholder",
-                                                        range = range, # default range = 3:10
+                                                        range = range, # default range = 2:10
                                                         inside_nest = FALSE) ## working on removing this
                                  )
            ) %>%

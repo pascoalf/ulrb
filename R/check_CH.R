@@ -5,7 +5,7 @@
 #' CH is an index used to decide the number of clusters in a clustering algorithm.
 #' This function, [check_CH()], calculates the CH index for every k in a pre-specified range
 #' of values. Thus providing a score for each number of clusters tested (k). The default
-#' range of cluster values (k) is `range = 3:10` (see why this is in Pascoal et al., 2024, in peer review).
+#' range of cluster values (k) is `range = 2:10` (see why this is in Pascoal et al., 2024, in peer review).
 #' However, this function may calculate the CH index for all possible k's.
 #'
 #' Note that CH index is not an absolute value that indicates the quality of a single clustering.
@@ -109,7 +109,7 @@ check_CH <- function(data,
                      sample_id,
                      samples_col = "Sample",
                      abundance_col = "Abundance",
-                     range = 3:10,
+                     range = 2:10,
                      with_plot = FALSE, ...){
 
   # Conditions for function to run

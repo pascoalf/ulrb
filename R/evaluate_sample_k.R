@@ -1,7 +1,7 @@
 #' Evaluate sample k
 #'
 #' This functions calculates three indices (Davies-Bouldin, Calinsky-Harabasz and average Silhouette score) for each k.
-#' Calculations are made for a single sample and for a default range of k that goes from 3 to 10.
+#' Calculations are made for a single sample and for a default range of k that goes from 2 to 10.
 #'
 #' **Note**: To get the indices for all samples, use [evaluate_k()] instead.
 #'
@@ -52,7 +52,7 @@ evaluate_sample_k <- function(data,
                               sample_id,
                               samples_col = "Sample",
                               abundance_col = "Abundance",
-                              range = 3:10,
+                              range = 2:10,
                               with_plot = FALSE,
                               ...){
   # stop if a vector is used as input
