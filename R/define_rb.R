@@ -124,6 +124,8 @@
 #'  and Silhouette scores. If TRUE, only the Classification result is added to the original input data.
 #' @param automatic By default (FALSE), will assume a classification into "Rare", "Undetermined" or "Abundant". If TRUE, then it will automatically select the number of classifications (or k),
 #' based on the index argument.
+#' @param check_singles Default if FALSE. If TRUE, the user is warned of the number of clusters represented by a single taxon,
+#' if any.
 #' @inheritParams suggest_k
 #'
 #' @returns The input data.frame with extra columns containing the classification and additional metrics (if detailed = TRUE).
@@ -210,7 +212,8 @@ define_rb <- function(data,
                       simplified = FALSE,
                       automatic = FALSE,
                       index = "Average Silhouette Score",
-                      ...) {
+                      check_singles = FALSE,
+                      ...){
 
 
   #If automatic, use suggest_k()
@@ -289,6 +292,26 @@ define_rb <- function(data,
     message("Check 'Evaluation' collumn for more details.")
   }
 
+  if(check_singles == TRUE){
+  # verify if any cluster is represented by a single taxon
+  single_tax_clusters <- classified_clusters %>%
+    group_by(.data$Sample, .data$Classification) %>%
+    count() %>%
+    filter(n == 1)
+
+  samples_with_single_tax_cluster <-  single_tax_clusters %>%
+    pull(Sample) %>%
+    unique()
+
+  n_single_clusters <- length(samples_with_single_tax_cluster)
+
+  # warn user if there are clusters with a single taxon
+  if(n_single_clusters > 1){
+    warning(
+      paste0("There are ",
+             n_single_clusters,
+             " samples with a cluster represented by a single taxon."))
+  }}
 
   # Option to simplify
   if(simplified == TRUE){
