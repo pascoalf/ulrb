@@ -159,7 +159,7 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU",
 
 Pascoal, F., Branco, P., Torgo, L., Costa, R., & Magalhães, C. (2025).
 Definition of the microbial rare biosphere through unsupervised machine
-learning. Communications Biology (in Peer-Review).
+learning. Communications Biology.
 
 Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025).
 ulrb: an R Package to Automatically Define Rare Taxa. Ecological
