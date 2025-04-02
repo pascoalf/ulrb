@@ -6,7 +6,7 @@ bibentry(
   year     = 2025,
   volume   = 8,
   Issue    = 544,
-  doi: https://doi.org/10.1038/s42003-025-07912-4
+  doi      = https://doi.org/10.1038/s42003-025-07912-4
 )
 bibentry(
   bibtype  = "Article",
