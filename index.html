@@ -17,8 +17,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Unsupervised Learning Based Definition of Microbial Rare Biosphere">
-<meta name="description" content="A tool to define rare biosphere. ulrb solves the problem of the definition of rarity by replacing arbitrary thresholds with an unsupervised machine learning algorithm (partitioning around medoids, or k-medoids). This algorithm works for any type of microbiome data, provided there is a species abundance table. For validation of this method to different species abundance tables see Pascoal et al, 2024 (in peer-review). This method also works for non-microbiome data.">
-<meta property="og:description" content="A tool to define rare biosphere. ulrb solves the problem of the definition of rarity by replacing arbitrary thresholds with an unsupervised machine learning algorithm (partitioning around medoids, or k-medoids). This algorithm works for any type of microbiome data, provided there is a species abundance table. For validation of this method to different species abundance tables see Pascoal et al, 2024 (in peer-review). This method also works for non-microbiome data.">
+<meta name="description" content="A tool to define rare biosphere. ulrb solves the problem of the definition of rarity by replacing arbitrary thresholds with an unsupervised machine learning algorithm (partitioning around medoids, or k-medoids). This algorithm works for any type of microbiome data, provided there is an abundance table. For validation of this method to different abundance tables, see Pascoal et al, 2025. This method also works for non-microbiome data.">
+<meta property="og:description" content="A tool to define rare biosphere. ulrb solves the problem of the definition of rarity by replacing arbitrary thresholds with an unsupervised machine learning algorithm (partitioning around medoids, or k-medoids). This algorithm works for any type of microbiome data, provided there is an abundance table. For validation of this method to different abundance tables, see Pascoal et al, 2025. This method also works for non-microbiome data.">
 <meta property="og:image" content="https://pascoalf.github.io/ulrb/logo.png">
 </head>
 <body>
@@ -71,7 +71,7 @@
 <p>The R package <strong>ulrb</strong> stands for <strong>Unsupervised Learning Based Definition of Microbial Rare Biosphere</strong>. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.</p>
 <p>More specifically, the partitioning around medoids (k-medoids) algorithm is used to divide taxa within a sample into clusters. The clusters are then ordered based on a user-defined classification vector. By default, our method classifies all taxa in: “rare”, “undetermined” or “abundant”. In alternative, the user can change the number of classifications. To do so, ulrb includes functions to help the user decide the number of clusters (k), but it is also possible for ulrb to automatically decide the number of clusters (equivalent to the number of classifications). Besides clustering, ulrb includes functions to help evaluate the clustering quality (e.g. average Silhouette score).</p>
 <p>For more details on the R functions used and data wrangling please see the package documentation.</p>
-<p>For tutorials and documentation of the <strong>ulrb</strong> package, visit our website: link.</p>
+<p>For tutorials and documentation of the <strong>ulrb</strong> package, visit our website: <a href="https://pascoalf.github.io/ulrb/" class="uri">https://pascoalf.github.io/ulrb/</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -82,7 +82,6 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"pascoalf/ulrb"</span><span class="op">)</span></span></code></pre></div>
-<p>We are working on a CRAN publication. We will then provide instructions for CRAN installation.</p>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -173,7 +172,7 @@
 <div class="section level2">
 <h2 id="how-to-cite-ulrb">How to cite ulrb<a class="anchor" aria-label="anchor" href="#how-to-cite-ulrb"></a>
 </h2>
-<p>Pascoal, F., Branco, P., Torgo, L., Costa, R., &amp; Magalhães, C. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.</p>
+<p>Pascoal, F., Branco, P., Torgo, L. et al. Definition of the microbial rare biosphere through unsupervised machine learning. Commun Biol 8, 544 (2025). <a href="https://doi.org/10.1038/s42003-025-07912-4" class="external-link uri">https://doi.org/10.1038/s42003-025-07912-4</a></p>
 <p>Pascoal, F., Costa, R., Torgo, L., Magalhães, C., &amp; Branco, P. (2025). ulrb: an R Package to Automatically Define Rare Taxa. Ecological Informatics (in Peer-Review).</p>
 <p>To cite this GitHub repository (v0.1.6): Francisco Pascoal. (2025). pascoalf/ulrb: v0.1.6 (v0.1.6). Zenodo. <a href="https://doi.org/10.5281/zenodo.14922442" class="external-link uri">https://doi.org/10.5281/zenodo.14922442</a></p>
 </div>
@@ -223,7 +222,7 @@
 <li><a href="http://perso.crans.org/besson/LICENSE.html" class="external-link"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GPLv3 license"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://doi.org/10.5281/zenodo.14922441" class="external-link"><img src="https://zenodo.org/badge/584780462.svg" alt="DOI"></a></li>
-<li><a href="https://cran.rstudio.com/web/packages/urlb/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/ulrb" alt="Downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=ulrb" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/ulrb" alt="Downloads"></a></li>
 </ul>
 </div>
 
