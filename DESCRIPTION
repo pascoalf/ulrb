@@ -9,7 +9,7 @@ Authors@R: c(
     person("Rodrigo", "Costa",,"rodrigoscosta@tecnico.ulisboa.pt", role = c("aut"), comment = c(ORCID = "0000-0002-5932-4101")),
     person("Catarina", "Magalhães",,"catarinamagalhaes1972@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-9576-2398")))
 Maintainer: Francisco Pascoal <fpascoal1996@gmail.com>
-Date: 2024-06-18
+Date: 2025-04-02
 Description: A tool to define rare biosphere. 'ulrb' solves the problem of the 
     definition of rarity by replacing arbitrary thresholds with an unsupervised machine 
     learning algorithm (partitioning around medoids, or k-medoids). This algorithm 
