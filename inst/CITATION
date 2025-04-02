@@ -5,13 +5,14 @@ bibentry(
   journal  = "Communications Biology",
   year     = 2025,
   volume   = 8,
-  Issue    = 544,
-  doi      = https://doi.org/10.1038/s42003-025-07912-4
+  article  = 544,
+  doi      = "https://doi.org/10.1038/s42003-025-07912-4"
 )
 bibentry(
   bibtype  = "Article",
   title    = "ulrb: an R Package to Automatically Define the Rare Taxa",
   author   = "Francisco Pascoal, Rodrigo Costa, Luís Torgo, Catarina Magalhães and Paula Branco",
-  journal  = "Ecological Informatics (in peer-review)",
-  year     = 2025
+  journal  = "Ecological Informatics",
+  year     = 2025,
+  note = "Manuscript in review"
 )
