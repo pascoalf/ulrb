@@ -39,8 +39,7 @@ help evaluate the clustering quality (e.g. average Silhouette score).
 For more details on the R functions used and data wrangling please see the package 
 documentation. 
 
-For tutorials and documentation of the **ulrb** package, visit our website: link.
-
+For tutorials and documentation of the **ulrb** package, visit our website: https://pascoalf.github.io/ulrb/.
 
 ## Installation
 
@@ -99,7 +98,7 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU",
 
 ## How to cite ulrb
 
-Pascoal, F., Branco, P., Torgo, L., Costa, R., & Magalhães, C. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.
+Pascoal, F., Branco, P., Torgo, L., Costa, R., & Magalhães, C. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, 8(544), 1–14. https://doi.org/10.1038/s42003-025-07912-4
 
 Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025). ulrb: an R Package to Automatically Define Rare Taxa. Ecological Informatics (in Peer-Review).
 

@@ -35,7 +35,7 @@ For more details on the R functions used and data wrangling please see
 the package documentation.
 
 For tutorials and documentation of the **ulrb** package, visit our
-website: link.
+website: <https://pascoalf.github.io/ulrb/>.
 
 ## Installation
 
@@ -119,9 +119,6 @@ head(nice)
 #> 4                           <NA>                                           <NA>
 #> 5                           <NA>                                           <NA>
 #> 6 g__Candidatus_Nitrosopelagicus                                           <NA>
-```
-
-``` r
 
 # first, we tidy the "nice" OTU table
 sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -136,9 +133,6 @@ nice_tidy <- prepare_tidy_data(nice,
 # second, we apply ulrb algorithm in automatic setting
 nice_classification_results <- define_rb(nice_tidy)
 #> Joining with `by = join_by(Sample, Level)`
-```
-
-``` r
 
 # third, we plot microbial community and the quality of k-medoids clustering
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
@@ -159,7 +153,8 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU",
 
 Pascoal, F., Branco, P., Torgo, L., Costa, R., & Magalhães, C. (2025).
 Definition of the microbial rare biosphere through unsupervised machine
-learning. Communications Biology.
+learning. Communications Biology, 8(544), 1–14.
+<https://doi.org/10.1038/s42003-025-07912-4>
 
 Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025).
 ulrb: an R Package to Automatically Define Rare Taxa. Ecological
