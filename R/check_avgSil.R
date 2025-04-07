@@ -88,7 +88,7 @@
 #'
 #' @references
 #' Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. Journal of Computational and Applied Mathematics, 20(C), 53–65.
-#' Pascoal et al. (2025). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology.
+#' Pascoal, F., Branco, P., Torgo, L. et al. Definition of the microbial rare biosphere through unsupervised machine learning. Commun Biol 8, 544 (2025). https://doi.org/10.1038/s42003-025-07912-4
 #'
 #' @examples
 #' library(dplyr)
