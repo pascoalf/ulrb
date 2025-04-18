@@ -10,7 +10,7 @@ bibentry(
 )
 bibentry(
   bibtype  = "Article",
-  title    = "ulrb: an R Package to Automatically Define the Rare Taxa",
+  title    = "Architecture and implementation of ulrb algorithm in R",
   author   = "Francisco Pascoal, Rodrigo Costa, Luís Torgo, Catarina Magalhães and Paula Branco",
   journal  = "Ecological Informatics",
   year     = 2025,

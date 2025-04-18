@@ -159,7 +159,7 @@ rare biosphere through unsupervised machine learning. Commun Biol 8, 544
 (2025). <https://doi.org/10.1038/s42003-025-07912-4>
 
 Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025).
-ulrb: an R Package to Automatically Define Rare Taxa. Ecological
+Architecture and implementation of ulrb algorithm in R. Ecological
 Informatics (in Peer-Review).
 
 To cite this GitHub repository (v0.1.6): Francisco Pascoal. (2025).
