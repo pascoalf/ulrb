@@ -83,7 +83,11 @@ suggest_k <- function(data,
     pull(.data$topK) %>%
     min()
   #
-  stopifnot(range < maxk)
+  if(max(range) > maxk){
+    stop(c("Adjust the range of k values. The maximum number of clusters allowed for your samples is", " ", maxk))
+  }
+
+  #
   all_scores <-
     evaluate_k(data = data,
                range = range,
