@@ -211,7 +211,35 @@ define_rb <- function(data,
                       automatic = FALSE,
                       index = "Average Silhouette Score",
                       ...) {
+  # Match samples_col and abundance_col with Samples and Abundance, respectively
+  data <-
+    data %>%
+    rename(Sample = all_of(samples_col),
+           Abundance = all_of(abundance_col))
 
+  # Verify possible k values
+
+  # Function to calculate maximum k of a sample
+    sample_max_k <- function(data){
+    data %>%
+      filter(.data$Abundance > 0) %>%
+      count(.data$Abundance) %>%
+      pull(.data$Abundance) %>%
+      length()
+    }
+  # Summary of maximum k possible of each sample
+  maxk_summary <- data %>%
+    group_by(.data$Sample) %>%
+    tidyr::nest() %>%
+      mutate(maxk = purrr::map(.x = data, .f = ~sample_max_k(.x))) %>%
+    tidyr::unnest(maxk)
+
+  if(sum(maxk_summary[, "maxk"] < 3) != 0){
+    samples_to_remove <- maxk_summary %>%
+      filter(maxK < 3) %>%
+      pull(Sample)
+    warning(paste0("Samples with less than 3 different species were discarded: ", samples_to_remove))
+  }
 
   #If automatic, use suggest_k()
   if(isTRUE(automatic)){
@@ -224,11 +252,6 @@ define_rb <- function(data,
   # Define number of cluster based on possible classifications
   k <- length(classification_vector)
 
-  # Match samples_col and abundance_col with Samples and Abundance, respectively
-  data <-
-    data %>%
-    rename(Sample = all_of(samples_col),
-           Abundance = all_of(abundance_col))
 
   # Calculate k-medoids
     ## Apply cluster algorithm
