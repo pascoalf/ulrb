@@ -45,6 +45,18 @@ evaluate_k <- function(data,
     stop("The column with abundance scores must be numeric (integer our double type).")
   }
 
+  # calculate maximum k
+  maxk = data %>%
+    group_by(.data$Sample) %>%
+    summarise(topK = length(unique(.data$Abundance))) %>%
+    ungroup() %>%
+    pull(.data$topK) %>%
+    min()
+  #
+  if(max(range) > maxk){
+    stop(c("Adjust the range of k values. The maximum number of clusters allowed for your samples is", " ", maxk))
+  }
+
   # Match samples_col and abundance_col with Samples and Abundance, respectively
   data <-
     data %>%
