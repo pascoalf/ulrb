@@ -84,7 +84,7 @@ suggest_k <- function(data,
     min()
   #
   if(max(range) > maxk){
-    stop(c("Adjust the range of k values. The maximum number of clusters allowed for your samples is", " ", maxk))
+    stop(c("Adjust the range of k values. The maximum number of clusters allowed for your samples is", "", maxk))
   }
 
   #
