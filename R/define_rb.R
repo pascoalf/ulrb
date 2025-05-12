@@ -236,9 +236,13 @@ define_rb <- function(data,
 
   if(sum(maxk_summary[, "maxk"] < 3) != 0){
     samples_to_remove <- maxk_summary %>%
-      filter(maxK < 3) %>%
+      filter(maxk < 3) %>%
       pull(Sample)
-    warning(paste0("Samples with less than 3 different species were discarded: ", samples_to_remove))
+    # Remove samples with maxk < 3
+    data <- data %>%
+      filter(!Sample %in% samples_to_remove)
+    # Warn user of samples discarded
+    warning(c("Samples with less than 3 different species were discarded:", paste(samples_to_remove, collapse = ",")))
   }
 
   #If automatic, use suggest_k()
