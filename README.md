@@ -39,13 +39,14 @@ website: <https://pascoalf.github.io/ulrb/>.
 
 ## Installation
 
-To install the last stable version, use:
+To install the last stable version (0.1.6), use:
 
 ``` r
 install.packages("ulrb")
 ```
 
-If you want to install the last version available on GitHub, use:
+If you want to install the last version available on GitHub (0.1.8),
+use:
 
 ``` r
 # install.packages("devtools")
