@@ -92,7 +92,7 @@ prepare_tidy_data <- function(data,
 
     } else {
       # if the user doesn't include the sample names in rownames, then we assume that the order of samples in rows and in the sample vector is the same
-      warning("Please check if samples in sample_names vector and rownames of data are in the same order.")
+      message("Please check if samples in sample_names vector and rownames of data are in the same order.")
       data <- data %>% t() %>% as.data.frame()
       #
       colnames(data) <- sample_names

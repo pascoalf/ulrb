@@ -37,7 +37,7 @@ test_that("for samples in rows, function stops if sample_names is not of the sam
 
 test_that("for samples in rows, function gives warning if rownames of input data do not correspond to sample_names vector provided", {
  # sample_names <- get_samples()
-  expect_warning(prepare_tidy_data(nice_rows, sample_names = seq_along(sample_names), samples_in = "rows"))
+  expect_message(prepare_tidy_data(nice_rows, sample_names = seq_along(sample_names), samples_in = "rows"))
 })
 
 test_that("if samples are in rows, a message warns that colnames were assumed to be taxonomic units", {
