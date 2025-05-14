@@ -26,7 +26,7 @@
 #'
 #' The maximum possible k is the number of different abundance scores observed in a single sample. Note, however,
 #'  that we do not recommend any clustering for k > 10
-#' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2024 (in peer review);
+#' and we also don't recommend k = 2 (we explain in more detail in Pascoal et al., 2025;
 #' and in the vignette `vignette("explore-classifications")`.
 #'
 #' @details
@@ -134,7 +134,7 @@
 #'
 #' @references
 #' Kaufman, L., & Rousseuw, P. J. (1991). Chapter 2 in book Finding Groups in Data: An Introduction to Cluster Analysis. Biometrics, 47(2), 788.
-#' Pascoal et al. (2024). Definition of the microbial rare biosphere through unsupervised machine learning. Communications Biology, in peer-review.
+#' Pascoal, F., Branco, P., Torgo, L. et al. Definition of the microbial rare biosphere through unsupervised machine learning. Commun Biol 8, 544 (2025). https://doi.org/10.1038/s42003-025-07912-4
 #'
 #' @examples
 #' \donttest{
@@ -214,7 +214,39 @@ define_rb <- function(data,
                       index = "Average Silhouette Score",
                       check_singles = FALSE,
                       ...){
+  # Match samples_col and abundance_col with Samples and Abundance, respectively
+  data <-
+    data %>%
+    rename(Sample = all_of(samples_col),
+           Abundance = all_of(abundance_col))
 
+  # Verify possible k values
+
+  # Function to calculate maximum k of a sample
+    sample_max_k <- function(data){
+    data %>%
+      filter(.data$Abundance > 0) %>%
+      count(.data$Abundance) %>%
+      pull(.data$Abundance) %>%
+      length()
+    }
+  # Summary of maximum k possible of each sample
+  maxk_summary <- data %>%
+    group_by(.data$Sample) %>%
+    tidyr::nest() %>%
+      mutate(maxk = purrr::map(.x = data, .f = ~sample_max_k(.x))) %>%
+    tidyr::unnest(maxk)
+
+  if(sum(maxk_summary[, "maxk"] < 3) != 0){
+    samples_to_remove <- maxk_summary %>%
+      filter(maxk <= 3) %>%
+      pull(Sample)
+    # Remove samples with maxk < 3
+    data <- data %>%
+      filter(!Sample %in% samples_to_remove)
+    # Warn user of samples discarded
+    warning(c("Samples with less than 3 different species were discarded:", paste(samples_to_remove, collapse = ",")))
+  }
 
   #If automatic, use suggest_k()
   if(isTRUE(automatic)){
@@ -227,11 +259,6 @@ define_rb <- function(data,
   # Define number of cluster based on possible classifications
   k <- length(classification_vector)
 
-  # Match samples_col and abundance_col with Samples and Abundance, respectively
-  data <-
-    data %>%
-    rename(Sample = all_of(samples_col),
-           Abundance = all_of(abundance_col))
 
   # Calculate k-medoids
     ## Apply cluster algorithm

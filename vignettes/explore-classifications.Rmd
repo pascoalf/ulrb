@@ -188,7 +188,7 @@ gridExtra::grid.arrange(
 We do not recommend using k = 2, because it implies that there is a hard distinction between rare and abundant taxa. 
 We consider that there should always be an intermediate or undetermined group, otherwise, we will always have phylogenetic 
 units with very similar abundance scores, but opposing classifications, which is misleading. 
-For more details on this reasoning, see Pascoal et al., 2023 (manuscript in preparation).
+For more details on this reasoning, see Pascoal et al., 2025.
 
 
 ## Apply more complicated classification, k>3
@@ -527,6 +527,8 @@ If we have the maximum k, we just need to use the `evaluate_k()` function for th
 evaluate_k(nice_tidy, with_plot = TRUE, range = 2:max_k)
 ```
 
+# References
 
+Pascoal, F., Branco, P., Torgo, L. et al. Definition of the microbial rare biosphere through unsupervised machine learning. Commun Biol 8, 544 (2025). https://doi.org/10.1038/s42003-025-07912-4
 
 

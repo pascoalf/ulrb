@@ -13,7 +13,7 @@ license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.cran
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![DOI](https://zenodo.org/badge/584780462.svg)](https://doi.org/10.5281/zenodo.14922441)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ulrb)](https://cran.rstudio.com/web/packages/urlb/)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ulrb)](https://cran.r-project.org/package=ulrb)
 <!-- badges: end -->
 
 The R package **ulrb** stands for **Unsupervised Learning Based
@@ -35,7 +35,7 @@ For more details on the R functions used and data wrangling please see
 the package documentation.
 
 For tutorials and documentation of the **ulrb** package, visit our
-website: link.
+website: <https://pascoalf.github.io/ulrb/>.
 
 ## Installation
 
@@ -51,9 +51,6 @@ If you want to install the last version available on GitHub, use:
 # install.packages("devtools")
 devtools::install_github("pascoalf/ulrb")
 ```
-
-We are working on a CRAN publication. We will then provide instructions
-for CRAN installation.
 
 ## Example
 
@@ -157,12 +154,12 @@ plot_ulrb(nice_classification_results, taxa_col = "OTU",
 
 ## How to cite ulrb
 
-Pascoal, F., Branco, P., Torgo, L., Costa, R., & Magalhães, C. (2025).
-Definition of the microbial rare biosphere through unsupervised machine
-learning. Communications Biology (in Peer-Review).
+Pascoal, F., Branco, P., Torgo, L. et al. Definition of the microbial
+rare biosphere through unsupervised machine learning. Commun Biol 8, 544
+(2025). <https://doi.org/10.1038/s42003-025-07912-4>
 
 Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025).
-ulrb: an R Package to Automatically Define Rare Taxa. Ecological
+Architecture and implementation of ulrb algorithm in R. Ecological
 Informatics (in Peer-Review).
 
 To cite this GitHub repository (v0.1.6): Francisco Pascoal. (2025).

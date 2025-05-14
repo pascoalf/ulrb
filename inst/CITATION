@@ -2,13 +2,17 @@ bibentry(
   bibtype  = "Article",
   title    = "Definition of the microbial rare biosphere through unsupervised machine learning",
   author   = "Francisco Pascoal, Paula Branco, Luís Torgo, Rodrigo Costa and Catarina Magalhães",
-  journal  = "Communications Biology (in peer-review)",
-  year     = 2025
+  journal  = "Communications Biology",
+  year     = 2025,
+  volume   = 8,
+  article  = 544,
+  doi      = "10.1038/s42003-025-07912-4"
 )
 bibentry(
   bibtype  = "Article",
-  title    = "ulrb: an R Package to Automatically Define the Rare Taxa",
+  title    = "Architecture and implementation of ulrb algorithm in R",
   author   = "Francisco Pascoal, Rodrigo Costa, Luís Torgo, Catarina Magalhães and Paula Branco",
-  journal  = "Ecological Informatics (in peer-review)",
-  year     = 2025
+  journal  = "Ecological Informatics",
+  year     = 2025,
+  note = "Manuscript in review"
 )

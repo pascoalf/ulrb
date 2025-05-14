@@ -62,6 +62,36 @@ evaluate_sample_k <- function(data,
   if(!is.numeric(pull(data, all_of(abundance_col)))){
     stop("The column with abundance scores must be numeric (integer our double type).")
   }
+
+# Ensure the range of k values is appropriate
+#    # calculate maximum k
+#  maxk = data %>%
+#    summarise(topK = length(unique(.data$Abundance))) %>%
+#    ungroup() %>%
+#    pull(.data$topK) %>%
+#    min()
+  #
+#  if(max(range) > maxk){
+#    stop(c("Adjust the range of k values. The maximum number of clusters allowed for your sample is", " ", maxk))
+#  }
+
+  # Function to calculate maximum k of a sample
+  sample_max_k <- function(data){
+    data %>%
+      filter(.data$Abundance > 0) %>%
+      count(.data$Abundance) %>%
+      pull(.data$Abundance) %>%
+      length()
+  }
+
+  maxk <- data %>% sample_max_k()
+
+  #
+  if(max(range) > maxk){
+    stop(c("Adjust the range of k values. The maximum number of clusters allowed
+           for your samples is", " ", maxk, ". Try range = 2:", maxk-1))
+  }
+
   ## One sample
   scores <- data.frame(DB = check_DB(data, sample_id = sample_id, range = range, samples_col = samples_col, abundance_col = abundance_col, ...),
                        CH = check_CH(data, sample_id = sample_id, range = range, samples_col = samples_col, abundance_col = abundance_col, ...),
