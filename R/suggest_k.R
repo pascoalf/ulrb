@@ -75,16 +75,49 @@ suggest_k <- function(data,
     stop("The column with abundance scores must be numeric (integer our double type).")
   }
 
-  # calculate maximum k
-  maxk = data %>%
+# Ensure the range of k values is appropriate
+# calculate maximum k
+#  maxk = data %>%
+#    group_by(.data$Sample) %>%
+#    summarise(topK = length(unique(.data$Abundance))) %>%
+#    ungroup() %>%
+#    pull(.data$topK) %>%
+#    min()
+  # Function to calculate maximum k of a sample
+  sample_max_k <- function(data){
+    data %>%
+      filter(.data$Abundance > 0) %>%
+      count(.data$Abundance) %>%
+      pull(.data$Abundance) %>%
+      length()
+  }
+  # Summary of maximum k possible of each sample
+  maxk_summary <- data %>%
     group_by(.data$Sample) %>%
-    summarise(topK = length(unique(.data$Abundance))) %>%
-    ungroup() %>%
-    pull(.data$topK) %>%
+    tidyr::nest() %>%
+    mutate(maxk = purrr::map(.x = data, .f = ~sample_max_k(.x))) %>%
+    tidyr::unnest(maxk)
+  #
+  maxk <- maxk_summary %>%
+    filter(.data$maxk >= 3) %>%
+    pull(.data$maxk) %>%
     min()
+
+  if(sum(maxk_summary[, "maxk"] <= 3) != 0){
+    samples_to_remove <- maxk_summary %>%
+      filter(maxk <= 3) %>%
+      pull(Sample)
+    # Remove samples with maxk < 3
+    data <- data %>%
+      filter(!Sample %in% samples_to_remove)
+    # Warn user of samples discarded
+    warning(c("Automatic selection of k discarded samples with less than 3 different species:", paste(samples_to_remove, collapse = ",")))
+  }
+
   #
   if(max(range) > maxk){
-    stop(c("Adjust the range of k values. The maximum number of clusters allowed for your samples is", "", maxk))
+    stop(c("Adjust the range of k values. The maximum number of clusters allowed
+           for your samples is", " ", maxk - 1, ". Try range = 2:", maxk - 1))
   }
 
   #

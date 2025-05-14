@@ -236,7 +236,7 @@ define_rb <- function(data,
 
   if(sum(maxk_summary[, "maxk"] < 3) != 0){
     samples_to_remove <- maxk_summary %>%
-      filter(maxk < 3) %>%
+      filter(maxk <= 3) %>%
       pull(Sample)
     # Remove samples with maxk < 3
     data <- data %>%
