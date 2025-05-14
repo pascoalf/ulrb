@@ -5,6 +5,9 @@
 #' This function guarantees that the abundance table includes one column with sample ID's and
 #' one column with abundance.
 #'
+#' To use this function, the user should have a vector with the samples names as they appear in the abundance table.
+#' Usually simple data wrangling with base R is enough to obtain this information from the abundance table itself.
+#'
 #' @details
 #' **Common species table formats**
 #'
@@ -49,6 +52,36 @@
 #' colnames(nice_rows) <- paste0("OTU_", seq_along(colnames(nice_rows)))
 #'
 #' prepare_tidy_data(nice_rows, sample_names = sample_names, samples_in = "rows")
+#'
+#'
+#' # Extra examples with mock values
+#' # Mock example 1 - wide table, samples in rows
+#' mock_1 <- data.frame(Sample = paste0("S", 1:10),
+#'                         Taxa1 = sample(10),
+#'                         Taxa2 = sample(10),
+#'                         Taxa3 = sample(10),
+#'                         Taxa4 = sample(10),
+#'                         Taxa5 = sample(10),
+#'                         Taxa6 = sample(10))
+#'
+#' prepare_tidy_data(mock_1,
+#'                   sample_names = mock_1$Sample,
+#'                   samples_in = "rows")
+#'
+#' # Mock example 2 - wide table, sample in columns
+#' mock_2 <- data.frame(Sample = paste0("Taxa_", 1:6),
+#'                         S1 = sample(6),
+#'                         S2 = sample(6),
+#'                         S3 = sample(6),
+#'                         S4 = sample(6),
+#'                         S5 = sample(6),
+#'                         S6 = sample(6))
+#'
+#' mock_2 %>%
+#'  rename(TaxaID = Sample) %>% # Correct column name
+#'  prepare_tidy_data(samples_in = "cols",
+#'                    sample_names = colnames(mock_2)[-1])
+#'
 #'
 #' @import dplyr
 #' @importFrom rlang .data
