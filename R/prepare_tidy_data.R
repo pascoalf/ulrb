@@ -64,7 +64,7 @@
 #'                         Taxa5 = sample(10),
 #'                         Taxa6 = sample(10))
 #'
-#' prepare_tidy_data(mock_1,
+#' prepare_tidy_data(mock_1[, -1], # remove Sample column
 #'                   sample_names = mock_1$Sample,
 #'                   samples_in = "rows")
 #'
