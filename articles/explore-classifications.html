@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Alternative classifications with ulrb • ulrb</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -26,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ulrb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.8</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +86,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="co"># a vector with some colors</span></span>
-<span><span class="va">qualitative_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">qualitative_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span>, <span class="st">"grey50"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="explore-alternative-classifications">Explore alternative classifications<a class="anchor" aria-label="anchor" href="#explore-alternative-classifications"></a>
 </h2>
@@ -503,7 +502,7 @@ the range argument).</p>
 <span><span class="co">#&gt; 3 Average Silhouette Score Maximum value for best k    Measures cluster density</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $SamplesSummary</span></span>
-<span><span class="co">#&gt; [1] "You study has 9 samples. For each one we calculated all indices obtained for each k, from 3 to 10"</span></span>
+<span><span class="co">#&gt; [1] "You study has 9 samples. For each one we calculated all indices obtained for each k, from 2 to 10"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $DaviesBouldin</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 3</span></span></span>
@@ -537,14 +536,14 @@ the range argument).</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 3</span></span></span>
 <span><span class="co">#&gt;   Sample     average_Silhouette     k</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ERR2044662              0.952     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ERR2044663              0.955     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ERR2044664              0.970     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ERR2044665              0.915     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ERR2044666              0.965     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ERR2044667              0.874     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> ERR2044669              0.913     5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> ERR2044668              0.951     4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> ERR2044662              0.977     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ERR2044663              0.978     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> ERR2044664              0.984     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ERR2044665              0.979     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ERR2044666              0.983     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ERR2044667              0.972     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> ERR2044669              0.976     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> ERR2044668              0.979     2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> ERR2044670              0.932     3</span></span></code></pre></div>
 <p>For another group of k’s, range = 10:20</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -619,28 +618,28 @@ score;</li>
 <p>You can also calculate them at the same time for one sample with
 <code><a href="../reference/evaluate_sample_k.html">evaluate_sample_k()</a></code> or all samples with
 <code><a href="../reference/evaluate_k.html">evaluate_k()</a></code>.</p>
-<p>Let’s look at several examples, using the default range of k = 3 up
+<p>Let’s look at several examples, using the default range of k = 2 up
 to k = 10:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## One sample</span></span>
 <span><span class="co"># To get values</span></span>
 <span><span class="fu"><a href="../reference/check_avgSil.html">check_avgSil</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.9521452 0.8820316 0.8561774 0.8398216 0.8479872 0.7843358 0.7740169</span></span>
-<span><span class="co">#&gt; [8] 0.7701163</span></span>
+<span><span class="co">#&gt; [1] 0.9770110 0.9521452 0.8820316 0.8561774 0.8398216 0.8479872 0.7843358</span></span>
+<span><span class="co">#&gt; [8] 0.7740169 0.7701163</span></span>
 <span></span>
 <span><span class="co"># To plot results</span></span>
 <span><span class="fu"><a href="../reference/check_avgSil.html">check_avgSil</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
 <p>In the last plot, each value of k represents a clustering result.
-From the above information, we would select k = 3 (just like the default
-option), because it had the highest average Silhouette score.</p>
+From the above information, we would select k = 2 (default option),
+because it had the highest average Silhouette score.</p>
 <p>We can repeat for all other indices:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Davie-Boulding index</span></span>
 <span><span class="co"># To get values</span></span>
 <span><span class="fu"><a href="../reference/check_DB.html">check_DB</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.3721866 0.5271704 0.4131651 0.4292696 0.3350836 0.3892966 0.3948026</span></span>
-<span><span class="co">#&gt; [8] 0.3294451</span></span>
+<span><span class="co">#&gt; [1] 0.03821785 0.37218659 0.52717038 0.41316515 0.42926962 0.33508359 0.38929657</span></span>
+<span><span class="co">#&gt; [8] 0.39480258 0.32944506</span></span>
 <span></span>
 <span><span class="co"># To plot results</span></span>
 <span><span class="fu"><a href="../reference/check_DB.html">check_DB</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -650,8 +649,8 @@ option), because it had the highest average Silhouette score.</p>
 <span><span class="co">## Calinski-Harabasz index</span></span>
 <span><span class="co"># To get values</span></span>
 <span><span class="fu"><a href="../reference/check_CH.html">check_CH</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1]  1821.426  2054.887  4933.956  5465.134 17589.032 17179.809 18083.313</span></span>
-<span><span class="co">#&gt; [8] 30332.345</span></span>
+<span><span class="co">#&gt; [1]   677.3258  1821.4258  2054.8869  4933.9560  5465.1344 17589.0320 17179.8092</span></span>
+<span><span class="co">#&gt; [8] 18083.3126 30332.3447</span></span>
 <span></span>
 <span><span class="co"># To plot results</span></span>
 <span><span class="fu"><a href="../reference/check_CH.html">check_CH</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -673,21 +672,21 @@ with centrality metrics. To do so, we can use the function
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## To get values</span></span>
 <span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 72 × 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 81 × 6</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   Sample [9]</span></span></span>
-<span><span class="co">#&gt;    Sample     data                   DB     CH average_Silhouette     k</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.372  <span style="text-decoration: underline;">1</span>821.              0.952     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.527  <span style="text-decoration: underline;">2</span>055.              0.882     4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.413  <span style="text-decoration: underline;">4</span>934.              0.856     5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.429  <span style="text-decoration: underline;">5</span>465.              0.840     6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.335 <span style="text-decoration: underline;">17</span>589.              0.848     7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.389 <span style="text-decoration: underline;">17</span>180.              0.784     8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.395 <span style="text-decoration: underline;">18</span>083.              0.774     9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.329 <span style="text-decoration: underline;">30</span>332.              0.770    10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.391  <span style="text-decoration: underline;">1</span>491.              0.955     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.516  <span style="text-decoration: underline;">1</span>495.              0.891     4</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 62 more rows</span></span></span>
+<span><span class="co">#&gt;    Sample     data                    DB     CH average_Silhouette     k</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.038<span style="text-decoration: underline;">2</span>   677.              0.977     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.372   <span style="text-decoration: underline;">1</span>821.              0.952     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.527   <span style="text-decoration: underline;">2</span>055.              0.882     4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.413   <span style="text-decoration: underline;">4</span>934.              0.856     5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.429   <span style="text-decoration: underline;">5</span>465.              0.840     6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.335  <span style="text-decoration: underline;">17</span>589.              0.848     7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.389  <span style="text-decoration: underline;">17</span>180.              0.784     8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.395  <span style="text-decoration: underline;">18</span>083.              0.774     9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ERR2044662 <span style="color: #949494;">&lt;tibble [187 × 10]&gt;</span> 0.329  <span style="text-decoration: underline;">30</span>332.              0.770    10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ERR2044663 <span style="color: #949494;">&lt;tibble [220 × 10]&gt;</span> 0.039<span style="text-decoration: underline;">0</span>   650.              0.978     2</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 71 more rows</span></span></span>
 <span></span>
 <span><span class="co">## To plot</span></span>
 <span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -719,11 +718,11 @@ automatic k decision.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># default option with average Silhouette score</span></span>
 <span><span class="fu"><a href="../reference/suggest_k.html">suggest_k</a></span><span class="op">(</span><span class="va">nice_tidy</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 3</span></span>
+<span><span class="co">#&gt; [1] 2</span></span>
 <span></span>
 <span><span class="co"># best k for Davies-Bouldin</span></span>
 <span><span class="fu"><a href="../reference/suggest_k.html">suggest_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, index <span class="op">=</span> <span class="st">"Davies-Bouldin"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 6</span></span>
+<span><span class="co">#&gt; [1] 4</span></span>
 <span></span>
 <span><span class="co"># best k for Calinski-Harabasz</span></span>
 <span><span class="fu"><a href="../reference/suggest_k.html">suggest_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, index <span class="op">=</span> <span class="st">"Calinski-Harabasz"</span><span class="op">)</span></span>
@@ -740,12 +739,14 @@ with the automatic argument set to TRUE.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">automatic_classification</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_rb.html">define_rb</a></span><span class="op">(</span><span class="va">nice_tidy</span>, automatic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Automatic option set to TRUE, so classification vector was overwritten</span></span>
-<span><span class="co">#&gt; K= 3 based on Average Silhouette Score.</span></span>
+<span><span class="co">#&gt; K= 2 based on Average Silhouette Score.</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span>
-<span></span>
 <span><span class="co"># Plot automatic result</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">automatic_classification</span>, taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">automatic_classification</span>, </span>
+<span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, </span>
+<span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="explore-classifications_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
 <p>Naturally, you can decide more parameters for the automatic selection
 of k, for example, lets suppose that you want to have groups of
@@ -798,8 +799,8 @@ approach.</p>
 <span><span class="va">max_k</span></span>
 <span><span class="co">#&gt; [1] 55</span></span></code></pre></div>
 <p>If we have the maximum k, we just need to use the
-<code><a href="../reference/evaluate_k.html">evaluate_k()</a></code> function for the full range of values. (if you
-try to run this code, it might take a while)</p>
+<code><a href="../reference/evaluate_k.html">evaluate_k()</a></code> function for the full range of values.</p>
+<p><em>note</em>: the next code chunk might take a while to run.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span>, range <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="va">max_k</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 row containing non-finite outside the scale range</span></span>
@@ -828,7 +829,7 @@ rare biosphere through unsupervised machine learning. Commun Biol 8, 544
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>

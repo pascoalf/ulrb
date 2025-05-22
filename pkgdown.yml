@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   eco-analysis: eco-analysis.html
   explore-classifications: explore-classifications.html
   Glossary: Glossary.html
   ulrb-vignet: ulrb-vignet.html
-last_built: 2025-04-18T10:43Z
+last_built: 2025-05-22T10:23Z
 urls:
   reference: https://pascoalf.github.io/ulrb/reference
   article: https://pascoalf.github.io/ulrb/articles
