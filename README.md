@@ -162,7 +162,3 @@ rare biosphere through unsupervised machine learning. Commun Biol 8, 544
 Pascoal, F., Costa, R., Torgo, L., Magalhães, C., & Branco, P. (2025).
 Architecture and implementation of ulrb algorithm in R. Ecological
 Informatics. <https://doi.org/10.1016/j.ecoinf.2025.103229>
-
-To cite this GitHub repository (v0.1.6): Francisco Pascoal. (2025).
-pascoalf/ulrb: v0.1.6 (v0.1.6). Zenodo.
-<https://doi.org/10.5281/zenodo.14922442>
