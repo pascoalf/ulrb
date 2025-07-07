@@ -9,7 +9,7 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/ulrb)](https://cran.r-project.org/package=ulrb)
 [![test-coverage](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/pascoalf/ulrb/actions/workflows/test-coverage.yaml)
 [![GPLv3
-license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://perso.crans.org/besson/LICENSE.html)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![DOI](https://zenodo.org/badge/584780462.svg)](https://doi.org/10.5281/zenodo.14922441)
