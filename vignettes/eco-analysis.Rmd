@@ -220,7 +220,7 @@ nice_diversity_tidy %>%
   theme_bw() + 
   theme(strip.background = element_blank(),
         strip.text = element_text(size = 12),
-        legend.position = "top") %>%
+        legend.position = "top") +
   labs(col = "Classification: ",
        title = "Alpha diversity across water mass")
 ```
