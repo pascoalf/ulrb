@@ -113,9 +113,8 @@ in 06-01-2023 and focus solely on the 16S amplicon data.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan" class="external-link">vegan</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://vegandevs.github.io/vegan/" class="external-link">vegan</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: permute</span></span>
-<span><span class="co">#&gt; Loading required package: lattice</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
 <span><span class="co">#</span></span>
@@ -247,7 +246,7 @@ to 40 000 reads.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Rarefied_reads <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">data</span>, </span>
 <span>                              <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span></span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span></span>
-<span>                                  <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/rarefy.html" class="external-link">rrarefy</a></span><span class="op">(</span></span>
+<span>                                  <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/rarefy.html" class="external-link">rrarefy</a></span><span class="op">(</span></span>
 <span>                                    <span class="va">.x</span><span class="op">$</span><span class="va">Abundance</span>, </span>
 <span>                                    sample <span class="op">=</span> <span class="fl">40000</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">data</span>,<span class="va">Rarefied_reads</span><span class="op">)</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -315,9 +314,9 @@ make a simple overview of prokaryotic diversity, by classification.</p>
 <code class="sourceCode R"><span><span class="co"># Calculate diversity</span></span>
 <span><span class="va">nice_diversity</span> <span class="op">&lt;-</span> <span class="va">nice_eco</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">Classification</span>, <span class="va">Month</span>, <span class="va">Depth</span>, <span class="va">Water.mass</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>SpeciesRichness <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html" class="external-link">specnumber</a></span><span class="op">(</span><span class="va">Abundance</span><span class="op">)</span>,</span>
-<span>            ShannonIndex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html" class="external-link">diversity</a></span><span class="op">(</span><span class="va">Abundance</span>, index <span class="op">=</span> <span class="st">"shannon"</span><span class="op">)</span>,</span>
-<span>            SimpsonIndex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/diversity.html" class="external-link">diversity</a></span><span class="op">(</span><span class="va">Abundance</span>, index <span class="op">=</span> <span class="st">"simpson"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>SpeciesRichness <span class="op">=</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html" class="external-link">specnumber</a></span><span class="op">(</span><span class="va">Abundance</span><span class="op">)</span>,</span>
+<span>            ShannonIndex <span class="op">=</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html" class="external-link">diversity</a></span><span class="op">(</span><span class="va">Abundance</span>, index <span class="op">=</span> <span class="st">"shannon"</span><span class="op">)</span>,</span>
+<span>            SimpsonIndex <span class="op">=</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html" class="external-link">diversity</a></span><span class="op">(</span><span class="va">Abundance</span>, index <span class="op">=</span> <span class="st">"simpson"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `summarise()` has grouped output by 'Sample', 'Classification', 'Month',</span></span>
 <span><span class="co">#&gt; 'Depth'. You can override using the `.groups` argument.</span></span></code></pre></div>
@@ -451,7 +450,7 @@ a little bit more of data wrangling.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cca_plot_rare_biosphere</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">cca</a></span><span class="op">(</span><span class="va">rb_sp</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, display <span class="op">=</span> <span class="st">"sites"</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">cca</a></span><span class="op">(</span><span class="va">rb_sp</span><span class="op">[</span>,<span class="op">-</span><span class="fl">1</span><span class="op">]</span>, display <span class="op">=</span> <span class="st">"sites"</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>display <span class="op">=</span> <span class="st">"sites"</span>, type <span class="op">=</span> <span class="st">"p"</span>, main <span class="op">=</span> <span class="st">"Rare biosphere"</span><span class="op">)</span></span>
 <span><span class="co">#</span></span>
 <span><span class="va">cca_plot_rare_biosphere</span></span>
@@ -476,7 +475,7 @@ a little bit more of data wrangling.</p>
 <span>       cex <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">rb_env</span>,</span>
-<span>     <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html" class="external-link">ordispider</a></span><span class="op">(</span><span class="va">cca_plot_rare_biosphere</span>,</span>
+<span>     <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/ordihull.html" class="external-link">ordispider</a></span><span class="op">(</span><span class="va">cca_plot_rare_biosphere</span>,</span>
 <span>                <span class="va">Month</span>, lty <span class="op">=</span> <span class="st">"dashed"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="eco-analysis_files/figure-html/unnamed-chunk-13-1.png" width="768"></p>
 <p>From this analysis, it seems that the community composition of the
@@ -525,7 +524,7 @@ Geophysical Research: Oceans, 123(3), 1586–1594.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
