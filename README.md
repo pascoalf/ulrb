@@ -53,6 +53,9 @@ use:
 ``` r
 # install.packages("devtools")
 devtools::install_github("pascoalf/ulrb")
+
+# developer version, 0.1.9 (unstable)
+devtools::install_github("pascoalf/ulrb@issue_4")
 ```
 
 ## Example
