@@ -16,6 +16,8 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ulrb)](https://cran.r-project.org/package=ulrb)
 <!-- badges: end -->
 
+**Note:** Developer version 0.1.9 (unstable).
+
 The R package **ulrb** stands for **Unsupervised Learning Based
 Definition of Microbial Rare Biosphere**. As the name suggests, it
 applies unsupervised learning principles to define the rare biosphere.
