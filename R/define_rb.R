@@ -301,20 +301,39 @@ define_rb <- function(data,
 
   ## the nest steps only check if a warning is necessary, the output is classified clusters
   clusters_report <- classified_clusters %>%
-    select(Sample, Classification, median_Silhouette, Evaluation) %>% ### break from here
+    select(Sample, Classification, median_Silhouette, Evaluation) %>%
     distinct() %>%
     group_by(.data$Classification) %>%
     count(.data$Evaluation)
 
-  # Count number of samples with bad scores
-  bad_samples <- clusters_report %>%
+  # Count number of clusters with bad scores
+  bad_clusters <- clusters_report %>%
+    filter(.data$Evaluation == "Bad") %>%
+    pull(.data$n) %>%
+    sum()
+
+  # Bad number of samples (consider multiple clusters in a sample)
+  bad_samples <- classified_clusters %>%
+    select(-Evaluation, -median_Silhouette) %>%
+    group_by(.data$Sample) %>%
+    tidyr::nest() %>%
+    mutate(median_Silhouette = purrr::map(.x = data, .f = ~median(.x$Silhouette_scores))) %>%
+    mutate(Evaluation = purrr::map(.x = .data$median_Silhouette, .f = ~case_when(median_Silhouette > 0.9 ~ "Very good",
+                                                                                 median_Silhouette > 0.75 ~ "Good",
+                                                                                 median_Silhouette > 0.5 ~ "Sufficient",
+                                                                                 median_Silhouette <= 0.5 ~ "Bad"))) %>%
+    tidyr::unnest(cols = c(data, median_Silhouette, Evaluation)) %>%
+    select(Sample, Classification, median_Silhouette, Evaluation) %>%
+    distinct() %>%
+    count(.data$Evaluation) %>%
     filter(.data$Evaluation == "Bad") %>%
     pull(.data$n) %>%
     sum()
 
   #
-  if(bad_samples > 0){
-    warning(paste(bad_samples, "samples got a bad Silhouette score. Consider changing the number of classifications."))
+  if(bad_samples > 0 | bad_clusters > 0){
+    warning(paste(bad_samples, "samples got, at least, 1 bad average Silhouette score. Consider changing the number of classifications."))
+    message(paste("Within", bad_samples, "bad samples, there were", bad_clusters, "clusters with bad average Silhouette score."))
     message("If half the observations within a classification are below 0.5 Silhouette score, we consider that the clustering was 'Bad'.")
     message("Check 'Evaluation' collumn for more details.")
   }
