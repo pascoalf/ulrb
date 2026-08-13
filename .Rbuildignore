@@ -9,3 +9,5 @@
 ^README\.Rmd$
 ^doc$
 ^Meta$
+^\.positai$
+^\.claude$
