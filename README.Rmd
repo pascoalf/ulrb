@@ -25,8 +25,6 @@ knitr::opts_chunk$set(
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ulrb)](https://cran.r-project.org/package=ulrb)
 <!-- badges: end -->
 
-**Note:** Developer version 0.1.9 (unstable).
-
 The R package **ulrb** stands for **Unsupervised Learning Based Definition of Microbial Rare Biosphere**. As the name suggests, it applies unsupervised learning principles to define the rare biosphere.
 
 More specifically, the partitioning around medoids (k-medoids) algorithm is 
@@ -45,7 +43,7 @@ For tutorials and documentation of the **ulrb** package, visit our website: http
 
 ## Installation
 
-To install the last stable version (0.1.8), use:
+To install the latest stable version (0.1.9), use:
 
 ```{r, eval=FALSE}
 install.packages("ulrb")
@@ -55,11 +53,7 @@ If you want to install from GitHub, use:
 
 ```{r, eval=FALSE}
 # install.packages("devtools")
-# current version, 0.1.8
 devtools::install_github("pascoalf/ulrb")
-
-# developer version, 0.1.9 (unstable)
-devtools::install_github("pascoalf/ulrb@issue_4")
 ```
 
 

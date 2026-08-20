@@ -16,8 +16,6 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/ulrb)](https://cran.r-project.org/package=ulrb)
 <!-- badges: end -->
 
-**Note:** Developer version 0.1.9 (unstable).
-
 The R package **ulrb** stands for **Unsupervised Learning Based
 Definition of Microbial Rare Biosphere**. As the name suggests, it
 applies unsupervised learning principles to define the rare biosphere.
@@ -41,7 +39,7 @@ website: <https://pascoalf.github.io/ulrb/>.
 
 ## Installation
 
-To install the last stable version (0.1.8), use:
+To install the latest stable version (0.1.9), use:
 
 ``` r
 install.packages("ulrb")
@@ -51,11 +49,7 @@ If you want to install from GitHub, use:
 
 ``` r
 # install.packages("devtools")
-# current version, 0.1.8
 devtools::install_github("pascoalf/ulrb")
-
-# developer version, 0.1.9 (unstable)
-devtools::install_github("pascoalf/ulrb@issue_4")
 ```
 
 ## Example
@@ -122,9 +116,6 @@ head(nice)
 #> 4                           <NA>                                           <NA>
 #> 5                           <NA>                                           <NA>
 #> 6 g__Candidatus_Nitrosopelagicus                                           <NA>
-```
-
-``` r
 
 # first, we tidy the "nice" OTU table
 sample_names <- c("ERR2044662", "ERR2044663", "ERR2044664",
@@ -139,24 +130,23 @@ nice_tidy <- prepare_tidy_data(nice,
 # second, we apply ulrb algorithm in automatic setting
 nice_classification_results <- define_rb(nice_tidy)
 #> Joining with `by = join_by(Sample, Level)`
-```
-
-``` r
 
 # third, we plot microbial community and the quality of k-medoids clustering
 plot_ulrb(nice_classification_results, taxa_col = "OTU", plot_all = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" alt="" width="100%" />
 
 ``` r
 
 # In case you want to inspect the result of a particular sample, do:
 plot_ulrb(nice_classification_results, taxa_col = "OTU", 
           sample_id = "ERR2044662", plot_all = FALSE, log_scaled = TRUE)
+#> Ignoring unknown labels:
+#> • fill : ""
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-2.png" alt="" width="100%" />
 
 ## How to cite ulrb
 
