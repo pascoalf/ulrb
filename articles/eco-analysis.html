@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Integration of ulrb in a simple microbial ecology workflow">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ulrb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,7 +150,7 @@ in 06-01-2023 and focus solely on the 16S amplicon data.</p>
 <span><span class="co">#&gt;   data %&gt;% select(all_of(selected_samples))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span></span>
@@ -234,7 +234,7 @@ data types.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html" class="external-link">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="eco-analysis_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
+<p><img src="eco-analysis_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="576"></p>
 <p>All samples have more than about 50 000 reads, with one sample having
 a little bit less. But we think we can keep all samples and rarefy down
 to 40 000 reads.</p>
@@ -318,8 +318,13 @@ make a simple overview of prokaryotic diversity, by classification.</p>
 <span>            ShannonIndex <span class="op">=</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html" class="external-link">diversity</a></span><span class="op">(</span><span class="va">Abundance</span>, index <span class="op">=</span> <span class="st">"shannon"</span><span class="op">)</span>,</span>
 <span>            SimpsonIndex <span class="op">=</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/diversity.html" class="external-link">diversity</a></span><span class="op">(</span><span class="va">Abundance</span>, index <span class="op">=</span> <span class="st">"simpson"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; `summarise()` has grouped output by 'Sample', 'Classification', 'Month',</span></span>
-<span><span class="co">#&gt; 'Depth'. You can override using the `.groups` argument.</span></span></code></pre></div>
+<span><span class="co">#&gt; `summarise()` has regrouped the output.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Summaries were computed grouped by <span style="color: #0000BB;">Sample</span>, <span style="color: #0000BB;">Classification</span>, <span style="color: #0000BB;">Month</span>, <span style="color: #0000BB;">Depth</span>, and</span></span>
+<span><span class="co">#&gt;   <span style="color: #0000BB;">Water.mass</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Output is grouped by <span style="color: #0000BB;">Sample</span>, <span style="color: #0000BB;">Classification</span>, <span style="color: #0000BB;">Month</span>, and <span style="color: #0000BB;">Depth</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `summarise(.groups = "drop_last")` to silence this message.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `summarise(.by = c(Sample, Classification, Month, Depth, Water.mass))`</span></span>
+<span><span class="co">#&gt;   for per-operation grouping (`?dplyr::dplyr_by`) instead.</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Re-organize table to have all diversity indices in a single col.</span></span>
 <span><span class="va">nice_diversity_tidy</span> <span class="op">&lt;-</span> <span class="va">nice_diversity</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -329,7 +334,7 @@ make a simple overview of prokaryotic diversity, by classification.</p>
 <span><span class="co"># correct order</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Month <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">Month</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"March"</span>, <span class="st">"April"</span>, <span class="st">"June"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span><span class="co"># edit diversity index names</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Index <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">Index</span> <span class="op">==</span> <span class="st">"ShannonIndex"</span> <span class="op">~</span> <span class="st">"Shannon Index"</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Index <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">Index</span> <span class="op">==</span> <span class="st">"ShannonIndex"</span> <span class="op">~</span> <span class="st">"Shannon Index"</span>,</span>
 <span>                           <span class="va">Index</span> <span class="op">==</span> <span class="st">"SimpsonIndex"</span> <span class="op">~</span> <span class="st">"Simpson Index"</span>,</span>
 <span>                           <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"Number of OTUs"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># order diversity index names</span></span>
@@ -358,7 +363,7 @@ makes ggplot plots straightforward.</p>
 <span>        legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"Classification: "</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Alpha diversity across month"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="eco-analysis_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
+<p><img src="eco-analysis_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="576"></p>
 <ul>
 <li>Water mass variation</li>
 </ul>
@@ -374,7 +379,7 @@ makes ggplot plots straightforward.</p>
 <span>        legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"Classification: "</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Alpha diversity across water mass"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="eco-analysis_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
+<p><img src="eco-analysis_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level4">
 <h4 id="beta-diversity">Beta diversity<a class="anchor" aria-label="anchor" href="#beta-diversity"></a>
@@ -444,7 +449,7 @@ a little bit more of data wrangling.</p>
 <span></span>
 <span><span class="co"># Prepare aesthetics</span></span>
 <span><span class="va">rb_env</span> <span class="op">&lt;-</span> <span class="va">rb_env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>col_month <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">Month</span> <span class="op">==</span> <span class="st">"March"</span> <span class="op">~</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>col_month <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">Month</span> <span class="op">==</span> <span class="st">"March"</span> <span class="op">~</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
 <span>                               <span class="va">Month</span> <span class="op">==</span> <span class="st">"April"</span> <span class="op">~</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>,</span>
 <span>                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -455,16 +460,16 @@ a little bit more of data wrangling.</p>
 <span><span class="co">#</span></span>
 <span><span class="va">cca_plot_rare_biosphere</span></span>
 <span><span class="co">#&gt; $sites</span></span>
-<span><span class="co">#&gt;             CA1        CA2</span></span>
-<span><span class="co">#&gt; sit1 -0.7896653  0.8503868</span></span>
-<span><span class="co">#&gt; sit2 -0.8239607  0.9143530</span></span>
-<span><span class="co">#&gt; sit3 -0.2497625 -1.1717369</span></span>
-<span><span class="co">#&gt; sit4 -0.3886150 -1.0134637</span></span>
-<span><span class="co">#&gt; sit5 -0.7702444  0.1222861</span></span>
-<span><span class="co">#&gt; sit6 -0.5394403 -3.0662464</span></span>
-<span><span class="co">#&gt; sit7  0.9769221 -0.3825371</span></span>
-<span><span class="co">#&gt; sit8  1.6462283  0.3933325</span></span>
-<span><span class="co">#&gt; sit9  1.5573013  0.3989370</span></span>
+<span><span class="co">#&gt;          CA1        CA2</span></span>
+<span><span class="co">#&gt; 1 -0.7896653  0.8503868</span></span>
+<span><span class="co">#&gt; 2 -0.8239607  0.9143530</span></span>
+<span><span class="co">#&gt; 3 -0.2497625 -1.1717369</span></span>
+<span><span class="co">#&gt; 4 -0.3886150 -1.0134637</span></span>
+<span><span class="co">#&gt; 5 -0.7702444  0.1222861</span></span>
+<span><span class="co">#&gt; 6 -0.5394403 -3.0662464</span></span>
+<span><span class="co">#&gt; 7  0.9769221 -0.3825371</span></span>
+<span><span class="co">#&gt; 8  1.6462283  0.3933325</span></span>
+<span><span class="co">#&gt; 9  1.5573013  0.3989370</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attr(,"class")</span></span>
 <span><span class="co">#&gt; [1] "ordiplot"</span></span>
@@ -477,7 +482,7 @@ a little bit more of data wrangling.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">rb_env</span>,</span>
 <span>     <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/ordihull.html" class="external-link">ordispider</a></span><span class="op">(</span><span class="va">cca_plot_rare_biosphere</span>,</span>
 <span>                <span class="va">Month</span>, lty <span class="op">=</span> <span class="st">"dashed"</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="eco-analysis_files/figure-html/unnamed-chunk-13-1.png" width="768"></p>
+<p><img src="eco-analysis_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="768"></p>
 <p>From this analysis, it seems that the community composition of the
 rare biosphere is different between June and the remaining months.</p>
 </div>
@@ -524,7 +529,7 @@ Geophysical Research: Oceans, 123(3), 1586–1594.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

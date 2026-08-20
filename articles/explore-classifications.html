@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Alternative classifications with ulrb">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ulrb</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,7 +159,7 @@ have to import, clean and tidy the dataset before using the
 <span><span class="co">#&gt;   data %&gt;% select(all_of(selected_samples))</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once per session.</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span></span>
@@ -208,7 +208,7 @@ Abundance Curve (RAC).</p>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in plot_ulrb_clustering(rb_default, sample_id = "ERR2044662", taxa_col</span></span>
 <span><span class="co">#&gt; = "OTU", : If you want to plot only ERR2044662 use plot_all = FALSE</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-4-1.png" width="480"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="480"></p>
 <p>To look at all samples at once, we use a centrality metric. Note that
 for a low number of samples you can chose to use a grid, or plot all
 samples; but this wont work for a high number of samples. With a
@@ -219,7 +219,7 @@ a single plot.</p>
 <span>                     taxa_col <span class="op">=</span> <span class="st">"OTU"</span>,</span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="768"></p>
 </div>
 </div>
 <div class="section level3">
@@ -250,7 +250,7 @@ classification_vector = c(“Rare”, “Undetermined”, “Abundant”), so le
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-7-1.png" width="480"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="480"></p>
 <p>And we can compare the two options directly:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span></span>
@@ -265,7 +265,7 @@ classification_vector = c(“Rare”, “Undetermined”, “Abundant”), so le
 <span>                     colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  nrow <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-8-1.png" width="1440"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="1440"></p>
 <p>We do not recommend using k = 2, because it implies that there is a
 hard distinction between rare and abundant taxa. We consider that there
 should always be an intermediate or undetermined group, otherwise, we
@@ -308,7 +308,7 @@ classification vector, which will have 4 different classifications, thus
 <span><span class="co">#&gt; Warning in plot_ulrb_silhouette(data, sample_id = sample_id, taxa_col =</span></span>
 <span><span class="co">#&gt; taxa_col, : If you want to plot only ERR2044662 use plot_all = FALSE</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-10-1.png" width="1440"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="1440"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># all samples</span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">rb_k4</span>,</span>
@@ -318,7 +318,7 @@ classification vector, which will have 4 different classifications, thus
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-11-1.png" width="1440"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="1440"></p>
 <p>Note that this is a very acceptable interpretation of the data!</p>
 <p>Hopefully you already have the intuition to change classifications as
 you wish. Let’s do the <em>e.g.</em> B, which has k = 5, because it
@@ -341,7 +341,7 @@ includes 5 different classifications.</p>
 <span><span class="co">#&gt; Warning in plot_ulrb_silhouette(data, sample_id = sample_id, taxa_col =</span></span>
 <span><span class="co">#&gt; taxa_col, : If you want to plot only ERR2044662 use plot_all = FALSE</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-13-1.png" width="1440"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="1440"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># All samples</span></span>
 <span><span class="fu"><a href="../reference/plot_ulrb.html">plot_ulrb</a></span><span class="op">(</span><span class="va">rb_k5</span>,</span>
@@ -351,7 +351,7 @@ includes 5 different classifications.</p>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-14-1.png" width="1440"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="1440"></p>
 </div>
 <div class="section level3">
 <h3 id="why-k-1-is-non-sense">Why k = 1 is non-sense<a class="anchor" aria-label="anchor" href="#why-k-1-is-non-sense"></a>
@@ -387,7 +387,7 @@ to just “rare” and you’ll see how it is possible, but meaningless.</p>
 <span>                     colors <span class="op">=</span> <span class="st">"green4"</span>, </span>
 <span>                     plot_all <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                     log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-16-1.png" width="480">
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="480">
 ## What is the maximum value of k and why?</p>
 <p>What about the maximum value of k? This is set by the limitations
 inherent to algorithm itself, which in this case is partition around
@@ -431,8 +431,9 @@ additional information.</p>
 <span>            classification_vector <span class="op">=</span> <span class="va">classification_vector_max_k_sample1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(Sample, Level)`</span></span>
 <span><span class="co">#&gt; Warning in define_rb(rb_sample1, classification_vector =</span></span>
-<span><span class="co">#&gt; classification_vector_max_k_sample1): 25 samples got a bad Silhouette score.</span></span>
-<span><span class="co">#&gt; Consider changing the number of classifications.</span></span>
+<span><span class="co">#&gt; classification_vector_max_k_sample1): 0 samples got bad average Silhouette</span></span>
+<span><span class="co">#&gt; score.</span></span>
+<span><span class="co">#&gt; Within 0 bad samples, there were 25 clusters with bad average Silhouette score.</span></span>
 <span><span class="co">#&gt; If half the observations within a classification are below 0.5 Silhouette score, we consider that the clustering was 'Bad'.</span></span>
 <span><span class="co">#&gt; Check 'Evaluation' collumn for more details.</span></span>
 <span><span class="co">#</span></span>
@@ -629,7 +630,7 @@ to k = 10:</p>
 <span></span>
 <span><span class="co"># To plot results</span></span>
 <span><span class="fu"><a href="../reference/check_avgSil.html">check_avgSil</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="" width="700"></p>
 <p>In the last plot, each value of k represents a clustering result.
 From the above information, we would select k = 2 (default option),
 because it had the highest average Silhouette score.</p>
@@ -643,7 +644,7 @@ because it had the highest average Silhouette score.</p>
 <span></span>
 <span><span class="co"># To plot results</span></span>
 <span><span class="fu"><a href="../reference/check_DB.html">check_DB</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" alt="" width="700"></p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Calinski-Harabasz index</span></span>
@@ -654,7 +655,7 @@ because it had the highest average Silhouette score.</p>
 <span></span>
 <span><span class="co"># To plot results</span></span>
 <span><span class="fu"><a href="../reference/check_CH.html">check_CH</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-21-2.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-21-2.png" class="r-plt" alt="" width="700"></p>
 <p>Note that the best k changed depending on the metric selected.</p>
 <p>Thus, for sample 1 (ERR2044662), the best k would be: - 3 based on
 average Silhouette scores; - 4 based on Davies-Bouldin index; - 10 based
@@ -663,7 +664,7 @@ on Calinski-Harabasz index.</p>
 <code><a href="../reference/evaluate_sample_k.html">evaluate_sample_k()</a></code>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/evaluate_sample_k.html">evaluate_sample_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, sample_id <span class="op">=</span> <span class="va">selected_samples</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="" width="700"></p>
 <p>The ulrb method assumes that samples are independent from each other,
 which means that the above results for one sample, will be different for
 the other samples. Thus, we should look at all samples at the same time,
@@ -690,10 +691,8 @@ with centrality metrics. To do so, we can use the function
 <span></span>
 <span><span class="co">## To plot</span></span>
 <span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-23-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 </div>
 <div class="section level3">
@@ -747,7 +746,7 @@ with the automatic argument set to TRUE.</p>
 <span>          taxa_col <span class="op">=</span> <span class="st">"OTU"</span>, </span>
 <span>          plot_all <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>          colors <span class="op">=</span> <span class="va">qualitative_colors</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-25-1.png" class="r-plt" alt="" width="700"></p>
 <p>Naturally, you can decide more parameters for the automatic selection
 of k, for example, lets suppose that you want to have groups of
 phylogenetic units that are very well defined, but you also want to
@@ -775,7 +774,7 @@ plots:</p>
 <span>          log_scaled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span>
 <span><span class="co">#&gt; Classification label might not fit, consider changing the plot.</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-27-1.png" width="700"></p>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-27-1.png" class="r-plt" alt="" width="700"></p>
 <p>In this example, the automatic option did not seem to give a better
 result than the default k = 3.</p>
 </div>
@@ -803,12 +802,10 @@ approach.</p>
 <p><em>note</em>: the next code chunk might take a while to run.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/evaluate_k.html">evaluate_k</a></span><span class="op">(</span><span class="va">nice_tidy</span>, with_plot <span class="op">=</span> <span class="cn">TRUE</span>, range <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="va">max_k</span><span class="op">)</span></span>
+<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 row containing non-finite outside the scale range</span></span>
-<span><span class="co">#&gt; (`stat_summary()`).</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
-<p><img src="explore-classifications_files/figure-html/unnamed-chunk-29-1.png" width="700"></p>
+<span><span class="co">#&gt; (`stat_summary()`).</span></span></code></pre></div>
+<p><img src="explore-classifications_files/figure-html/unnamed-chunk-29-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 </div>
 <div class="section level2">
@@ -829,7 +826,7 @@ rare biosphere through unsupervised machine learning. Commun Biol 8, 544
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
